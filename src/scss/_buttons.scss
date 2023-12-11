@@ -1,0 +1,19 @@
+@import "variables";
+
+.gradient-button {
+   height: 48px;
+   padding-left: 32px;
+   padding-right: 32px;
+   line-height: 48px;
+   border-radius: 8px;
+   background-image: linear-gradient(249deg, $gradient-red-first 3.2%, $gradient-red-second 44.56%, $gradient-orange-color 100%);
+   font-family: "Inter", Arial, sans-serif;
+   font-weight: 600;
+   color: $white-color;
+   cursor: pointer;
+   transition: 0.05s outline-width ease;
+}
+
+.gradient-button:hover {
+   background: linear-gradient(249deg, $gradient-orange-color 3.2%, $gradient-red-first 44.56%, $gradient-red-second 100%);
+}

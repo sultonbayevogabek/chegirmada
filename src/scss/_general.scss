@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "variables";
+
+html {
+   box-sizing: border-box;
+   font-size: 16px;
+}
+
+*, *::after, *::before {
+   box-sizing: inherit;
+}
+
+body {
+   margin: 0;
+   font-family: "Inter", Arial, sans-serif;
+   font-size: 1rem;
+   line-height: 1;
+   color: #000000;
+}
+
+button {
+   border: none;
+}
+
+.container {
+   max-width: 92rem;
+   padding-left: 1rem;
+   padding-right: 1rem;
+   margin: 0 auto;
+}
+
+.cdk-overlay-dark-backdrop {
+   background: rgba(178, 183, 208, 0.40);
+   backdrop-filter: blur(12px);
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+   border-radius: 1rem !important;
+   background-color: $white-color !important;
+   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.10), 0 1.8125rem 4.0625rem 0 rgba(0, 0, 0, 0.10), 0 7.375rem 7.375rem 0 rgba(0, 0, 0, 0.09) !important;
+}
