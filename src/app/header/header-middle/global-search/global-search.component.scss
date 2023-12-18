@@ -12,7 +12,6 @@
 .global-search__input {
    flex-grow: 1;
    padding: 0 0.75rem;
-   font-size: 1rem;
    text-align: left;
 
    &::placeholder {
@@ -21,6 +20,24 @@
 }
 
 .global-search__location-btn {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 0 0.25rem 0 0.75rem;
+   border-left: 1px solid $border-grey-color;
+   border-right: 1px solid $border-grey-color;
+
+   span {
+      margin-right: 0.5rem;
+   }
+
+   .mat-icon {
+      width: 1.7rem;
+      height: 1.7rem;
+   }
+}
+
+.global-search__search-btn {
    display: flex;
    align-items: center;
    justify-content: center;
