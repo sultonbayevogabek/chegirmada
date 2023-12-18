@@ -1,0 +1,23 @@
+@import "variables";
+
+.catalog-button {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 3rem;
+   margin-right: 0.5rem;
+   padding: 0 1rem;
+   border-radius: 0.5rem;
+   background-color: rgba(255, 3, 76, 0.12);
+   color: $primary-brand-color;
+
+   &__icon {
+      width: 1rem;
+      margin-right: 0.5rem;
+   }
+
+   &__text {
+      font-size: 1rem;
+      font-weight: 500;
+   }
+}

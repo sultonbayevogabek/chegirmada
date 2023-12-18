@@ -1,0 +1,28 @@
+@import "variables";
+
+.global-search {
+   display: flex;
+   height: 3rem;
+   border: 1px solid $border-grey-color;
+   border-radius: 0.5rem;
+   overflow: hidden;
+}
+
+
+.global-search__input {
+   flex-grow: 1;
+   padding: 0 0.75rem;
+   font-size: 1rem;
+   text-align: left;
+
+   &::placeholder {
+      color: $placeholder-grey-color;
+   }
+}
+
+.global-search__location-btn {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 0 0.75rem;
+}

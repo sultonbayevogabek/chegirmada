@@ -18,8 +18,18 @@ body {
    color: #000000;
 }
 
+input {
+   border: none;
+
+   &:focus {
+      outline: none;
+   }
+}
+
 button {
    border: none;
+   cursor: pointer;
+   background-color: transparent;
 }
 
 a {

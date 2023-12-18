@@ -1,0 +1,25 @@
+<div class="global-search"
+     matAutocompleteOrigin
+     #globalSearchWrapper="matAutocompleteOrigin"
+>
+   <input
+      class="global-search__input"
+      [matAutocomplete]="globalSearchInput"
+      [matAutocompleteConnectedTo]="globalSearchWrapper"
+      type="text"
+      placeholder="Поиск"
+   >
+   <button class="global-search__location-btn">
+      <span>Вся страна</span>
+      <mat-icon svgIcon="icon:arrow-down"></mat-icon>
+   </button>
+   <button class="global-search__search-btn">
+      <mat-icon svgIcon="icon:search"></mat-icon>
+   </button>
+</div>
+
+<mat-autocomplete #globalSearchInput="matAutocomplete">
+   @for (option of streets; track option) {
+      <mat-option [value]="option">{{ option }}</mat-option>
+   }
+</mat-autocomplete>
