@@ -1,0 +1,17 @@
+.header-middle__inner {
+   display: flex;
+   align-items: center;
+   padding: 1.5rem 0;
+}
+
+.catalog-button {
+   height: 48px;
+   border-radius: 8px;
+   background-color: rgba(255, 3, 76, 0.12);
+   color: var(--Colors-Main-Red, #FF034C);
+   font-size: 14px;
+   font-style: normal;
+   font-weight: 500;
+   line-height: 20px; /
+}
+
