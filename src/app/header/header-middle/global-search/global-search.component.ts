@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
    selector: 'global-search',
@@ -10,9 +11,11 @@ import { MatInputModule } from '@angular/material/input';
    imports: [
       MatIconModule,
       MatAutocompleteModule,
-      MatInputModule
+      MatInputModule,
+      NgOptimizedImage
    ],
-   standalone: true
+   standalone: true,
+   encapsulation: ViewEncapsulation.None
 })
 
 export class GlobalSearchComponent {

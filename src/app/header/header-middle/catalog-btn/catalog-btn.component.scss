@@ -11,12 +11,12 @@
    background-color: rgba(255, 3, 76, 0.12);
    color: $primary-brand-color;
 
-   &__icon {
+   &-icon {
       width: 1rem;
       margin-right: 0.5rem;
    }
 
-   &__text {
+   &-text {
       font-size: 0.875rem;
       font-weight: 500;
    }

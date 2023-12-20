@@ -3,23 +3,41 @@
      #globalSearchWrapper="matAutocompleteOrigin"
 >
    <input
-      class="global-search__input"
+      class="global-search-input"
       [matAutocomplete]="globalSearchInput"
       [matAutocompleteConnectedTo]="globalSearchWrapper"
       type="text"
       placeholder="Поиск"
    >
-   <button class="global-search__location-btn">
+   <button class="global-search-location">
       <span>Вся страна</span>
       <mat-icon svgIcon="icon:arrow-down"></mat-icon>
    </button>
-   <button class="global-search__search-btn">
+   <button class="global-search-submit">
       <mat-icon svgIcon="icon:search"></mat-icon>
    </button>
 </div>
 
-<mat-autocomplete #globalSearchInput="matAutocomplete">
+<mat-autocomplete [class]="'global-search-result'" #globalSearchInput="matAutocomplete">
    @for (option of streets; track option) {
-      <mat-option [value]="option">{{ option }}</mat-option>
+      <mat-option class="global-search-option" [value]="option">
+         <div class="global-search-item">
+            <div class="global-search-img">
+               <img
+                  src="https://www.edigitalagency.com.au/wp-content/uploads/apple-logo-png-black.png"
+                  alt="logo name"
+               >
+            </div>
+
+            <div class="global-search-info">
+               <div class="global-search-title">
+                  Помидор соланум рома
+               </div>
+               <div class="global-search-text">
+                  корзинка
+               </div>
+            </div>
+         </div>
+      </mat-option>
    }
 </mat-autocomplete>

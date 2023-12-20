@@ -3,42 +3,37 @@
 .header-top {
    padding: 0.75rem 0;
    background-color: $background-grey-color;
-
-   &__inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-   }
 }
 
-.location {
+.header-top-inner {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.header-top-location {
    display: flex;
    align-items: center;
    cursor: pointer;
-
-   &__icon {
-      width: 1.25rem;
-      height: 1.25rem;
-      margin-right: 0.3rem;
-   }
-
-   &__text {
-      margin-right: 1rem;
-      font-size: 0.875rem;
-   }
-   //
-   //&__arrow {
-   //   width: 1.875rem;
-   //   height: 1.875rem;
-   //}
 }
 
-.links {
+.header-top-location-icon {
+   width: 1.25rem;
+   height: 1.25rem;
+   margin-right: 0.3rem;
+}
+
+.header-top-location-text {
+   margin-right: 1rem;
+   font-size: 0.875rem;
+}
+
+.header-top-links {
    display: flex;
    align-items: center;
 }
 
-.links__item {
+.header-top-links-item {
    margin-left: 2.5rem;
    font-size: 0.875rem;
 }

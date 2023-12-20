@@ -1,22 +1,21 @@
 @import "variables";
 
-.header-middle__inner {
-   display: flex;
-   align-items: center;
-   padding: 1.5rem 0;
-
-   &-logo {
-      margin-right: 1.5rem;
-   }
-
-   &-catalog {
-      margin-right: 0.5rem;
-   }
-
-   &-search {
-      flex-grow: 1;
-   }
+.header-middle-inner {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 0;
 }
 
+.header-middle-logo {
+  margin-right: 1.5rem;
+}
+
+.header-middle-catalog {
+  margin-right: 0.5rem;
+}
+
+.header-middle-search {
+  flex-grow: 1;
+}
 
 
