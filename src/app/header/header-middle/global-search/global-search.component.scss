@@ -13,6 +13,7 @@
    flex-grow: 1;
    padding: 0 0.75rem;
    text-align: left;
+   font-size: 0.875rem;
 
    &::placeholder {
       color: $placeholder-grey-color;
@@ -26,15 +27,7 @@
    padding: 0 0.25rem 0 0.75rem;
    border-left: 1px solid $border-grey-color;
    border-right: 1px solid $border-grey-color;
-
-   span {
-      margin-right: 0.5rem;
-   }
-
-   .mat-icon {
-      width: 1.7rem;
-      height: 1.7rem;
-   }
+   font-size: 0.875rem;
 }
 
 .global-search__search-btn {
@@ -43,3 +36,9 @@
    justify-content: center;
    padding: 0 0.75rem;
 }
+
+div.mat-mdc-autocomplete-panel {
+   border-radius: 0.5rem;
+   box-shadow: 0 4px 24px 0 rgba(51, 51, 51, 0.12);
+}
+

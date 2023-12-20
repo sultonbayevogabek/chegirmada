@@ -13,14 +13,13 @@ html {
 body {
    margin: 0;
    font-family: "Inter", Arial, sans-serif;
-   font-size: 1rem;
+   font-size: 0.875rem;
    line-height: 1;
    color: #000000;
 }
 
 input {
    border: none;
-   font-size: 1rem;
 
    &:focus {
       outline: none;
@@ -31,7 +30,6 @@ button {
    border: none;
    cursor: pointer;
    background-color: transparent;
-   font-size: 1rem;
 }
 
 a {
