@@ -1,0 +1,21 @@
+@import "variables";
+@import "general";
+
+.notifications-button {
+  @extend .flex-center-center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+
+  &:hover {
+    background-color: $background-grey-color;
+  }
+
+  &.active, &.active:hover {
+    background-color: rgba($primary-brand-color, 0.12);
+  }
+}
+
+.notifications-icon {
+  width: 2rem;
+}

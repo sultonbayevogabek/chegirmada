@@ -1,12 +1,11 @@
 @import "variables";
+@import "general";
 
 .catalog-button {
-   display: flex;
-   align-items: center;
-   justify-content: center;
+   @extend .flex-center-center;
    height: 3rem;
    margin-right: 0.5rem;
-   padding: 0 1rem;
+   padding: 0 1.25rem;
    border-radius: 0.5rem;
    background-color: rgba(255, 3, 76, 0.12);
    color: $primary-brand-color;

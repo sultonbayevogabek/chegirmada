@@ -18,7 +18,10 @@
    </button>
 </div>
 
-<mat-autocomplete [class]="'global-search-result'" #globalSearchInput="matAutocomplete">
+<mat-autocomplete
+   [class]="'global-search-result'"
+   #globalSearchInput="matAutocomplete"
+   [disableRipple]="true">
    @for (option of streets; track option) {
       <mat-option class="global-search-option" [value]="option">
          <div class="global-search-item">
@@ -34,7 +37,7 @@
                   Помидор соланум рома
                </div>
                <div class="global-search-text">
-                  корзинка
+                  Корзинка
                </div>
             </div>
          </div>

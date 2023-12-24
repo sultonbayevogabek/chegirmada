@@ -1,0 +1,15 @@
+<div class="language">
+   <button class="language-button" [class.active]="activeLang === 'uz'" (click)="changeLanguage('uz')">
+      <img ngSrc="/assets/flags/uz.svg" width="20" height="20" alt="Uzbekistan flag">
+
+      <span>O'z</span>
+   </button>
+
+   <div class="language-divider"></div>
+
+   <button class="language-button" [class.active]="activeLang === 'ru'" (click)="changeLanguage('ru')">
+      <img ngSrc="/assets/flags/ru.svg" width="20" height="20" alt="Russia flag">
+
+      <span>Ру</span>
+   </button>
+</div>

@@ -1,0 +1,9 @@
+@import "general";
+
+.location {
+  @extend .flex-center;
+}
+
+.location-icon {
+  margin-right: 0.25rem;
+}

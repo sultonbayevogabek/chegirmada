@@ -19,6 +19,7 @@ body {
 }
 
 input {
+   font-family: "Inter", Arial, sans-serif;
    border: none;
 
    &:focus {
@@ -44,6 +45,17 @@ a {
    margin: 0 auto;
 }
 
+.flex-center {
+   display: flex;
+   align-items: center;
+}
+
+.flex-center-center {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
 .cdk-overlay-dark-backdrop {
    background: rgba(178, 183, 208, 0.40);
    backdrop-filter: blur(12px);
@@ -63,5 +75,21 @@ a {
    font-family: "Inter", Arial, sans-serif;
    font-size: 1rem;
    line-height: 1;
-   color: #000000;
+   color: $primary-text-color;
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple) {
+   background-color: transparent !important;
+}
+
+.mat-mdc-option .mat-pseudo-checkbox-minimal {
+   display: none;
+}
+
+.mat-mdc-option:focus.mdc-list-item {
+   background-color: transparent !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+   color: $primary-text-color !important;
 }

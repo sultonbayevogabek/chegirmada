@@ -1,4 +1,5 @@
 @import "variables";
+@import "general";
 
 .global-search {
   display: flex;
@@ -11,8 +12,7 @@
 
 .global-search-input {
   flex-grow: 1;
-  padding: 0 0.75rem;
-  text-align: left;
+  padding: 0 1rem;
   font-size: 0.875rem;
 
   &::placeholder {
@@ -21,10 +21,8 @@
 }
 
 .global-search-location {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0.25rem 0 0.75rem;
+  @extend .flex-center-center;
+  padding: 0 0.5rem 0 1rem;
   border-left: 1px solid $border-grey-color;
   border-right: 1px solid $border-grey-color;
 
@@ -35,13 +33,16 @@
 }
 
 .global-search-submit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0.75rem;
+  @extend .flex-center-center;
+  padding: 0 1rem;
+
+  .mat-icon {
+    width: 20px;
+  }
 }
 
 div.global-search-result.mat-mdc-autocomplete-panel {
+  max-height: 400px;
   margin-top: 0.5rem;
   padding: 1.5rem;
   border-radius: 0.5rem !important;
@@ -62,10 +63,9 @@ div.global-search-result.mat-mdc-autocomplete-panel {
 }
 
 .global-search-item {
-  display: flex;
-  align-items: center;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  @extend .flex-center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid $background-grey-color;
 }
 
@@ -98,15 +98,19 @@ div.global-search-result.mat-mdc-autocomplete-panel {
   margin-bottom: 4px;
   font-family: "Inter", Arial, sans-serif;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1;
 }
 
 .global-search-text {
   font-family: "Inter", Arial, sans-serif;
   font-size: 0.75rem;
-  font-style: normal;
-  text-transform: uppercase;
   color: #64748B;
   line-height: 1;
+}
+
+.global-search-item:hover {
+  .global-search-title, .global-search-text {
+    color: $primary-brand-color;
+  }
 }

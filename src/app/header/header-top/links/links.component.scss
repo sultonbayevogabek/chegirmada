@@ -1,0 +1,10 @@
+@import "general";
+
+.links {
+  @extend .flex-center;
+}
+
+.links-item {
+  margin-left: 2.5rem;
+  font-size: 0.875rem;
+}

@@ -1,17 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input';
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
    selector: 'global-search',
-   templateUrl: './global-search.component.html',
-   styleUrls: [ './global-search.component.scss' ],
+   templateUrl: 'global-search.component.html',
+   styleUrls: [ 'global-search.component.scss' ],
    imports: [
       MatIconModule,
       MatAutocompleteModule,
-      MatInputModule,
       NgOptimizedImage
    ],
    standalone: true,
@@ -19,5 +17,5 @@ import { NgOptimizedImage } from '@angular/common';
 })
 
 export class GlobalSearchComponent {
-   streets: string[] = ['Champs-Élysées', 'Lombard Street', 'Abbey Road', 'Fifth Avenue'];
+   streets: string[] = ['Champs-Élysées', 'Lombard Street', 'Abbey Road', 'Fifth Avenue', 'Champs-Élysées', 'Lombard Street', 'Abbey Road', 'Fifth Avenue'];
 }

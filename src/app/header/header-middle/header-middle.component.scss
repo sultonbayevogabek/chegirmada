@@ -1,9 +1,9 @@
 @import "variables";
+@import "general";
 
 .header-middle-inner {
-  display: flex;
-  align-items: center;
-  padding: 1.5rem 0;
+  @extend .flex-center;
+  padding: 1.25rem 0;
 }
 
 .header-middle-logo {
@@ -16,6 +16,14 @@
 
 .header-middle-search {
   flex-grow: 1;
+  margin-right: 1rem;
 }
 
+.header-middle-notifications {
+  margin-right: 0.5rem;
+}
+
+.header-middle-wish-list {
+  margin-right: 1rem;
+}
 
