@@ -3,7 +3,7 @@
 
 .global-search {
   display: flex;
-  height: 3rem;
+  height: 2.75rem;
   border: 1px solid $border-grey-color;
   border-radius: 0.5rem;
   overflow: hidden;
@@ -95,7 +95,7 @@ div.global-search-result.mat-mdc-autocomplete-panel {
 }
 
 .global-search-title {
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
   font-family: "Inter", Arial, sans-serif;
   font-size: 0.875rem;
   font-weight: 500;

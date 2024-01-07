@@ -3,12 +3,9 @@
 
 .header-bottom-ul {
   @extend .flex-center;
+  justify-content: space-between;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
-
-.header-bottom-li {
-  margin-right: 30px;
 }
 
 .header-bottom-link {
