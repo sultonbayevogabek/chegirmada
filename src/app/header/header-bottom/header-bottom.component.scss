@@ -1,0 +1,22 @@
+@import "variables";
+@import "general";
+
+.header-bottom-nav {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.header-bottom-ul {
+  @extend .flex-center;
+  justify-content: space-between;
+}
+
+.header-bottom-link {
+  color: $secondary-black-color;
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  &.active {
+    color: $primary-blue-color;
+  }
+}

@@ -1,0 +1,13 @@
+@import "variables";
+
+.login-button {
+  height: 48px;
+  padding-left: 32px;
+  padding-right: 32px;
+  line-height: 48px;
+  border-radius: 8px;
+  background-color: $primary-blue-color;
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 600;
+  color: $white-color;
+}

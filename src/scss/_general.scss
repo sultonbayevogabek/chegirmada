@@ -38,6 +38,12 @@ a {
    text-decoration: none;
 }
 
+ul {
+   margin: 0;
+   padding: 0;
+   list-style-type: none;
+}
+
 .container {
    max-width: 92rem;
    padding-left: 1rem;
