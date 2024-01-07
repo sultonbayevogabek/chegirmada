@@ -1,14 +1,14 @@
 @import "variables";
 @import "general";
 
-.header-bottom-nav {
+.header-bottom-ul {
+  @extend .flex-center;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
 
-.header-bottom-ul {
-  @extend .flex-center;
-  justify-content: space-between;
+.header-bottom-li {
+  margin-right: 30px;
 }
 
 .header-bottom-link {
