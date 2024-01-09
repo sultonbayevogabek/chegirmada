@@ -3,6 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
    selector: 'login-dialog',
@@ -13,7 +14,8 @@ import { MatInputModule } from '@angular/material/input';
       MatDialogContent,
       MatDialogClose,
       NgxMaskDirective,
-      MatInputModule
+      MatInputModule,
+      MatTabsModule
    ],
    standalone: true,
    providers: [
@@ -22,4 +24,9 @@ import { MatInputModule } from '@angular/material/input';
 })
 
 export class LoginDialogComponent {
+   selectedTab = 0;
+
+   change(): void {
+      this.selectedTab = 1
+   }
 }
