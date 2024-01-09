@@ -14,6 +14,17 @@
    transition: 0.05s outline-width ease;
 }
 
+.blue-button {
+   height: 2.75rem;
+   padding-left: 2rem;
+   padding-right: 2rem;
+   border-radius: 0.5rem;
+   background-color: $primary-blue-color;
+   font-family: "Inter", Arial, sans-serif;
+   font-weight: 500;
+   color: $white-color;
+}
+
 .gradient-button:hover {
    background: linear-gradient(249deg, $gradient-orange-color 3.2%, $gradient-red-first 44.56%, $gradient-red-second 100%);
 }

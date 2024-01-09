@@ -1,12 +1,5 @@
-@import "variables";
+@import "buttons";
 
 .login-button {
-  height: 2.75rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  border-radius: 0.5rem;
-  background-color: $primary-blue-color;
-  font-family: "Inter", Arial, sans-serif;
-  font-weight: 500;
-  color: $white-color;
+  @extend .blue-button;
 }

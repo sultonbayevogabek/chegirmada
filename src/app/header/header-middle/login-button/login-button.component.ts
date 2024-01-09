@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
@@ -13,10 +13,19 @@ import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
    standalone: true
 })
 
-export class LoginButtonComponent {
+export class LoginButtonComponent implements OnInit {
    dialog = inject(MatDialog);
 
+   ngOnInit(): void {
+      this.openLoginDialog();
+   }
+
    openLoginDialog(): void {
-      this.dialog.open(LoginDialogComponent)
+      this.dialog.open(LoginDialogComponent, {
+         closeOnNavigation: true,
+         panelClass: 'login-dialog',
+         width: '27rem',
+         maxWidth: '100%'
+      });
    }
 }

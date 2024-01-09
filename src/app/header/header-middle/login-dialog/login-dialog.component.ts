@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogContent } from '@angular/material/dialog';
+import { MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 
 @Component({
    selector: 'login-dialog',
@@ -8,7 +8,8 @@ import { MatDialogContent } from '@angular/material/dialog';
    styleUrls: [ 'login-dialog.component.scss' ],
    imports: [
       MatIconModule,
-      MatDialogContent
+      MatDialogContent,
+      MatDialogClose
    ],
    standalone: true
 })

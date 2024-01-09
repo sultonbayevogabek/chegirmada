@@ -1,3 +1,17 @@
 <mat-dialog-content>
-   <h2>Введите номер телефона</h2>
+   <div class="login-dialog-content">
+      <h2 class="login-dialog-title">Введите номер телефона</h2>
+      <p class="login-dialog-text">Отправим смс с кодом подтверждения</p>
+
+      <form class="login-dialog-form">
+         <label class="login-dialog-label">
+            <span class="login-dialog-label-text">Номер телефона</span>
+            <input class="login-dialog-phone-input" type="tel" value="+998">
+         </label>
+
+         <button class="login-dialog-submit" type="submit">Получить код</button>
+      </form>
+
+      <mat-icon class="login-dialog-close" svgIcon="icon:x" mat-dialog-close></mat-icon>
+   </div>
 </mat-dialog-content>
