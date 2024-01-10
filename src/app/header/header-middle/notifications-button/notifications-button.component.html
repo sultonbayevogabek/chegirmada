@@ -1,3 +1,11 @@
-<button class="notifications-button">
+<button class="notifications-button" (click)="overlayPanel.openPanel()" #notificationButton>
   <mat-icon class="notifications-icon" svgIcon="icon:bell"></mat-icon>
 </button>
+<overlay-panel [originElement]="notificationButton" #overlayPanel>
+  <div
+    style="background: white; border: 1px solid; margin-top: 10px"
+    overlay-content
+  >
+    <h1>Notifications go here</h1>
+  </div>
+</overlay-panel>
