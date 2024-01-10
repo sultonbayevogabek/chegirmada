@@ -17,7 +17,6 @@ export class LoginButtonComponent implements OnInit {
   dialog = inject(MatDialog);
 
   ngOnInit(): void {
-    this.openLoginDialog();
   }
 
   openLoginDialog(): void {
