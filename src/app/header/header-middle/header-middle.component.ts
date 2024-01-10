@@ -9,20 +9,20 @@ import { WishListButtonComponent } from './wish-list-button/wish-list-button.com
 import { LoginButtonComponent } from './login-button/login-button.component';
 
 @Component({
-   selector: 'header-middle',
-   templateUrl: 'header-middle.component.html',
-   styleUrls: [ 'header-middle.component.scss' ],
-   imports: [
-      RouterLink,
-      MatIconModule,
-      CatalogBtnComponent,
-      SiteLogoComponent,
-      GlobalSearchComponent,
-      NotificationsButtonComponent,
-      WishListButtonComponent,
-      LoginButtonComponent
-   ],
-   standalone: true
+  selector: 'header-middle',
+  templateUrl: 'header-middle.component.html',
+  styleUrls: [ 'header-middle.component.scss' ],
+  imports: [
+    RouterLink,
+    MatIconModule,
+    CatalogBtnComponent,
+    SiteLogoComponent,
+    GlobalSearchComponent,
+    NotificationsButtonComponent,
+    WishListButtonComponent,
+    LoginButtonComponent
+  ],
+  standalone: true
 })
 
 export class HeaderMiddleComponent {

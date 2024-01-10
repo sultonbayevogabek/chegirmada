@@ -1,9 +1,29 @@
 @import "variables";
+@import "general";
 @import "buttons";
 
 .login-dialog-content {
   position: relative;
-  padding: 3rem;
+  padding: 0 3rem 3rem;
+}
+
+.login-dialog-actions {
+  @extend .flex-center-end;
+  height: 3rem;
+  padding: 0 0.75rem;
+
+  &.code {
+    justify-content: space-between;
+  }
+
+  button {
+    padding: 0;
+  }
+}
+
+.login-dialog-back .mat-icon {
+  width: 1.75rem;
+  height: 1.75rem;
 }
 
 .login-dialog-title {
@@ -18,13 +38,12 @@
   text-align: center;
   font-size: 0.875rem;
   font-weight: 400;
-}
+  line-height: 1.2;
 
-.login-dialog-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  cursor: pointer;
+  strong {
+    font-weight: 400;
+    color: $primary-brand-color;
+  }
 }
 
 .login-dialog-form {
@@ -39,8 +58,8 @@
 .login-dialog-label-text {
   display: block;
   margin-bottom: 0.1875rem;
-  color: $dialog-label-text-black;
   font-size: 0.875rem;
+  color: $dialog-label-text-black;
 }
 
 .login-dialog-phone-input {
@@ -55,6 +74,47 @@
 }
 
 .login-dialog-submit {
-  width: 100%;
   @extend .blue-button;
+  @extend .flex-center-center;
+  width: 100%;
+
+  .mat-mdc-progress-spinner {
+    margin-left: 0.5rem;
+  }
+}
+
+.login-dialog-code {
+  @extend .flex-center-center;
+}
+
+.login-dialog-code-input {
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: $dialog-input-background;
+  color: $dialog-title-black;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.login-dialog-timer {
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.login-dialog-timer-text {
+  color: $secondary-black-color;
+  font-size: 0.875rem;
+  line-height: 1.2;
+}
+
+.login-dialog-timer-resend {
+  color: $primary-blue-color;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  text-decoration-line: underline;
 }

@@ -70,6 +70,22 @@ h1, h2, h3, h4, p {
    justify-content: center;
 }
 
+.flex-center-between {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.flex-center-end {
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+}
+
+.d-none {
+   display: none;
+}
+
 .cdk-overlay-dark-backdrop {
    background: rgba(178, 183, 208, 0.30);
    backdrop-filter: blur(3px);
@@ -111,4 +127,8 @@ h1, h2, h3, h4, p {
 
 .mdc-dialog .mdc-dialog__content {
    padding: 0 !important;
+}
+
+.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+   stroke: currentColor!important;
 }

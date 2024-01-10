@@ -2,8 +2,7 @@
 @import "general";
 
 .header-bottom-ul {
-  @extend .flex-center;
-  justify-content: space-between;
+  @extend .flex-center-between;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }

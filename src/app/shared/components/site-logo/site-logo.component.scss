@@ -1,9 +1,8 @@
 @import "variables";
+@import "general";
 
 .site-logo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @extend .flex-center-between;
 
   &-img {
     margin-right: 0.5rem;

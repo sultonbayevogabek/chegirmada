@@ -1,35 +1,62 @@
 <mat-dialog-content>
-   <mat-icon class="login-dialog-close" svgIcon="icon:x" mat-dialog-close></mat-icon>
-   <mat-tab-group [(selectedIndex)]="selectedTab">
-      <mat-tab label="First">
-         <div class="login-dialog-content">
-            <h2 class="login-dialog-title">Введите номер телефона</h2>
-            <p class="login-dialog-text">Отправим смс с кодом подтверждения</p>
+  <div class="login-dialog-actions" [class.code]="selectedTab === 'code'">
+    @if (selectedTab === 'code') {
+      <button (click)="back()" class="login-dialog-back">
+        <mat-icon svgIcon="icon:arrow-back"></mat-icon>
+      </button>
+    }
 
-            <form class="login-dialog-form">
-               <label class="login-dialog-label">
-                  <span class="login-dialog-label-text">Номер телефона</span>
-                  <input matInput class="login-dialog-phone-input" type="text" mask="00 000 00 00" prefix="+998 ">
-               </label>
+    <button class="login-dialog-close" mat-dialog-close>
+      <mat-icon svgIcon="icon:x"></mat-icon>
+    </button>
+  </div>
 
-               <button (click)="change()" class="login-dialog-submit" type="button">Получить код</button>
-            </form>
-         </div>
-      </mat-tab>
-      <mat-tab label="Second">
-         <div class="login-dialog-content">
-            <h2 class="login-dialog-title">Введите номер телефона</h2>
-            <p class="login-dialog-text">Отправим смс с кодом подтверждения</p>
+  @if (selectedTab === 'phone') {
+    <div class="login-dialog-content">
+      <h2 class="login-dialog-title">Введите номер телефона</h2>
+      <p class="login-dialog-text">Отправим смс с кодом подтверждения</p>
 
-            <form class="login-dialog-form">
-               <label class="login-dialog-label">
-                  <span class="login-dialog-label-text">Номер телефона</span>
-                  <input matInput class="login-dialog-phone-input" type="text" mask="00 000 00 00" prefix="+998 ">
-               </label>
+      <form class="login-dialog-form">
+        <label class="login-dialog-label">
+          <span class="login-dialog-label-text">Номер телефона</span>
+          <input class="login-dialog-phone-input" type="text" mask="00 000 00 00" prefix="+998 ">
+        </label>
 
-               <button class="login-dialog-submit" type="submit">Получить код</button>
-            </form>
-         </div>
-      </mat-tab>
-   </mat-tab-group>
+        <button
+          (click)="sendPhoneNumber()"
+          class="login-dialog-submit"
+          type="button">Получить код
+        </button>
+      </form>
+    </div>
+  }
+
+  @if (selectedTab === 'code') {
+    <div class="login-dialog-content">
+      <h2 class="login-dialog-title">Введите код</h2>
+      <p class="login-dialog-text">Для подтверждения телефона отправили 5-значный код на <strong>+998 33
+        695-95-50</strong></p>
+
+      <form class="login-dialog-form">
+        <div class="login-dialog-code">
+          <input class="login-dialog-code-input" type="text" mask="0">
+          <input class="login-dialog-code-input" type="text" mask="0">
+          <input class="login-dialog-code-input" type="text" mask="0">
+          <input class="login-dialog-code-input" type="text" mask="0">
+          <input class="login-dialog-code-input" type="text" mask="0">
+        </div>
+
+        <button class="login-dialog-submit">
+          <span>Отправить</span>
+          <mat-spinner [diameter]="20"></mat-spinner>
+        </button>
+
+        <div class="login-dialog-timer">
+          <p class="login-dialog-timer-text">Если код не придёт, можно получить новый через 36 сек</p>
+
+          <!--<button class="login-dialog-timer-resend">Отправить код повторно</button>-->
+        </div>
+      </form>
+    </div>
+  }
 </mat-dialog-content>

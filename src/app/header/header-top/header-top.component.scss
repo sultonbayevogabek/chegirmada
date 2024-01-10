@@ -2,19 +2,18 @@
 @import 'general';
 
 .header-top {
-   background-color: $background-grey-color;
+  background-color: $background-grey-color;
 }
 
 .header-top-inner {
-   @extend .flex-center;
-   justify-content: space-between;
-   padding: 0.25rem 0;
+  @extend .flex-center-between;
+  padding: 0.25rem 0;
 }
 
 .header-top-right {
-   @extend .flex-center;
+  @extend .flex-center;
 }
 
 .header-top-links {
-   margin-right: 1.5rem;
+  margin-right: 1.5rem;
 }

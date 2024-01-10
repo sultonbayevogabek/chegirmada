@@ -7,12 +7,12 @@ import { provideIcons } from './config/icons/icons.provider';
 import { HttpClientModule } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
-    providers: [
-        provideRouter(routes),
-        provideAnimations(),
-        provideIcons(),
-        importProvidersFrom(
-            HttpClientModule
-        )
-    ]
+  providers: [
+    provideRouter(routes),
+    provideAnimations(),
+    provideIcons(),
+    importProvidersFrom(
+      HttpClientModule
+    )
+  ]
 };

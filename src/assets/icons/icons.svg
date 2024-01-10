@@ -76,6 +76,12 @@
           </defs>
        </svg>
 
+        <svg id="arrow-back" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.66699 16H25.3337" stroke="#0F172A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.3337 9.33334L6.66699 16" stroke="#0F172A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.3337 22.6667L6.66699 16" stroke="#0F172A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
 
     </defs>
 </svg>

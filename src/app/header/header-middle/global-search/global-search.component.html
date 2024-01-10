@@ -2,45 +2,45 @@
      matAutocompleteOrigin
      #globalSearchWrapper="matAutocompleteOrigin"
 >
-   <input
-      class="global-search-input"
-      [matAutocomplete]="globalSearchInput"
-      [matAutocompleteConnectedTo]="globalSearchWrapper"
-      type="text"
-      placeholder="Поиск"
-   >
-   <button class="global-search-location">
-      <span>Вся страна</span>
-      <mat-icon svgIcon="icon:arrow-down"></mat-icon>
-   </button>
-   <button class="global-search-submit">
-      <mat-icon svgIcon="icon:search"></mat-icon>
-   </button>
+  <input
+    class="global-search-input"
+    [matAutocomplete]="globalSearchInput"
+    [matAutocompleteConnectedTo]="globalSearchWrapper"
+    type="text"
+    placeholder="Поиск"
+  >
+  <button class="global-search-location">
+    <span>Вся страна</span>
+    <mat-icon svgIcon="icon:arrow-down"></mat-icon>
+  </button>
+  <button class="global-search-submit">
+    <mat-icon svgIcon="icon:search"></mat-icon>
+  </button>
 </div>
 
 <mat-autocomplete
-   [class]="'global-search-result'"
-   #globalSearchInput="matAutocomplete"
-   [disableRipple]="true">
-   @for (option of streets; track option) {
-      <mat-option class="global-search-option" [value]="option">
-         <div class="global-search-item">
-            <div class="global-search-img">
-               <img
-                  src="https://www.edigitalagency.com.au/wp-content/uploads/apple-logo-png-black.png"
-                  alt="logo name"
-               >
-            </div>
+  [class]="'global-search-result'"
+  #globalSearchInput="matAutocomplete"
+  [disableRipple]="true">
+  @for (option of streets; track option) {
+    <mat-option class="global-search-option" [value]="option">
+      <div class="global-search-item">
+        <div class="global-search-img">
+          <img
+            src="https://www.edigitalagency.com.au/wp-content/uploads/apple-logo-png-black.png"
+            alt="logo name"
+          >
+        </div>
 
-            <div class="global-search-info">
-               <div class="global-search-title">
-                  Помидор соланум рома
-               </div>
-               <div class="global-search-text">
-                  Корзинка
-               </div>
-            </div>
-         </div>
-      </mat-option>
-   }
+        <div class="global-search-info">
+          <div class="global-search-title">
+            Помидор соланум рома
+          </div>
+          <div class="global-search-text">
+            Корзинка
+          </div>
+        </div>
+      </div>
+    </mat-option>
+  }
 </mat-autocomplete>

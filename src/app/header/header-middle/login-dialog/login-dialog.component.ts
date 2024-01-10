@@ -1,32 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { MatInputModule } from '@angular/material/input';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
    selector: 'login-dialog',
    templateUrl: 'login-dialog.component.html',
    styleUrls: [ 'login-dialog.component.scss' ],
+   encapsulation: ViewEncapsulation.None,
    imports: [
       MatIconModule,
       MatDialogContent,
       MatDialogClose,
       NgxMaskDirective,
-      MatInputModule,
-      MatTabsModule
+      MatProgressSpinnerModule
    ],
    standalone: true,
    providers: [
-      provideNgxMask(),
+      provideNgxMask()
    ]
 })
 
 export class LoginDialogComponent {
-   selectedTab = 0;
+   selectedTab: 'phone' | 'code' = 'phone';
 
-   change(): void {
-      this.selectedTab = 1
+   sendPhoneNumber(): void {
+      this.selectedTab = 'code';
+   }
+
+   back(): void {
+      this.selectedTab = 'phone';
    }
 }
