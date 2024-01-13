@@ -18,10 +18,12 @@
   </button>
 </div>
 
+
 <mat-autocomplete
   [class]="'global-search-result'"
   #globalSearchInput="matAutocomplete"
   [disableRipple]="true">
+
   @for (option of streets; track option) {
     <mat-option class="global-search-option" [value]="option">
       <div class="global-search-item">
@@ -51,38 +53,41 @@
     overlay-content
   >
 
-    <mat-tab-group [(selectedIndex)]="tabIndex">
-      <mat-tab>
-        <ul class="global-search-location-list">
-          @for (region of regions; track region) {
-            <li class="global-search-location-item" mat-ripple (click)="selectRegion(region)">
-              <div>
-                <span>{{ region }}</span>
+    <ng-scrollbar autoHeightDisabled="false" visibility="hover">
+      <mat-tab-group [(selectedIndex)]="tabIndex">
+        <mat-tab>
+          <ul class="global-search-location-list">
+            @for (region of regions; track region) {
+              <li class="global-search-location-item" mat-ripple (click)="selectRegion(region)">
+                <div>
+                  <span>{{ region }}</span>
 
-                <mat-icon svgIcon="icon:arrow-right"></mat-icon>
-              </div>
-            </li>
-          }
-        </ul>
-      </mat-tab>
-      <mat-tab>
-        <div class="global-search-location-region">
-          <button class="global-search-location-back" mat-ripple (click)="backToRegions()">
-            <mat-icon svgIcon="icon:arrow-back"></mat-icon>
-          </button>
+                  <mat-icon svgIcon="icon:arrow-right"></mat-icon>
+                </div>
+              </li>
+            }
+          </ul>
+        </mat-tab>
+        <mat-tab>
+          <div class="global-search-location-region">
+            <button class="global-search-location-back" mat-ripple (click)="backToRegions()">
+              <mat-icon svgIcon="icon:arrow-back"></mat-icon>
+            </button>
 
-          <h2 class="global-search-location-region-name">{{ selectedRegion }}</h2>
-        </div>
-        <ul class="global-search-location-list districts">
-          @for (district of districts; track district) {
-            <li class="global-search-location-item" mat-ripple>
-              <div>{{ district }}</div>
-            </li>
-          }
-        </ul>
-      </mat-tab>
-    </mat-tab-group>
+            <h2 class="global-search-location-region-name">{{ selectedRegion }}</h2>
+          </div>
+          <ul class="global-search-location-list districts">
+            @for (district of districts; track district) {
+              <li class="global-search-location-item" mat-ripple>
+                <div>{{ district }}</div>
+              </li>
+            }
+          </ul>
+        </mat-tab>
+      </mat-tab-group>
+    </ng-scrollbar>
 
   </div>
 </overlay-panel>
+
 

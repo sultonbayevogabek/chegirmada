@@ -1,10 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { OverlayComponent } from '../../../shared/components/overlay-panel/overlay-panel.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRippleModule } from '@angular/material/core';
+import { NgScrollbar } from 'ngx-scrollbar';
 
 @Component({
   selector: 'global-search',
@@ -16,7 +17,9 @@ import { MatRippleModule } from '@angular/material/core';
     NgOptimizedImage,
     OverlayComponent,
     MatTabsModule,
-    MatRippleModule
+    MatRippleModule,
+    NgScrollbar,
+    NgTemplateOutlet
   ],
   standalone: true,
   encapsulation: ViewEncapsulation.None
