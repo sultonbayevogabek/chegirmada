@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
+import { LoginDialogComponent } from '../../../shared/components/login-dialog/login-dialog.component';
 
 @Component({
   selector: 'login-button',

@@ -1,0 +1,28 @@
+<div class="banner">
+  <div class="container">
+    <div class="banner-wrapper">
+      <div class="banner-carousel">
+        <ng-container *ngTemplateOutlet="carousel"></ng-container>
+      </div>
+      <div class="banner-top">
+        <img src="https://picsum.photos/464/228?rand=1" alt="">
+      </div>
+      <div class="banner-bottom">
+        <img src="https://picsum.photos/464/228?rand=2" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #carousel>
+  <owl-carousel-o [options]="customOptions">
+    <ng-template carouselSlide>
+      <div class="slide">
+        <img src="https://picsum.photos/952/480" alt="">
+      </div>
+    </ng-template>
+  </owl-carousel-o>
+</ng-template>
+
+
