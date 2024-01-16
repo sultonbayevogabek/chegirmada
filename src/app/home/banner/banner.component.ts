@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { NgForOf, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 
@@ -12,7 +12,8 @@ import { NgForOf, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
     NgTemplateOutlet,
     NgOptimizedImage
   ],
-  standalone: true
+  standalone: true,
+  encapsulation: ViewEncapsulation.None
 })
 
 export class BannerComponent {
@@ -21,23 +22,20 @@ export class BannerComponent {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
-    dots: false,
+    dots: true,
     navSpeed: 700,
-    navText: [ 'Back', 'Forward' ],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 3
-      },
-      940: {
-        items: 4
-      }
-    },
-    nav: true
+    items: 1,
+    nav: true,
+    navText: ['', ''],
+    autoplay: true
   };
+
+  carouselImages = [
+    'https://picsum.photos/952/480?rand=1',
+    'https://picsum.photos/952/480?rand=2',
+    'https://picsum.photos/952/480?rand=3',
+    'https://picsum.photos/952/480?rand=4',
+    'https://picsum.photos/952/480?rand=5',
+    'https://picsum.photos/952/480?rand=5',
+  ]
 }

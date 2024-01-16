@@ -1,4 +1,5 @@
 @import "variables";
+@import "general";
 
 .banner-wrapper {
   display: grid;
@@ -7,28 +8,86 @@
   gap: 1.5rem 1.5rem;
   grid-auto-flow: row;
   grid-template-areas:
-    "banner-carousel banner-carousel banner-top"
-    "banner-carousel banner-carousel banner-bottom";
+    "banner-carousel banner-carousel banner-right-top"
+    "banner-carousel banner-carousel banner-right-bottom";
   padding-top: 1.5rem;
 }
 
 .banner-carousel {
+  position: relative;
   grid-area: banner-carousel;
-  height: 30rem;
   border-radius: 0.5rem;
   overflow: hidden;
+
+  .owl-dots {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    @extend .flex-center;
+    height: 1.25rem;
+    padding: 0 0.25rem;
+    border-radius: 0.625rem;
+    background-color: #B2B7D052;
+    vertical-align: middle;
+  }
+
+  .owl-dot {
+    margin: 0 0.25rem
+  }
+
+  .owl-theme .owl-dots .owl-dot span {
+    margin: 0;
+    background-color: $white-color;
+  }
+
+  .owl-theme .owl-dots .owl-dot.active span {
+    background-color: $primary-brand-color;
+  }
+
+  .owl-nav {
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(50%);
+    @extend .flex-center-between;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .owl-theme .owl-nav [class*=owl-] {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 1.5rem;
+    background-color: rgba($logo-black-color, 0.4);
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .owl-theme .owl-nav .owl-prev {
+    background-image: url("/assets/icons/arrow-left-white.svg");
+  }
+
+  .owl-theme .owl-nav .owl-next {
+    background-image: url("/assets/icons/arrow-right-white.svg");
+  }
 }
 
-.banner-top {
-  grid-area: banner-top;
-}
+.banner-right {
+  border-radius: 0.5rem;
+  overflow: hidden;
 
-.banner-bottom {
-  grid-area: banner-bottom;
+  &-top {
+    grid-area: banner-right-top;
+  }
+
+  &-bottom {
+    grid-area: banner-right-bottom;
+  }
 }
 
 .slide {
-  height: 100%;
+  height: 30rem;
   overflow: hidden;
   object-fit: cover;
 
@@ -38,4 +97,3 @@
     object-fit: cover;
   }
 }
-

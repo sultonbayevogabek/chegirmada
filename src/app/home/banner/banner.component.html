@@ -4,10 +4,10 @@
       <div class="banner-carousel">
         <ng-container *ngTemplateOutlet="carousel"></ng-container>
       </div>
-      <div class="banner-top">
+      <div class="banner-right banner-right-top">
         <img src="https://picsum.photos/464/228?rand=1" alt="">
       </div>
-      <div class="banner-bottom">
+      <div class="banner-right banner-right-bottom">
         <img src="https://picsum.photos/464/228?rand=2" alt="">
       </div>
     </div>
@@ -17,11 +17,13 @@
 
 <ng-template #carousel>
   <owl-carousel-o [options]="customOptions">
-    <ng-template carouselSlide>
-      <div class="slide">
-        <img src="https://picsum.photos/952/480" alt="">
-      </div>
-    </ng-template>
+    @for (imgUrl of carouselImages; track imgUrl) {
+      <ng-template carouselSlide>
+        <div class="slide">
+          <img [src]="imgUrl" [alt]="imgUrl" [height]="952">
+        </div>
+      </ng-template>
+    }
   </owl-carousel-o>
 </ng-template>
 
