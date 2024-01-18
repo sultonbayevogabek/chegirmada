@@ -1,4 +1,4 @@
-<div class="banner">
+<section class="banner">
   <div class="container">
     <div class="banner-wrapper">
       <div class="banner-carousel">
@@ -12,14 +12,14 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 
 
 <ng-template #carousel>
   <owl-carousel-o [options]="customOptions">
     @for (imgUrl of carouselImages; track imgUrl) {
       <ng-template carouselSlide>
-        <div class="slide">
+        <div class="banner-slide">
           <img [src]="imgUrl" [alt]="imgUrl" [height]="952">
         </div>
       </ng-template>

@@ -31,10 +31,6 @@ button {
   border: none;
   cursor: pointer;
   background-color: transparent;
-
-  &:focus {
-    outline: none;
-  }
 }
 
 a {
@@ -89,6 +85,10 @@ img {
 
 .d-none {
   display: none;
+}
+
+.section {
+  padding-top: 2.5rem;
 }
 
 .cdk-overlay-dark-backdrop {

@@ -1,0 +1,19 @@
+@import "general";
+
+.section-header {
+  @extend .flex-center;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .mat-icon {
+    margin-left: 1rem;
+  }
+
+  &.clickable {
+    cursor: pointer;
+  }
+}

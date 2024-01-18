@@ -5,7 +5,6 @@ import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { OverlayComponent } from '../../../shared/components/overlay-panel/overlay-panel.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRippleModule } from '@angular/material/core';
-import { NgScrollbar } from 'ngx-scrollbar';
 
 @Component({
   selector: 'global-search',
@@ -18,7 +17,6 @@ import { NgScrollbar } from 'ngx-scrollbar';
     OverlayComponent,
     MatTabsModule,
     MatRippleModule,
-    NgScrollbar,
     NgTemplateOutlet
   ],
   standalone: true,

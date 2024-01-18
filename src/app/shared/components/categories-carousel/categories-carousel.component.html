@@ -1,0 +1,17 @@
+<section class="categories-carousel section">
+  <div class="container">
+    <section-header
+      [heading]="'Категории'"
+    />
+    <owl-carousel-o [options]="customOptions">
+      @for (category of categories; track category) {
+        <ng-template carouselSlide>
+          <div [class]="'categories-slide gradient-' + category.id">
+            <h3 class="categories-slide-heading">{{ category.name.ru }}</h3>
+            <img class="categories-slide-img" [src]="category.img" [alt]="category.name.uz">
+          </div>
+        </ng-template>
+      }
+    </owl-carousel-o>
+  </div>
+</section>
