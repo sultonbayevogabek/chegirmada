@@ -22,7 +22,7 @@ export class BannerComponent {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
-    dots: true,
+    dots: false,
     navSpeed: 700,
     items: 1,
     nav: true,

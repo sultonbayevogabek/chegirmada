@@ -19,32 +19,6 @@
   border-radius: 0.5rem;
   overflow: hidden;
 
-  .owl-dots {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    @extend .flex-center;
-    height: 1.25rem;
-    padding: 0 0.25rem;
-    border-radius: 0.625rem;
-    background-color: #B2B7D052;
-    vertical-align: middle;
-  }
-
-  .owl-dot {
-    margin: 0 0.25rem
-  }
-
-  .owl-theme .owl-dots .owl-dot span {
-    margin: 0;
-    background-color: $white-color;
-  }
-
-  .owl-theme .owl-dots .owl-dot.active span {
-    background-color: $primary-brand-color;
-  }
-
   .owl-nav {
     position: absolute;
     bottom: 50%;

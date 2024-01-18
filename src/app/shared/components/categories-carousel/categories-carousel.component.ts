@@ -90,10 +90,10 @@ export class CategoriesCarouselComponent {
     {
       id: 3,
       name: {
-        uz: 'Elektronika',
-        ru: 'Электроника',
+        uz: 'Uy va bog´',
+        ru: 'Дом и сад',
       },
-      img: '/assets/categories/electronics.png'
+      img: '/assets/categories/tools.png'
     },
   ]
 }
