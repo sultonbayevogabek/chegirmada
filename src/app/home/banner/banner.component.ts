@@ -31,11 +31,11 @@ export class BannerComponent {
   };
 
   carouselImages = [
-    'https://picsum.photos/952/480?rand=1',
-    'https://picsum.photos/952/480?rand=2',
-    'https://picsum.photos/952/480?rand=3',
-    'https://picsum.photos/952/480?rand=4',
-    'https://picsum.photos/952/480?rand=5',
-    'https://picsum.photos/952/480?rand=5',
+    '/assets/banner/banner.jpg',
+    '/assets/banner/banner.jpg',
+    '/assets/banner/banner.jpg',
+    '/assets/banner/banner.jpg',
+    '/assets/banner/banner.jpg',
+    '/assets/banner/banner.jpg',
   ]
 }
