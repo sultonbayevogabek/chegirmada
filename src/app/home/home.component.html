@@ -1,7 +1,7 @@
 <header></header>
 
 <main>
-  <banner/>
+  <intro-banner/>
   <categories-carousel/>
 
   <products-section
@@ -16,6 +16,25 @@
 
   <products-section
     [heading]="'Для тебя'"
+    [url]="'some-url'"
+  />
+
+  <banner />
+
+  <products-section
+    [heading]="'Скидки рядом'"
+    [url]="'some-url'"
+  />
+
+  <products-section
+    [heading]="'Последние просмотренные объявления'"
+    [url]="'some-url'"
+  />
+
+  <partners/>
+
+  <products-section
+    [heading]="'Остановленные объявления'"
     [url]="'some-url'"
   />
 </main>

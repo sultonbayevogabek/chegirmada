@@ -3,9 +3,9 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { NgForOf, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 
 @Component({
-  selector: 'banner',
-  templateUrl: 'banner.component.html',
-  styleUrls: [ 'banner.component.scss' ],
+  selector: 'intro-banner',
+  templateUrl: 'intro-banner.component.html',
+  styleUrls: [ 'intro-banner.component.scss' ],
   imports: [
     CarouselModule,
     NgForOf,
@@ -16,7 +16,7 @@ import { NgForOf, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
   encapsulation: ViewEncapsulation.None
 })
 
-export class BannerComponent {
+export class IntroBannerComponent {
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
