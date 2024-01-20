@@ -1,9 +1,5 @@
-@import "general";
+@import "mixins";
 
 .location {
-  @extend .flex-center;
-}
-
-.location-icon {
-  margin-right: 0.25rem;
+  @include flex-center(0.25rem);
 }

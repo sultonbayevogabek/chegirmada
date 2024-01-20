@@ -1,10 +1,9 @@
-@import "general";
+@import "mixins";
 
 .links {
-  @extend .flex-center;
+  @include flex-center(2.5rem);
 }
 
 .links-item {
-  margin-left: 2.5rem;
   font-size: 0.875rem;
 }

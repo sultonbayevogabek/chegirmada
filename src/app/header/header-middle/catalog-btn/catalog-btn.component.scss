@@ -1,10 +1,9 @@
 @import "variables";
-@import "general";
+@import "mixins";
 
 .catalog-button {
-  @extend .flex-center-center;
+  @include flex-center-center(0.5rem);
   height: 2.75rem;
-  margin-right: 0.5rem;
   padding: 0 1.25rem;
   border-radius: 0.5rem;
   background-color: rgba($primary-blue-color, 0.12);
@@ -12,7 +11,6 @@
 
   &-icon {
     width: 1rem;
-    margin-right: 0.5rem;
   }
 
   &-text {

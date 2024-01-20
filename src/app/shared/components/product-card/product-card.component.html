@@ -1,7 +1,7 @@
 <div class="product-card">
   <div class="product-card-top">
     <div class="product-card-gallery">
-      <img [ngSrc]="'/assets/products/1.jpg'" [width]="342" [height]="322" alt="Product description">
+      <img [ngSrc]="product.productCardImageUrl" [width]="342" [height]="322" [alt]="product.productCardTitle">
 
       <div class="product-card-dots">
         <div class="product-card-dot"></div>
@@ -18,11 +18,47 @@
     </div>
 
     <button class="product-card-heart">
-      <mat-icon svgIcon="icon:heart"></mat-icon>
+      <mat-icon [svgIcon]="'icon:heart'"></mat-icon>
     </button>
 
     <div class="product-card-percent">
       50%
+    </div>
+  </div>
+  <div class="product-card-bottom">
+    <div class="product-card-brand-view">
+      <div class="product-card-brand">
+        <div class="product-card-brand-logo">
+          <img [src]="product.productCardBrandLogo" [alt]="product.productCardBrandName">
+        </div>
+
+        <div class="product-card-brand-name">{{ product.productCardBrandName }}</div>
+      </div>
+
+      <div class="product-card-view">
+        <mat-icon [svgIcon]="'icon:eye'"></mat-icon>
+
+        <span>{{ product.productCardBrandViews }}</span>
+      </div>
+    </div>
+
+    <h3 class="product-card-title">{{ product.productCardTitle }}</h3>
+
+    <div class="product-card-price">
+      <del class="product-card-price-old">{{ product.productCardOldPrice }}</del>
+      <strong class="product-card-price-new">{{ product.productCardNewPrice }}</strong>
+    </div>
+
+    <div class="product-card-location-date">
+      <div class="product-card-location-date-item">
+        <mat-icon [svgIcon]="'icon:location'"></mat-icon>
+
+        <span>{{ product.productCardLocation }}</span>
+      </div>
+
+      <div class="product-card-location-date-item">
+        {{ product.productCardDate }}
+      </div>
     </div>
   </div>
 </div>

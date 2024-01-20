@@ -1,5 +1,5 @@
 @import "variables";
-@import "general";
+@import "mixins";
 
 .global-search {
   display: flex;
@@ -20,19 +20,18 @@
 }
 
 .global-search-location {
-  @extend .flex-center-center;
+  @include flex-center-center(0.5rem);
   padding: 0 0.5rem 0 1rem;
   border-left: 1px solid $border-grey-color;
   border-right: 1px solid $border-grey-color;
 
   span {
     font-size: 0.875rem;
-    margin-right: 0.5rem;
   }
 }
 
 .global-search-submit {
-  @extend .flex-center-center;
+  @include flex-center-center;
   padding: 0 1rem;
 
   .mat-icon {
@@ -63,7 +62,7 @@ div.global-search-result.mat-mdc-autocomplete-panel {
 }
 
 .global-search-item {
-  @extend .flex-center;
+  @include flex-center(0.75rem);
   padding: 0.5rem 1rem;
   border-bottom: 1px solid $background-grey-color;
 
@@ -83,7 +82,6 @@ div.global-search-result.mat-mdc-autocomplete-panel {
   place-items: center;
   width: 3rem;
   height: 3rem;
-  margin-right: 0.75rem;
   border-radius: 50%;
   background-color: $background-grey-color;
   object-fit: cover;
@@ -142,7 +140,7 @@ div.global-search-result.mat-mdc-autocomplete-panel {
   cursor: pointer;
 
   div {
-    @extend .flex-center-between;
+    @include flex-center-between;
     padding: 0.75rem 0;
     color: $dialog-title-black;
     font-size: 0.875rem;
@@ -159,13 +157,13 @@ div.global-search-result.mat-mdc-autocomplete-panel {
 }
 
 .global-search-location-region {
-  @extend .flex-center;
+  @include flex-center;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid $border-grey-color;
 }
 
 .global-search-location-back {
-  @extend .flex-center-center;
+  @include flex-center-center;
   width: 2rem;
   height: 2rem;
   margin-right: 0.5rem;

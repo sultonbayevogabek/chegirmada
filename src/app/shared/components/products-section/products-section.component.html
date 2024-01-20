@@ -1,15 +1,16 @@
 <section class="products-section section">
   <div class="container">
     <section-header
-      [heading]="'Лучшие объявления'"
-      [url]="'best-announcement'"
+      [heading]="heading"
+      [url]="url"
     />
 
     <div class="products-grid">
-      <product-card />
-      <product-card />
-      <product-card />
-      <product-card />
+      @for (product of products; track product) {
+        <product-card
+          [product]="product"
+        />
+      }
     </div>
   </div>
 </section>

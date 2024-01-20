@@ -2,7 +2,7 @@
   <div class="login-dialog-actions" [class.code]="selectedTab === 'code'">
     @if (selectedTab === 'code') {
       <button (click)="back()" class="login-dialog-back">
-        <mat-icon svgIcon="icon:arrow-back"></mat-icon>
+        <mat-icon [svgIcon]="'icon:arrow-back'"></mat-icon>
       </button>
     }
 

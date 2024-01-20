@@ -1,19 +1,15 @@
 @import 'variables';
-@import 'general';
+@import 'mixins';
 
 .header-top {
   background-color: $background-grey-color;
 }
 
 .header-top-inner {
-  @extend .flex-center-between;
+  @include flex-center-between;
   padding: 0.25rem 0;
 }
 
 .header-top-right {
-  @extend .flex-center;
-}
-
-.header-top-links {
-  margin-right: 1.5rem;
+  @include flex-center(1.5rem);
 }

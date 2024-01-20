@@ -1,29 +1,19 @@
 @import "variables";
-@import "general";
+@import "mixins";
 
 .header-middle-inner {
-  @extend .flex-center;
+  @include flex-center(0.5rem);
   padding: 0.75rem 0;
 }
 
+.header-middle-search {
+  flex-grow: 1;
+}
+
 .header-middle-logo {
-  margin-right: 1.5rem;
+  margin-right: 0.5rem;
 }
 
 .header-middle-catalog {
   margin-right: 0.5rem;
 }
-
-.header-middle-search {
-  flex-grow: 1;
-  margin-right: 1rem;
-}
-
-.header-middle-notifications {
-  margin-right: 0.5rem;
-}
-
-.header-middle-wish-list {
-  margin-right: 1rem;
-}
-

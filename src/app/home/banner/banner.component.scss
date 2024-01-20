@@ -1,5 +1,5 @@
 @import "variables";
-@import "general";
+@import "mixins";
 
 .banner-wrapper {
   display: grid;
@@ -23,7 +23,7 @@
     position: absolute;
     bottom: 50%;
     transform: translateY(50%);
-    @extend .flex-center-between;
+    @include flex-center-between;
     width: 100%;
     margin-top: 0;
   }

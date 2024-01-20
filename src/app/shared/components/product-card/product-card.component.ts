@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -14,5 +14,15 @@ import { MatIconModule } from '@angular/material/icon';
 })
 
 export class ProductCardComponent {
-
+  @Input({ required: true }) product: {
+    productCardImageUrl: string;
+    productCardBrandLogo: string;
+    productCardBrandName: string;
+    productCardBrandViews: number;
+    productCardTitle: string;
+    productCardOldPrice: string;
+    productCardNewPrice: string;
+    productCardLocation: string;
+    productCardDate: string;
+  }
 }

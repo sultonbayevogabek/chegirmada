@@ -11,10 +11,10 @@
   >
   <button class="global-search-location" #locationButton (click)="overlayPanel.openPanel()">
     <span>{{ selectedRegion }}</span>
-    <mat-icon svgIcon="icon:arrow-down"></mat-icon>
+    <mat-icon [svgIcon]="'icon:arrow-down'"></mat-icon>
   </button>
   <button class="global-search-submit">
-    <mat-icon svgIcon="icon:search"></mat-icon>
+    <mat-icon [svgIcon]="'icon:search'"></mat-icon>
   </button>
 </div>
 
@@ -60,7 +60,7 @@
               <div>
                 <span>{{ region }}</span>
 
-                <mat-icon svgIcon="icon:arrow-right"></mat-icon>
+                <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
               </div>
             </li>
           }
@@ -69,7 +69,7 @@
       <mat-tab>
         <div class="global-search-location-region">
           <button class="global-search-location-back" mat-ripple (click)="backToRegions()">
-            <mat-icon svgIcon="icon:arrow-back"></mat-icon>
+            <mat-icon [svgIcon]="'icon:arrow-back'"></mat-icon>
           </button>
 
           <h2 class="global-search-location-region-name">{{ selectedRegion }}</h2>

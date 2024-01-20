@@ -1,8 +1,8 @@
 @import "variables";
-@import "general";
+@import "mixins";
 
 .notifications-button {
-  @extend .flex-center-center;
+  @include flex-center-center;
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 0.5rem;

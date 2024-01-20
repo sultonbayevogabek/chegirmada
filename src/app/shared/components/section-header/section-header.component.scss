@@ -1,7 +1,7 @@
-@import "general";
+@import "mixins";
 
 .section-header {
-  @extend .flex-center;
+  @include flex-center(0.5rem);
   margin-bottom: 1rem;
 
   h2 {
@@ -12,7 +12,6 @@
   .mat-icon {
     width: 2.75rem;
     height: 2.75rem;
-    margin-left: 0.5rem;
   }
 
   &.clickable {

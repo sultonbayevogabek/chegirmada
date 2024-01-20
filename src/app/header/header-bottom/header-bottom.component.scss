@@ -1,8 +1,8 @@
 @import "variables";
-@import "general";
+@import "mixins";
 
 .header-bottom-ul {
-  @extend .flex-center-between;
+  @include flex-center-between;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }

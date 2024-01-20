@@ -1,5 +1,5 @@
 @import "variables";
-@import "general";
+@import "mixins";
 
 .product-card-top {
   position: relative;
@@ -16,9 +16,9 @@
   bottom: 0.5rem;
   left: 50%;
   transform: translateX(-50%);
-  @extend .flex-center;
+  @include flex-center(0.25rem);
   height: 0.875rem;
-  padding: 0.25rem 0.125rem;
+  padding: 0.25rem;
   border-radius: calc(0.875rem / 2);
   background-color: rgba(178, 183, 208, 0.32);
   backdrop-filter: blur(12px);
@@ -27,7 +27,6 @@
 .product-card-dot {
   width: 0.375rem;
   height: 0.375rem;
-  margin: 0 0.125rem;
   border-radius: 50%;
   background-color: $white-color;
 
@@ -52,7 +51,7 @@
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  @extend .flex-center-center;
+  @include flex-center-center;
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
@@ -72,4 +71,86 @@
   line-height: 2.5rem;
   font-size: 0.75rem;
   color: $white-color;
+}
+
+.product-card-bottom {
+  padding-top: 1rem;
+}
+
+.product-card-brand-view {
+  @include flex-center-between;
+}
+
+.product-card-brand {
+  @include flex-center(0.5rem);
+}
+
+.product-card-brand-logo {
+  @include flex-center-center;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: $dialog-input-background;
+}
+
+.product-card-brand-name {
+  color: $secondary-black-color;
+  font-size: 0.875rem;
+}
+
+.product-card-view {
+  @include flex-center(0.25rem);
+  color: $secondary-black-color;
+
+  span {
+    font-size: 0.875rem;
+  }
+}
+
+.product-card-title {
+  padding-top: 0.5rem;
+  color: $dialog-title-black;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  @include line-clamp(2);
+}
+
+.product-card-price {
+  padding-top: 0.5rem;
+}
+
+.product-card-price-old {
+  display: block;
+  font-size: 0.875rem;
+  color: $secondary-black-color;
+}
+
+.product-card-price-new {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+  color: $primary-brand-color;
+}
+
+.product-card-location-date {
+  @include flex-center-between;
+  padding-top: 0.5rem;
+}
+
+.product-card-location-date-item {
+  @include flex-center-center(0.25rem);
+  height: 1.75rem;
+  padding: 0.25rem 0.5rem;
+  background-color: $dialog-input-background;
+  border-radius: 0.25rem;
+  color: $dialog-title-black;
+  font-size: 0.875rem;
+
+  .mat-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
 }

@@ -1,5 +1,5 @@
 <button class="notifications-button" (click)="overlayPanel.openPanel()" #notificationButton>
-  <mat-icon class="notifications-icon" svgIcon="icon:bell"></mat-icon>
+  <mat-icon class="notifications-icon" [svgIcon]="'icon:bell'"></mat-icon>
 </button>
 <overlay-panel [originElement]="notificationButton" #overlayPanel>
   <div

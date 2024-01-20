@@ -1,12 +1,8 @@
 @import "variables";
-@import "general";
+@import "mixins";
 
 .site-logo {
-  @extend .flex-center-between;
-
-  &-img {
-    margin-right: 0.5rem;
-  }
+  @include flex-center(0.5rem);
 
   &-text {
     font-size: 1.4rem;

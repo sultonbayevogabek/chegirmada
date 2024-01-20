@@ -1,8 +1,8 @@
 @import "variables";
-@import "general";
+@import "mixins";
 
 .wish-list-button {
-  @extend .flex-center-center;
+  @include flex-center-center;
   width: 3rem;
   height: 3rem;
   border-radius: 0.5rem;
