@@ -1,0 +1,75 @@
+@import "variables";
+@import "general";
+
+.product-card-top {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.product-card-gallery {
+  position: relative;
+}
+
+.product-card-dots {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  @extend .flex-center;
+  height: 0.875rem;
+  padding: 0.25rem 0.125rem;
+  border-radius: calc(0.875rem / 2);
+  background-color: rgba(178, 183, 208, 0.32);
+  backdrop-filter: blur(12px);
+}
+
+.product-card-dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  margin: 0 0.125rem;
+  border-radius: 50%;
+  background-color: $white-color;
+
+  &.active {
+    background-color: $primary-brand-color;
+  }
+}
+
+.product-top-indicator {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: $primary-brand-color;
+  color: $white-color;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.product-card-heart {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  @extend .flex-center-center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: rgba($background-heart-button, 0.4);
+  color: $white-color;
+}
+
+.product-card-percent {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: $primary-brand-color;
+  text-align: center;
+  line-height: 2.5rem;
+  font-size: 0.75rem;
+  color: $white-color;
+}

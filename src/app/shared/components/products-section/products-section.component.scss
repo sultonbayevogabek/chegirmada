@@ -1,0 +1,8 @@
+@import "variables";
+@import "general";
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1.5rem;
+}
