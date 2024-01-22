@@ -1,0 +1,52 @@
+<section class="product-details section">
+  <div class="container">
+    <div class="product-details-crumbs">
+      <a class="product-details-crumbs-link" href="#">
+        <span class="product-details-crumbs-text">Главная</span>
+
+        <mat-icon class="product-details-crumbs-arrow" [svgIcon]="'icon:arrow-right'"></mat-icon>
+      </a>
+
+      <a class="product-details-crumbs-link" href="#">
+        <span class="product-details-crumbs-text">Смартфоны</span>
+
+        <mat-icon class="product-details-crumbs-arrow" [svgIcon]="'icon:arrow-right'"></mat-icon>
+      </a>
+
+      <a class="product-details-crumbs-link" href="#">
+        <span class="product-details-crumbs-text">Apple</span>
+
+        <mat-icon class="product-details-crumbs-arrow" [svgIcon]="'icon:arrow-right'"></mat-icon>
+      </a>
+
+      <a class="product-details-crumbs-link last">
+        <span class="product-details-crumbs-text">Смартфон iPhone 15 Pro 256GB Синий Титан</span>
+      </a>
+    </div>
+
+    <div class="product-details-main">
+      <div class="product-details-main-info">
+        <div class="product-details-photo-gallery">
+
+          <owl-carousel-o [options]="multiImageSliderOptions">
+            @for (imgUrl of productImages; track imgUrl; let i = $index) {
+              <ng-template carouselSlide>
+                <div class="banner-slide" [id]="i">
+                  <img [src]="imgUrl" [alt]="imgUrl">
+                </div>
+              </ng-template>
+            }
+          </owl-carousel-o>
+        </div>
+        <div class="product-details-info-block">
+
+        </div>
+      </div>
+
+      <div class="product-details-seller">
+
+      </div>
+    </div>
+  </div>
+</section>
+

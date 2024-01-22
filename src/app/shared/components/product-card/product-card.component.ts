@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'product-card',
@@ -8,7 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: [ 'product-card.component.scss' ],
   imports: [
     NgOptimizedImage,
-    MatIconModule
+    MatIconModule,
+    RouterLink
   ],
   standalone: true
 })

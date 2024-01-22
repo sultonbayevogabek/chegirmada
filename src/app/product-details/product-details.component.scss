@@ -1,0 +1,36 @@
+@import "variables";
+@import "mixins";
+
+.product-details-crumbs {
+  @include flex-center;
+}
+
+.product-details-crumbs-link {
+  @include flex-center(0.25rem);
+  font-size: 0.875rem;
+  color: $secondary-text-color;
+
+  &.last {
+    color: $primary-text-color;
+    cursor: default;
+  }
+}
+
+.product-details-main {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  grid-gap: 1.5rem;
+  padding-top: 2rem;
+}
+
+.product-details-main-info {
+  display: grid;
+  grid-template-columns: 1fr 1.32fr;
+  min-height: 0;
+  min-width: 0;
+}
+
+.product-details-photo-gallery {
+  overflow: hidden;
+  min-width: 0;
+}

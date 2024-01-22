@@ -1,6 +1,10 @@
 @import "variables";
 @import "mixins";
 
+.product-card {
+  cursor: pointer;
+}
+
 .product-card-top {
   position: relative;
   border-radius: 0.5rem;
