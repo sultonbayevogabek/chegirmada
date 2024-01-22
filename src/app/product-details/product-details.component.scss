@@ -2,11 +2,11 @@
 @import "mixins";
 
 .product-details-crumbs {
-  @include flex-center;
+  @include flex-center(0.5rem);
 }
 
 .product-details-crumbs-link {
-  @include flex-center(0.25rem);
+  @include flex-center(0.5rem);
   font-size: 0.875rem;
   color: $secondary-text-color;
 
@@ -14,6 +14,10 @@
     color: $primary-text-color;
     cursor: default;
   }
+}
+
+.product-details-crumbs-arrow {
+  width: 0.35rem;
 }
 
 .product-details-main {
@@ -33,4 +37,38 @@
 .product-details-photo-gallery {
   overflow: hidden;
   min-width: 0;
+}
+
+.product-details-photo-display {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.product-details-photo-navs {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  @include flex-center-between;
+  z-index: 1;
+  padding: 0 1rem;
+}
+
+.product-details-photo-thumbs {
+  padding-top: 1rem;
+}
+
+.product-details-photo-thumb {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+
+  &.active {
+    border: 0.125rem solid $primary-blue-color;
+  }
 }

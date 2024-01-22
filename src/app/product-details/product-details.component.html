@@ -28,15 +28,36 @@
       <div class="product-details-main-info">
         <div class="product-details-photo-gallery">
 
-          <owl-carousel-o [options]="multiImageSliderOptions">
-            @for (imgUrl of productImages; track imgUrl; let i = $index) {
-              <ng-template carouselSlide>
-                <div class="banner-slide" [id]="i">
-                  <img [src]="imgUrl" [alt]="imgUrl">
-                </div>
-              </ng-template>
-            }
-          </owl-carousel-o>
+          <div class="product-details-photo-display">
+            <img [ngSrc]="selectedImageUrl" [fill]="true" [alt]="">
+
+            <div class="product-details-photo-navs">
+              <button class="carousel-navigation-button" (click)="navigateCarousel('prev')">
+                <mat-icon [svgIcon]="'icon:arrow-left'"></mat-icon>
+              </button>
+
+              <button class="carousel-navigation-button" (click)="navigateCarousel('next')">
+                <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="product-details-photo-thumbs">
+            <owl-carousel-o [options]="thumbsCarouselOption" #thumbsCarousel>
+              @for (imgUrl of productImages; track imgUrl; let i = $index) {
+                <ng-template carouselSlide id="{{ imgUrl }}">
+                  <div
+                    class="product-details-photo-thumb"
+                    [class.active]="selectedImageIndex === i"
+                    [id]="i"
+                    (click)="selectThumb(i)"
+                  >
+                    <img [ngSrc]="imgUrl" [fill]="true" [alt]="imgUrl">
+                  </div>
+                </ng-template>
+              }
+            </owl-carousel-o>
+          </div>
         </div>
         <div class="product-details-info-block">
 

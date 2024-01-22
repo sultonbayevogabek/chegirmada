@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, inject, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { NgClass, NgForOf } from '@angular/common';
+import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { NgClass, NgForOf, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'product-details',
@@ -11,19 +11,22 @@ import { NgClass, NgForOf } from '@angular/common';
     MatIconModule,
     CarouselModule,
     NgClass,
-    NgForOf
+    NgForOf,
+    NgOptimizedImage
   ],
   standalone: true
 })
 
 export class ProductDetailsComponent {
-  @ViewChild('owl') owl;
+  @ViewChild('thumbsCarousel') thumbsCarousel: CarouselComponent;
+  selectedImageIndex = 0;
+  selectedImageUrl = 'https://picsum.photos/1000?id=1';
 
-  multiImageSliderOptions: OwlOptions = {
+  thumbsCarouselOption: OwlOptions = {
     loop: false,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
     dots: false,
     navSpeed: 700,
     items: 4,
@@ -33,10 +36,43 @@ export class ProductDetailsComponent {
   };
 
   productImages = [
-    'https://picsum.photos/480?id=1',
-    'https://picsum.photos/480?id=2',
-    'https://picsum.photos/480?id=3',
-    'https://picsum.photos/480?id=4',
-    'https://picsum.photos/480?id=5'
+    'https://picsum.photos/1000?id=1',
+    'https://picsum.photos/1000?id=2',
+    'https://picsum.photos/1000?id=3',
+    'https://picsum.photos/1000?id=4',
+    'https://picsum.photos/1000?id=5',
+    'https://picsum.photos/1000?id=6'
   ];
+
+  navigateCarousel(direction: 'next' | 'prev'): void {
+    const productImages = this.productImages;
+    const productImagesLength = productImages.length;
+
+    if (direction === 'next') {
+      if (productImagesLength - 1 > this.selectedImageIndex) {
+        this.selectedImageIndex++;
+        this.selectedImageUrl = productImages[this.selectedImageIndex];
+      } else {
+        this.selectedImageIndex = 0;
+        this.selectedImageUrl = productImages[0];
+      }
+    }
+
+    if (direction === 'prev') {
+      if (this.selectedImageIndex > 0) {
+        this.selectedImageIndex--;
+        this.selectedImageUrl = productImages[this.selectedImageIndex];
+      } else {
+        this.selectedImageIndex = productImagesLength - 1;
+        this.selectedImageUrl = productImages[this.selectedImageIndex];
+      }
+    }
+
+    this.thumbsCarousel.to(this.selectedImageUrl);
+  }
+
+  selectThumb(i: number): void {
+    this.selectedImageIndex = i;
+    this.selectedImageUrl = this.productImages[i];
+  }
 }
