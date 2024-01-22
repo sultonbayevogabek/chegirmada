@@ -1,33 +1,19 @@
 @import "variables";
 @import "mixins";
 
-.categories-carousel {
-  .owl-nav {
-    position: absolute;
-    bottom: 50%;
-    transform: translateY(50%);
-    @include flex-center-between;
-    width: 100%;
-    margin-top: 0;
-  }
+.categories-carousel-wrapper {
+  position: relative;
+}
 
-  .owl-theme .owl-nav [class*=owl-] {
-    width: 2.5rem;
-    height: 2.5rem;
-    margin: -1.25rem;
-    background-color: rgba($logo-black-color, 0.4);
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  .owl-theme .owl-nav .owl-prev {
-    background-image: url("/assets/icons/arrow-left-white.svg");
-  }
-
-  .owl-theme .owl-nav .owl-next {
-    background-image: url("/assets/icons/arrow-right-white.svg");
-  }
+.categories-carousel-navs {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 1;
+  @include flex-center-between;
+  width: calc(100% + 2.5rem);
+  margin: 0 -1.25rem;
 }
 
 .categories-slide {

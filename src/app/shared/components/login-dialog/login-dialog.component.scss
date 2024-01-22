@@ -21,9 +21,16 @@
   }
 }
 
-.login-dialog-back .mat-icon {
-  width: 1.75rem;
-  height: 1.75rem;
+.login-dialog-close {
+  .mat-icon {
+    width: 1rem;
+  }
+}
+
+.login-dialog-back {
+  .mat-icon {
+    width: 1.25rem;
+  }
 }
 
 .login-dialog-title {

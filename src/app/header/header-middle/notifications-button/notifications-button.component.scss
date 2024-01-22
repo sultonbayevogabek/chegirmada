@@ -8,14 +8,11 @@
   border-radius: 0.5rem;
 
   &:hover {
-    background-color: $background-grey-color;
-  }
-
-  &.active, &.active:hover {
-    background-color: rgba($primary-brand-color, 0.12);
+    background-color: rgba($primary-blue-color, 0.1);
+    color: $primary-blue-color;
   }
 }
 
 .notifications-icon {
-  width: 2rem;
+  width: 1.2rem;
 }

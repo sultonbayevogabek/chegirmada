@@ -21,12 +21,16 @@
 
 .global-search-location {
   @include flex-center-center(0.5rem);
-  padding: 0 0.5rem 0 1rem;
+  padding: 0 1rem;
   border-left: 1px solid $border-grey-color;
   border-right: 1px solid $border-grey-color;
 
   span {
     font-size: 0.875rem;
+  }
+
+  .mat-icon {
+    width: 0.75rem;
   }
 }
 
@@ -35,7 +39,7 @@
   padding: 0 1rem;
 
   .mat-icon {
-    width: 20px;
+    width: 1rem;
   }
 }
 
@@ -154,6 +158,10 @@ div.global-search-result.mat-mdc-autocomplete-panel {
   &:hover {
     background-color: $background-grey-color;
   }
+
+  .mat-icon {
+    width: 0.55rem;
+  }
 }
 
 .global-search-location-region {
@@ -167,6 +175,7 @@ div.global-search-result.mat-mdc-autocomplete-panel {
   width: 2rem;
   height: 2rem;
   margin-right: 0.5rem;
+  padding: 0.5rem;
   border-radius: 50%;
   background-color: $dialog-input-background;
 }

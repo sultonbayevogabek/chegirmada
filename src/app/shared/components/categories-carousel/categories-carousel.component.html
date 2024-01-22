@@ -3,15 +3,27 @@
     <section-header
       [heading]="'Категории'"
     />
-    <owl-carousel-o [options]="customOptions">
-      @for (category of categories; track category) {
-        <ng-template carouselSlide>
-          <div [class]="'categories-slide gradient-' + category.id">
-            <h3 class="categories-slide-heading">{{ category.name.ru }}</h3>
-            <img class="categories-slide-img" [src]="category.img" [alt]="category.name.uz">
-          </div>
-        </ng-template>
-      }
-    </owl-carousel-o>
+    <div class="categories-carousel-wrapper">
+      <owl-carousel-o [options]="carouselOptions" #categoriesCarousel>
+        @for (category of categories; track category) {
+          <ng-template carouselSlide>
+            <div [class]="'categories-slide gradient-' + category.id">
+              <h3 class="categories-slide-heading">{{ category.name.ru }}</h3>
+              <img class="categories-slide-img" [src]="category.img" [alt]="category.name.uz">
+            </div>
+          </ng-template>
+        }
+      </owl-carousel-o>
+
+      <div class="categories-carousel-navs">
+        <button class="carousel-navigation-button" (click)="navigateCarousel('prev')">
+          <mat-icon [svgIcon]="'icon:arrow-left'"></mat-icon>
+        </button>
+
+        <button class="carousel-navigation-button" (click)="navigateCarousel('next')">
+          <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 </section>

@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 .gradient-button {
    height: 48px;
@@ -27,4 +28,17 @@
 
 .gradient-button:hover {
    background: linear-gradient(249deg, $gradient-orange-color 3.2%, $gradient-red-first 44.56%, $gradient-red-second 100%);
+}
+
+.carousel-navigation-button {
+  @include flex-center-center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgba($logo-black-color, 0.4);
+  border-radius: 50%;
+  color: $white-color;
+
+  .mat-icon {
+    width: 0.6rem;
+  }
 }

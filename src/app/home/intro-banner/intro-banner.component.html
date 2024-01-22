@@ -3,6 +3,16 @@
     <div class="banner-wrapper">
       <div class="banner-carousel">
         <ng-container *ngTemplateOutlet="carousel"></ng-container>
+
+        <div class="banner-carousel-navs">
+          <button class="carousel-navigation-button" (click)="navigateCarousel('prev')">
+            <mat-icon [svgIcon]="'icon:arrow-left'"></mat-icon>
+          </button>
+
+          <button class="carousel-navigation-button" (click)="navigateCarousel('next')">
+            <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
+          </button>
+        </div>
       </div>
       <div class="banner-right banner-right-top">
         <img src="/assets/banner/top.jpg" alt="">
@@ -14,9 +24,8 @@
   </div>
 </section>
 
-
 <ng-template #carousel>
-  <owl-carousel-o [options]="customOptions">
+  <owl-carousel-o [options]="carouselOptions" #carouselComponent>
     @for (imgUrl of carouselImages; track imgUrl) {
       <ng-template carouselSlide>
         <div class="banner-slide">

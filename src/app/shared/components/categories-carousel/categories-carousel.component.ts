@@ -1,6 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { SectionHeaderComponent } from '../section-header/section-header.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'categories-carousel',
@@ -8,26 +9,29 @@ import { SectionHeaderComponent } from '../section-header/section-header.compone
   styleUrls: [ 'categories-carousel.component.scss' ],
   imports: [
     CarouselModule,
-    SectionHeaderComponent
+    SectionHeaderComponent,
+    MatIconModule
   ],
   standalone: true,
   encapsulation: ViewEncapsulation.None
 })
 
 export class CategoriesCarouselComponent {
-  customOptions: OwlOptions = {
+  @ViewChild('categoriesCarousel') categoriesCarousel: CarouselComponent;
+
+  carouselOptions: OwlOptions = {
     loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
     dots: false,
     navSpeed: 700,
     items: 7,
-    nav: true,
-    navText: ['', ''],
+    nav: false,
+    navText: [ '', '' ],
     autoplay: false,
     lazyLoad: true,
-    margin: 16,
+    margin: 16
   };
 
   categories = [
@@ -35,7 +39,7 @@ export class CategoriesCarouselComponent {
       id: 1,
       name: {
         uz: 'Elektronika',
-        ru: 'Электроника',
+        ru: 'Электроника'
       },
       img: '/assets/categories/electronics.png'
     },
@@ -43,7 +47,7 @@ export class CategoriesCarouselComponent {
       id: 2,
       name: {
         uz: 'Kitoblar',
-        ru: 'Книги',
+        ru: 'Книги'
       },
       img: '/assets/categories/books.png'
     },
@@ -51,7 +55,7 @@ export class CategoriesCarouselComponent {
       id: 3,
       name: {
         uz: 'Maishiy texnika',
-        ru: 'Бытовая техника',
+        ru: 'Бытовая техника'
       },
       img: '/assets/categories/appliances.png'
     },
@@ -59,7 +63,7 @@ export class CategoriesCarouselComponent {
       id: 4,
       name: {
         uz: 'Mebel',
-        ru: 'Мебель',
+        ru: 'Мебель'
       },
       img: '/assets/categories/furniture.png'
     },
@@ -67,7 +71,7 @@ export class CategoriesCarouselComponent {
       id: 5,
       name: {
         uz: 'Uy va bog´',
-        ru: 'Дом и сад',
+        ru: 'Дом и сад'
       },
       img: '/assets/categories/tools.png'
     },
@@ -75,7 +79,7 @@ export class CategoriesCarouselComponent {
       id: 6,
       name: {
         uz: 'Bolalar buyumlari',
-        ru: 'Детские товары',
+        ru: 'Детские товары'
       },
       img: '/assets/categories/kids-things.png'
     },
@@ -83,7 +87,7 @@ export class CategoriesCarouselComponent {
       id: 7,
       name: {
         uz: 'Kiyim-kechak',
-        ru: 'Одежда',
+        ru: 'Одежда'
       },
       img: '/assets/categories/clothes.png'
     },
@@ -91,9 +95,13 @@ export class CategoriesCarouselComponent {
       id: 3,
       name: {
         uz: 'Uy va bog´',
-        ru: 'Дом и сад',
+        ru: 'Дом и сад'
       },
       img: '/assets/categories/tools.png'
-    },
-  ]
+    }
+  ];
+
+  navigateCarousel(direction: 'next' | 'prev'): void {
+    this.categoriesCarousel[direction]();
+  }
 }
