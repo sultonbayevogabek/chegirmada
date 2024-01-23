@@ -72,7 +72,16 @@ export class ProductDetailsComponent {
   }
 
   selectThumb(i: number): void {
+    const previousSelectedImageIndex = this.selectedImageIndex;
     this.selectedImageIndex = i;
     this.selectedImageUrl = this.productImages[i];
+
+    if (this.selectedImageIndex > previousSelectedImageIndex) {
+      this.thumbsCarousel.next()
+    }
+
+    if (this.selectedImageIndex < previousSelectedImageIndex) {
+      this.thumbsCarousel.prev()
+    }
   }
 }
