@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, inject, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { NgClass, NgForOf } from '@angular/common';
+import { NgClass, NgForOf, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'product-details',
@@ -11,7 +11,8 @@ import { NgClass, NgForOf } from '@angular/common';
     MatIconModule,
     CarouselModule,
     NgClass,
-    NgForOf
+    NgForOf,
+    NgOptimizedImage
   ],
   standalone: true
 })
@@ -33,10 +34,10 @@ export class ProductDetailsComponent {
   };
 
   productImages = [
-    'https://picsum.photos/480?id=1',
-    'https://picsum.photos/480?id=2',
-    'https://picsum.photos/480?id=3',
-    'https://picsum.photos/480?id=4',
-    'https://picsum.photos/480?id=5'
+    'https://picsum.photos/500?id=1',
+    'https://picsum.photos/500?id=2',
+    'https://picsum.photos/500?id=3',
+    'https://picsum.photos/500?id=4',
+    'https://picsum.photos/500?id=5'
   ];
 }

@@ -28,6 +28,10 @@
       <div class="product-details-main-info">
         <div class="product-details-photo-gallery">
 
+          <div class="product-details-photo-display">
+            <img [ngSrc]="'https://picsum.photos/480?id=1'" [fill]="true" alt="Product image">
+          </div>
+
           <owl-carousel-o [options]="multiImageSliderOptions">
             @for (imgUrl of productImages; track imgUrl; let i = $index) {
               <ng-template carouselSlide>
