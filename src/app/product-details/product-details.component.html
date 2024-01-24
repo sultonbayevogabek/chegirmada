@@ -29,21 +29,66 @@
         <div class="product-details-photo-gallery">
 
           <div class="product-details-photo-display">
-            <img [ngSrc]="'https://picsum.photos/480?id=1'" [fill]="true" alt="Product image">
+            <img [ngSrc]="selectedImageUrl" [fill]="true" [alt]="">
+
+            <div class="product-details-photo-navs">
+              <button class="carousel-navigation-button" (click)="navigateCarousel('prev')">
+                <mat-icon [svgIcon]="'icon:arrow-left'"></mat-icon>
+              </button>
+
+              <button class="carousel-navigation-button" (click)="navigateCarousel('next')">
+                <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
+              </button>
+            </div>
           </div>
 
-          <owl-carousel-o [options]="multiImageSliderOptions">
-            @for (imgUrl of productImages; track imgUrl; let i = $index) {
-              <ng-template carouselSlide>
-                <div class="banner-slide" [id]="i">
-                  <img [src]="imgUrl" [alt]="imgUrl">
-                </div>
-              </ng-template>
-            }
-          </owl-carousel-o>
+          <div class="product-details-photo-thumbs">
+            <owl-carousel-o [options]="thumbsCarouselOption" #thumbsCarousel>
+              @for (imgUrl of productImages; track imgUrl; let i = $index) {
+                <ng-template carouselSlide id="{{ imgUrl }}">
+                  <div
+                    class="product-details-photo-thumb"
+                    [class.active]="selectedImageIndex === i"
+                    [id]="i"
+                    (click)="selectThumb(i)"
+                  >
+                    <img [ngSrc]="imgUrl" [fill]="true" [alt]="imgUrl">
+                  </div>
+                </ng-template>
+              }
+            </owl-carousel-o>
+          </div>
         </div>
         <div class="product-details-info-block">
+          <div class="product-details-date-view">
+            <div class="product-details-date-view-item">
+              ID: 120334
+            </div>
 
+            <div class="product-details-date-view-item">
+              <mat-icon [svgIcon]="'icon:calendar'"></mat-icon>
+
+              <span>Осталось 12 дней</span>
+            </div>
+
+            <div class="product-details-date-view-item views">
+              <mat-icon [svgIcon]="'icon:eye'"></mat-icon>
+
+              <span>122</span>
+            </div>
+          </div>
+
+          <h2 class="product-details-product-title">Смартфон Apple iPhone 13 256 ГБ, Dual: nano SIM + eSIM</h2>
+
+          <div class="product-details-price-change">
+            <div class="product-details-price-old">
+              <del class="">15 000 000 сум</del>
+
+              <div class="product-details-price-discount">10%</div>
+            </div>
+
+            <strong class="product-details-price-new">13 499 000 сум</strong>
+          </div>
         </div>
       </div>
 
