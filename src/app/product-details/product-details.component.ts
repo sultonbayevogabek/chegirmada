@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { NgClass, NgForOf, NgOptimizedImage } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'product-details',
@@ -12,7 +13,8 @@ import { NgClass, NgForOf, NgOptimizedImage } from '@angular/common';
     CarouselModule,
     NgClass,
     NgForOf,
-    NgOptimizedImage
+    NgOptimizedImage,
+    MatButtonModule
   ],
   standalone: true
 })

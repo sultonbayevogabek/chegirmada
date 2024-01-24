@@ -1,0 +1,33 @@
+.banner {
+  padding-top: 2rem;
+}
+
+.banner-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1.5rem 1.5rem;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "banner-left banner-left banner-right-top"
+    "banner-left banner-left banner-right-bottom";
+  padding-top: 1.5rem;
+}
+
+.banner-left {
+  grid-area: banner-left;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.banner-right {
+  overflow: hidden;
+
+  &-top {
+    grid-area: banner-right-top;
+  }
+
+  &-bottom {
+    grid-area: banner-right-bottom;
+  }
+}
