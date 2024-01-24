@@ -3,6 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { NgClass, NgForOf, NgOptimizedImage } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { RatingStarsComponent } from '../shared/components/rating-stars/rating-stars.component';
 
 @Component({
   selector: 'product-details',
@@ -14,7 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
     NgClass,
     NgForOf,
     NgOptimizedImage,
-    MatButtonModule
+    MatButtonModule,
+    RatingStarsComponent
   ],
   standalone: true
 })
