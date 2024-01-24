@@ -75,5 +75,17 @@
             <path d="M12.1213 5.87868C13.2929 7.05025 13.2929 8.94975 12.1213 10.1213C10.9497 11.2929 9.05025 11.2929 7.87868 10.1213C6.70711 8.94975 6.70711 7.05025 7.87868 5.87868C9.05025 4.70711 10.9497 4.70711 12.1213 5.87868Z"
                   stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
+
+       <svg id="calendar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+          <path d="M15.3307 3.66663V6.99996" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8.66667 3.66663V6.99996" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4.5 9.50001H19.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M17.8333 5.33337H6.16667C5.24583 5.33337 4.5 6.07921 4.5 7.00004V17.8334C4.5 18.7542 5.24583 19.5 6.16667 19.5H17.8333C18.7542 19.5 19.5 18.7542 19.5 17.8334V7.00004C19.5 6.07921 18.7542 5.33337 17.8333 5.33337Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7.84552 12.6075C7.73052 12.6075 7.63719 12.7008 7.63802 12.8158C7.63802 12.9308 7.73136 13.0242 7.84636 13.0242C7.96136 13.0242 8.05469 12.9308 8.05469 12.8158C8.05469 12.7008 7.96136 12.6075 7.84552 12.6075" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12.0096 12.6075C11.8946 12.6075 11.8013 12.7008 11.8021 12.8158C11.8021 12.9308 11.8954 13.0242 12.0104 13.0242C12.1254 13.0242 12.2188 12.9308 12.2188 12.8158C12.2188 12.7008 12.1254 12.6075 12.0096 12.6075" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16.1776 12.6075C16.0626 12.6075 15.9692 12.7008 15.9701 12.8158C15.9701 12.9308 16.0634 13.0242 16.1784 13.0242C16.2934 13.0242 16.3867 12.9308 16.3867 12.8158C16.3867 12.7008 16.2934 12.6075 16.1776 12.6075" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7.84552 15.9408C7.73052 15.9408 7.63719 16.0341 7.63802 16.1491C7.63802 16.2641 7.73136 16.3575 7.84636 16.3575C7.96136 16.3575 8.05469 16.2641 8.05469 16.1491C8.05469 16.0341 7.96136 15.9408 7.84552 15.9408" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12.0096 15.9408C11.8946 15.9408 11.8013 16.0341 11.8021 16.1491C11.8021 16.2641 11.8954 16.3575 12.0104 16.3575C12.1254 16.3575 12.2188 16.2641 12.2188 16.1491C12.2188 16.0341 12.1254 15.9408 12.0096 15.9408" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+       </svg>
     </defs>
 </svg>
