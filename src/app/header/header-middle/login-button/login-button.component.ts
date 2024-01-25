@@ -6,7 +6,7 @@ import { LoginDialogComponent } from '../../../shared/components/login-dialog/lo
 @Component({
   selector: 'login-button',
   templateUrl: 'login-button.component.html',
-  styleUrls: [ 'login-button.component.scss' ],
+  styleUrl: 'login-button.component.scss',
   imports: [
     MatIconModule
   ],

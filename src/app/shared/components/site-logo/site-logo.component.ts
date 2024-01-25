@@ -4,8 +4,8 @@ import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'site-logo',
-  templateUrl: './site-logo.component.html',
-  styleUrls: [ './site-logo.component.scss' ],
+  templateUrl: 'site-logo.component.html',
+  styleUrl: 'site-logo.component.scss',
   imports: [
     RouterLink,
     NgOptimizedImage

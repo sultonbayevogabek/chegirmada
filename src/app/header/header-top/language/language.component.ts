@@ -6,7 +6,7 @@ import { NgOptimizedImage } from '@angular/common';
 @Component({
   selector: 'language',
   templateUrl: 'language.component.html',
-  styleUrls: [ 'language.component.scss' ],
+  styleUrl: 'language.component.scss',
   imports: [
     MatIconModule,
     MatDividerModule,

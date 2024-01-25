@@ -5,7 +5,7 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 @Component({
   selector: 'products-section',
   templateUrl: 'products-section.component.html',
-  styleUrls: [ 'products-section.component.scss' ],
+  styleUrl: 'products-section.component.scss',
   imports: [
     SectionHeaderComponent,
     ProductCardComponent

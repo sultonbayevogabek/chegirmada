@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'partners',
   templateUrl: 'partners.component.html',
-  styleUrls: [ 'partners.component.scss' ],
+  styleUrl: 'partners.component.scss',
   imports: [
     NgOptimizedImage,
     MatIconModule

@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'rating-stars',
   templateUrl: 'rating-stars.component.html',
-  styleUrls: [ 'rating-stars.component.scss' ],
+  styleUrl: 'rating-stars.component.scss',
   imports: [
     MatIconModule
   ],

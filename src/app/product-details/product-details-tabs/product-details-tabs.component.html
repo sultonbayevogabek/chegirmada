@@ -1,0 +1,61 @@
+<div class="product-details-tabs">
+  <div class="product-details-tabs-header">
+    @for (tab of tabs; track tab) {
+      <div
+        class="product-details-tabs-label"
+        [class.active]="selectedTab === tab.id"
+        (click)="changeTab(tab.id)"
+      >
+        {{ tab.title }}
+        @if (tab.id === 'comments') {
+          <span>25</span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="product-details-tabs-body">
+    <ng-scrollbar autoHeightDisabled="false" [visibility]="'hover'">
+
+      @switch (selectedTab) {
+        @case ('about') {
+          <ng-container
+            *ngTemplateOutlet="productDetailsTabsAbout"
+          />
+        }
+        @case ('characteristics') {
+          <ng-container
+            *ngTemplateOutlet="productDetailsTabsCharacteristics"
+          />
+        }
+        @case ('comments') {
+          <div>comments</div>
+        }
+      }
+    </ng-scrollbar>
+  </div>
+</div>
+
+<ng-template #productDetailsTabsAbout>
+  <div class="product-details-tabs-about">
+    iPhone 15 Pro: новый король смартфонов с инновационными функциями! Встречайте мощный и стильный iPhone с передовыми
+    технологиями! Представляем iPhone 15 Pro, новый флагман Apple, который изменит ваше представление о смартфонах. Он
+    оснащен OLED-дисплеем с диагональю 6.1 дюйма и технологией Super Retina XDR для непревзойденной цветопередачи и
+    яркости. В основе iPhone 15 Pro лежит мощнейший процессор A17 Pro, который гарантирует молниеносное быстродействие и
+    плавную работу при любых нагрузках. Тройная камера с оптической стабилизацией обеспечивает потрясающие снимки и
+    кинематографические видео. Технология Face ID гарантирует быструю и безопасную аутентификацию. Аккумулятор
+    увеличенной емкости поддерживает быструю зарядку, позволяя работать и играть весь день без перерыва.
+  </div>
+</ng-template>
+
+<ng-template #productDetailsTabsCharacteristics>
+  <ul class="product-details-tabs-characteristics">
+    @for (character of characteristics; track character) {
+      <li class="product-details-tabs-characteristics-item">
+        <div class="product-details-tabs-characteristics-name">{{ character.name }}</div>
+        <div class="product-details-tabs-characteristics-dashes"></div>
+        <div class="product-details-tabs-characteristics-value">{{ character.value }}</div>
+      </li>
+    }
+  </ul>
+</ng-template>

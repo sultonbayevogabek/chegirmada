@@ -6,8 +6,8 @@ import { LocationComponent } from './location/location.component';
 
 @Component({
   selector: 'header-top',
-  templateUrl: './header-top.component.html',
-  styleUrl: './header-top.component.scss',
+  templateUrl: 'header-top.component.html',
+  styleUrl: 'header-top.component.scss',
   imports: [
     MatIconModule,
     LanguageComponent,

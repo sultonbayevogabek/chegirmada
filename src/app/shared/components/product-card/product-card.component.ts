@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'product-card',
   templateUrl: 'product-card.component.html',
-  styleUrls: [ 'product-card.component.scss' ],
+  styleUrl: 'product-card.component.scss',
   imports: [
     NgOptimizedImage,
     MatIconModule,

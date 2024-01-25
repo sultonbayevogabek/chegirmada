@@ -4,11 +4,13 @@ import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-
 import { NgClass, NgForOf, NgOptimizedImage } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { RatingStarsComponent } from '../shared/components/rating-stars/rating-stars.component';
+import { ProductDetailsSellerInfoComponent } from './product-details-seller-info/product-details-seller-info.component';
+import { ProductDetailsTabsComponent } from './product-details-tabs/product-details-tabs.component';
 
 @Component({
   selector: 'product-details',
   templateUrl: 'product-details.component.html',
-  styleUrls: [ 'product-details.component.scss' ],
+  styleUrl: 'product-details.component.scss',
   imports: [
     MatIconModule,
     CarouselModule,
@@ -16,7 +18,9 @@ import { RatingStarsComponent } from '../shared/components/rating-stars/rating-s
     NgForOf,
     NgOptimizedImage,
     MatButtonModule,
-    RatingStarsComponent
+    RatingStarsComponent,
+    ProductDetailsSellerInfoComponent,
+    ProductDetailsTabsComponent,
   ],
   standalone: true
 })

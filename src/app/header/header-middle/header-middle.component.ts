@@ -11,7 +11,7 @@ import { LoginButtonComponent } from './login-button/login-button.component';
 @Component({
   selector: 'header-middle',
   templateUrl: 'header-middle.component.html',
-  styleUrls: [ 'header-middle.component.scss' ],
+  styleUrl: 'header-middle.component.scss',
   imports: [
     RouterLink,
     MatIconModule,

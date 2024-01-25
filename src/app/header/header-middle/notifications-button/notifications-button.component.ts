@@ -7,7 +7,7 @@ import {
 @Component({
   selector: 'notifications-button',
   templateUrl: 'notifications-button.component.html',
-  styleUrls: [ 'notifications-button.component.scss' ],
+  styleUrl: 'notifications-button.component.scss',
   imports: [
     MatIconModule,
     OverlayComponent

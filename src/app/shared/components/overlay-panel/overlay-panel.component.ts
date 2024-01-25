@@ -6,7 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'overlay-panel',
   templateUrl: './overlay-panel.component.html',
-  styleUrls: [ './overlay-panel.component.scss' ],
+  styleUrl: './overlay-panel.component.scss',
   standalone: true
 })
 

@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'categories-carousel',
   templateUrl: 'categories-carousel.component.html',
-  styleUrls: [ 'categories-carousel.component.scss' ],
+  styleUrl: 'categories-carousel.component.scss',
   imports: [
     CarouselModule,
     SectionHeaderComponent,

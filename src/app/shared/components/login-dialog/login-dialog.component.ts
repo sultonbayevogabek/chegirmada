@@ -7,7 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
    selector: 'login-dialog',
    templateUrl: 'login-dialog.component.html',
-   styleUrls: [ 'login-dialog.component.scss' ],
+   styleUrl: 'login-dialog.component.scss',
    encapsulation: ViewEncapsulation.None,
    imports: [
       MatIconModule,

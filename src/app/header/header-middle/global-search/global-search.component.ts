@@ -9,7 +9,7 @@ import { MatRippleModule } from '@angular/material/core';
 @Component({
   selector: 'global-search',
   templateUrl: 'global-search.component.html',
-  styleUrls: [ 'global-search.component.scss' ],
+  styleUrl: 'global-search.component.scss',
   imports: [
     MatIconModule,
     MatAutocompleteModule,

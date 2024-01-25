@@ -4,7 +4,7 @@ import { NgOptimizedImage } from '@angular/common';
 @Component({
   selector: 'download-app',
   templateUrl: 'download-app.component.html',
-  styleUrls: [ 'download-app.component.scss' ],
+  styleUrl: 'download-app.component.scss',
   imports: [
     NgOptimizedImage
   ],

@@ -1,0 +1,75 @@
+@import 'variables';
+@import 'mixins';
+
+.product-details-tabs {
+  @include flex-column(0.75rem)
+}
+
+.product-details-tabs-header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 4rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background: $dialog-input-background;
+}
+
+.product-details-tabs-label {
+  border-radius: 0.5rem;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 3rem;
+  font-weight: 500;
+  color: $logo-black-color;
+  cursor: pointer;
+
+  span {
+    color: $primary-brand-color;
+  }
+
+  &.active {
+    background-color: $white-color;
+  }
+}
+
+.product-details-tabs-body {
+  height: 20rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-grey-color;
+}
+
+.product-details-tabs-about {
+  font-size: 1rem;
+  line-height: 1.75rem;
+}
+
+.product-details-tabs-characteristics {
+  @include flex-column(0.75rem);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: $white-color;
+  box-shadow: 0 4px 16px 0 rgba(74, 74, 74, 0.06);
+}
+
+.product-details-tabs-characteristics-item {
+  @include flex-center(0.35rem);
+  font-size: 1rem;
+}
+
+.product-details-tabs-characteristics-name {
+  color: $secondary-black-color;
+}
+
+.product-details-tabs-characteristics-dashes {
+  flex-grow: 1;
+  align-self: flex-end;
+  border-bottom: 1px dashed rgba($dashed-border-color, 0.9);
+}
+
+.product-details-tabs-characteristics-value {
+  font-weight: 500;
+  color: $logo-black-color;
+}
+
+

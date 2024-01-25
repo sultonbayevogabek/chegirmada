@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'intro-banner',
   templateUrl: 'intro-banner.component.html',
-  styleUrls: [ 'intro-banner.component.scss' ],
+  styleUrl: 'intro-banner.component.scss',
   imports: [
     CarouselModule,
     NgForOf,
