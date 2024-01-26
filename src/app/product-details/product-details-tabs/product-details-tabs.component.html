@@ -15,46 +15,143 @@
   </div>
 
   <div class="product-details-tabs-body">
-    <ng-scrollbar [autoHeightDisabled]="false" [visibility]="'hover'">
-      @switch (selectedTab) {
-        @case ('about') {
-          <ng-container
-            *ngTemplateOutlet="productDetailsTabsAbout"
-          />
-        }
-        @case ('characteristics') {
-          <ng-container
-            *ngTemplateOutlet="productDetailsTabsCharacteristics"
-          />
-        }
-        @case ('comments') {
-          <div>comments</div>
-        }
+    @switch (selectedTab) {
+      @case ('about') {
+        <ng-container
+          *ngTemplateOutlet="productDetailsTabsAbout"
+        />
       }
-    </ng-scrollbar>
+      @case ('characteristics') {
+        <ng-container
+          *ngTemplateOutlet="productDetailsTabsCharacteristics"
+        />
+      }
+      @case ('comments') {
+        <ng-container
+          *ngTemplateOutlet="productDetailsTabsComments"
+        />
+      }
+    }
   </div>
 </div>
 
 <ng-template #productDetailsTabsAbout>
+
   <div class="product-details-tabs-about">
-    iPhone 15 Pro: новый король смартфонов с инновационными функциями! Встречайте мощный и стильный iPhone с передовыми
-    технологиями! Представляем iPhone 15 Pro, новый флагман Apple, который изменит ваше представление о смартфонах. Он
-    оснащен OLED-дисплеем с диагональю 6.1 дюйма и технологией Super Retina XDR для непревзойденной цветопередачи и
-    яркости. В основе iPhone 15 Pro лежит мощнейший процессор A17 Pro, который гарантирует молниеносное быстродействие и
-    плавную работу при любых нагрузках. Тройная камера с оптической стабилизацией обеспечивает потрясающие снимки и
-    кинематографические видео. Технология Face ID гарантирует быструю и безопасную аутентификацию. Аккумулятор
-    увеличенной емкости поддерживает быструю зарядку, позволяя работать и играть весь день без перерыва.
+      iPhone 15 Pro: новый король смартфонов с инновационными функциями! Встречайте мощный и стильный iPhone с
+      передовыми
+      технологиями! Представляем iPhone 15 Pro, новый флагман Apple, который изменит ваше представление о смартфонах. Он
+      оснащен OLED-дисплеем с диагональю 6.1 дюйма и технологией Super Retina XDR для непревзойденной цветопередачи и
+      яркости. В основе iPhone 15 Pro лежит мощнейший процессор A17 Pro, который гарантирует молниеносное быстродействие
+      и
+      плавную работу при любых нагрузках. Тройная камера с оптической стабилизацией обеспечивает потрясающие снимки и
+      кинематографические видео. Технология Face ID гарантирует быструю и безопасную аутентификацию. Аккумулятор
+      увеличенной емкости поддерживает быструю зарядку, позволяя работать и играть весь день без перерыва.
   </div>
 </ng-template>
 
 <ng-template #productDetailsTabsCharacteristics>
-  <ul class="product-details-tabs-characteristics">
-    @for (character of characteristics; track character) {
-      <li class="product-details-tabs-characteristics-item">
-        <div class="product-details-tabs-characteristics-name">{{ character.name }}</div>
-        <div class="product-details-tabs-characteristics-dashes"></div>
-        <div class="product-details-tabs-characteristics-value">{{ character.value }}</div>
+  <ng-scrollbar [autoHeightDisabled]="false" [visibility]="'hover'">
+    <ul class="product-details-tabs-characteristics">
+      @for (character of characteristics; track character) {
+        <li class="product-details-tabs-characteristics-item">
+          <div class="product-details-tabs-characteristics-name">{{ character.name }}</div>
+          <div class="product-details-tabs-characteristics-dashes"></div>
+          <div class="product-details-tabs-characteristics-value">{{ character.value }}</div>
+        </li>
+      }
+    </ul>
+  </ng-scrollbar>
+</ng-template>
+
+<ng-template #productDetailsTabsComments>
+  @if (true) {
+    <ul class="product-details-tabs-comments">
+      <li class="product-details-tabs-comment">
+        <div class="product-details-tabs-comment-header">
+          <div class="product-details-tabs-comment-owner-time">
+            <div class="product-details-tabs-comment-owner-img">
+              <img [ngSrc]="'https://i.pravatar.cc/150?img=3'" [fill]="true" [alt]="">
+            </div>
+
+            <div class="product-details-tabs-comment-owner-name">
+              <div>Kamol Urinov</div>
+              <time>30 минут назад</time>
+            </div>
+          </div>
+
+          <button class="product-details-tabs-comment-dots" mat-ripple>
+            <mat-icon [svgIcon]="'icon:dots'"></mat-icon>
+          </button>
+
+        </div>
+
+        <div class="product-details-tabs-comment-body">
+          <p class="product-details-tabs-comment-text">
+            Это отличный телефон. Я рекомендую это всем. Спасибо. Дешево и качественно. Доставили быстро ко мне домой. Я
+            рад
+          </p>
+
+          <div class="product-details-tabs-comment-reply">
+            <button class="product-details-tabs-comment-reply-button">Ответить</button>
+          </div>
+        </div>
       </li>
-    }
-  </ul>
+
+      <li class="product-details-tabs-comment">
+        <div class="product-details-tabs-comment-header">
+          <div class="product-details-tabs-comment-owner-time">
+            <div class="product-details-tabs-comment-owner-img">
+              <img [ngSrc]="'https://i.pravatar.cc/150?img=5'" [fill]="true" [alt]="">
+            </div>
+
+            <div class="product-details-tabs-comment-owner-name">
+              <div>Samira Jallatovna</div>
+              <time>22 минут назад</time>
+            </div>
+          </div>
+
+          <button class="product-details-tabs-comment-dots" mat-ripple>
+            <mat-icon [svgIcon]="'icon:dots'"></mat-icon>
+          </button>
+
+        </div>
+
+        <div class="product-details-tabs-comment-body">
+          <p class="product-details-tabs-comment-text">
+            Это отличный телефон. Я рекомендую это всем. Спасибо. Дешево и качественно. Доставили быстро ко мне домой. Я
+            рад
+          </p>
+
+          <div class="product-details-tabs-comment-reply">
+            <button class="product-details-tabs-comment-reply-button">Ответить</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  }
+
+  @if (false) {
+    <div class="product-details-tabs-no-comments">
+      <img class="product-details-tabs-no-comments-icon" [ngSrc]="'/assets/icons/message.svg'" [width]="113"
+           [height]="104" [alt]="''">
+      <p class="product-details-tabs-no-comments-text">Пока нет отзывов!</p>
+      <button class="product-details-tabs-leave-comment">Оставить отзыв</button>
+    </div>
+  }
+
+  <form class="product-details-tabs-comment-form">
+    <input class="product-details-tabs-comment-input" type="text" placeholder="Введите ответ">
+
+    <div class="product-details-tabs-comment-samples">
+      <button class="product-details-tabs-comment-sample" type="button">Очень хороший</button>
+      <button class="product-details-tabs-comment-sample" type="button">Большое спасибо</button>
+      <button class="product-details-tabs-comment-sample" type="button">Качественный продукт</button>
+    </div>
+
+    <div class="product-details-tabs-comment-form-actions">
+      <button class="product-details-tabs-comment-form-button cancel" type="button">Отмена</button>
+      <button class="product-details-tabs-comment-form-button save" type="button">Сохранять</button>
+    </div>
+  </form>
 </ng-template>

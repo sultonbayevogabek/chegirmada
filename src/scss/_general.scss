@@ -7,7 +7,7 @@ html {
 }
 
 *, *::after, *::before {
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 body {
@@ -25,6 +25,10 @@ label {
 input {
   font-family: "Inter", Arial, sans-serif;
   border: none;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 button {

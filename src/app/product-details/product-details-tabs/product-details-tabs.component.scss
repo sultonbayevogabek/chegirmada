@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'mixins';
+@import 'buttons';
 
 .product-details-tabs {
   @include flex-column(0.75rem)
@@ -33,11 +34,13 @@
 }
 
 .product-details-tabs-body {
-  min-height: 15rem;
+  position: relative;
+  min-height: 20rem;
   max-height: 28rem;
   padding: 1rem;
   border-radius: 0.5rem;
   border: 1px solid $border-grey-color;
+  overflow: auto;
 }
 
 .product-details-tabs-about {
@@ -71,4 +74,162 @@
   color: $logo-black-color;
 }
 
+.product-details-tabs-no-comments {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.product-details-tabs-no-comments-text {
+  margin-bottom: 1rem;
+  color: $dialog-title-black;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.product-details-tabs-leave-comment {
+  @extend .blue-button;
+  background-color: $primary-brand-color;
+  box-shadow: 0 4px 24px 0 rgba(255, 3, 76, 0.16);
+}
+
+.product-details-tabs-comment {
+  @include flex-column(0.75rem);
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+.product-details-tabs-comment-header {
+  @include flex-start-between;
+}
+
+.product-details-tabs-comment-owner-img {
+  position: relative;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.product-details-tabs-comment-owner-time {
+  @include flex-center(0.5rem);
+}
+
+.product-details-tabs-comment-owner-name {
+  div {
+    margin-bottom: 0.125rem;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  time {
+    font-size: 0.75rem;
+    color: $secondary-text-color;
+  }
+}
+
+.product-details-tabs-comment-dots {
+  @include flex-center-center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: $background-grey-color;
+  }
+
+  .mat-icon {
+    height: 1rem;
+  }
+}
+
+.product-details-tabs-comment-body {
+  padding-left: 1rem;
+}
+
+.product-details-tabs-comment-text {
+  font-size: 1rem;
+  line-height: 1.25rem;
+  color: $seller-description-color;
+}
+
+.product-details-tabs-comment-reply {
+  padding: 0.25rem 0 0.5rem;
+  border-bottom: 1px solid $dashed-border-color;
+  text-align: right;
+}
+
+.product-details-tabs-comment-reply-button {
+  height: 2.25rem;
+  padding: 0 0.75rem;
+  background-color: $background-grey-color;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  &:hover {
+    background-color: rgba($primary-blue-color, 0.10);
+    color: $primary-blue-color;
+  }
+}
+
+.product-details-tabs-comment-form {
+  padding-top: 0.5rem;
+}
+
+.product-details-tabs-comment-input {
+  display: block;
+  width: 100%;
+  height: 2.5rem;
+  padding: 0 0.5rem;
+  font-size: 1rem;
+  border: none;
+
+  &::placeholder {
+    color: $dashed-border-color;
+  }
+}
+
+.product-details-tabs-comment-samples {
+  @include flex-center(0.25rem);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid $dashed-border-color;
+}
+
+.product-details-tabs-comment-sample {
+  height: 1.75rem;
+  padding: 0 1rem;
+  border-radius: 0.875rem;
+  background-color: $dialog-input-background;
+  font-size: 0.875rem;
+  line-height: 1.75rem;
+}
+
+.product-details-tabs-comment-form-actions {
+  @include flex-center-end(0.5rem);
+  padding-top: 0.5rem;
+}
+
+.product-details-tabs-comment-form-button {
+  height: 2.5rem;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+
+  &.cancel {
+    background-color: $background-grey-color;
+    color: $secondary-black-color;
+  }
+
+  &.save {
+    background-color: rgba($primary-blue-color, 0.1);
+    color: $primary-blue-color;
+  }
+}
 

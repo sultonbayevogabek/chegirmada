@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RatingStarsComponent } from '../../shared/components/rating-stars/rating-stars.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { NgTemplateOutlet } from '@angular/common';
+import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatRippleModule } from '@angular/material/core';
 
 type tabType = 'about' | 'characteristics' | 'comments'
 
@@ -14,7 +17,9 @@ type tabType = 'about' | 'characteristics' | 'comments'
     MatIconModule,
     RatingStarsComponent,
     NgScrollbarModule,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    NgOptimizedImage,
+    MatRippleModule
   ],
   standalone: true
 })
@@ -71,9 +76,21 @@ export class ProductDetailsTabsComponent {
       name: 'Год издания',
       value: '2023',
     },
+    {
+      name: 'Издательство',
+      value: 'Гафур Гулом',
+    },
+    {
+      name: 'Тип обложки',
+      value: 'Твердая',
+    },
+    {
+      name: 'Формат бумаги',
+      value: 'A5',
+    },
   ]
 
-  selectedTab: tabType = 'about';
+  selectedTab: tabType = 'comments';
 
   changeTab(tab: tabType): void {
     this.selectedTab = tab;
