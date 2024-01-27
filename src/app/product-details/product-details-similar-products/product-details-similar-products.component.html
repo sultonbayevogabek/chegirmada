@@ -1,0 +1,59 @@
+<div class="product-details-similar-products">
+  <section-header [heading]="'Похожие объявления'"/>
+
+  <div class="product-details-similar-carousel-wrapper">
+    <owl-carousel-o [options]="similarProductsCarouselOptions" #similarProductsCarousel>
+      @for (product of products; track product) {
+        <ng-template carouselSlide>
+          <product-card
+            [product]="product"
+          />
+        </ng-template>
+      }
+    </owl-carousel-o>
+
+    <div class="product-details-similar-carousel-navs">
+      <button
+        class="carousel-navigation-button"
+        (click)="navigateCarousel(similarProductsCarousel, 'prev')"
+      >
+        <mat-icon [svgIcon]="'icon:arrow-left'"></mat-icon>
+      </button>
+
+      <button
+        class="carousel-navigation-button"
+        (click)="navigateCarousel(similarProductsCarousel, 'next')"
+      >
+        <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="product-details-similar-carousel-wrapper">
+    <owl-carousel-o [options]="similarProductsCarouselOptions" #similarProductsCarouselBottom>
+      @for (product of products; track product) {
+        <ng-template carouselSlide>
+          <product-card
+            [product]="product"
+          />
+        </ng-template>
+      }
+    </owl-carousel-o>
+
+    <div class="product-details-similar-carousel-navs">
+      <button
+        class="carousel-navigation-button"
+        (click)="navigateCarousel(similarProductsCarouselBottom, 'prev')"
+      >
+        <mat-icon [svgIcon]="'icon:arrow-left'"></mat-icon>
+      </button>
+
+      <button
+        class="carousel-navigation-button"
+        (click)="navigateCarousel(similarProductsCarouselBottom, 'next')"
+      >
+        <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+@import 'variables';
+@import 'mixins';
+@import 'buttons';
+
+.product-details-similar-carousel-wrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.product-details-similar-carousel-navs {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 1;
+  @include flex-center-between;
+  width: calc(100% + 2.5rem);
+  margin: 0 -1.25rem;
+}

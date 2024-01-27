@@ -283,6 +283,21 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1.5rem;
-  padding-top: 4rem;
+  min-height: 0;
+  min-width: 0;
+  padding-top: 3rem;
+}
+
+.product-details-other-products {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1.5rem;
+  min-height: 0;
+  min-width: 0;
+  padding-top: 3rem;
+}
+
+.product-details-other-shops, .product-details-similar-products {
+  min-width: 0;
 }
 

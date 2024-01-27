@@ -1,0 +1,43 @@
+<div class="product-details-other-shops">
+  <section-header [heading]="'Этот товар в других магазинах'"/>
+
+  <ul class="product-details-other-shops-list">
+    @for (product of productsInOtherShops; track product) {
+      <li class="product-details-other-shops-item" mat-ripple>
+        <div class="product-details-other-shops-img">
+          <img [ngSrc]="product.productImg" [fill]="true" [alt]="product.productTitle">
+        </div>
+
+        <div class="product-details-other-shops-info">
+          <h3 class="product-details-other-shops-title">{{ product.productTitle }}</h3>
+
+          <div class="product-details-other-shops-prices">
+            <div class="product-details-other-shops-old-price">
+              <del>{{ product.productOldPrice }}</del>
+              <span>{{ product.productDiscount }}%</span>
+            </div>
+            <div class="product-details-other-shops-new-price">{{ product.productNewPrice }}</div>
+          </div>
+        </div>
+
+        <div class="product-details-other-shops-brand">
+          <div class="product-details-other-shops-brand-logo">
+            <img [ngSrc]="product.productShopBrandLogo" [fill]="true" [alt]="product.productShopBrandName">
+          </div>
+
+          <div class="product-details-other-shops-rating-brand-name">
+            <div class="product-details-other-shops-rating">
+              <mat-icon [svgIcon]="'icon:gradient-star'"></mat-icon>
+
+              <span>{{ product.productRating }}</span>
+            </div>
+
+            <div class="product-details-other-shops-brand-name">
+              {{ product.productShopBrandName }}
+            </div>
+          </div>
+        </div>
+      </li>
+    }
+  </ul>
+</div>

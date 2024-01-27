@@ -6,6 +6,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { RatingStarsComponent } from '../shared/components/rating-stars/rating-stars.component';
 import { ProductDetailsSellerInfoComponent } from './product-details-seller-info/product-details-seller-info.component';
 import { ProductDetailsTabsComponent } from './product-details-tabs/product-details-tabs.component';
+import { ProductDetailsMapComponent } from './product-details-map/product-details-map.component';
+import { ProductDetailsOtherShopsComponent } from './product-details-other-shops/product-details-other-shops.component';
+import {
+  ProductDetailsSimilarProductsComponent
+} from './product-details-similar-products/product-details-similar-products.component';
 
 @Component({
   selector: 'product-details',
@@ -21,6 +26,9 @@ import { ProductDetailsTabsComponent } from './product-details-tabs/product-deta
     RatingStarsComponent,
     ProductDetailsSellerInfoComponent,
     ProductDetailsTabsComponent,
+    ProductDetailsMapComponent,
+    ProductDetailsOtherShopsComponent,
+    ProductDetailsSimilarProductsComponent
   ],
   standalone: true
 })

@@ -1,0 +1,21 @@
+@import 'variables';
+@import 'mixins';
+@import 'buttons';
+
+.product-details-map {
+  @include flex-column(0.75rem);
+}
+
+.product-details-map-heading {
+  height: 4rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 4rem;
+}
+
+.product-details-map-body {
+  iframe {
+    border-radius: 0.5rem;
+    border: 1px solid $border-grey-color;
+  }
+}

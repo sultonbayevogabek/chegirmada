@@ -1,0 +1,107 @@
+@import "variables";
+@import "mixins";
+
+.product-details-other-shops-list {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-grey-color;
+}
+
+.product-details-other-shops-item {
+  @include flex-start(1rem);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: $background-grey-color;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
+}
+
+.product-details-other-shops-img {
+  position: relative;
+  width: 4.5rem;
+  height: 5.25rem;
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.product-details-other-shops-info {
+  width: 60%;
+  padding-top: 0.25rem;
+}
+
+.product-details-other-shops-title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+}
+
+.product-details-other-shops-prices {
+  width: max-content;
+  padding-top: 0.75rem;
+}
+
+.product-details-other-shops-old-price {
+  @include flex-center-between;
+  margin-bottom: 0.125rem;
+
+  del {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    color: $secondary-text-color
+  }
+
+  span {
+    @include flex-center-center;
+    padding: 0.25rem 0.35rem;
+    border-radius: 0.25rem;
+    background-image: linear-gradient(249deg, #F50951 3.2%, #FD3A7E 44.56%, #FF9B06 100%);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: $white-color;
+  }
+}
+
+.product-details-other-shops-old-price {
+  @include flex-center-between;
+}
+
+.product-details-other-shops-brand-logo {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: $white-color;
+}
+
+.product-details-other-shops-new-price {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: $primary-blue-color;
+}
+
+.product-details-other-shops-brand {
+  @include flex-center(0.5rem)
+}
+
+.product-details-other-shops-rating {
+  @include flex-center(0.125rem);
+  margin-bottom: 0.25rem;
+  .mat-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  span {
+    font-size: 0.875rem;
+    color: $secondary-text-color;
+  }
+}
+
+.product-details-other-shops-brand-name {
+  font-size: 1rem;
+  font-weight: 500;
+}
