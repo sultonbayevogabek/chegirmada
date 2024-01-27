@@ -1,28 +1,6 @@
 <section class="product-details section">
   <div class="container">
-    <div class="product-details-crumbs">
-      <a class="product-details-crumbs-link" href="#">
-        <span class="product-details-crumbs-text">Главная</span>
-
-        <mat-icon class="product-details-crumbs-arrow" [svgIcon]="'icon:arrow-right'"></mat-icon>
-      </a>
-
-      <a class="product-details-crumbs-link" href="#">
-        <span class="product-details-crumbs-text">Смартфоны</span>
-
-        <mat-icon class="product-details-crumbs-arrow" [svgIcon]="'icon:arrow-right'"></mat-icon>
-      </a>
-
-      <a class="product-details-crumbs-link" href="#">
-        <span class="product-details-crumbs-text">Apple</span>
-
-        <mat-icon class="product-details-crumbs-arrow" [svgIcon]="'icon:arrow-right'"></mat-icon>
-      </a>
-
-      <a class="product-details-crumbs-link last">
-        <span class="product-details-crumbs-text">Смартфон iPhone 15 Pro 256GB Синий Титан</span>
-      </a>
-    </div>
+    <bread-crumbs [breadCrumbs]="breadCrumbs"/>
 
     <div class="product-details-main">
       <div class="product-details-main-info">

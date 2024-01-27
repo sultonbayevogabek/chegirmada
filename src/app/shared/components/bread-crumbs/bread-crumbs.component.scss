@@ -1,0 +1,21 @@
+@import "variables";
+@import "mixins";
+
+.bread-crumbs {
+  @include flex-center(0.5rem);
+}
+
+.bread-crumbs-link {
+  @include flex-center(0.5rem);
+  font-size: 0.875rem;
+  color: $secondary-text-color;
+
+  &.last {
+    color: $primary-text-color;
+    cursor: default;
+  }
+}
+
+.bread-crumbs-arrow {
+  width: 0.35rem;
+}

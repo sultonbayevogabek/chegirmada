@@ -118,3 +118,21 @@ img {
 .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: currentColor !important;
 }
+
+.mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.mdc-slider__track {
+  margin-left: -7px;
+  width: calc(100% + 14px) !important;
+}
+
+.mat-mdc-slider .mdc-slider__thumb-knob {
+  background-color: $white-color !important;
+  border-color: $primary-brand-color !important;
+}
+
+.mat-mdc-slider .mdc-slider__track--active_fill {
+  border-color: $primary-brand-color !important;
+}

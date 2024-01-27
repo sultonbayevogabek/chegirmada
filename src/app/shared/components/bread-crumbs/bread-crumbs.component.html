@@ -1,0 +1,18 @@
+<div class="bread-crumbs">
+  @for (breadCrumb of breadCrumbs; track breadCrumb) {
+    <a
+      class="bread-crumbs-link"
+      [class.last]="!breadCrumb.url"
+      [routerLink]="breadCrumb.url"
+    >
+      <span class="bread-crumbs-text">{{ breadCrumb.text }}</span>
+
+      @if (breadCrumb.url) {
+        <mat-icon
+          class="bread-crumbs-arrow"
+          [svgIcon]="'icon:arrow-right'"
+        ></mat-icon>
+      }
+    </a>
+  }
+</div>

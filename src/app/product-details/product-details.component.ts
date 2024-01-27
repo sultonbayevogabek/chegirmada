@@ -11,6 +11,7 @@ import { ProductDetailsOtherShopsComponent } from './product-details-other-shops
 import {
   ProductDetailsSimilarProductsComponent
 } from './product-details-similar-products/product-details-similar-products.component';
+import { BreadCrumbsComponent } from '../shared/components/bread-crumbs/bread-crumbs.component';
 
 @Component({
   selector: 'product-details',
@@ -28,7 +29,8 @@ import {
     ProductDetailsTabsComponent,
     ProductDetailsMapComponent,
     ProductDetailsOtherShopsComponent,
-    ProductDetailsSimilarProductsComponent
+    ProductDetailsSimilarProductsComponent,
+    BreadCrumbsComponent
   ],
   standalone: true
 })
@@ -59,6 +61,25 @@ export class ProductDetailsComponent {
     'https://picsum.photos/1000?id=5',
     'https://picsum.photos/1000?id=6'
   ];
+
+  breadCrumbs = [
+    {
+      text: 'Главная',
+      url: '#',
+    },
+    {
+      text: 'Смартфоны',
+      url: '#',
+    },
+    {
+      text: 'Apple',
+      url: '#',
+    },
+    {
+      text: 'Смартфон iPhone 15 Pro 256GB Синий Титан',
+      url: ''
+    }
+  ]
 
   navigateCarousel(direction: 'next' | 'prev'): void {
     const productImages = this.productImages;
@@ -100,4 +121,5 @@ export class ProductDetailsComponent {
       this.thumbsCarousel.prev()
     }
   }
+
 }
