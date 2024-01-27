@@ -27,7 +27,7 @@ export class ProductDetailsOtherShopsComponent {
       productDiscount: '10',
       productShopBrandLogo: '/assets/logos/mac-bro.svg',
       productShopBrandName: 'MacBro',
-      productRating: '4.8',
+      productRating: '4.8'
     },
     {
       productImg: 'https://picsum.photos/72/84?rand=2',
@@ -37,7 +37,7 @@ export class ProductDetailsOtherShopsComponent {
       productDiscount: '10',
       productShopBrandLogo: '/assets/logos/mac-bro.svg',
       productShopBrandName: 'MacBro',
-      productRating: '3.8',
+      productRating: '3.8'
     },
     {
       productImg: 'https://picsum.photos/72/84?rand=3',
@@ -47,7 +47,7 @@ export class ProductDetailsOtherShopsComponent {
       productDiscount: '10',
       productShopBrandLogo: '/assets/logos/mac-bro.svg',
       productShopBrandName: 'MacBro',
-      productRating: '3.2',
+      productRating: '3.2'
     },
     {
       productImg: 'https://picsum.photos/72/84?rand=4',
@@ -57,7 +57,7 @@ export class ProductDetailsOtherShopsComponent {
       productDiscount: '10',
       productShopBrandLogo: '/assets/logos/mac-bro.svg',
       productShopBrandName: 'MacBro',
-      productRating: '3.2',
+      productRating: '3.2'
     },
     {
       productImg: 'https://picsum.photos/72/84?rand=5',
@@ -67,17 +67,36 @@ export class ProductDetailsOtherShopsComponent {
       productDiscount: '10',
       productShopBrandLogo: '/assets/logos/mac-bro.svg',
       productShopBrandName: 'MacBro',
-      productRating: '3.2',
+      productRating: '3.2'
     },
     {
-      productImg: 'https://picsum.photos/72/84?rand=6',
+      productImg: 'https://picsum.photos/72/84?rand=7',
       productTitle: 'Apple iPhone 13  256 ГБ',
       productOldPrice: '15 000 000 сум',
       productNewPrice: '13 499 000 сум',
       productDiscount: '10',
       productShopBrandLogo: '/assets/logos/mac-bro.svg',
       productShopBrandName: 'MacBro',
-      productRating: '3.2',
+      productRating: '3.2'
+    }, {
+      productImg: 'https://picsum.photos/72/84?rand=8',
+      productTitle: 'Apple iPhone 13  256 ГБ',
+      productOldPrice: '15 000 000 сум',
+      productNewPrice: '13 499 000 сум',
+      productDiscount: '10',
+      productShopBrandLogo: '/assets/logos/mac-bro.svg',
+      productShopBrandName: 'MacBro',
+      productRating: '3.2'
+    },
+    {
+      productImg: 'https://picsum.photos/72/84?rand=9',
+      productTitle: 'Apple iPhone 13  256 ГБ',
+      productOldPrice: '15 000 000 сум',
+      productNewPrice: '13 499 000 сум',
+      productDiscount: '10',
+      productShopBrandLogo: '/assets/logos/mac-bro.svg',
+      productShopBrandName: 'MacBro',
+      productRating: '3.2'
     }
-  ]
+  ];
 }
