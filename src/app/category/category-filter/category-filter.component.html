@@ -16,23 +16,130 @@
         </div>
       </mat-expansion-panel-header>
 
-      <div class="category-filter-body">
+      <div class="category-filter-body no-pb">
         <div class="category-filter-inputs">
           <label class="category-filter-label">
-            <input class="category-filter-input" type="text" placeholder="100 000" [mask]="'00000000'">
+            <input class="category-filter-input with-prefix" type="text" placeholder="100 000" [mask]="'00000000'">
             <span class="category-filter-input-prefix">от</span>
           </label>
 
           <label class="category-filter-label">
-            <input class="category-filter-input" type="text" placeholder="50 000 000" [mask]="'00000000'">
+            <input class="category-filter-input with-prefix" type="text" placeholder="50 000 000" [mask]="'00000000'">
             <span class="category-filter-input-prefix">до</span>
           </label>
         </div>
 
-        <mat-slider class="category-filter-range" [min]="0" [max]="50" [disableRipple]>
+        <mat-slider
+          class="category-filter-range"
+          [min]="0"
+          [max]="50"
+          [color]="'warn'"
+          [disableRipple]="true"
+        >
           <input [value]="0" matSliderStartThumb>
           <input [value]="25" matSliderEndThumb>
         </mat-slider>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion class="category-filter-accordion">
+    <mat-expansion-panel class="category-filter-panel" [hideToggle]="true" #matExpansionPanel2>
+      <mat-expansion-panel-header>
+        <div class="category-filter-header">
+          <h3 class="category-filter-heading">Производитель</h3>
+
+          <mat-icon
+            class="category-filter-arrow"
+            [class.open]="matExpansionPanel2.expanded"
+            [svgIcon]="'icon:arrow-down'"
+          ></mat-icon>
+        </div>
+      </mat-expansion-panel-header>
+
+      <div class="category-filter-body">
+        <label class="category-filter-label">
+          <input class="category-filter-input" type="text" placeholder="Введите производитель">
+        </label>
+
+        <div class="category-filter-options padding-top">
+          @for (brand of brands; track brand) {
+            <button class="category-filter-option" [class.active]="brand.selected" (click)="brand.selected = !brand.selected" mat-ripple>
+              <span class="category-filter-option-title">{{ brand.name }}</span>
+              <span class="category-filter-option-count">{{ brand.count }}</span>
+            </button>
+          }
+        </div>
+
+        <button class="category-filter-show-all">
+          <span>Показать все</span>
+
+          <mat-icon [svgIcon]="'icon:rounded-plus'"></mat-icon>
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion class="category-filter-accordion">
+    <mat-expansion-panel class="category-filter-panel" [hideToggle]="true" #matExpansionPanel3>
+      <mat-expansion-panel-header>
+        <div class="category-filter-header">
+          <h3 class="category-filter-heading">Разрешение дисплея</h3>
+
+          <mat-icon
+            class="category-filter-arrow"
+            [class.open]="matExpansionPanel3.expanded"
+            [svgIcon]="'icon:arrow-down'"
+          ></mat-icon>
+        </div>
+      </mat-expansion-panel-header>
+
+      <div class="category-filter-body">
+        <div class="category-filter-options">
+          @for (resolution of screenResolutions; track resolution) {
+            <button class="category-filter-option" [class.active]="resolution.selected" (click)="resolution.selected = !resolution.selected" mat-ripple>
+              <span class="category-filter-option-title">{{ resolution.name }}</span>
+              <span class="category-filter-option-count">{{ resolution.count }}</span>
+            </button>
+          }
+        </div>
+
+        <button class="category-filter-show-all">
+          <span>Показать все</span>
+
+          <mat-icon [svgIcon]="'icon:rounded-plus'"></mat-icon>
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <mat-accordion class="category-filter-accordion">
+    <mat-expansion-panel class="category-filter-panel" [hideToggle]="true" #matExpansionPanel4>
+      <mat-expansion-panel-header>
+        <div class="category-filter-header">
+          <h3 class="category-filter-heading">Емкость аккумлятора</h3>
+          <span class="category-filter-heading-postfix">(мАч)</span>
+
+          <mat-icon
+            class="category-filter-arrow"
+            [class.open]="matExpansionPanel4.expanded"
+            [svgIcon]="'icon:arrow-down'"
+          ></mat-icon>
+        </div>
+      </mat-expansion-panel-header>
+
+      <div class="category-filter-body">
+        <div class="category-filter-inputs">
+          <label class="category-filter-label">
+            <input class="category-filter-input with-prefix" type="text" placeholder="600" [mask]="'00000000'">
+            <span class="category-filter-input-prefix">от</span>
+          </label>
+
+          <label class="category-filter-label">
+            <input class="category-filter-input with-prefix" type="text" placeholder="12 500" [mask]="'00000000'">
+            <span class="category-filter-input-prefix">до</span>
+          </label>
+        </div>
       </div>
     </mat-expansion-panel>
   </mat-accordion>

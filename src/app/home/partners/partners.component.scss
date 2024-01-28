@@ -3,8 +3,7 @@
 @import "variables";
 
 .partners-inner {
-  display: grid;
-  grid-template-columns: 1fr 1.7fr;
+  @include grid(1fr 1.7fr);
   border-radius: 1rem;
   background-color: $background-grey-color;
   overflow: hidden;
@@ -43,9 +42,7 @@
 }
 
 .partners-info-list {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-gap: 1rem;
+  @include grid(repeat(6, 1fr), 1rem);
   padding-top: 2.5rem;
 }
 

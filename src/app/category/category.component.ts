@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreadCrumbsComponent } from '../shared/components/bread-crumbs/bread-crumbs.component';
 import { MatRippleModule } from '@angular/material/core';
 import { CategoryFilterComponent } from './category-filter/category-filter.component';
+import { CategoryProductsListComponent } from './category-products-list/category-products-list.component';
 
 @Component({
   selector: 'category',
@@ -10,7 +11,8 @@ import { CategoryFilterComponent } from './category-filter/category-filter.compo
   imports: [
     BreadCrumbsComponent,
     MatRippleModule,
-    CategoryFilterComponent
+    CategoryFilterComponent,
+    CategoryProductsListComponent
   ],
   standalone: true
 })

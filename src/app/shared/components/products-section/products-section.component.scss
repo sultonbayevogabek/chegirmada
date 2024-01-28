@@ -1,8 +1,5 @@
-@import "variables";
-@import "general";
+@import "mixins";
 
 .products-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1.5rem;
+  @include grid(repeat(4, 1fr), 1.5rem)
 }

@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   gap: $gap;
+  flex-wrap: wrap;
 }
 
 @mixin flex-start($gap: 0) {
@@ -53,4 +54,16 @@
   display: flex;
   flex-direction: column;
   gap: $gap;
+}
+
+@mixin grid($grid-template-columns, $grid-gap: 0) {
+  display: grid;
+  grid-template-columns: $grid-template-columns;
+  grid-gap: $grid-gap;
+  min-width: 0;
+  min-height: 0;
+
+  & > * {
+    min-width: 0;
+  }
 }

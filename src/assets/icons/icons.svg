@@ -217,15 +217,20 @@
 
       <svg id="gradient-star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
          <g clip-path="url(#clip0_1814_3381)">
-            <path d="M12 17.235L6.179 20L7.388 13.88L3 9.392L9.179 8.621L12 3L14.821 8.621L21 9.392L16.612 13.88L17.821 20L12 17.235Z" fill="url(#paint0_linear_1814_3381)" stroke="url(#paint1_linear_1814_3381)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+               d="M12 17.235L6.179 20L7.388 13.88L3 9.392L9.179 8.621L12 3L14.821 8.621L21 9.392L16.612 13.88L17.821 20L12 17.235Z"
+               fill="url(#paint0_linear_1814_3381)" stroke="url(#paint1_linear_1814_3381)" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round"/>
          </g>
          <defs>
-            <linearGradient id="paint0_linear_1814_3381" x1="20.2069" y1="3" x2="-0.488199" y2="11.2521" gradientUnits="userSpaceOnUse">
+            <linearGradient id="paint0_linear_1814_3381" x1="20.2069" y1="3" x2="-0.488199" y2="11.2521"
+                            gradientUnits="userSpaceOnUse">
                <stop stop-color="#F50951"/>
                <stop offset="0.427315" stop-color="#FD3A7E"/>
                <stop offset="1" stop-color="#FF9B06"/>
             </linearGradient>
-            <linearGradient id="paint1_linear_1814_3381" x1="20.2069" y1="3" x2="-0.488199" y2="11.2521" gradientUnits="userSpaceOnUse">
+            <linearGradient id="paint1_linear_1814_3381" x1="20.2069" y1="3" x2="-0.488199" y2="11.2521"
+                            gradientUnits="userSpaceOnUse">
                <stop stop-color="#F50951"/>
                <stop offset="0.427315" stop-color="#FD3A7E"/>
                <stop offset="1" stop-color="#FF9B06"/>
@@ -237,9 +242,22 @@
       </svg>
 
       <svg id="dots" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 16" fill="none">
-         <path d="M2 14.5C1.72386 14.5 1.5 14.2761 1.5 14C1.5 13.7239 1.72386 13.5 2 13.5C2.27614 13.5 2.5 13.7239 2.5 14V14C2.5 14.2761 2.27614 14.5 2 14.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-         <path d="M2 8.5C1.72386 8.5 1.5 8.27614 1.5 8C1.5 7.72386 1.72386 7.5 2 7.5C2.27614 7.5 2.5 7.72386 2.5 8V8C2.5 8.27614 2.27614 8.5 2 8.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-         <path d="M2 2.5C1.72386 2.5 1.5 2.27614 1.5 2C1.5 1.72386 1.72386 1.5 2 1.5C2.27614 1.5 2.5 1.72386 2.5 2V2C2.5 2.27614 2.27614 2.5 2 2.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+         <path
+            d="M2 14.5C1.72386 14.5 1.5 14.2761 1.5 14C1.5 13.7239 1.72386 13.5 2 13.5C2.27614 13.5 2.5 13.7239 2.5 14V14C2.5 14.2761 2.27614 14.5 2 14.5"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+         <path
+            d="M2 8.5C1.72386 8.5 1.5 8.27614 1.5 8C1.5 7.72386 1.72386 7.5 2 7.5C2.27614 7.5 2.5 7.72386 2.5 8V8C2.5 8.27614 2.27614 8.5 2 8.5"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+         <path
+            d="M2 2.5C1.72386 2.5 1.5 2.27614 1.5 2C1.5 1.72386 1.72386 1.5 2 1.5C2.27614 1.5 2.5 1.72386 2.5 2V2C2.5 2.27614 2.27614 2.5 2 2.5"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <svg id="rounded-plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none">
+         <circle cx="8" cy="8" r="7.625" stroke="currentColor" stroke-width="0.75"/>
+         <path fill-rule="evenodd" clip-rule="evenodd"
+               d="M7.88889 4C7.70479 4 7.55556 4.14924 7.55556 4.33333V7.55556H4.33333C4.14924 7.55556 4 7.70479 4 7.88889C4 8.07298 4.14924 8.22222 4.33333 8.22222H7.55556V11.6667C7.55556 11.8508 7.70479 12 7.88889 12C8.07298 12 8.22222 11.8508 8.22222 11.6667V8.22222H11.6667C11.8508 8.22222 12 8.07298 12 7.88889C12 7.70479 11.8508 7.55556 11.6667 7.55556H8.22222V4.33333C8.22222 4.14924 8.07298 4 7.88889 4Z"
+               fill="currentColor"/>
       </svg>
    </defs>
 </svg>
