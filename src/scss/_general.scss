@@ -64,10 +64,6 @@ img {
   margin: 0 auto;
 }
 
-.d-none {
-  display: none;
-}
-
 .section {
   padding-top: 2.5rem;
 }
@@ -80,12 +76,7 @@ img {
 .mat-mdc-dialog-container .mdc-dialog__surface {
   background-color: $white-color !important;
   border-radius: 0.5rem !important;
-  background: var(--Colors-Black-vs-White-White, #FFF);
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.10), 0 29px 65px 0 rgba(0, 0, 0, 0.10), 0 118px 118px 0 rgba(0, 0, 0, 0.09) !important;
-}
-
-.mat-mdc-select-arrow svg {
-  display: none;
 }
 
 .mat-mdc-select-min-line {
