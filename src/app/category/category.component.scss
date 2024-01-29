@@ -1,9 +1,13 @@
 @import "variables";
 @import "mixins";
 
+.category {
+  padding-top: 1.5rem;
+}
+
 .category-header {
   @include flex-center-between;
-  padding-top: 2.5rem;
+  padding-top: 1.5rem;
 }
 
 .category-heading {
