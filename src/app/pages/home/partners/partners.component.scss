@@ -1,0 +1,54 @@
+@import "../../../../scss/mixins";
+@import "../../../../scss/buttons";
+@import "../../../../scss/variables";
+
+.partners-inner {
+  @include grid(1fr 1.7fr);
+  border-radius: 1rem;
+  background-color: $background-grey-color;
+  overflow: hidden;
+}
+
+.partners-info {
+  padding: 3.5rem 3rem 3.5rem 4rem;
+}
+
+.partners-info-header {
+  @include flex-center-between;
+}
+
+.partners-info-heading {
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: $secondary-black-color;
+  }
+}
+
+.partners-info-button {
+  @extend .blue-button;
+  @include flex-center-center(0.5rem);
+
+  .mat-icon {
+    width: 0.5rem;
+  }
+}
+
+.partners-info-list {
+  @include grid(repeat(6, 1fr), 1rem);
+  padding-top: 2.5rem;
+}
+
+.partners-info-item {
+  @include flex-center-center;
+  padding: 1rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: $white-color;
+}

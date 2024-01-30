@@ -1,0 +1,40 @@
+@import "../../../scss/variables";
+@import "../../../scss/mixins";
+
+.category {
+  padding-top: 1.5rem;
+}
+
+.category-header {
+  @include flex-center-between;
+  padding-top: 1.5rem;
+}
+
+.category-heading {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.category-amount {
+  font-size: 1rem;
+  color: $dialog-title-black;
+}
+
+.category-brands {
+  @include flex-center(0.75rem);
+  padding-top: 1.5rem;
+}
+
+.category-brand {
+  height: 2rem;
+  padding: 0 1rem;
+  border-radius: 0.25rem;
+  background-color: $background-grey-color;
+  font-size: 0.875rem;
+  color: $dialog-title-black;
+}
+
+.category-content {
+  @include grid(1fr 3fr, 1.5rem);
+  padding-top: 1.5rem;
+}
