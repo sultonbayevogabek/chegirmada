@@ -2,6 +2,8 @@
 @import 'mixins';
 
 .header-top {
+  position: relative;
+  z-index: 2;
   background-color: $background-grey-color;
 }
 

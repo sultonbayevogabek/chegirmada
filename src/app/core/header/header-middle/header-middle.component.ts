@@ -27,4 +27,8 @@ import { NgOptimizedImage } from '@angular/common';
 
 export class HeaderMiddleComponent {
 
+  open = false
+  openModal() {
+    this.open = !this.open
+  }
 }
