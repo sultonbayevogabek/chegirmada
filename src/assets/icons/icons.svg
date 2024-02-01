@@ -4,7 +4,8 @@
       <svg id="location" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
          <path
             d="M6.00065 13C6.00065 13 1.33398 9.16667 1.33398 5.66667C1.33398 3.08933 3.42332 1 6.00065 1C8.57798 1 10.6673 3.08933 10.6673 5.66667C10.6673 9.16667 6.00065 13 6.00065 13Z"
-            fill="currentColor" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+            fill="currentColor" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"
+            stroke-linejoin="round"/>
          <path
             d="M6 7.66663C4.89533 7.66663 4 6.77129 4 5.66663C4 4.56196 4.89533 3.66663 6 3.66663C7.10467 3.66663 8 4.56196 8 5.66663C8 6.77129 7.10467 7.66663 6 7.66663Z"
             fill="white" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -268,6 +269,21 @@
          <path fill-rule="evenodd" clip-rule="evenodd"
                d="M2.53852 0H5.92449C7.32676 0 8.46301 1.14585 8.46301 2.55996V5.97452C8.46301 7.38864 7.32676 8.53449 5.92449 8.53449H2.53852C1.13626 8.53449 0 7.38864 0 5.97452V2.55996C0 1.14585 1.13626 0 2.53852 0ZM2.53852 11.4655H5.92449C7.32676 11.4655 8.46301 12.6114 8.46301 14.0255V17.44C8.46301 18.8532 7.32676 20 5.92449 20H2.53852C1.13626 20 0 18.8532 0 17.44V14.0255C0 12.6114 1.13626 11.4655 2.53852 11.4655ZM17.4614 11.4655H14.0755C12.6732 11.4655 11.537 12.6114 11.537 14.0255V17.44C11.537 18.8532 12.6732 20 14.0755 20H17.4614C18.8637 20 20 18.8532 20 17.44V14.0255C20 12.6114 18.8637 11.4655 17.4614 11.4655Z"
                fill="currentColor"/>
+      </svg>
+
+      <svg id="electronics" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+         <g clip-path="url(#clip0_320_12727)">
+            <path d="M9.5 3V4.8C9.5 5.131 9.724 5.4 10 5.4H14C14.276 5.4 14.5 5.131 14.5 4.8V3" stroke="currentColor"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+               d="M8 3H16C17.105 3 18 3.895 18 5V19C18 20.105 17.105 21 16 21H8C6.895 21 6 20.105 6 19V5C6 3.895 6.895 3 8 3Z"
+               stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+         </g>
+         <defs>
+            <clipPath id="clip0_320_12727">
+               <rect width="24" height="24" fill="white"/>
+            </clipPath>
+         </defs>
       </svg>
    </defs>
 </svg>

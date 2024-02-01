@@ -12,7 +12,17 @@
         >
         <span class="header-middle-logo-text">aksiyamix</span>
       </a>
-      <catalog-btn (click)="openModal()" class="header-middle-catalog"/>
+
+      <button class="header-middle-catalog-button" (click)="toggleCatalogPanel()">
+        <div class="header-middle-catalog-hamburger" [class.open]="isCatalogPanelOpen">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+
+        <span class="header-middle-catalog-text">Каталог</span>
+      </button>
       <global-search class="header-middle-search"/>
       <notifications class="header-middle-notifications"/>
       <wish-list-button class="header-middle-wish-list"/>
@@ -20,85 +30,7 @@
     </div>
   </div>
 
-  @if (open) {
-    <div class="catalog">
-      <div class="container">
-        <p style="border: 1px solid">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi cumque delectus deleniti distinctio
-          dolores earum error, est et facere fugit iste iusto maiores molestiae mollitia nam neque odit optio,
-          perspiciatis provident quaerat quod reiciendis repellendus repudiandae sint tempora temporibus vitae
-          voluptatem voluptatibus voluptatum. At aut autem delectus deleniti dolore dolores dolorum ducimus eaque earum
-          eos error esse exercitationem laboriosam, natus necessitatibus neque nesciunt obcaecati, omnis optio, placeat
-          porro quae quasi reiciendis repellendus reprehenderit veritatis voluptatem. Ab amet architecto aspernatur
-          debitis eius enim est et, ipsum labore magnam nostrum obcaecati quas quasi repellat similique suscipit,
-          voluptas voluptate? Ab consequuntur ipsa suscipit! Aperiam aspernatur dicta, dignissimos distinctio doloremque
-          eos eum harum id incidunt maxime nisi nobis omnis pariatur porro possimus reiciendis reprehenderit tempore
-          voluptas? Ad, aliquid aperiam assumenda deleniti doloribus eveniet excepturi ipsum minus mollitia numquam
-          officiis quibusdam quod reiciendis rem sequi tempore veritatis. Adipisci, cumque, dignissimos dolores ducimus
-          enim eos hic minima minus perferendis placeat quaerat repudiandae tempore, totam voluptates voluptatum. Beatae
-          blanditiis distinctio dolore dolorem, dolorum earum error incidunt ipsa maxime modi, necessitatibus nihil
-          quaerat recusandae repellendus vel voluptate voluptates. A accusamus alias aliquam aspernatur culpa doloremque
-          eum incidunt laboriosam laborum libero nulla quaerat reprehenderit sit suscipit totam, vitae voluptate! Alias
-          cumque in quisquam similique sit veniam. Amet animi consequuntur cumque delectus dicta dignissimos dolor
-          doloremque error eveniet exercitationem facere harum hic ipsum iure minus natus, nesciunt nisi nobis numquam
-          possimus quas reiciendis repellendus tempore tenetur voluptatibus. A ab aliquam, distinctio dolor doloremque
-          ex impedit molestias natus nisi optio, praesentium provident quam quia ratione similique? Adipisci animi
-          dolore dolorem dolores eaque fugiat molestiae neque nulla repellat sint unde vel vitae, voluptatum. Ad
-          asperiores assumenda fugiat impedit incidunt itaque maiores mollitia repellendus temporibus! Aliquid amet
-          aspernatur assumenda distinctio dolor dolore dolores earum eos excepturi fugit id itaque magni non numquam
-          officia, officiis omnis perspiciatis quaerat quo quos sint soluta veniam, vitae. Aliquid architecto autem
-          blanditiis corporis cumque delectus dolores esse et harum hic iure, magni modi nostrum placeat sed sequi sint
-          sit tenetur velit voluptatibus? Amet eveniet omnis quisquam rerum sed. Accusamus beatae dolorum et obcaecati
-          omnis quae quasi repellendus repudiandae sit. Asperiores autem cumque cupiditate deleniti doloremque ducimus
-          eos eum ex excepturi, fuga harum illo impedit incidunt laboriosam libero magnam nam nulla omnis perspiciatis
-          provident quae quasi quia quidem quisquam quo reiciendis sint tenetur velit vitae voluptas? A, accusantium,
-          amet architecto aut beatae dolor et ex fugit incidunt ipsum itaque odio omnis optio similique tenetur.
-          Accusamus adipisci aspernatur assumenda at aut, debitis dicta dolore est eveniet id illum incidunt laudantium
-          maxime, natus necessitatibus nihil possimus quisquam quod soluta temporibus veritatis voluptates voluptatibus.
-          A animi, assumenda blanditiis dolorem earum eligendi est exercitationem harum iure nesciunt quisquam
-          reiciendis sapiente vitae voluptas voluptate? Architecto ducimus in itaque maiores modi, obcaecati possimus
-          quae quas quis recusandae sunt tempore tenetur totam. Ab adipisci aspernatur at cumque eius eveniet excepturi
-          in optio quibusdam vitae? Corporis debitis distinctio minus natus nisi perspiciatis possimus quos sunt tempora
-          veniam? Asperiores commodi consequuntur cum delectus ea explicabo numquam quibusdam tempore temporibus!
-          Accusamus accusantium adipisci assumenda autem corporis cumque cupiditate debitis dignissimos dolorum ducimus
-          error est excepturi exercitationem facilis harum illum iusto labore magnam magni maiores necessitatibus, nihil
-          odio omnis, quidem quo quod recusandae rem repellat repellendus repudiandae, tenetur velit voluptate
-          voluptatibus. Ab consequatur, delectus earum error explicabo facilis magnam nostrum, numquam, officiis omnis
-          quae qui repellat reprehenderit repudiandae similique tempore unde voluptatibus. Aperiam consequatur
-          dignissimos eveniet ipsa ipsum odit perferendis quas, soluta unde veritatis! Adipisci blanditiis dolore
-          eligendi explicabo ipsam minima mollitia, nostrum suscipit. Atque blanditiis dignissimos, fuga iusto labore,
-          necessitatibus nisi odio officiis porro repellendus similique tempore vitae voluptatibus? Fugit incidunt ipsum
-          laborum molestiae similique sit. Accusantium adipisci alias, animi aspernatur autem, dignissimos dolor
-          doloribus ex facilis fuga inventore libero magni molestiae molestias natus nesciunt non nulla placeat porro
-          quibusdam quod totam, ut! Accusantium ad, animi at, aut autem beatae consectetur consequuntur dicta dolores
-          eligendi excepturi exercitationem fuga labore laborum laudantium magni maiores minima molestias nemo nisi
-          nulla odio officia praesentium quae quam quidem quisquam ratione rem repellat reprehenderit sequi sit tempora
-          temporibus vel vero voluptatem voluptatum. Asperiores debitis dicta exercitationem incidunt mollitia nesciunt
-          perspiciatis praesentium quisquam quo! Aliquid animi consequuntur corporis, culpa dolorem, doloremque dolores
-          doloribus et eveniet excepturi impedit incidunt ipsam iste itaque modi nihil quae quaerat quas quasi quo quos
-          ratione reprehenderit sequi soluta tenetur veniam voluptatum. Ad architecto at atque autem deleniti eveniet id
-          ipsum maxime necessitatibus non, numquam omnis optio perspiciatis quasi sed soluta ut veritatis vero
-          voluptatibus, voluptatum. Aut dolorum iusto laborum magnam porro. Accusantium culpa deleniti dignissimos ea
-          illo molestiae perspiciatis voluptatem. Aperiam asperiores aspernatur assumenda delectus deserunt ea eaque
-          eius eos error excepturi explicabo facilis fugiat incidunt ipsa ipsam ipsum magnam maiores maxime minus
-          nesciunt nulla, obcaecati, odio officia officiis placeat qui quia quos repellendus reprehenderit sed sint
-          tempora tempore tenetur ullam ut veritatis voluptas! Adipisci, alias debitis doloremque ducimus ea et illo in,
-          maxime molestiae nesciunt quae recusandae sequi similique tempora ullam vel veniam vero voluptatibus. Deleniti
-          exercitationem laudantium, libero nemo nihil perspiciatis quidem totam! Molestiae, odio quod? Ad amet, illo!
-          Ab adipisci amet animi consequatur corporis eius exercitationem laboriosam laborum minus molestias,
-          necessitatibus nobis perferendis placeat provident quidem quisquam ratione, sint soluta sunt suscipit ullam
-          unde voluptatibus! A assumenda at nam nemo. Accusamus aperiam aspernatur blanditiis dignissimos dolore eaque,
-          earum eum illum maiores, modi neque nostrum omnis quia rem vitae. Culpa deleniti ipsum odit repellendus.
-          Aspernatur atque blanditiis consequuntur cum cumque, libero natus neque nisi non nostrum numquam porro
-          similique, tenetur! Accusamus, adipisci alias, architecto aspernatur commodi consequuntur dolorum eos error
-          est et eveniet exercitationem expedita inventore ipsa iure iusto labore libero nobis optio perspiciatis quas
-          quod repellat sapiente sed sit suscipit vitae. Amet consequuntur culpa cupiditate dignissimos distinctio,
-          eligendi eum in minus neque nobis non officiis quibusdam quisquam quo quod quos reiciendis saepe! Accusantium
-          assumenda culpa cupiditate, delectus doloremque ducimus ea error facilis hic laborum magnam minima molestiae
-          nam nobis non odit omnis placeat possimus praesentium quae quam quas quisquam reiciendis reprehenderit sed
-          soluta tempora tempore totam?
-        </p>
-      </div>
-    </div>
+  @if (isCatalogPanelOpen) {
+    <categories-panel/>
   }
 </div>

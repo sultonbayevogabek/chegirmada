@@ -6,30 +6,6 @@
   z-index: 2;
 }
 
-.catalog {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  height: calc(100vh - 108px);
-  background-color: $white-color;
-  z-index: 1;
-  animation-name: modal;
-  animation-duration: 0.425s;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes modal {
-  from {
-    opacity: 0.7;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 .header-middle-inner {
   @include flex-center(0.5rem);
   padding: 0.75rem 0;
@@ -52,4 +28,93 @@
 
 .header-middle-catalog {
   margin-right: 0.5rem;
+}
+
+.header-middle-catalog-button {
+  position: relative;
+  @include flex-center-center;
+  height: 2.75rem;
+  padding: 0 1.25rem 0 3rem;
+  border-radius: 0.5rem;
+  background-color: rgba($primary-blue-color, 0.12);
+  color: $primary-blue-color;
+}
+
+.header-middle-catalog-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.header-middle-catalog-hamburger {
+  width: 60px;
+  height: 45px;
+  position: absolute;
+  left: 0;
+  margin: 50px auto;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg) scale(0.3);
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+  cursor: pointer;
+}
+
+.header-middle-catalog-hamburger div {
+  display: block;
+  position: absolute;
+  height: 7px;
+  width: 100%;
+  background: $primary-blue-color;
+  border-radius: 7px;
+  opacity: 1;
+  left: 0;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: .25s ease-in-out;
+  -moz-transition: .25s ease-in-out;
+  -o-transition: .25s ease-in-out;
+  transition: .25s ease-in-out;
+}
+
+.header-middle-catalog-hamburger div:nth-child(1) {
+  top: 0;
+}
+
+.header-middle-catalog-hamburger div:nth-child(2),.header-middle-catalog-hamburger div:nth-child(3) {
+  top: 18px;
+}
+
+.header-middle-catalog-hamburger div:nth-child(4) {
+  top: 36px;
+}
+
+.header-middle-catalog-hamburger.open div:nth-child(1) {
+  top: 18px;
+  width: 0;
+  left: 50%;
+}
+
+.header-middle-catalog-hamburger.open div:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.header-middle-catalog-hamburger.open div:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.header-middle-catalog-hamburger.open div:nth-child(4) {
+  top: 18px;
+  width: 0;
+  left: 50%;
 }

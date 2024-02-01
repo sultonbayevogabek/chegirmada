@@ -1,0 +1,78 @@
+<div class="categories-panel">
+  <div class="container">
+    <div class="categories-wrapper">
+      <div class="parent-categories">
+        <ng-container
+          *ngTemplateOutlet="parentCategoriesList"
+        />
+      </div>
+
+      <div class="category-groups">
+        <h2 class="category-groups-parent">{{ selectedCategory.parentCategoryName }}</h2>
+
+        <div class="category-groups-grid">
+          <div class="category-groups-column">
+            @for (categoryGroup of selectedCategory.categoryGroupsFirstColumn; track categoryGroup) {
+              <div class="category-groups-item">
+                <h3 class="category-groups-heading">{{ categoryGroup.categoryGroupName }}</h3>
+
+                <ul class="category-groups-list">
+                  @for (category of categoryGroup.categories; track category) {
+                    <li class="category-groups-category-name">{{ category.name }}</li>
+                  }
+                </ul>
+              </div>
+            }
+
+          </div>
+          <div class="category-groups-column">
+            @for (categoryGroup of selectedCategory.categoryGroupsSecondColumn; track categoryGroup) {
+              <div class="category-groups-item">
+                <h3 class="category-groups-heading">{{ categoryGroup.categoryGroupName }}</h3>
+
+                <ul class="category-groups-list">
+                  @for (category of categoryGroup.categories; track category) {
+                    <li class="category-groups-category-name">{{ category.name }}</li>
+                  }
+                </ul>
+              </div>
+            }
+
+          </div>
+          <div class="category-groups-column">
+            @for (categoryGroup of selectedCategory.categoryGroupsThirdColumn; track categoryGroup) {
+              <div class="category-groups-item">
+                <h3 class="category-groups-heading">{{ categoryGroup.categoryGroupName }}</h3>
+
+                <ul class="category-groups-list">
+                  @for (category of categoryGroup.categories; track category) {
+                    <li class="category-groups-category-name">{{ category.name }}</li>
+                  }
+                </ul>
+              </div>
+            }
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #parentCategoriesList>
+  <ul class="parent-categories-list">
+    @for(category of categories; track category) {
+      <li
+        class="parent-categories-item"
+        [class.active]="category.active"
+        mat-ripple
+        [matRippleColor]="'#4755691a'"
+        (mouseenter)="selectParentCategory(category)"
+      >
+        <mat-icon class="parent-categories-icon" [svgIcon]="'icon:' + category.parentCategoryIcon" />
+        <span class="parent-categories-name">{{ category.parentCategoryName }}</span>
+        <mat-icon class="parent-categories-arrow" [svgIcon]="'icon:arrow-right'" />
+      </li>
+    }
+  </ul>
+</ng-template>
