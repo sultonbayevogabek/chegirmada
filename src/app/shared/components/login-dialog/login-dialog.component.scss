@@ -34,6 +34,7 @@
 }
 
 .login-dialog-title {
+  margin-bottom: 0.5rem;
   text-align: center;
   color: $dialog-title-black;
   font-size: 1.25rem;
@@ -59,7 +60,7 @@
 
 .login-dialog-label {
   display: block;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
 }
 
 .login-dialog-label-text {
