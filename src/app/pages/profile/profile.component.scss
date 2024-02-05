@@ -1,0 +1,51 @@
+@import "mixins";
+@import "variables";
+
+.profile-inner {
+  @include grid(1fr 3.2fr, 1.25rem);
+  align-items: start;
+}
+
+.profile-menu {
+  padding: 0.5rem 0;
+  border-radius: 0.5rem;
+  border: 1px solid $border-grey-color;
+}
+
+.profile-menu-item {
+  padding: 0 1.25rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $background-grey-color;
+  }
+
+  &.active .profile-menu-link {
+    color: $primary-blue-color
+  }
+
+  &.exit .profile-menu-link {
+    color: $primary-brand-color
+  }
+
+  &:not(:last-child) .profile-menu-link {
+    border-bottom: 1px solid $border-grey-color;
+  }
+}
+
+.profile-menu-link {
+  @include flex-center(0.5rem);
+  padding: 1rem 0;
+  font-size: 0.875rem;
+  color: $dialog-title-black;
+
+  .mat-icon {
+    width: 1.25rem;
+  }
+}
+
+.profile-main {
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-grey-color;
+}

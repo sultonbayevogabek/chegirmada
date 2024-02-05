@@ -1,0 +1,51 @@
+<div class="my-information">
+  <div class="my-information-header">
+    <h2 class="my-information-heading">Моя информация</h2>
+
+    <button class="my-information-add-company" mat-ripple [matRippleColor]="'#0CA4FA12'">
+      <mat-icon [svgIcon]="'icon:solid-plus'"/>
+      <span>Добавить компанию</span>
+    </button>
+  </div>
+
+  <form class="my-information-form">
+    <div class="my-information-fields">
+      <label class="my-information-label form-label">
+        <span class="my-information-label-text form-label-text">Ваше имя</span>
+        <input class="my-information-input form-input" type="text" [value]="'Огабек'">
+      </label>
+
+      <label class="my-information-label form-label">
+        <span class="my-information-label-text form-label-text">Электронная почта</span>
+        <input class="my-information-input form-input" type="text" [value]="'sultonbayev@gmail.com'">
+      </label>
+
+      <label class="my-information-label form-label">
+        <span class="my-information-label-text form-label-text">Дата рождения</span>
+        <input class="my-information-input form-input" type="text" [value]="'31.10.1999'">
+      </label>
+
+      <label class="my-information-label form-label">
+        <span class="my-information-label-text form-label-text">Фамилия</span>
+        <input class="my-information-input form-input" type="text" [value]="'Султонбаев'">
+      </label>
+
+      <label class="my-information-label form-label">
+        <span class="my-information-label-text form-label-text">Адрес</span>
+        <input class="my-information-input form-input" type="text" [value]="'ул.Истикбол 18а'">
+      </label>
+
+      <label class="my-information-label form-label">
+        <span class="my-information-label-text form-label-text">Номер телефона</span>
+        <input class="my-information-input form-input" type="text" [value]="'+99 899 963 97 73'">
+      </label>
+
+      <label class="my-information-label form-label">
+        <span class="my-information-label-text form-label-text">Пол</span>
+        <input class="my-information-input form-input" type="text" [value]="'Мужской'">
+      </label>
+    </div>
+
+    <button class="my-information-save">Сохранить</button>
+  </form>
+</div>

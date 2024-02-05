@@ -16,5 +16,9 @@ export const pagesRoutes: Routes = [
   {
     path: 'wish-list',
     loadComponent: () => import('./wish-list/wish-list.component').then(c => c.WishListComponent)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.routes').then(r => r.profileRoutes)
   }
 ];

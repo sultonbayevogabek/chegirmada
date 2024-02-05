@@ -1,0 +1,40 @@
+@import "variables";
+@import "mixins";
+@import "buttons";
+
+.my-information-header {
+  @include flex-center-between;
+}
+
+.my-information-heading {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.my-information-add-company {
+  @include flex-center-center(0.5rem);
+  height: 2.5rem;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba($primary-blue-color, 0.12);
+  font-size: 0.875rem;
+  color: $primary-blue-color;
+}
+
+.my-information-form {
+  @include flex-column(1.5rem);
+}
+
+.my-information-fields {
+  @include grid(repeat(3, 1fr), 1.25rem);
+  padding-top: 1rem;
+}
+
+.my-information-label-text {
+  margin-bottom: 0.35rem;
+}
+
+.my-information-save {
+  @extend .blue-button;
+  align-self: flex-start;
+}

@@ -1,0 +1,50 @@
+<section class="profile section">
+  <div class="container">
+    <section-header [heading]="'Мой кабинет'"/>
+
+    <div class="profile-inner">
+      <aside class="profile-menu">
+        <ul class="profile-menu-list">
+          <li class="profile-menu-item" mat-ripple [routerLink]="['my-information']" [routerLinkActive]="'active'">
+            <a class="profile-menu-link">
+              <mat-icon [svgIcon]="'icon:my-information'"/>
+              <span>Моя информация</span>
+            </a>
+          </li>
+
+          <li class="profile-menu-item" mat-ripple [routerLink]="['favourite-companies']" [routerLinkActive]="'active'">
+            <a class="profile-menu-link">
+              <mat-icon [svgIcon]="'icon:favourite-companies'"/>
+              <span>Следующая компания</span>
+            </a>
+          </li>
+
+          <li class="profile-menu-item" mat-ripple [routerLink]="['favourite-products']" [routerLinkActive]="'active'">
+            <a class="profile-menu-link">
+              <mat-icon [svgIcon]="'icon:like-outline'"/>
+              <span>Нравится</span>
+            </a>
+          </li>
+
+          <li class="profile-menu-item" mat-ripple [routerLink]="['settings']" [routerLinkActive]="'active'">
+            <a class="profile-menu-link">
+              <mat-icon [svgIcon]="'icon:settings'"/>
+              <span>Настройки</span>
+            </a>
+          </li>
+
+          <li class="profile-menu-item exit" mat-ripple>
+            <a class="profile-menu-link">
+              <mat-icon [svgIcon]="'icon:logout'"/>
+              <span>Выход</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <main class="profile-main">
+        <router-outlet />
+      </main>
+    </div>
+  </div>
+</section>
