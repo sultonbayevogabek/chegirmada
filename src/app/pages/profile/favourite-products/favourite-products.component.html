@@ -1,0 +1,37 @@
+<div class="favourite-companies">
+  <h2 class="favourite-companies-heading">Следующая компания</h2>
+
+  <profile-empty-list [emptyListText]="'У вас нет подписок'"/>
+
+  <h2 class="favourite-companies-heading">Рекомендуем</h2>
+
+  <ul class="favourite-companies-recommendations">
+    @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+      <li class="favourite-companies-recommendations-item">
+        <div class="favourite-companies-recommendations-logo">
+          <img [ngSrc]="'/assets/logos/mac-bro.svg'" [fill]="true" [alt]="">
+        </div>
+
+        <div class="favourite-companies-recommendations-info">
+          <div class="favourite-companies-recommendations-brand">Mac Bro</div>
+          <div class="favourite-companies-recommendations-address">Ташкент</div>
+          <div class="favourite-companies-recommendations-stats">
+            <div class="favourite-companies-recommendations-stat">
+              <mat-icon [svgIcon]="'icon:gradient-star'"/>
+              <span>4.7</span>
+            </div>
+            <div class="favourite-companies-recommendations-stat">
+              <mat-icon [svgIcon]="'icon:gradient-man'"/>
+              <span>11.2 тыс.</span>
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="favourite-companies-recommendations-subscribe"
+          mat-ripple
+        >Подписаться</button>
+      </li>
+    }
+  </ul>
+</div>
