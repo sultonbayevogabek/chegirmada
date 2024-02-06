@@ -3,59 +3,11 @@
 @import "buttons";
 
 .favourite-companies-heading {
-  @include font(1.25rem, 500);
-}
-
-.favourite-companies-recommendations {
-  @include flex-column(1rem);
-  padding-top: 1rem;
-}
-
-.favourite-companies-recommendations-item {
-  @include flex-center(1rem);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  background-color: $background-grey-color;
-}
-
-.favourite-companies-recommendations-info {
-  @include flex-column(0.25rem);
-}
-
-.favourite-companies-recommendations-logo {
-  position: relative;
-  width: 4.5rem;
-  aspect-ratio: 1;
-  background-color: $white-color;
-  border-radius: 50%;
-}
-
-.favourite-companies-recommendations-brand {
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 500;
 }
 
-.favourite-companies-recommendations-address {
-  font-size: 0.75rem;
-  color: $secondary-text-color;
-}
-
-.favourite-companies-recommendations-subscribe {
-  @extend .blue-button;
-  margin-left: auto;
-  box-shadow: 0 4px 24px 0 rgba($primary-blue-color, 0.16);
-}
-
-.favourite-companies-recommendations-stats {
-  @include flex-center(1.75rem);
-}
-
-.favourite-companies-recommendations-stat {
-  @include flex-center(0.25rem);
-  font-size: 0.75rem;
-  color: $secondary-text-color;
-
-  .mat-icon {
-    width: 1rem;
-  }
+.favourite-products-list {
+  @include grid(repeat(3, 1fr), 1.5rem);
+  padding-top: 1.5rem;
 }

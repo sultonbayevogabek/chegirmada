@@ -1,13 +1,7 @@
 <div class="favourite-companies">
   <h2 class="favourite-companies-heading">Следующая компания</h2>
 
-  <div class="favourite-companies-empty">
-    <div class="favourite-companies-empty-icon">
-      <img [ngSrc]="'/assets/icons/no-favourite-companies.svg'" [fill]="true" [alt]="">
-    </div>
-
-    <p class="favourite-companies-empty-text">У вас нет подписок</p>
-  </div>
+  <profile-empty-list [emptyListText]="'У вас нет подписок'"/>
 
   <h2 class="favourite-companies-heading">Рекомендуем</h2>
 
