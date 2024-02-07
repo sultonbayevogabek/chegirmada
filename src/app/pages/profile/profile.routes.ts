@@ -21,6 +21,10 @@ export const profileRoutes: Routes = [
       {
         path: 'favourite-products',
         loadComponent: () => import('./favourite-products/favourite-products.component').then(c => c.FavouriteProductsComponent)
+      },
+      {
+        path: 'register',
+        loadComponent: () => import('./register/register.component').then(c => c.RegisterComponent)
       }
     ]
   }

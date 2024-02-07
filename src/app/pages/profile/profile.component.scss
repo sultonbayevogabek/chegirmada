@@ -2,7 +2,7 @@
 @import "variables";
 
 .profile-inner {
-  @include grid(1fr 3.2fr, 1.25rem);
+  @include grid(1fr 3.5fr, 1.25rem);
   align-items: start;
 }
 
@@ -42,10 +42,4 @@
   .mat-icon {
     width: 1.25rem;
   }
-}
-
-.profile-main {
-  padding: 1.25rem;
-  border-radius: 0.5rem;
-  border: 1px solid $border-grey-color;
 }

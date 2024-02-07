@@ -64,6 +64,28 @@ export class FavouriteProductsComponent {
       productCardNewPrice: '950 $',
       productCardLocation: 'Ташкент',
       productCardDate: '14 но. – 21 дек.',
-    }
+    },
+    {
+      productCardImageUrl: '/assets/products/2.jpg',
+      productCardBrandLogo: '/assets/logos/mac-bro.svg',
+      productCardBrandName: 'MacBro',
+      productCardBrandViews: 214,
+      productCardTitle: 'Смартфон Apple iPhone 13 pro 256 ГБ, Dual: nano SIM + eSIM',
+      productCardOldPrice: '18 500 000 сум',
+      productCardNewPrice: '17 000 000 сум',
+      productCardLocation: 'Ташкент',
+      productCardDate: '14 но. – 21 дек.',
+    },
+    {
+      productCardImageUrl: '/assets/products/3.jpg',
+      productCardBrandLogo: '/assets/logos/mac-bro.svg',
+      productCardBrandName: 'MacBro',
+      productCardBrandViews: 356,
+      productCardTitle: 'Наушники Apple AirPods Pro (2-го поколения, 2022), белый',
+      productCardOldPrice: '2 200 000 сум',
+      productCardNewPrice: '1 900 000 сум',
+      productCardLocation: 'Ташкент',
+      productCardDate: '14 но. – 21 дек.',
+    },
   ]
 }

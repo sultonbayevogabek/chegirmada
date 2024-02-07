@@ -1,6 +1,6 @@
-@import "../../../../scss/variables";
-@import "../../../../scss/mixins";
-@import "../../../../scss/buttons";
+@import "variables";
+@import "mixins";
+@import "buttons";
 
 :host {
   .mat-expansion-panel-header {
@@ -33,7 +33,9 @@
   .mat-expansion-panel-header {
     height: 3rem;
   }
+}
 
+::ng-deep {
   .mat-expansion-panel-body {
     padding: 0 !important;
   }
@@ -41,6 +43,16 @@
   .mdc-slider__track {
     margin-left: -7px;
     width: calc(100% + 14px) !important;
+  }
+
+  .mat-mdc-slider .mdc-slider__thumb-knob {
+    background-color: $white-color !important;
+    border-color: $primary-blue-color !important;
+    border-width: 2px !important;
+  }
+
+  .mat-mdc-slider .mdc-slider__track--active_fill {
+    border-color: $primary-blue-color !important;
   }
 }
 

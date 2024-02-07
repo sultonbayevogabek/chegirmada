@@ -1,13 +1,5 @@
-@import "variables";
 @import "mixins";
-@import "buttons";
 
-.favourite-companies-heading {
-  font-size: 1.25rem;
-  font-weight: 500;
-}
-
-.favourite-products-list {
-  @include grid(repeat(3, 1fr), 1.5rem);
-  padding-top: 1.5rem;
+.favourite-products {
+  @include grid(repeat(3, 1fr), 1.25rem);
 }

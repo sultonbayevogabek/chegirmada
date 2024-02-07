@@ -1,9 +1,5 @@
 <div class="favourite-products">
-  <h2 class="favourite-products-heading">Нравится</h2>
-
-  <div class="favourite-products-list">
-    @for (product of products; track product) {
-      <product-card [product]="product"/>
-    }
-  </div>
+  @for (product of products; track product) {
+    <product-card [product]="product"/>
+  }
 </div>

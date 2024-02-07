@@ -1,0 +1,55 @@
+@import "variables";
+@import "mixins";
+
+.register {
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-grey-color;
+}
+
+.register-heading {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.register-fieldset {
+  margin: 0;
+  padding: 1.25rem 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid $border-grey-color;
+}
+
+.register-info {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: $dialog-title-black;
+
+  a {
+    color: $primary-brand-color;
+    text-decoration: underline;
+  }
+}
+
+.register-main-fields {
+  @include grid(repeat(3, 1fr), 1rem);
+}
+
+.register-legend {
+  font-size: 1rem;
+  font-weight: 500;
+  color: $dialog-title-black;
+}
+
+.register-company-info {
+  padding-top: 1rem;
+}
+
+.register-company-info-top {
+  @include grid(2fr 1fr, 1rem);
+}
+
+.register-company-info-fields {
+  @include grid(1fr 1fr, 1rem);
+}

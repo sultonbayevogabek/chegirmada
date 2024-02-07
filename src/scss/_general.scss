@@ -74,6 +74,7 @@ img {
 
 .form-label-text {
   display: block;
+  margin-bottom: 0.35rem;
   font-size: 0.875rem;
   color: $dialog-label-text-black;
 }
@@ -114,11 +115,7 @@ img {
 }
 
 .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple) {
-  background-color: transparent !important;
-}
-
-.mat-mdc-option .mat-pseudo-checkbox-minimal {
-  display: none;
+  background-color: $background-grey-color !important;
 }
 
 .mat-mdc-option:focus.mdc-list-item {
@@ -135,23 +132,4 @@ img {
 
 .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: currentColor !important;
-}
-
-.mat-expansion-panel-body {
-  padding: 0 !important;
-}
-
-.mdc-slider__track {
-  margin-left: -7px;
-  width: calc(100% + 14px) !important;
-}
-
-.mat-mdc-slider .mdc-slider__thumb-knob {
-  background-color: $white-color !important;
-  border-color: $primary-blue-color !important;
-  border-width: 2px !important;
-}
-
-.mat-mdc-slider .mdc-slider__track--active_fill {
-  border-color: $primary-blue-color !important;
 }
