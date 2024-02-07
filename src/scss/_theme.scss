@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+
+$custom-palette: (
+  50: #e0f2f7,
+  100: #b3e0f3,
+  200: #80c9ef,
+  300: #4da2eb,
+  400: #2687e8,
+  500: #0ca4fa, // Your custom color
+  600: #007deb,
+  700: #006fd1,
+  800: #005fb6,
+  900: #004e99,
+  A100: #80cfff,
+  A200: #4dbdff,
+  A400: #1aaaff,
+  A700: #0086ff
+);
+
+$custom-theme: mat.define-light-theme((
+  color: (
+    primary: $custom-palette,
+  ),
+));
+
+@include mat.all-component-themes($custom-theme);

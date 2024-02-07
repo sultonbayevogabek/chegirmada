@@ -43,7 +43,7 @@
 }
 
 .register-company-info {
-  padding-top: 1rem;
+  padding-top: 1.5rem;
 }
 
 .register-company-info-top {
@@ -52,4 +52,12 @@
 
 .register-company-info-fields {
   @include grid(1fr 1fr, 1rem);
+}
+
+.register-work-times {
+  @include grid(repeat(4, 1fr), 0.5rem);
+}
+
+.register-work-times-input {
+  text-align: center;
 }

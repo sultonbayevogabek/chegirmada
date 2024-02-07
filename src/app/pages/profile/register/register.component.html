@@ -52,10 +52,60 @@
             <span class="form-label-text">Короткое название</span>
             <input class="form-input" type="text" placeholder="Введите короткое название">
           </label>
-        </div>
 
-        <div class="register-company-upload-logo"></div>
+          <label class="form-label">
+            <span class="form-label-text">Рабочее время</span>
+            <div class="register-work-times">
+              <mat-select class="register-work-times-select solid-select" [value]="1"
+                          [hideSingleSelectionIndicator]="true">
+                <mat-option [value]="1">Пн</mat-option>
+                <mat-option [value]="2">Вт</mat-option>
+                <mat-option [value]="3">Ср</mat-option>
+                <mat-option [value]="4">Чт</mat-option>
+                <mat-option [value]="5">Пт</mat-option>
+                <mat-option [value]="6">Сб</mat-option>
+                <mat-option [value]="7">Вс</mat-option>
+              </mat-select>
+              <input class="register-work-times-input form-input" type="text" placeholder="00:00" [mask]="'Hh:m0'">
+              <mat-select class="solid-select" [value]="1" [hideSingleSelectionIndicator]="true">
+                <mat-option [value]="1">Пн</mat-option>
+                <mat-option [value]="2">Вт</mat-option>
+                <mat-option [value]="3">Ср</mat-option>
+                <mat-option [value]="4">Чт</mat-option>
+                <mat-option [value]="5">Пт</mat-option>
+                <mat-option [value]="6">Сб</mat-option>
+                <mat-option [value]="7">Вс</mat-option>
+              </mat-select>
+              <input class="register-work-times-input form-input" type="text" placeholder="00:00" [mask]="'Hh:m0'">
+            </div>
+          </label>
+
+          <label class="form-label">
+            <span class="form-label-text">Выберите категория</span>
+
+            <mat-select class="solid-select" [value]="1" [hideSingleSelectionIndicator]="true">
+              <mat-option [value]="1">Лучшие объявления</mat-option>
+              <mat-option [value]="2">Объявления о начале скидки</mat-option>
+              <mat-option [value]="3">Для тебя</mat-option>
+              <mat-option [value]="4">Скидки рядом</mat-option>
+              <mat-option [value]="5">Последние просмотренные объявления</mat-option>
+              <mat-option [value]="6">Остановленные объявления</mat-option>
+            </mat-select>
+          </label>
+
+
+          <label class="form-label">
+            <span class="form-label-text">Выберите категория</span>
+
+            <mat-radio-group>
+              <mat-radio-button value="1" [color]="'primary'">Да</mat-radio-button>
+              <mat-radio-button value="2">Нет</mat-radio-button>
+            </mat-radio-group>
+          </label>
+        </div>
       </div>
+
+      <div class="register-company-upload-logo"></div>
     </div>
   </fieldset>
 </form>
