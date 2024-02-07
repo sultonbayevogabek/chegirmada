@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOption, MatRippleModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule } from '@angular/forms';
 import { ProductCardComponent } from '../../../shared/components/product-card/product-card.component';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'category-products-list',
@@ -18,7 +19,7 @@ import { ProductCardComponent } from '../../../shared/components/product-card/pr
     MatRippleModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatDatepickerModule, MatNativeDateModule, FormsModule, ProductCardComponent
+    MatDatepickerModule, MatNativeDateModule, FormsModule, ProductCardComponent, MatSelect, MatOption
   ],
   standalone: true
 })

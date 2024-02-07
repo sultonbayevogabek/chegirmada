@@ -1,32 +1,37 @@
 <main class="category-products-list">
   <div class="category-products-list-header">
     <div class="category-products-list-filter">
-      <div class="category-products-list-date">
-        <mat-date-range-input [rangePicker]="picker">
-          <input matStartDate [(ngModel)]="startDate" [readonly]="true">
-          <input matEndDate [(ngModel)]="endDate" [readonly]="true">
-        </mat-date-range-input>
+      <div class="category-products-list-date-sort">
+        <div class="category-products-list-date">
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate [(ngModel)]="startDate" [readonly]="true">
+            <input matEndDate [(ngModel)]="endDate" [readonly]="true">
+          </mat-date-range-input>
 
-        <mat-icon
-          [svgIcon]="'icon:calendar'"
-          (click)="picker.open()"
-        ></mat-icon>
-        <mat-date-range-picker #picker></mat-date-range-picker>
+          <mat-icon
+            [svgIcon]="'icon:calendar'"
+            (click)="picker.open()"
+          ></mat-icon>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </div>
+
+        <div class="category-products-list-common-sort">
+          <mat-select class="outlined-select" [value]="1" [hideSingleSelectionIndicator]="true">
+            <mat-option [value]="0" [title]="'Самые новые'">Самые новые</mat-option>
+            <mat-option [value]="1" [title]="'Самые дешевые'">Самые дешевые</mat-option>
+            <mat-option [value]="2" [title]="'Самые дорогие'">Самые дорогие</mat-option>
+            <mat-option [value]="3" [title]="'Близка'">Близка</mat-option>
+            <mat-option [value]="4" [title]="'Наиболее просматриваемые'">Наиболее просматриваемые</mat-option>
+            <mat-option [value]="5" [title]="'Больше всего лайков'">Больше всего лайков</mat-option>
+          </mat-select>
+        </div>
+
       </div>
 
       <button class="category-products-list-map" mat-ripple [matRippleColor]="'#0CA4FA10'">
         <mat-icon [svgIcon]="'icon:location'"></mat-icon>
         <span>На карте</span>
       </button>
-    </div>
-
-    <div class="category-products-list-sort">
-      <button class="category-products-list-sort-button" mat-ripple>Самые новые</button>
-      <button class="category-products-list-sort-button" mat-ripple>Самые дешевые</button>
-      <button class="category-products-list-sort-button" mat-ripple>Самые дорогие</button>
-      <button class="category-products-list-sort-button" mat-ripple>Близка</button>
-      <button class="category-products-list-sort-button" mat-ripple>Наиболее просматриваемые</button>
-      <button class="category-products-list-sort-button" mat-ripple>Больше всего лайков</button>
     </div>
 
     <div class="category-products-list-grid">

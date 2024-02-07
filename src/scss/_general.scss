@@ -1,5 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 @import "variables";
+@import "mixins";
+
+/*
+  HTML TAGS STYLES
+*/
 
 html {
   box-sizing: border-box;
@@ -57,6 +62,11 @@ img {
   vertical-align: middle;
 }
 
+
+/*
+  OWN CSS CLASSES
+*/
+
 .container {
   max-width: 92rem;
   padding-left: 1rem;
@@ -96,6 +106,10 @@ img {
   }
 }
 
+/*
+  MAT-DIALOG
+*/
+
 .cdk-overlay-dark-backdrop {
   background: rgba(178, 183, 208, 0.30);
   backdrop-filter: blur(3px);
@@ -107,28 +121,71 @@ img {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.10), 0 29px 65px 0 rgba(0, 0, 0, 0.10), 0 118px 118px 0 rgba(0, 0, 0, 0.09) !important;
 }
 
-.mat-mdc-select-min-line {
-  font-family: "Inter", Arial, sans-serif;
-  font-size: 1rem;
-  line-height: 1;
-  color: $primary-text-color;
-}
-
-.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple) {
-  background-color: $background-grey-color !important;
-}
-
-.mat-mdc-option:focus.mdc-list-item {
-  background-color: transparent !important;
-}
-
-.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
-  color: $primary-text-color !important;
-}
-
 .mdc-dialog .mdc-dialog__content {
   padding: 0 !important;
 }
+
+/*
+  MAT-SELECT
+*/
+
+.mat-mdc-option {
+  font-family: "Inter", Arial, sans-serif !important;
+  font-size: 0.875rem !important;
+
+  &.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple) {
+    background-color: $background-grey-color !important;
+  }
+
+  &:focus.mdc-list-item {
+    background-color: transparent !important;
+  }
+
+  &.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+    color: $primary-text-color !important;
+  }
+
+  .mdc-list-item__primary-text {
+    @include line-clamp(1);
+  }
+}
+
+div.mat-mdc-select-panel {
+  @include no-scrollbar;
+  box-shadow: 0 0.25rem 1.5rem 0 rgba(51, 51, 51, 0.12) !important;
+}
+
+.mat-mdc-select-arrow-wrapper {
+  width: 0.75rem;
+  background-image: url("/assets/icons/arrow-down.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.mat-mdc-select-arrow {
+  display: none;
+}
+
+.mat-mdc-select-trigger {
+  height: 2.75rem;
+  padding: 0 0.875rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: $dialog-title-black;
+}
+
+.solid-select .mat-mdc-select-trigger {
+  background-color: $dialog-input-background;
+}
+
+.outlined-select .mat-mdc-select-trigger {
+  border: 1px solid $border-grey-color;
+}
+
+
+/*
+  MAT-SPINNER
+*/
 
 .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: currentColor !important;
