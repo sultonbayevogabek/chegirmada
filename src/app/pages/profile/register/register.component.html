@@ -56,8 +56,7 @@
           <label class="form-label">
             <span class="form-label-text">Рабочее время</span>
             <div class="register-work-times">
-              <mat-select class="register-work-times-select solid-select" [value]="1"
-                          [hideSingleSelectionIndicator]="true">
+              <mat-select class="register-work-times-select solid-select" [value]="1" [hideSingleSelectionIndicator]="true">
                 <mat-option [value]="1">Пн</mat-option>
                 <mat-option [value]="2">Вт</mat-option>
                 <mat-option [value]="3">Ср</mat-option>
@@ -95,17 +94,54 @@
 
 
           <label class="form-label">
-            <span class="form-label-text">Выберите категория</span>
+            <span class="form-label-text">Доставка</span>
 
-            <mat-radio-group>
-              <mat-radio-button value="1" [color]="'primary'">Да</mat-radio-button>
-              <mat-radio-button value="2">Нет</mat-radio-button>
+            <mat-radio-group class="register-delivery-type">
+              <mat-radio-button [color]="'primary'">Да</mat-radio-button>
+              <mat-radio-button [color]="'primary'">Нет</mat-radio-button>
             </mat-radio-group>
           </label>
+
+          <label class="form-label">
+            <span class="form-label-text">Номер телефона</span>
+            <input class="form-input" type="text" placeholder="Введите номер телефона">
+          </label>
+
+          <label class="form-label">
+            <span class="form-label-text">Введите слоган (UZ)</span>
+            <input class="form-input" type="text" placeholder="Введите слоган">
+          </label>
+
+          <label class="form-label">
+            <span class="form-label-text">Введите слоган (RU)</span>
+            <input class="form-input" type="text" placeholder="Введите слоган">
+          </label>
+        </div>
+
+        <div class="register-company-upload-logo" (click)="logoFileInput.click()">
+          <div class="register-company-logo-preview">
+            <p class="register-company-logo-requirements">До 5 МБ (512x512)</p>
+          </div>
+          <button class="register-company-logo-button" type="button">
+            <span>Загрузить</span>
+
+            <mat-icon [svgIcon]="'icon:camera'"/>
+          </button>
+          <input #logoFileInput class="register-company-logo-file-input" type="file">
         </div>
       </div>
 
-      <div class="register-company-upload-logo"></div>
+      <div class="register-company-descriptions">
+        <label class="form-label">
+          <span class="form-label-text">Описание (UZ)</span>
+          <textarea class="form-textarea" placeholder="Введите Описание"></textarea>
+        </label>
+
+        <label class="form-label">
+          <span class="form-label-text">Описание (UZ)</span>
+          <textarea class="form-textarea" placeholder="Введите Описание"></textarea>
+        </label>
+      </div>
     </div>
   </fieldset>
 </form>

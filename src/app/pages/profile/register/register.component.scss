@@ -61,3 +61,70 @@
 .register-work-times-input {
   text-align: center;
 }
+
+.register-delivery-type {
+  @include grid(1fr 1fr, 0.5rem);
+
+  ::ng-deep .mdc-form-field {
+    width: 100%;
+    height: 2.75rem;
+    padding: 0 0.25rem;
+    border-radius: 0.5rem;
+    background-color: $dialog-input-background;
+    font-size: 0.875rem;
+    color: $dialog-title-black;
+  }
+
+  ::ng-deep .mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
+    border-color: $border-grey-color;
+  }
+
+  ::ng-deep .mdc-label {
+    @include flex-center;
+    flex-grow: 1;
+    height: 100%;
+    padding-left: 0;
+  }
+
+  ::ng-deep .mdc-radio__outer-circle {
+    border-width: 1px;
+  }
+}
+
+.register-company-upload-logo {
+  @include flex-column(1rem);
+  align-items: center;
+  cursor: pointer;
+}
+
+.register-company-logo-preview {
+  @include flex-center-center;
+  width: 60%;
+  aspect-ratio: 1;
+  background-color: $background-grey-color;
+  border-radius: 50%;
+}
+
+.register-company-logo-requirements {
+  font-size: 0.75rem;
+  color: $secondary-text-color;
+}
+
+.register-company-logo-file-input {
+  @include visually-hidden;
+}
+
+.register-company-logo-button {
+  @include flex-center-center(0.5rem);
+  height: 2.75rem;
+  padding: 0 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-grey-color;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.register-company-descriptions {
+  @include grid(1fr 1fr, 1rem);
+  padding-top: 1rem;
+}
