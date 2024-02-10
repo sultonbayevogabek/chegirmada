@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
-import { BlueButtonComponent } from '../../../shared/components/blue-button/blue-button.component';
+import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'my-information',
@@ -10,7 +10,7 @@ import { BlueButtonComponent } from '../../../shared/components/blue-button/blue
   imports: [
     MatIcon,
     MatRipple,
-    BlueButtonComponent
+    UiButtonComponent
   ],
   standalone: true
 })

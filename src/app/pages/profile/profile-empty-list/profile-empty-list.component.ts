@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { BlueButtonComponent } from '../../../shared/components/blue-button/blue-button.component';
+import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'profile-empty-list',
@@ -8,7 +8,7 @@ import { BlueButtonComponent } from '../../../shared/components/blue-button/blue
   styleUrl: 'profile-empty-list.component.scss',
   imports: [
     NgOptimizedImage,
-    BlueButtonComponent
+    UiButtonComponent
   ],
   standalone: true
 })

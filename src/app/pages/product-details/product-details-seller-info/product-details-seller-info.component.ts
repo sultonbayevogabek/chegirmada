@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RatingStarsComponent } from '../../../shared/components/rating-stars/rating-stars.component';
-import { BlueButtonComponent } from '../../../shared/components/blue-button/blue-button.component';
+import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'product-details-seller-info',
@@ -10,7 +10,7 @@ import { BlueButtonComponent } from '../../../shared/components/blue-button/blue
   imports: [
     MatIconModule,
     RatingStarsComponent,
-    BlueButtonComponent
+    UiButtonComponent
   ],
   standalone: true
 })

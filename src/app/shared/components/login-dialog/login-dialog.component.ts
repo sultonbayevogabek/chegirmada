@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { BlueButtonComponent } from '../blue-button/blue-button.component';
+import { UiButtonComponent } from '../ui-button/ui-button.component';
 
 @Component({
   selector: 'login-dialog',
@@ -15,7 +15,7 @@ import { BlueButtonComponent } from '../blue-button/blue-button.component';
     MatDialogClose,
     NgxMaskDirective,
     MatProgressSpinnerModule,
-    BlueButtonComponent
+    UiButtonComponent
   ],
   standalone: true,
   providers: [

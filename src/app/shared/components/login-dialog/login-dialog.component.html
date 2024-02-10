@@ -22,7 +22,7 @@
           <input class="login-dialog-phone-input form-input" type="text" mask="00 000 00 00" prefix="+998 ">
         </label>
 
-        <blue-button
+        <ui-button
           (click)="sendPhoneNumber()"
           [text]="'Получить код'"
           [full]="true"
@@ -46,7 +46,7 @@
           <input class="login-dialog-code-input" type="text" mask="0">
         </div>
 
-        <blue-button
+        <ui-button
           [text]="'Отправить'"
           [full]="true"
         />

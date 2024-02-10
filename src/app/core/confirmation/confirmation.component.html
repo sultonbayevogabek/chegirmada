@@ -1,2 +1,20 @@
-<button (click)="confirmationAction(false)">Cancel</button>
-<button (click)="confirmationAction(true)">Confirm</button>
+<mat-dialog-content>
+  <div class="confirmation">
+    <p class="confirmation-text">
+      {{ data?.message }}
+    </p>
+
+    <div class="confirmation-actions">
+      <ui-button
+        [type]="'gray'"
+        [text]="data.cancel"
+        (click)="confirmationAction(false)"
+      />
+      <ui-button
+        [type]="'red'"
+        [text]="data.confirm"
+        (click)="confirmationAction(true)"
+      />
+    </div>
+  </div>
+</mat-dialog-content>

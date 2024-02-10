@@ -6,7 +6,7 @@ import { MatOption } from '@angular/material/autocomplete';
 import { MatSelect } from '@angular/material/select';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { BlueButtonComponent } from '../../../shared/components/blue-button/blue-button.component';
+import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'branch-action',
@@ -22,7 +22,7 @@ import { BlueButtonComponent } from '../../../shared/components/blue-button/blue
     NgxMaskDirective,
     MatRadioButton,
     MatRadioGroup,
-    BlueButtonComponent
+    UiButtonComponent
   ],
   providers: [
     provideNgxMask()

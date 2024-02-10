@@ -1,0 +1,18 @@
+@import "variables";
+@import "mixins";
+
+.confirmation {
+  padding: 1.5rem;
+}
+
+.confirmation-text {
+  font-size: 1rem;
+  font-weight: 500;
+  color: $dialog-title-black;
+  text-align: center;
+}
+
+.confirmation-actions {
+  @include flex-center-center(0.5rem);
+  padding-top: 1rem;
+}

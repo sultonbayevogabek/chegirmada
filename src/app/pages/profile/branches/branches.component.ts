@@ -37,8 +37,8 @@ export class BranchesComponent {
     })
   }
 
-  openConfirmation() {
-    this.confirmation.confirmation({ message: 're' })
+  openConfirmation(): void {
+    this.confirmation.confirmation()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(d => {
         console.log(d);

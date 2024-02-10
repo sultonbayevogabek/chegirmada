@@ -1,0 +1,35 @@
+@import "variables";
+
+:host {
+  display: block;
+}
+
+.ui-button {
+  height: 2.75rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-radius: 0.5rem;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  &.gray {
+    background-color: $dialog-input-background;
+    color: $dialog-title-black;
+  }
+
+  &.red {
+    background-color: $primary-red-color;
+    color: $white-color;
+  }
+
+  &.blue {
+    background-color: $primary-blue-color;
+    color: $white-color;
+  }
+
+  &.full {
+    width: 100%;
+  }
+}
+
