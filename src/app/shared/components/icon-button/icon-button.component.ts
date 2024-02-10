@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
 import { NgStyle } from '@angular/common';
@@ -16,7 +16,6 @@ import { NgStyle } from '@angular/common';
 })
 
 export class IconButtonComponent implements OnInit {
-  @Output() onClick: EventEmitter<void> = new EventEmitter<void>();
   @Input() type: 'simple' | 'blue' | 'red' = 'simple';
   @Input() icon = 'icon:x';
   @Input() iconWidth = 1;
