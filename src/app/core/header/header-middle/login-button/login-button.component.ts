@@ -2,13 +2,15 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from '../../../../shared/components/login-dialog/login-dialog.component';
+import { BlueButtonComponent } from '../../../../shared/components/blue-button/blue-button.component';
 
 @Component({
   selector: 'login-button',
   templateUrl: 'login-button.component.html',
   styleUrl: 'login-button.component.scss',
   imports: [
-    MatIconModule
+    MatIconModule,
+    BlueButtonComponent
   ],
   standalone: true
 })

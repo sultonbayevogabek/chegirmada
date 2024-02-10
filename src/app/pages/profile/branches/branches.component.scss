@@ -1,0 +1,56 @@
+@import "variables";
+@import "mixins";
+
+.branches {
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-grey-color;
+}
+
+.branches-heading {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.branches-list {
+  @include flex-column(1.5rem)
+}
+
+.branches-item {
+  @include flex-start-between;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $border-grey-color;
+}
+
+.branch-info {
+  width: 70%;
+}
+
+.branch-name {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: $dialog-title-black;
+}
+
+.branch-details {
+  @include grid(1fr 1fr, 0.75rem 1.5rem);
+  padding-top: 1rem;
+}
+
+.branch-details-item {
+  @include flex-center(0.25rem);
+  font-size: 0.875rem;
+}
+
+.branch-details-label {
+  color: $secondary-text-color;
+}
+
+.branch-details-value {
+  font-weight: 500;
+  color: $dialog-title-black;
+}
+
+.branch-actions {
+  @include flex-column(0.25rem)
+}

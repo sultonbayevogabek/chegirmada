@@ -1,0 +1,12 @@
+<button
+  [class]="'icon-button ' + type"
+  mat-ripple
+  [matRippleColor]="matRippleColor"
+>
+  <mat-icon
+    [ngStyle]="{
+      width: iconWidth + 'rem'
+    }"
+    [svgIcon]="icon"
+  />
+</button>

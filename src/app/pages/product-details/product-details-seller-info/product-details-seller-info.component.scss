@@ -1,6 +1,5 @@
 @import 'variables';
 @import 'mixins';
-@import 'buttons';
 
 .product-details-side-info {
   @include flex-column(1rem);
@@ -77,7 +76,7 @@
 }
 
 .product-details-seller-phone-hidden {
-  color: $primary-brand-color;
+  color: $primary-red-color;
   cursor: pointer;
 }
 
@@ -86,11 +85,6 @@
   font-size: 0.875rem;
   line-height: 1.125rem;
   color: $seller-description-color;
-}
-
-.product-details-seller-subscribe {
-  @extend .gradient-button;
-  width: 100%;
 }
 
 .product-details-quantity {

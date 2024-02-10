@@ -1,6 +1,5 @@
 @import 'variables';
 @import 'mixins';
-@import 'buttons';
 
 .product-details-tabs {
   @include flex-column(0.75rem)
@@ -24,7 +23,7 @@
   cursor: pointer;
 
   span {
-    color: $primary-brand-color;
+    color: $primary-red-color;
   }
 
   &.active {
@@ -96,8 +95,8 @@
 }
 
 .product-details-tabs-leave-comment {
-  @extend .blue-button;
-  background-color: $primary-brand-color;
+  @include blue-button;;
+  background-color: $primary-red-color;
   box-shadow: 0 4px 24px 0 rgba(255, 3, 76, 0.16);
 }
 

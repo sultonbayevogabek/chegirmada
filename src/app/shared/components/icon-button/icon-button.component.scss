@@ -1,0 +1,28 @@
+@import "variables";
+@import "mixins";
+
+.icon-button {
+  @include flex-center-center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  transition: 0.1s background-color ease-in;
+
+  &.simple {
+    color: $dialog-title-black;
+
+    &:hover {
+      background-color: $background-grey-color;
+    }
+  }
+
+  &.blue {
+    background-color: rgba($primary-blue-color, 0.12);
+    color: $primary-blue-color;
+  }
+
+  &.red {
+    background-color: rgba($primary-red-color, 0.12);
+    color: $primary-red-color;
+  }
+}

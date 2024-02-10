@@ -3,6 +3,7 @@ import { SectionHeaderComponent } from '../../shared/components/section-header/s
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'profile',
@@ -14,9 +15,38 @@ import { MatRipple } from '@angular/material/core';
     MatIcon,
     MatRipple,
     RouterOutlet,
-    RouterLinkActive
+    RouterLinkActive,
+    NgTemplateOutlet
   ],
   standalone: true
 })
 
-export class ProfileComponent {}
+export class ProfileComponent {
+  menu = [
+    {
+      icon: 'icon:my-information',
+      link: 'my-information',
+      name: 'Моя информация'
+    },
+    {
+      icon: 'icon:my-information',
+      link: 'branches',
+      name: 'Филиалы'
+    },
+    {
+      icon: 'icon:favourite-companies',
+      link: 'favourite-companies',
+      name: 'Следующая компания'
+    },
+    {
+      icon: 'icon:like-outline',
+      link: 'favourite-products',
+      name: 'Нравится'
+    },
+    {
+      icon: 'icon:settings',
+      link: 'settings',
+      name: 'Настройки'
+    }
+  ]
+}

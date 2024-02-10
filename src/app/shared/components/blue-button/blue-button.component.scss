@@ -1,0 +1,14 @@
+@import "mixins";
+
+:host {
+  display: block;
+}
+
+.blue-button {
+  @include blue-button;
+
+  &.full {
+    width: 100%;
+  }
+}
+

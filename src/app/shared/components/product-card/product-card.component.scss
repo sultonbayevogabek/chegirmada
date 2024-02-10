@@ -36,7 +36,7 @@
   background-color: $white-color;
 
   &.active {
-    background-color: $primary-brand-color;
+    background-color: $primary-red-color;
   }
 }
 
@@ -46,7 +46,7 @@
   left: 0.5rem;
   padding: 0.3rem 0.5rem;
   border-radius: 0.25rem;
-  background-color: $primary-brand-color;
+  background-color: $primary-red-color;
   color: $white-color;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -71,7 +71,7 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  background-color: $primary-brand-color;
+  background-color: $primary-red-color;
   text-align: center;
   line-height: 2.5rem;
   font-size: 0.75rem;
@@ -141,7 +141,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.75rem;
-  color: $primary-brand-color;
+  color: $primary-red-color;
 }
 
 .product-card-location-date {

@@ -1,6 +1,5 @@
-@import "../../../../scss/mixins";
-@import "../../../../scss/buttons";
-@import "../../../../scss/variables";
+@import "mixins";
+@import "variables";
 
 .partners-inner {
   @include grid(1fr 1.7fr);
@@ -32,7 +31,7 @@
 }
 
 .partners-info-button {
-  @extend .blue-button;
+  @include blue-button;;
   @include flex-center-center(0.5rem);
 
   .mat-icon {

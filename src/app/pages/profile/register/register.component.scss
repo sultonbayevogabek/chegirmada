@@ -1,6 +1,7 @@
 @import "variables";
 @import "mixins";
 
+
 .register {
   padding: 1.25rem;
   border-radius: 0.5rem;
@@ -27,7 +28,7 @@
   color: $dialog-title-black;
 
   a {
-    color: $primary-brand-color;
+    color: $primary-red-color;
     text-decoration: underline;
   }
 }
@@ -64,31 +65,6 @@
 
 .register-delivery-type {
   @include grid(1fr 1fr, 0.5rem);
-
-  ::ng-deep .mdc-form-field {
-    width: 100%;
-    height: 2.75rem;
-    padding: 0 0.25rem;
-    border-radius: 0.5rem;
-    background-color: $dialog-input-background;
-    font-size: 0.875rem;
-    color: $dialog-title-black;
-  }
-
-  ::ng-deep .mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
-    border-color: $border-grey-color;
-  }
-
-  ::ng-deep .mdc-label {
-    @include flex-center;
-    flex-grow: 1;
-    height: 100%;
-    padding-left: 0;
-  }
-
-  ::ng-deep .mdc-radio__outer-circle {
-    border-width: 1px;
-  }
 }
 
 .register-company-upload-logo {
@@ -127,4 +103,13 @@
 .register-company-descriptions {
   @include grid(1fr 1fr, 1rem);
   padding-top: 1rem;
+}
+
+.register-submit {
+  padding-top: 1rem;
+  text-align: right;
+}
+
+.register-submit-button {
+  @include blue-button;;
 }

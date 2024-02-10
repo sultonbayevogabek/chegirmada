@@ -123,6 +123,34 @@ img {
   }
 }
 
+.form-radio {
+  .mdc-form-field {
+    width: 100%;
+    height: 2.75rem;
+    padding: 0 0.25rem;
+    border-radius: 0.5rem;
+    background-color: $dialog-input-background;
+    font-size: 0.875rem;
+    color: $dialog-title-black;
+  }
+
+  .mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
+    border-color: $border-grey-color;
+  }
+
+  .mdc-label {
+    @include flex-center;
+    flex-grow: 1;
+    height: 100%;
+    padding-left: 0;
+    cursor: pointer;
+  }
+
+  .mdc-radio__outer-circle {
+    border-width: 1px;
+  }
+}
+
 /*
   MAT-DIALOG
 */

@@ -97,8 +97,13 @@
             <span class="form-label-text">Доставка</span>
 
             <mat-radio-group class="register-delivery-type">
-              <mat-radio-button [color]="'primary'">Да</mat-radio-button>
-              <mat-radio-button [color]="'primary'">Нет</mat-radio-button>
+              <mat-radio-button
+                class="form-radio"
+                [color]="'primary'">Да</mat-radio-button>
+              <mat-radio-button
+                class="form-radio"
+                [color]="'primary'"
+              >Нет</mat-radio-button>
             </mat-radio-group>
           </label>
 
@@ -144,4 +149,10 @@
       </div>
     </div>
   </fieldset>
+
+  <img style="width: 100%; margin-top: 1rem" src="/assets/banner/map.svg" alt="Map image">
+
+  <div class="register-submit">
+    <button class="register-submit-button">Сохранять</button>
+  </div>
 </form>

@@ -1,0 +1,58 @@
+<div class="branch-action-header">
+  <h2 class="branch-action-heading">Добавить филиал</h2>
+
+  <icon-button
+    mat-dialog-close
+    [icon]="'icon:x'"
+    [iconWidth]="0.875"
+  />
+</div>
+
+<mat-dialog-content class="branch-action-content">
+  <form class="branch-action-form">
+    <div class="branch-action-fields">
+      <label class="form-label">
+        <span class="form-label-text">Название фирма</span>
+        <input class="form-input" type="text" placeholder="Введите название">
+      </label>
+
+      <label class="form-label">
+        <span class="form-label-text">Номер телефона</span>
+        <input class="form-input" type="text" placeholder="Введите номер телефона">
+      </label>
+
+      <label class="form-label">
+        <span class="form-label-text">Электронная почта</span>
+        <input class="form-input" type="text" placeholder="Введите электронную почту">
+      </label>
+
+      <label class="form-label">
+        <span class="form-label-text">Рабочее время</span>
+        <div class="branch-action-times">
+          <input class="branch-action-time form-input" type="text" placeholder="00:00" [mask]="'Hh:m0'">
+          <input class="branch-action-time form-input" type="text" placeholder="00:00" [mask]="'Hh:m0'">
+        </div>
+      </label>
+
+      <label class="form-label">
+        <span class="form-label-text">Доставка</span>
+
+        <mat-radio-group class="branch-action-delivery">
+          <mat-radio-button class="form-radio" [color]="'primary'">Да</mat-radio-button>
+          <mat-radio-button class="form-radio" [color]="'primary'">Нет</mat-radio-button>
+        </mat-radio-group>
+      </label>
+    </div>
+
+    <label class="form-label" style="margin-top: 1rem; aspect-ratio: 2.56">
+      <span class="form-label-text">Адрес</span>
+      <img style="width: 100%;" src="/assets/banner/map.svg" alt="Map image">
+    </label>
+  </form>
+</mat-dialog-content>
+
+<div class="branch-action-submit">
+  <blue-button
+    [text]="'Добавить'"
+  />
+</div>

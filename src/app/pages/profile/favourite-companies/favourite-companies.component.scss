@@ -1,6 +1,6 @@
 @import "variables";
 @import "mixins";
-@import "buttons";
+
 
 .favourite-companies {
   padding: 1.25rem;
@@ -48,7 +48,7 @@
 }
 
 .favourite-companies-recommendations-subscribe {
-  @extend .blue-button;
+  @include blue-button;;
   margin-left: auto;
   box-shadow: 0 4px 24px 0 rgba($primary-blue-color, 0.16);
 }

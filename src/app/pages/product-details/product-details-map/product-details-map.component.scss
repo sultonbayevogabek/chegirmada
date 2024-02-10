@@ -1,6 +1,5 @@
 @import 'variables';
 @import 'mixins';
-@import 'buttons';
 
 .product-details-map {
   @include flex-column(0.75rem);

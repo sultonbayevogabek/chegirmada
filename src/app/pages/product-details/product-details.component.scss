@@ -1,6 +1,6 @@
 @import "variables";
 @import "mixins";
-@import "buttons";
+
 
 .product-details-main {
   @include grid(5fr 1.5fr, 1.5rem);
@@ -111,7 +111,7 @@
 
 .product-details-price-new {
   display: block;
-  color: $primary-brand-color;
+  color: $primary-red-color;
   font-size: 2rem;
   font-weight: 600;
 }
@@ -200,7 +200,7 @@
   
   strong {
     font-weight: 500;
-    color: $primary-brand-color;
+    color: $primary-red-color;
   }
 }
 

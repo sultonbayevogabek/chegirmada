@@ -4,42 +4,9 @@
 
     <div class="profile-inner">
       <aside class="profile-menu">
-        <ul class="profile-menu-list">
-          <li class="profile-menu-item" mat-ripple [routerLink]="['my-information']" [routerLinkActive]="'active'">
-            <a class="profile-menu-link">
-              <mat-icon [svgIcon]="'icon:my-information'"/>
-              <span>Моя информация</span>
-            </a>
-          </li>
-
-          <li class="profile-menu-item" mat-ripple [routerLink]="['favourite-companies']" [routerLinkActive]="'active'">
-            <a class="profile-menu-link">
-              <mat-icon [svgIcon]="'icon:favourite-companies'"/>
-              <span>Следующая компания</span>
-            </a>
-          </li>
-
-          <li class="profile-menu-item" mat-ripple [routerLink]="['favourite-products']" [routerLinkActive]="'active'">
-            <a class="profile-menu-link">
-              <mat-icon [svgIcon]="'icon:like-outline'"/>
-              <span>Нравится</span>
-            </a>
-          </li>
-
-          <li class="profile-menu-item" mat-ripple [routerLink]="['settings']" [routerLinkActive]="'active'">
-            <a class="profile-menu-link">
-              <mat-icon [svgIcon]="'icon:settings'"/>
-              <span>Настройки</span>
-            </a>
-          </li>
-
-          <li class="profile-menu-item exit" mat-ripple>
-            <a class="profile-menu-link">
-              <mat-icon [svgIcon]="'icon:logout'"/>
-              <span>Выход</span>
-            </a>
-          </li>
-        </ul>
+        <ng-container
+          *ngTemplateOutlet="profileMenu"
+        />
       </aside>
 
       <main class="profile-main">
@@ -48,3 +15,23 @@
     </div>
   </div>
 </section>
+
+<ng-template #profileMenu>
+  <ul class="profile-menu-list">
+    @for (menuItem of menu; track menuItem) {
+      <li class="profile-menu-item" mat-ripple [routerLink]="[menuItem.link]" [routerLinkActive]="'active'">
+        <a class="profile-menu-link">
+          <mat-icon [svgIcon]="menuItem.icon"/>
+          <span>{{ menuItem.name }}</span>
+        </a>
+      </li>
+    }
+
+    <li class="profile-menu-item exit" mat-ripple>
+      <a class="profile-menu-link">
+        <mat-icon [svgIcon]="'icon:logout'"/>
+        <span>Выход</span>
+      </a>
+    </li>
+  </ul>
+</ng-template>

@@ -5,6 +5,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
+import { BlueButtonComponent } from '../../../shared/components/blue-button/blue-button.component';
 
 @Component({
   selector: 'category-filter',
@@ -16,7 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatRippleModule,
     NgxMaskDirective,
     MatSliderModule,
-    MatButtonModule
+    MatButtonModule,
+    BlueButtonComponent
   ],
   providers: [
     provideNgxMask()

@@ -22,11 +22,11 @@
           <input class="login-dialog-phone-input form-input" type="text" mask="00 000 00 00" prefix="+998 ">
         </label>
 
-        <button
+        <blue-button
           (click)="sendPhoneNumber()"
-          class="login-dialog-submit"
-          type="button">Получить код
-        </button>
+          [text]="'Получить код'"
+          [full]="true"
+        />
       </form>
     </div>
   }
@@ -46,10 +46,10 @@
           <input class="login-dialog-code-input" type="text" mask="0">
         </div>
 
-        <button class="login-dialog-submit">
-          <span>Отправить</span>
-          <mat-spinner [diameter]="20"></mat-spinner>
-        </button>
+        <blue-button
+          [text]="'Отправить'"
+          [full]="true"
+        />
 
         <div class="login-dialog-timer">
           <p class="login-dialog-timer-text">Если код не придёт, можно получить новый через 36 сек</p>

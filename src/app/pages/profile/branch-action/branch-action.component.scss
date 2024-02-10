@@ -1,0 +1,33 @@
+@import "variables";
+@import "mixins";
+
+.branch-action-header {
+  @include flex-center-between;
+  padding: 1.5rem 2rem;
+}
+
+.branch-action-heading {
+  font-size: 1.5rem;
+  color: $dialog-title-black;
+}
+
+.branch-action-content {
+  @include custom-scrollbar;
+}
+
+.branch-action-form {
+  padding: 0 2rem;
+}
+
+.branch-action-fields {
+  @include grid(repeat(3, 1fr), 0.5rem 1rem);
+}
+
+.branch-action-times, .branch-action-delivery {
+  @include grid(1fr 1fr, 1rem);
+}
+
+.branch-action-submit {
+  padding: 1.5rem 2rem;
+  text-align: right;
+}

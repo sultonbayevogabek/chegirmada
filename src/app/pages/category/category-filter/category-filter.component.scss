@@ -1,6 +1,6 @@
 @import "variables";
 @import "mixins";
-@import "buttons";
+
 
 :host {
   .mat-expansion-panel-header {
@@ -60,8 +60,6 @@
 }
 
 .category-filter-reset {
-  @extend .blue-button;
-  width: 100%;
   margin-bottom: 1rem;
 }
 
