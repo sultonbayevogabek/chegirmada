@@ -12,7 +12,7 @@
   overflow: hidden;
 }
 
-.company-profile-main {
+.company-profile-top {
   @include grid(1fr 1fr, 1.5rem);
   padding: 1.5rem 0;
   border-bottom: 1px solid $border-grey-color;
@@ -138,4 +138,85 @@
   font-size: 1.25rem;
   font-weight: 500;
   color: $logo-black-color;
+}
+
+.company-profile-middle {
+  @include grid(1fr 1fr, 1.5rem);
+  padding-top: 1.5rem;
+}
+
+.company-profile-middle-heading {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: $dialog-title-black;
+}
+
+.company-profile-about-text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: $secondary-black-color
+}
+
+.company-profile-rate-header {
+  @include flex-start-between(3rem);
+}
+
+.company-profile-rate-title {
+  width: 60%;
+}
+
+.company-profile-rate-description {
+  font-size: 0.875rem;
+  color: $secondary-black-color;
+}
+
+.company-profile-rate-body {
+  @include grid(1fr 5.76fr, 1.5fr);
+  padding-top: 1.5rem;
+}
+
+.company-profile-rate-number {
+  strong {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    font-weight: 500;
+    color: $dialog-title-black;
+  }
+
+  span {
+    display: block;
+    font-size: 1rem;
+    color: $secondary-text-color;
+  }
+}
+
+.company-profile-rate-diagram {
+  @include flex-column(0.5rem);
+}
+
+.company-profile-rate-diagram-bar {
+  @include flex-center(0.5rem);
+}
+
+.company-profile-rate-diagram-number {
+  width: 1rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: $dialog-title-black;
+  text-align: center;
+}
+
+.company-profile-rate-diagram-line {
+  flex-grow: 1;
+  height: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: $dialog-input-background;
+
+  div {
+    height: 100%;
+    border-radius: 0.5rem;
+    background-color: $primary-blue-color;
+  }
 }
