@@ -151,6 +151,19 @@ img {
   }
 }
 
+.carousel-navigation-button {
+  @include flex-center-center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgba($logo-black-color, 0.4);
+  border-radius: 50%;
+  color: $white-color;
+
+  .mat-icon {
+    width: 0.6rem;
+  }
+}
+
 /*
   MAT-DIALOG
 */

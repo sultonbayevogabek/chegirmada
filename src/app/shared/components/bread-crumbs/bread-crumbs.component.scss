@@ -1,6 +1,10 @@
 @import "variables";
 @import "mixins";
 
+:host {
+  display: block;
+}
+
 .bread-crumbs {
   @include flex-center(0.5rem);
 }

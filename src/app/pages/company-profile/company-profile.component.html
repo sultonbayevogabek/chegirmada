@@ -1,0 +1,121 @@
+<section class="company-profile section">
+  <div class="container">
+    <bread-crumbs
+      class="company-profile-bread-crumb"
+      [breadCrumbs]="breadCrumbs"
+    />
+    <div class="company-profile-banner">
+      <img [ngSrc]="'/assets/banner/korzinka.jpg'" [fill]="true" [alt]="">
+    </div>
+
+    <div class="company-profile-main">
+      <div class="company-profile-main-left">
+        <div class="company-profile-logo">
+          <img [ngSrc]="'/assets/logos/korzinka.svg'" [fill]="true" [alt]="'Korzinka'">
+        </div>
+
+        <div class="company-profile-brand-stats">
+          <div class="company-profile-brand-details">
+            <h2 class="company-profile-brand-name">Korzinka MCHJ</h2>
+
+            <div class="company-profile-username-views">
+              <div class="company-profile-username-views-item">
+                {{ '@korzinka' }}
+              </div>
+
+              <div class="company-profile-username-views-item">
+                <mat-icon [svgIcon]="'icon:eye'"/>
+                <span>11.2 тыс.</span>
+              </div>
+
+              <div class="company-profile-username-views-item">
+                На платформе с март 2018 г.
+              </div>
+            </div>
+          </div>
+
+          <div class="company-profile-stats">
+            <div class="company-profile-stats-item">
+              <div class="company-profile-stats-value">11.2 тыс.</div>
+              <div class="company-profile-stats-label">Подписчиков</div>
+            </div>
+
+            <div class="company-profile-stats-item">
+              <div class="company-profile-stats-value">21.4 млн</div>
+              <div class="company-profile-stats-label">Нравится</div>
+            </div>
+
+            <div class="company-profile-stats-item">
+              <div class="company-profile-stats-value">850</div>
+              <div class="company-profile-stats-label">Комментарии</div>
+            </div>
+          </div>
+
+          <ui-button [text]="'Подписаться'"/>
+        </div>
+      </div>
+
+      <div class="company-profile-main-right">
+        <div class="company-profile-additional">
+          <div class="company-profile-additional-item">
+            <mat-icon [svgIcon]="'icon:verified'"/>
+            <span class="company-profile-additional-label">Проверенная компания</span>
+          </div>
+
+          <div class="company-profile-additional-item">
+            <span class="company-profile-additional-label">Доставка:</span>
+            <span class="company-profile-additional-value">Есть</span>
+          </div>
+
+          <div class="company-profile-additional-item">
+            <span class="company-profile-additional-label">Категория:</span>
+            <span class="company-profile-additional-value">Мобильные телефоны</span>
+          </div>
+
+          <div class="company-profile-additional-item">
+            <span class="company-profile-additional-label">ID:</span>
+            <span class="company-profile-additional-value"> 131200</span>
+          </div>
+        </div>
+        <div class="company-profile-contact">
+          <div class="company-profile-contact-item">
+            <div class="company-profile-contact-label">Номер телефона</div>
+            <div class="company-profile-contact-value">
+              <mat-icon [svgIcon]="'icon:phone'"/>
+              <span>+998 90 043 77 47</span>
+            </div>
+          </div>
+
+          <div class="company-profile-contact-item">
+            <div class="company-profile-contact-label">Рабочее время</div>
+            <div class="company-profile-contact-value">
+              <mat-icon [svgIcon]="'icon:clock'"/>
+              <span>Пон. - Пят. 09:00 - 18:00</span>
+            </div>
+          </div>
+
+          <div class="company-profile-contact-item">
+            <div class="company-profile-contact-label">Адрес</div>
+            <div class="company-profile-contact-value">
+              <mat-icon [svgIcon]="'icon:location-outline'"/>
+              <span>Toshkent, Yunusobot-14 32-uy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="company-profile-balance">
+          <div class="company-profile-balance-info">
+            <div class="company-profile-balance-label">
+              Баланс
+            </div>
+            <div class="company-profile-balance-value">
+              1 200 000 сум
+            </div>
+          </div>
+
+          <ui-button [text]="'Пополнить'"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

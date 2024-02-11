@@ -1,0 +1,141 @@
+@import "variables";
+@import "mixins";
+
+.company-profile-bread-crumb {
+  margin-bottom: 1rem;
+}
+
+.company-profile-banner {
+  position: relative;
+  aspect-ratio: 4.38;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.company-profile-main {
+  @include grid(1fr 1fr, 1.5rem);
+  padding: 1.5rem 0;
+  border-bottom: 1px solid $border-grey-color;
+}
+
+.company-profile-main-left {
+  @include grid(1fr 2.5fr, 1rem);
+}
+
+.company-profile-logo {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 0.5rem;
+  background-color: $background-grey-color;
+
+  img {
+    object-fit: none;
+  }
+}
+
+.company-profile-brand-details {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid $border-grey-color;
+}
+
+.company-profile-brand-name {
+  margin-bottom: 0.125rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: $dialog-title-black;
+}
+
+.company-profile-username-views {
+  @include flex-center(4rem);
+  gap: 2rem;
+}
+
+.company-profile-username-views-item {
+  @include flex-center(0.25rem);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: $secondary-text-color;
+
+  .mat-icon {
+    width: 1.125rem;
+  }
+}
+
+.company-profile-stats {
+  @include flex-center(1rem);
+  padding: 0.75rem 0 1rem;
+}
+
+.company-profile-stats-item {
+  padding: 0.5rem 2rem 0.5rem 0;
+  font-size: 0.875rem;
+  color: $secondary-text-color;
+
+  &:not(:last-child) {
+    border-right: 1px solid $border-grey-color;
+  }
+}
+
+.company-profile-stats-value {
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  color: $dialog-title-black;
+}
+
+.company-profile-main-right {
+  @include flex-column(0.75rem);
+}
+
+.company-profile-additional {
+  @include flex-center-between;
+  gap: 1.5rem;
+}
+
+.company-profile-additional-item {
+  @include flex-center(0.5rem);
+  font-size: 0.875rem;
+}
+
+.company-profile-additional-value {
+  color: $secondary-text-color;
+}
+
+.company-profile-contact {
+  @include flex-start-between(1rem);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: $dialog-input-background;
+}
+
+.company-profile-contact-label {
+  margin-bottom: 0.125rem;
+  font-size: 0.875rem;
+  color: $secondary-text-color;
+}
+
+.company-profile-contact-value {
+  @include flex-center(0.25rem);
+
+  .mat-icon {
+    width: 1rem;
+  }
+}
+
+.company-profile-balance {
+  @include flex-center-between;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-grey-color;
+}
+
+.company-profile-balance-label {
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  color: $secondary-text-color;
+}
+
+.company-profile-balance-value {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: $logo-black-color;
+}

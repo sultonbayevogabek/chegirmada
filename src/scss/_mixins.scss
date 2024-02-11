@@ -46,10 +46,11 @@
   justify-content: space-between;
 }
 
-@mixin flex-start-between {
+@mixin flex-start-between($gap: 0) {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  gap: $gap;
 }
 
 @mixin flex-column($gap: 0) {
@@ -139,17 +140,3 @@
   font-weight: 500;
   color: $white-color;
 }
-
-@mixin carousel-navigation-button {
-  @include flex-center-center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: rgba($logo-black-color, 0.4);
-  border-radius: 50%;
-  color: $white-color;
-
-  .mat-icon {
-    width: 0.6rem;
-  }
-}
-
