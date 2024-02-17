@@ -29,6 +29,10 @@ export const profileRoutes: Routes = [
       {
         path: 'branches',
         loadComponent: () => import('./branches/branches.component').then(c => c.BranchesComponent)
+      },
+      {
+        path: 'my-announcements',
+        loadChildren: () => import('./my-announcements/my-announcements.routes').then(r => r.myAnnouncementsRoutes)
       }
     ]
   }

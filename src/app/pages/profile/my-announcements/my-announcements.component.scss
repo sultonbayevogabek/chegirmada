@@ -1,0 +1,39 @@
+@import "variables";
+@import "mixins";
+
+.tab {
+  background-color: $dialog-input-background;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.tab-item {
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  &.active {
+    background-color: $white-color;
+  }
+}
+
+::ng-deep {
+  .mat-mdc-tab-link .mdc-tab__text-label {
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $dialog-title-black !important;
+    letter-spacing: 0;
+  }
+
+  .mdc-tab-indicator {
+    opacity: 0;
+  }
+
+  .mat-mdc-tab-link:hover .mdc-tab__ripple::before {
+    display: none;
+  }
+
+  .mat-mdc-tab-link:not(.mdc-tab--stacked) {
+    height: 2.75rem !important;
+  }
+}

@@ -3,6 +3,7 @@ import { BreadCrumbsComponent } from '../../shared/components/bread-crumbs/bread
 import { NgOptimizedImage } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { UiButtonComponent } from '../../shared/components/ui-button/ui-button.component';
+import { YoutubePlayer } from '../../shared/components/youtube-player/youtube-player.component';
 
 @Component({
   selector: 'company-profile',
@@ -12,7 +13,8 @@ import { UiButtonComponent } from '../../shared/components/ui-button/ui-button.c
     BreadCrumbsComponent,
     NgOptimizedImage,
     MatIcon,
-    UiButtonComponent
+    UiButtonComponent,
+    YoutubePlayer
   ],
   standalone: true
 })
