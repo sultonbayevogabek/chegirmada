@@ -1,2 +1,46 @@
-<mat-dialog-content>
-</mat-dialog-content>
+<div class="gallery-modal">
+  <icon-button
+    class="gallery-modal-close"
+    [mat-dialog-close]="true"
+    [buttonType]="'red-flat'"
+  />
+
+  <div class="gallery-modal-counter">
+    {{ selectedImageIndex + 1 }} / {{ productImagesCount }}
+  </div>
+
+  @if (data?.productImages?.length) {
+    <div class="gallery-modal-carousel">
+      <ng-container
+        *ngTemplateOutlet="carouselTemplate"
+      />
+    </div>
+  }
+
+  <div class="gallery-modal-navigations">
+    <button class="gallery-modal-navigation" (click)="navigateCarousel('prev')">
+      <mat-icon [svgIcon]="'icon:arrow-left'"/>
+    </button>
+
+    <button class="gallery-modal-navigation" (click)="navigateCarousel('next')">
+      <mat-icon [svgIcon]="'icon:arrow-right'"/>
+    </button>
+  </div>
+</div>
+
+<ng-template #carouselTemplate>
+  <owl-carousel-o
+    [options]="carouselOption"
+    #carouselComponent
+    (changed)="carouselChanged($event)"
+  >
+    @for (imgUrl of data.productImages; track imgUrl; let i = $index) {
+      <ng-template carouselSlide id="{{ imgUrl }}">
+        <div class="gallery-modal-img">
+          <img [ngSrc]="imgUrl" [fill]="true" [alt]="imgUrl">
+        </div>
+      </ng-template>
+    }
+  </owl-carousel-o>
+</ng-template>
+

@@ -16,15 +16,14 @@ import { NgStyle } from '@angular/common';
 })
 
 export class IconButtonComponent implements OnInit {
-  @Input() type: 'simple' | 'blue' | 'red' = 'simple';
+  @Input() buttonType: 'simple' | 'blue' | 'red' | 'icon-secondary' | 'red-flat' = 'simple';
   @Input() icon = 'icon:x';
   @Input() iconWidth = 1;
-  @Input() iconColor = '#0F172A';
 
   matRippleColor = '#F8FAFC50';
 
   ngOnInit() {
-    switch (this.type) {
+    switch (this.buttonType) {
       case 'blue':
         this.matRippleColor = '#0CA4FA20';
         break;

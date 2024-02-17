@@ -25,4 +25,17 @@
     background-color: rgba($primary-red-color, 0.12);
     color: $primary-red-color;
   }
+
+  &.red-flat {
+    background-color: $primary-red-color;
+    color: $white-color;
+  }
+
+  &.icon-secondary {
+    color: $secondary-black-color;
+
+    &:hover {
+      background-color: $background-grey-color;
+    }
+  }
 }

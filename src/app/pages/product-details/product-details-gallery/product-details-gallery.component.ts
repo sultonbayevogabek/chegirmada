@@ -22,7 +22,7 @@ import {
 export class ProductDetailsGalleryComponent {
   @ViewChild('thumbsCarousel') thumbsCarousel: CarouselComponent;
   selectedImageIndex = 0;
-  selectedImageUrl = 'https://picsum.photos/1000?id=1';
+  selectedImageUrl = 'https://olcha.uz/image/original/products/2020-10-24/apple-iphone-12-64gb-18438-0.jpeg';
 
   private _dialog = inject(MatDialog);
 
@@ -34,18 +34,17 @@ export class ProductDetailsGalleryComponent {
     dots: false,
     navSpeed: 700,
     items: 4,
-    margin: 16,
+    margin: 12,
     nav: false,
     navText: [ '', '' ]
   };
 
   productImages = [
-    'https://picsum.photos/1000?id=1',
-    'https://picsum.photos/1000?id=2',
-    'https://picsum.photos/1000?id=3',
-    'https://picsum.photos/1000?id=4',
-    'https://picsum.photos/1000?id=5',
-    'https://picsum.photos/1000?id=6'
+    'https://olcha.uz/image/original/products/2020-10-24/apple-iphone-12-64gb-18438-0.jpeg',
+    'https://olcha.uz/image/original/products/2020-10-24/apple-iphone-12-64gb-18438-1.jpeg',
+    'https://olcha.uz/image/original/products/2020-10-24/apple-iphone-12-64gb-18438-2.jpeg',
+    'https://olcha.uz/image/original/products/2020-10-24/apple-iphone-12-64gb-18438-3.jpeg',
+    'https://olcha.uz/image/original/products/2020-10-24/apple-iphone-12-64gb-18438-4.jpeg',
   ];
   navigateCarousel(direction: 'next' | 'prev'): void {
     const productImages = this.productImages;
@@ -78,6 +77,7 @@ export class ProductDetailsGalleryComponent {
     const previousSelectedImageIndex = this.selectedImageIndex;
     this.selectedImageIndex = i;
     this.selectedImageUrl = this.productImages[i];
+    console.log(this.selectedImageUrl);
 
     if (this.selectedImageIndex > previousSelectedImageIndex) {
       this.thumbsCarousel.next()
@@ -95,6 +95,11 @@ export class ProductDetailsGalleryComponent {
       height: '100vh',
       maxWidth: '100vw',
       maxHeight: '100vh',
+      data: {
+        selectedImageUrl: this.selectedImageUrl,
+        selectedImageIndex: this.selectedImageIndex,
+        productImages: this.productImages
+      }
     })
   }
 }
