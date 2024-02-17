@@ -22,7 +22,7 @@ import {
 export class ProductDetailsGalleryComponent {
   @ViewChild('thumbsCarousel') thumbsCarousel: CarouselComponent;
   selectedImageIndex = 0;
-  selectedImageUrl = 'https://olcha.uz/image/original/products/2020-10-24/apple-iphone-12-64gb-18438-0.jpeg';
+  selectedImageUrl = 'https://picsum.photos/id/1/1000/1000';
 
   private _dialog = inject(MatDialog);
 
@@ -34,17 +34,17 @@ export class ProductDetailsGalleryComponent {
     dots: false,
     navSpeed: 700,
     items: 4,
-    margin: 12,
+    margin: 16,
     nav: false,
     navText: [ '', '' ]
   };
 
   productImages = [
-    'https://olcha.uz/image/original/products/2020-10-24/apple-iphone-12-64gb-18438-0.jpeg',
-    'https://olcha.uz/image/original/products/2020-10-24/apple-iphone-12-64gb-18438-1.jpeg',
-    'https://olcha.uz/image/original/products/2020-10-24/apple-iphone-12-64gb-18438-2.jpeg',
-    'https://olcha.uz/image/original/products/2020-10-24/apple-iphone-12-64gb-18438-3.jpeg',
-    'https://olcha.uz/image/original/products/2020-10-24/apple-iphone-12-64gb-18438-4.jpeg',
+    'https://picsum.photos/id/1/1000/1000',
+    'https://picsum.photos/id/2/1000/1000',
+    'https://picsum.photos/id/3/1000/1000',
+    'https://picsum.photos/id/4/1000/1000',
+    'https://picsum.photos/id/5/1000/1000',
   ];
   navigateCarousel(direction: 'next' | 'prev'): void {
     const productImages = this.productImages;
