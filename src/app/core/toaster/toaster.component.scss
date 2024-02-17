@@ -48,6 +48,11 @@
   }
 }
 
+.toaster-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
 .toaster-body {
   flex-grow: 1;
   padding-right: 2rem;
@@ -67,6 +72,14 @@
 
 .toaster-close {
   transform: translate(0.5rem, -0.75rem);
+}
+
+.black {
+  color: $dialog-title-black;
+}
+
+.secondary {
+  color: $secondary-text-color;
 }
 
 .toaster-progress {

@@ -1,0 +1,204 @@
+@import "variables";
+@import "mixins";
+
+.product-details-info-block {
+  @include flex-column;
+}
+
+.product-details-info-header {
+  @include flex-center-between;
+}
+
+.product-details-date-view {
+  @include flex-center(2rem)
+}
+
+.product-details-date-view-item {
+  @include flex-center(0.25rem);
+  font-size: 0.875rem;
+  color: $secondary-text-color;
+}
+
+.product-details-date-view-item.views {
+  @include flex-center(0.35rem);
+
+  .mat-icon {
+    width: 1.25rem;
+  }
+}
+
+.product-details-product-title {
+  padding-top: 0.5rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+.product-details-price-change {
+  width: max-content;
+  padding-top: 1rem;
+}
+
+.product-details-price-old {
+  @include flex-center-between;
+  margin-bottom: 0.25rem;
+
+  del {
+    display: block;
+    color: $secondary-black-color;
+    font-size: 1.25rem;
+  }
+}
+
+.product-details-price-discount {
+  @include flex-center-center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  background-image: linear-gradient(249deg, #F50951 3.2%, #FD3A7E 44.56%, #FF9B06 100%);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: $white-color;
+}
+
+.product-details-price-new {
+  display: block;
+  color: $primary-red-color;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.product-details-characteristics {
+  padding-top: 1.5rem;
+}
+
+.product-details-characteristics-item {
+  margin-bottom: 1rem;
+}
+
+.product-details-characteristics-label {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  color: $dialog-title-black;
+}
+
+.product-details-characteristics-options {
+  @include flex-center(0.5rem)
+}
+
+.product-details-characteristics-option {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid $border-grey-color;
+  font-size: 0.875rem;
+  color: $dialog-title-black;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($primary-blue-color, 0.05);
+    border-color: $primary-blue-color;
+    color: $primary-blue-color;
+  }
+}
+
+.product-details-characteristics-color {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:nth-child(1) {
+    background-color: #000000;
+  }
+
+  &:nth-child(2) {
+    background-color: #D7DADA;
+  }
+
+  &:nth-child(3) {
+    background-color: #1C6ECF;
+  }
+
+  &:nth-child(4) {
+    background-color: #E737E0;
+  }
+}
+
+.product-details-dates-like-report {
+  @include flex-column;
+  flex-grow: 1;
+  justify-content: flex-end;
+  width: max-content;
+}
+
+.product-details-dates {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background-color: $dialog-input-background;
+  text-align: center;
+}
+
+.product-details-dates-title {
+  font-size: 0.875rem;
+  color: $secondary-black-color;
+  margin-bottom: 0.5rem;
+}
+
+.product-details-dates-interval {
+  font-size: 1rem;
+  font-weight: 500;
+
+  strong {
+    font-weight: 500;
+    color: $primary-red-color;
+  }
+}
+
+.product-details-like-report {
+  @include flex-center(0.5rem);
+  padding-top: 0.5rem;
+}
+
+.product-details-like-dislike {
+  @include flex-center;
+  height: 2.75rem;
+  border-radius: 0.5rem;
+  background-color: $background-grey-color;
+}
+
+.product-details-like-button {
+  @include flex-center(0.25rem);
+  height: 100%;
+  padding: 0 0.75rem;
+  color: $secondary-text-color;
+
+  span {
+    font-size: 1rem;
+    color: $logo-black-color;
+  }
+}
+
+.product-details-dislike-button {
+  @include flex-center;
+  height: 100%;
+  padding: 0 0.75rem;
+  color: $secondary-text-color;
+}
+
+.product-details-like-dislike-divider {
+  width: 0.5px;
+  height: 2rem;
+  background-color: $border-grey-color;
+}
+
+.product-details-report-button {
+  @include flex-center-center(0.5rem);
+  height: 2.75rem;
+  padding: 0 1.25rem;
+  border-radius: 0.5rem;
+  background-color: $background-grey-color;
+  font-size: 1rem;
+  color: $logo-black-color;
+}

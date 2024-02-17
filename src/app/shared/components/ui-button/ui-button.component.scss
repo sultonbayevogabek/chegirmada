@@ -28,6 +28,12 @@
     color: $white-color;
   }
 
+  &.gray-outline {
+    background-color: $white-color;
+    border: 1px solid $border-grey-color;
+    color: $secondary-black-color
+  }
+
   &.full {
     width: 100%;
   }

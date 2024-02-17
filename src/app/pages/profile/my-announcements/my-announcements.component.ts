@@ -1,21 +1,39 @@
 import { Component } from '@angular/core';
-import { MatTab, MatTabLink, MatTabNav, MatTabNavPanel } from '@angular/material/tabs';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { TabsComponent } from '../../../shared/components/tabs/tabs.component';
 
 @Component({
   selector: 'my-announcements',
   templateUrl: 'my-announcements.component.html',
   styleUrl: 'my-announcements.component.scss',
   imports: [
-    MatTabNav,
-    MatTabLink,
-    RouterLink,
-    RouterLinkActive,
-    RouterOutlet,
-    MatTab,
-    MatTabNavPanel
+    TabsComponent
+
   ],
   standalone: true
 })
 
-export class MyAnnouncementsComponent {}
+export class MyAnnouncementsComponent {
+  tabs = [
+    {
+      routerLink: ['active'],
+      text: 'Активный'
+    },
+    {
+      routerLink: ['pending'],
+      text: 'Ожидающий'
+    },
+    {
+      routerLink: ['not-payed'],
+      text: 'Неоплачиваемый'
+    },
+    {
+      routerLink: ['not-active'],
+      text: 'Неактивный'
+    },
+    {
+      routerLink: ['rejected'],
+      text: 'Отклоненный'
+    }
+  ]
+}
+

@@ -1,14 +1,18 @@
 <mat-dialog-content>
   <div class="login-dialog-actions" [class.code]="selectedTab === 'code'">
     @if (selectedTab === 'code') {
-      <button (click)="back()" class="login-dialog-back">
-        <mat-icon [svgIcon]="'icon:arrow-back'"></mat-icon>
-      </button>
+      <icon-button
+        (click)="back()"
+        [iconWidth]="1.25"
+        [icon]="'icon:arrow-back'"
+      />
     }
 
-    <button class="login-dialog-close" mat-dialog-close>
-      <mat-icon [svgIcon]="'icon:x'"></mat-icon>
-    </button>
+    <icon-button
+      (click)="back()"
+      [iconWidth]="0.875"
+      mat-dialog-close
+    />
   </div>
 
   @if (selectedTab === 'phone') {
@@ -47,6 +51,7 @@
         </div>
 
         <ui-button
+          (click)="sendCode()"
           [text]="'Отправить'"
           [full]="true"
         />
@@ -56,6 +61,23 @@
 
           <!--<button class="login-dialog-timer-resend">Отправить код повторно</button>-->
         </div>
+      </form>
+    </div>
+  }
+
+  @if (selectedTab === 'name') {
+    <div class="login-dialog-content">
+      <h2 class="login-dialog-title">Введите имя</h2>
+
+      <form class="login-dialog-form">
+        <label class="login-dialog-label form-label">
+          <input class="login-dialog-phone-input form-input" type="text" placeholder="Имя">
+        </label>
+
+        <ui-button
+          [text]="'Продолжать'"
+          [full]="true"
+        />
       </form>
     </div>
   }

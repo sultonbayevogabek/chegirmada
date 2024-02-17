@@ -19,6 +19,7 @@ export class IconButtonComponent implements OnInit {
   @Input() type: 'simple' | 'blue' | 'red' = 'simple';
   @Input() icon = 'icon:x';
   @Input() iconWidth = 1;
+  @Input() iconColor = '#0F172A';
 
   matRippleColor = '#F8FAFC50';
 

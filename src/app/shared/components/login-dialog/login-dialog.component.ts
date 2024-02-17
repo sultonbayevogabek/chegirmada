@@ -4,6 +4,7 @@ import { MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UiButtonComponent } from '../ui-button/ui-button.component';
+import { IconButtonComponent } from '../icon-button/icon-button.component';
 
 @Component({
   selector: 'login-dialog',
@@ -15,7 +16,8 @@ import { UiButtonComponent } from '../ui-button/ui-button.component';
     MatDialogClose,
     NgxMaskDirective,
     MatProgressSpinnerModule,
-    UiButtonComponent
+    UiButtonComponent,
+    IconButtonComponent
   ],
   standalone: true,
   providers: [
@@ -24,7 +26,7 @@ import { UiButtonComponent } from '../ui-button/ui-button.component';
 })
 
 export class LoginDialogComponent {
-  selectedTab: 'phone' | 'code' = 'phone';
+  selectedTab: 'phone' | 'code' | 'name' = 'phone';
 
   sendPhoneNumber(): void {
     this.selectedTab = 'code';
@@ -32,5 +34,9 @@ export class LoginDialogComponent {
 
   back(): void {
     this.selectedTab = 'phone';
+  }
+
+  sendCode(): void {
+    this.selectedTab = 'name';
   }
 }

@@ -1,0 +1,18 @@
+<div class="tab" color="accent" mat-tab-nav-bar [tabPanel]="tabPanel">
+  @for (tabItem of tabs; track tabItem) {
+    <a
+      [routerLink]="tabItem.routerLink"
+      class="tab-item"
+      [routerLinkActive]="'active'" #rla="routerLinkActive"
+      [active]="rla.isActive"
+      [ariaCurrentWhenActive]="true"
+      mat-tab-link
+    >
+      {{ tabItem.text }}
+    </a>
+  }
+</div>
+
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet></router-outlet>
+</mat-tab-nav-panel>

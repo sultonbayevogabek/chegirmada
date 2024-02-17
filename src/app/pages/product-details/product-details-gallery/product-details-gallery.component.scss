@@ -1,0 +1,41 @@
+@import "variables";
+@import "mixins";
+
+.product-details-photo-gallery {
+  overflow: hidden;
+}
+
+.product-details-photo-display {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.product-details-photo-navs {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  @include flex-center-between;
+  z-index: 1;
+  padding: 0 1rem;
+}
+
+.product-details-photo-thumbs {
+  padding-top: 1rem;
+}
+
+.product-details-photo-thumb {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+
+  &.active {
+    border: 0.125rem solid $primary-blue-color;
+  }
+}

@@ -14,5 +14,5 @@ import { MatRipple } from '@angular/material/core';
 export class UiButtonComponent {
   @Input() text = 'Сохранить'
   @Input() full = false;
-  @Input() type: 'gray' | 'red' | 'blue' = 'blue';
+  @Input() type: 'gray' | 'red' | 'blue' | 'gray-outline' = 'blue';
 }

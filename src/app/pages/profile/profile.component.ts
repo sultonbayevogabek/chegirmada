@@ -33,7 +33,7 @@ export class ProfileComponent {
       title: 'Диккат',
       dismissible: true,
       duration: 10000,
-      type: 'error'
+      type: 'info'
     })
   }
   menu = [
