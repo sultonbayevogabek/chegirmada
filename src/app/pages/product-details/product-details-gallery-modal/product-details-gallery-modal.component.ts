@@ -1,4 +1,4 @@
-import { Component, inject, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
 import { CarouselComponent, CarouselModule, OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
@@ -23,13 +23,25 @@ import { MatIcon } from '@angular/material/icon';
   standalone: true
 })
 
-export class ProductDetailsGalleryModalComponent implements OnInit {
-  @ViewChild('carouselComponent') carousel: CarouselComponent;
+export class ProductDetailsGalleryModalComponent implements AfterViewInit {
+  @ViewChild('carouselComponent', { static: true }) carousel: CarouselComponent;
   @Inject(MAT_DIALOG_DATA) data: {
     selectedImgUrl: string;
     selectedImgIndex: number;
     productImages: string[];
   } = inject(MAT_DIALOG_DATA);
+
+  selectedImageUrl = '';
+  selectedImageIndex = 0;
+  productImagesCount = 0;
+  productImages = [];
+
+  constructor() {
+    this.selectedImageIndex = this.data.selectedImgIndex;
+    this.selectedImageUrl = this.data.selectedImgUrl;
+    this.productImagesCount = this.data.productImages.length;
+    this.productImages = this.data.productImages;
+  }
 
   carouselOption: OwlOptions = {
     loop: true,
@@ -43,14 +55,9 @@ export class ProductDetailsGalleryModalComponent implements OnInit {
     nav: false,
     navText: [ '', '' ]
   };
-  selectedImageUrl = '';
-  selectedImageIndex = 0;
-  productImagesCount = 0;
 
-  ngOnInit() {
-    this.selectedImageIndex = this.data.selectedImgIndex;
-    this.selectedImageUrl = this.data.selectedImgUrl;
-    this.productImagesCount = this.data.productImages.length;
+  ngAfterViewInit() {
+
   }
 
   carouselChanged($event: SlidesOutputData): void {

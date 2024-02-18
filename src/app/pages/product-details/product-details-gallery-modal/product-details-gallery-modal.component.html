@@ -9,7 +9,7 @@
     {{ selectedImageIndex + 1 }} / {{ productImagesCount }}
   </div>
 
-  @if (data?.productImages?.length) {
+  @if (productImages?.length) {
     <div class="gallery-modal-carousel">
       <ng-container
         *ngTemplateOutlet="carouselTemplate"
@@ -34,7 +34,7 @@
     #carouselComponent
     (changed)="carouselChanged($event)"
   >
-    @for (imgUrl of data.productImages; track imgUrl; let i = $index) {
+    @for (imgUrl of productImages; track imgUrl; let i = $index) {
       <ng-template carouselSlide id="{{ imgUrl }}">
         <div class="gallery-modal-img">
           <img [ngSrc]="imgUrl" [fill]="true" [alt]="imgUrl">
