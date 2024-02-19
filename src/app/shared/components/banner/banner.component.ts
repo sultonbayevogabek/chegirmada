@@ -8,7 +8,7 @@ import { NgOptimizedImage } from '@angular/common';
   imports: [
     NgOptimizedImage
   ],
-  standalone: true
+  standalone: true,
 })
 
 export class BannerComponent {

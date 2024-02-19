@@ -28,7 +28,12 @@
 
       </div>
 
-      <button class="category-products-list-map" mat-ripple [matRippleColor]="'#0CA4FA10'">
+      <button
+        class="category-products-list-map"
+        mat-ripple
+        [matRippleColor]="'#0CA4FA10'"
+        [routerLink]="['/category', 'map-view']"
+      >
         <mat-icon [svgIcon]="'icon:location'"></mat-icon>
         <span>На карте</span>
       </button>

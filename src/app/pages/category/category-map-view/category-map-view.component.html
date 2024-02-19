@@ -1,0 +1,47 @@
+<div class="category-map-view">
+  <div class="category-map-view-filter" fuseScrollbar>
+    <category-filter [withBorder]="false"/>
+  </div>
+
+  <div class="category-map-view-map" id="map">
+  </div>
+
+
+  @if (true) {
+    <div class="category-map-view-list" fuseScrollbar>
+      @for (i of [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]; track i) {
+        <div class="category-map-view-product" mat-ripple>
+          <div class="category-map-view-product-inner">
+            <div class="category-map-view-product-img">
+              <img [ngSrc]="'https://picsum.photos/110/110?rand=' + i" [fill]="true" [alt]="">
+            </div>
+
+            <div class="category-map-view-product-body">
+              <h3 class="category-map-view-product-name">Смартфон Apple iPhone 13 256 ГБ, Dual: nano SIM + eSIM</h3>
+
+              <div class="category-map-view-product-prices">
+                <del>15 000 000 сум</del>
+                <strong>13 499 000 сум</strong>
+              </div>
+
+              <div class="category-map-view-product-brand">
+                <div class="category-map-view-product-brand-logo">
+                  <img [ngSrc]="'/assets/logos/mac-bro.svg'" [fill]="true" alt="">
+                </div>
+                <div class="category-map-view-product-brand-name">MacBro</div>
+              </div>
+            </div>
+
+            <icon-button
+              [icon]="'icon:heart'"
+              [iconWidth]="1.25"
+            />
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+</div>
+
+

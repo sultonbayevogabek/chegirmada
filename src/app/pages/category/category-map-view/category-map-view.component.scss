@@ -1,0 +1,110 @@
+@import "variables";
+@import "mixins";
+
+.category-map-shadow {
+  position: relative;
+  z-index: 3;
+  height: 1.5rem;
+  box-shadow: 0 8px 8px 0 #B0B0B029;
+}
+
+.category-map-view {
+  position: relative;
+  @include flex-start();
+  height: calc(100vh - 138px);
+  padding-top: 2rem;
+}
+
+.category-map-view-filter {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 22.5rem;
+  height: 100%;
+  padding: 1rem;
+  background-color: $white-color;
+  box-shadow: 0 8px 8px 0 #B0B0B029;
+}
+
+.category-map-view-map {
+  flex-grow: 1;
+  height: 100%;
+  padding-left: 22.5rem;
+}
+
+.category-map-view-list {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 22.5rem;
+  height: 100%;
+  padding: 0.5rem 0;
+  background-color: $white-color;
+  box-shadow: 0 8px 8px 0 #B0B0B029;
+}
+
+.category-map-view-product {
+  padding: 0 1rem;
+  cursor: pointer;
+}
+
+.category-map-view-product-inner {
+  @include flex-start(0.75rem);
+  padding: 1rem 0;
+  border-bottom: 1px solid $border-grey-color;
+}
+
+.category-map-view-product-img {
+  position: relative;
+  width: 12rem;
+  aspect-ratio: 1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.category-map-view-product-body {
+  flex-grow: 1;
+}
+
+.category-map-view-product-name {
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $dialog-title-black;
+  @include line-clamp(2)
+}
+
+.category-map-view-product-prices {
+  margin-bottom: 0.25rem;
+
+  del {
+    display: block;
+    font-size: 0.75rem;
+    color: $secondary-black-color
+  }
+
+  strong {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $primary-red-color
+  }
+}
+
+.category-map-view-product-brand {
+  @include flex-center(0.25rem);
+}
+
+.category-map-view-product-brand-logo {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: $dialog-input-background;
+}
+
+.category-map-view-product-brand-name {
+  font-size: 0.875rem;
+  color: $secondary-black-color;
+}

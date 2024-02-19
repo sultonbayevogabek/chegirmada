@@ -54,9 +54,12 @@
 .category-filter {
   position: sticky;
   top: 1rem;
-  padding: 1rem;
   border-radius: 0.5rem;
-  border: 1px solid $border-grey-color;
+
+  &.border {
+    padding: 1rem;
+    border: 1px solid $border-grey-color;
+  }
 }
 
 .category-filter-reset {

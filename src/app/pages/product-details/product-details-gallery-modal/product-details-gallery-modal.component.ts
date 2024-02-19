@@ -1,5 +1,4 @@
 import {
-  AfterContentChecked,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
@@ -43,7 +42,6 @@ export class ProductDetailsGalleryModalComponent implements AfterViewInit, OnIni
       this.navigateCarousel('prev');
     }
   }
-
   @ViewChild('carouselComponent') carousel: CarouselComponent;
   @Inject(MAT_DIALOG_DATA) data: {
     selectedImageUrl: string;

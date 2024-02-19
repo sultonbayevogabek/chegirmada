@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { BreadCrumbsComponent } from '../../shared/components/bread-crumbs/bread-crumbs.component';
+import { BreadCrumbsComponent } from '../../../shared/components/bread-crumbs/bread-crumbs.component';
 import { MatRippleModule } from '@angular/material/core';
-import { CategoryFilterComponent } from './category-filter/category-filter.component';
-import { CategoryProductsListComponent } from './category-products-list/category-products-list.component';
+import { CategoryFilterComponent } from '../category-filter/category-filter.component';
+import { CategoryProductsListComponent } from '../category-products-list/category-products-list.component';
 
 @Component({
-  selector: 'category',
-  templateUrl: 'category.component.html',
-  styleUrl: 'category.component.scss',
+  selector: 'category-list-view',
+  templateUrl: 'category-list-view.component.html',
+  styleUrl: 'category-list-view.component.scss',
   imports: [
     BreadCrumbsComponent,
     MatRippleModule,
@@ -17,7 +17,7 @@ import { CategoryProductsListComponent } from './category-products-list/category
   standalone: true
 })
 
-export class CategoryComponent {
+export class CategoryListViewComponent {
   breadCrumbs = [
     {
       text: 'Главная',

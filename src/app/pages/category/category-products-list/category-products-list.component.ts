@@ -8,6 +8,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule } from '@angular/forms';
 import { ProductCardComponent } from '../../../shared/components/product-card/product-card.component';
 import { MatSelect } from '@angular/material/select';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'category-products-list',
@@ -19,7 +20,7 @@ import { MatSelect } from '@angular/material/select';
     MatRippleModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatDatepickerModule, MatNativeDateModule, FormsModule, ProductCardComponent, MatSelect, MatOption
+    MatDatepickerModule, MatNativeDateModule, FormsModule, ProductCardComponent, MatSelect, MatOption, RouterLink
   ],
   standalone: true
 })

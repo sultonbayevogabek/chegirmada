@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
@@ -27,6 +27,7 @@ import { UiButtonComponent } from '../../../shared/components/ui-button/ui-butto
 })
 
 export class CategoryFilterComponent implements OnInit {
+  @Input() withBorder = true;
   brands = [
     {
       name: 'Samsung',
