@@ -4,7 +4,7 @@ import { YandexMapsService } from '../../../core/services/yandex-maps.service';
 import { MatRipple } from '@angular/material/core';
 import { NgOptimizedImage } from '@angular/common';
 import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
-import { FuseScrollbarDirective } from '../../../shared/directives/scrollbar/scrollbar.directive';
+import { ScrollbarDirective } from '../../../shared/directives/scrollbar/scrollbar.directive';
 
 @Component({
   selector: 'category-map-view',
@@ -15,7 +15,7 @@ import { FuseScrollbarDirective } from '../../../shared/directives/scrollbar/scr
     MatRipple,
     NgOptimizedImage,
     IconButtonComponent,
-    FuseScrollbarDirective
+    ScrollbarDirective
   ],
   standalone: true,
   providers: [ YandexMapsService, ]

@@ -1,7 +1,6 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Platform } from '@angular/cdk/platform';
 import { Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { Router } from '@angular/router';
 import { ScrollbarGeometry, ScrollbarPosition } from './scrollbar.types';
 import { merge } from 'lodash-es';
 import PerfectScrollbar from 'perfect-scrollbar';
@@ -11,18 +10,18 @@ import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs';
  * Wrapper directive for the Perfect Scrollbar: https://github.com/mdbootstrap/perfect-scrollbar
  */
 @Directive({
-    selector  : '[fuseScrollbar]',
-    exportAs  : 'fuseScrollbar',
+    selector  : '[scrollbar]',
+    exportAs  : 'scrollbar',
     standalone: true,
 })
-export class FuseScrollbarDirective implements OnChanges, OnInit, OnDestroy
+export class ScrollbarDirective implements OnChanges, OnInit, OnDestroy
 {
     /* eslint-disable @typescript-eslint/naming-convention */
-    static ngAcceptInputType_fuseScrollbar: BooleanInput;
+    static ngAcceptInputType_scrollbar: BooleanInput;
     /* eslint-enable @typescript-eslint/naming-convention */
 
-    @Input() fuseScrollbar: boolean = true;
-    @Input() fuseScrollbarOptions: PerfectScrollbar.Options;
+    @Input() scrollbar: boolean = true;
+    @Input() scrollbarOptions: PerfectScrollbar.Options;
 
     private _animation: number;
     private _options: PerfectScrollbar.Options;
@@ -35,7 +34,6 @@ export class FuseScrollbarDirective implements OnChanges, OnInit, OnDestroy
     constructor(
         private _elementRef: ElementRef,
         private _platform: Platform,
-        private _router: Router,
     )
     {
     }
@@ -72,13 +70,13 @@ export class FuseScrollbarDirective implements OnChanges, OnInit, OnDestroy
     ngOnChanges(changes: SimpleChanges): void
     {
         // Enabled
-        if ( 'fuseScrollbar' in changes )
+        if ( 'scrollbar' in changes )
         {
             // Interpret empty string as 'true'
-            this.fuseScrollbar = coerceBooleanProperty(changes['fuseScrollbar'].currentValue);
+            this.scrollbar = coerceBooleanProperty(changes['scrollbar'].currentValue);
 
             // If enabled, init the directive
-            if ( this.fuseScrollbar )
+            if ( this.scrollbar )
             {
                 this._init();
             }
@@ -90,10 +88,10 @@ export class FuseScrollbarDirective implements OnChanges, OnInit, OnDestroy
         }
 
         // Scrollbar options
-        if ( 'fuseScrollbarOptions' in changes )
+        if ( 'scrollbarOptions' in changes )
         {
             // Merge the options
-            this._options = merge({}, this._options, changes['fuseScrollbarOptions'].currentValue);
+            this._options = merge({}, this._options, changes['scrollbarOptions'].currentValue);
 
             // Return if not initialized
             if ( !this._ps )
@@ -153,7 +151,7 @@ export class FuseScrollbarDirective implements OnChanges, OnInit, OnDestroy
      */
     isEnabled(): boolean
     {
-        return this.fuseScrollbar;
+        return this.scrollbar;
     }
 
     /**
@@ -440,7 +438,7 @@ export class FuseScrollbarDirective implements OnChanges, OnInit, OnDestroy
         // Return if on mobile or not on browser
         if ( this._platform.ANDROID || this._platform.IOS || !this._platform.isBrowser )
         {
-            this.fuseScrollbar = false;
+            this.scrollbar = false;
             return;
         }
 
