@@ -9,7 +9,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogClose, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
 import { CarouselComponent, CarouselModule, OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
 import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
@@ -34,7 +34,7 @@ import { MatIcon } from '@angular/material/icon';
 })
 
 export class ProductDetailsGalleryModalComponent implements AfterViewInit, OnInit {
-  @HostListener('keydown', ['$event'])
+  @HostListener('keydown', [ '$event' ])
   navigateCarouselWithKeyboard(event: KeyboardEvent) {
     if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
       this.navigateCarousel('next');
@@ -43,6 +43,7 @@ export class ProductDetailsGalleryModalComponent implements AfterViewInit, OnIni
       this.navigateCarousel('prev');
     }
   }
+
   @ViewChild('carouselComponent') carousel: CarouselComponent;
   @Inject(MAT_DIALOG_DATA) data: {
     selectedImageUrl: string;
@@ -66,8 +67,9 @@ export class ProductDetailsGalleryModalComponent implements AfterViewInit, OnIni
   };
 
   private _changeDetectorRef = inject(ChangeDetectorRef);
+  private _dialogRef = inject(MatDialogRef);
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.carousel.to(this.selectedImageUrl);
   }
 
@@ -84,5 +86,11 @@ export class ProductDetailsGalleryModalComponent implements AfterViewInit, OnIni
 
   navigateCarousel(direction: 'next' | 'prev'): void {
     this.carousel[direction]();
+  }
+
+  closeGalleryDialog($event: MouseEvent): void {
+    if (($event.target as HTMLDivElement)?.classList?.contains('gallery-modal')) {
+      this._dialogRef.close();
+    }
   }
 }
