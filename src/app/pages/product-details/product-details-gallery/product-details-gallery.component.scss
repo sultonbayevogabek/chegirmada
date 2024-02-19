@@ -10,7 +10,6 @@
   aspect-ratio: 1;
   border-radius: 0.5rem;
   overflow: hidden;
-  cursor: pointer;
 }
 
 .product-details-photo-navs {
@@ -22,6 +21,37 @@
   @include flex-center-between;
   z-index: 1;
   padding: 0 1rem;
+}
+
+.carousel-navigation-button {
+  background-color: #B2B7D066;
+}
+
+.product-details-scale-actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  @include flex-center-between;
+  padding: 1rem;
+}
+
+.product-details-scale-button {
+  @include flex-center-center(0.25rem);
+  height: 2rem;
+  border-radius: 0.25rem;
+  background-color: #B2B7D066;
+  font-size: 0.875rem;
+  color: $white-color;
+
+  &.scale {
+    width: 2rem;
+    padding: 0.35rem;
+  }
+
+  &.video {
+    padding: 0.25rem 0.5rem;
+  }
 }
 
 .product-details-photo-thumbs {

@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, inject, Inject, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  inject,
+  Inject,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
 import { CarouselComponent, CarouselModule, OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
@@ -23,26 +33,25 @@ import { MatIcon } from '@angular/material/icon';
   standalone: true
 })
 
-export class ProductDetailsGalleryModalComponent implements AfterViewInit {
-  @ViewChild('carouselComponent', { static: true }) carousel: CarouselComponent;
+export class ProductDetailsGalleryModalComponent implements AfterViewInit, OnInit {
+  @HostListener('keydown', ['$event'])
+  navigateCarouselWithKeyboard(event: KeyboardEvent) {
+    if (event.key === 'ArrowRight' || event.key === 'ArrowUp') {
+      this.navigateCarousel('next');
+    }
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') {
+      this.navigateCarousel('prev');
+    }
+  }
+  @ViewChild('carouselComponent') carousel: CarouselComponent;
   @Inject(MAT_DIALOG_DATA) data: {
-    selectedImgUrl: string;
-    selectedImgIndex: number;
+    selectedImageUrl: string;
+    selectedImageIndex: number;
     productImages: string[];
   } = inject(MAT_DIALOG_DATA);
-
   selectedImageUrl = '';
   selectedImageIndex = 0;
-  productImagesCount = 0;
-  productImages = [];
-
-  constructor() {
-    this.selectedImageIndex = this.data.selectedImgIndex;
-    this.selectedImageUrl = this.data.selectedImgUrl;
-    this.productImagesCount = this.data.productImages.length;
-    this.productImages = this.data.productImages;
-  }
-
+  productImages: string[] = [];
   carouselOption: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -56,8 +65,17 @@ export class ProductDetailsGalleryModalComponent implements AfterViewInit {
     navText: [ '', '' ]
   };
 
-  ngAfterViewInit() {
+  private _changeDetectorRef = inject(ChangeDetectorRef);
 
+  ngAfterViewInit() {
+    this.carousel.to(this.selectedImageUrl);
+  }
+
+  ngOnInit() {
+    this.selectedImageIndex = this.data.selectedImageIndex;
+    this.selectedImageUrl = this.data.selectedImageUrl;
+    this.productImages = this.data.productImages;
+    this._changeDetectorRef.detectChanges();
   }
 
   carouselChanged($event: SlidesOutputData): void {
@@ -68,4 +86,3 @@ export class ProductDetailsGalleryModalComponent implements AfterViewInit {
     this.carousel[direction]();
   }
 }
-

@@ -1,21 +1,17 @@
 <div class="gallery-modal">
-  <icon-button
-    class="gallery-modal-close"
-    [mat-dialog-close]="true"
-    [buttonType]="'red-flat'"
-  />
+  <button class="gallery-modal-close" mat-dialog-close>
+    <mat-icon [svgIcon]="'icon:x'"/>
+  </button>
 
   <div class="gallery-modal-counter">
-    {{ selectedImageIndex + 1 }} / {{ productImagesCount }}
+    {{ selectedImageIndex + 1 }} / {{ productImages.length }}
   </div>
 
-  @if (productImages?.length) {
-    <div class="gallery-modal-carousel">
-      <ng-container
-        *ngTemplateOutlet="carouselTemplate"
-      />
-    </div>
-  }
+  <div class="gallery-modal-carousel">
+    <ng-container
+      *ngTemplateOutlet="carouselTemplate"
+    />
+  </div>
 
   <div class="gallery-modal-navigations">
     <button class="gallery-modal-navigation" (click)="navigateCarousel('prev')">
@@ -27,6 +23,7 @@
     </button>
   </div>
 </div>
+
 
 <ng-template #carouselTemplate>
   <owl-carousel-o
@@ -43,4 +40,3 @@
     }
   </owl-carousel-o>
 </ng-template>
-

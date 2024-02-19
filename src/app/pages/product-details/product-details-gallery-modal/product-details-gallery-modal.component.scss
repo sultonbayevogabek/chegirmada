@@ -23,6 +23,17 @@
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
+  @include flex-center-center();
+  width: 3rem;
+  aspect-ratio: 1;
+  background-color: $white-color;
+  border-radius: 50%;
+  border: 1px solid $border-grey-color;
+  color: $dialog-title-black;
+
+  .mat-icon {
+    width: 0.875rem;
+  }
 }
 
 .gallery-modal-counter {

@@ -1,7 +1,6 @@
 <div class="product-details-photo-gallery">
   <div class="product-details-photo-display">
     <img
-      (click)="openGalleryModal()"
       [ngSrc]="selectedImageUrl"
       [fill]="true"
       [alt]="">
@@ -13,6 +12,16 @@
 
       <button class="carousel-navigation-button" (click)="navigateCarousel('next')">
         <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
+      </button>
+    </div>
+
+    <div class="product-details-scale-actions">
+      <button class="product-details-scale-button video">
+        <mat-icon [svgIcon]="'icon:play'"/>
+        <span>Видео</span>
+      </button>
+      <button class="product-details-scale-button scale" (click)="openGalleryModal()">
+        <mat-icon [svgIcon]="'icon:full-screen'"/>
       </button>
     </div>
   </div>
