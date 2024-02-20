@@ -1,0 +1,33 @@
+@import "variables";
+
+.confetti-alert {
+  position: relative;
+  padding: 3rem;
+}
+
+.confetti-alert-img {
+  position: relative;
+  width: 5rem;
+  aspect-ratio: 1;
+  margin: 0 auto 1.5rem;
+  z-index: 2;
+}
+
+.confetti-alert-text {
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: $dialog-title-black;
+  text-align: center;
+  z-index: 2;
+}
+
+#confetti {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+}

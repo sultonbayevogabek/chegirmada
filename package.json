@@ -28,7 +28,6 @@
     "lodash-es": "4.17.21",
     "ngx-mask": "^17.0.4",
     "ngx-owl-carousel-o": "^17.0.0",
-    "ngx-scrollbar": "^13.0.3",
     "perfect-scrollbar": "1.5.5",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
