@@ -22,6 +22,10 @@ export const pagesRoutes: Routes = [
     loadComponent: () => import('./company-profile/company-profile.component').then(c => c.CompanyProfileComponent)
   },
   {
+    path: 'not-found-404',
+    loadComponent: () => import('./not-found-404/not-found-404.component').then(c => c.NotFound404Component)
+  },
+  {
     path: 'profile',
     loadChildren: () => import('./profile/profile.routes').then(r => r.profileRoutes)
   },
@@ -29,4 +33,8 @@ export const pagesRoutes: Routes = [
     path: 'category',
     loadChildren: () => import('./category/category.routes').then(r => r.categoryRoutes)
   },
+  {
+    path: '**',
+    redirectTo: 'not-found-404'
+  }
 ];

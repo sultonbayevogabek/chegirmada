@@ -1,5 +1,19 @@
-<section class="wish-list-section">
-    <products-section
-      [heading]="'Избранное'"
-    />
+<section class="wish-list-section section">
+  <!--    <products-section-->
+  <!--      [heading]="'Избранное'"-->
+  <!--    />-->
+  <div class="container">
+    <section-header [heading]="'Избранное'"/>
+  </div>
 </section>
+
+<div class="wish-list-empty">
+  <div class="wish-list-empty-img">
+    <img class="" [ngSrc]="'/assets/empty-list-icons/wishlist.svg'" [fill]="true" [alt]="">
+  </div>
+
+  <h2 class="wish-list-empty-heading">Пока здесь ничего нет</h2>
+  <p class="wish-list-empty-text">Жмите ️❤️ на странице товара и добавляйте сюда то, что нравится.</p>
+
+  <ui-button [text]="'Перейти в каталог товаров'"/>
+</div>

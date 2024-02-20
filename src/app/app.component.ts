@@ -5,10 +5,11 @@ import { HeaderComponent } from './core/header/header.component';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-   imports: [
-      RouterOutlet,
-      HeaderComponent
-   ],
+  styleUrl: 'app.component.scss',
+  imports: [
+    RouterOutlet,
+    HeaderComponent
+  ],
   standalone: true
 })
 

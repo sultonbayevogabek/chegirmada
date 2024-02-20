@@ -6,7 +6,7 @@
   flex-grow: 1;
 }
 
-.wish-list-empty {
+.not-found-page {
   @include flex-column;
   align-items: center;
   justify-content: center;
@@ -15,21 +15,21 @@
   text-align: center;
 }
 
-.wish-list-empty-img {
+.not-found-page-img {
   position: relative;
-  width: 12rem;
-  aspect-ratio: 10/9;
+  width: 43rem;
+  aspect-ratio: 2.03;
   margin-bottom: 3rem;
 }
 
-.wish-list-empty-heading {
+.not-found-page-heading {
   margin-bottom: 0.75rem;
   font-size: 1.25rem;
   font-weight: 500;
   color: $dialog-title-black;
 }
 
-.wish-list-empty-text {
+.not-found-page-text {
   margin-bottom: 2rem;
   font-size: 0.875rem;
   color: $secondary-black-color;
