@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { NgScrollbarModule } from 'ngx-scrollbar';
 import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatRippleModule } from '@angular/material/core';
 import { RatingStarsComponent } from '../../../shared/components/rating-stars/rating-stars.component';
@@ -14,7 +13,6 @@ type tabType = 'about' | 'characteristics' | 'comments'
   imports: [
     MatIconModule,
     RatingStarsComponent,
-    NgScrollbarModule,
     NgTemplateOutlet,
     NgOptimizedImage,
     MatRippleModule

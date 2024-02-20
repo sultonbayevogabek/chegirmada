@@ -23,7 +23,7 @@ export class ConfettiAlertComponent implements AfterViewInit {
     let H = document.getElementById('confetti').clientHeight;
     const canvas = document.getElementById('confetti');
     const context = (canvas as HTMLCanvasElement).getContext('2d');
-    const maxConfetti = 60;
+    const maxConfetti = 70;
     const particles: any[] = [];
 
     const possibleColors = [
@@ -48,7 +48,7 @@ export class ConfettiAlertComponent implements AfterViewInit {
     function confettiParticle(): void {
       this.x = Math.random() * W;
       this.y = Math.random() * H - H;
-      this.r = randomFromTo(0, 20);
+      this.r = randomFromTo(0, 30);
       this.d = Math.random() * maxConfetti + 11;
       this.color = possibleColors[Math.floor(Math.random() * possibleColors.length)];
       this.tilt = Math.floor(Math.random() * 33) - 11;
