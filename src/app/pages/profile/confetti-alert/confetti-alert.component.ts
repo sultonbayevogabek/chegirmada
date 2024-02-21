@@ -20,7 +20,17 @@ export class ConfettiComponent implements AfterViewInit {
   private H: number;
   private context: CanvasRenderingContext2D;
   private maxConfetti = 70;
-  private particles: any[] = [];
+  private particles: {
+    x: number,
+    y: number,
+    r: number,
+    d: number,
+    color: string,
+    tilt: number,
+    tiltAngleIncremental: number,
+    tiltAngle: number,
+    draw: () => void
+  }[] = [];
   private possibleColors = [
     '#56B8A5A6',
     '#FDA5A599',
