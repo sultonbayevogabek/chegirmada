@@ -5,7 +5,7 @@ import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { MatRipple } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfettiAlertComponent } from '../confetti-alert/confetti-alert.component';
+import { ConfettiComponent } from '../confetti-alert/confetti-alert.component';
 
 @Component({
   selector: 'register',
@@ -30,7 +30,7 @@ export class RegisterComponent {
   private _dialog = inject(MatDialog);
 
   constructor() {
-    this._dialog.open(ConfettiAlertComponent, {
+    this._dialog.open(ConfettiComponent, {
       data: {
         text: 'Ваш запрос принят. Ответ будет дан в ближайшее время. Спасибо, что вы с нами!'
       },

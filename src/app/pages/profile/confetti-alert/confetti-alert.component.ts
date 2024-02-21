@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, inject, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AfterViewInit, Component, ElementRef, inject, Inject, ViewChild } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { max } from 'rxjs';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'confetti-alert',
@@ -13,98 +12,96 @@ import { max } from 'rxjs';
   standalone: true
 })
 
-export class ConfettiAlertComponent implements AfterViewInit {
-  @Inject(MAT_DIALOG_DATA) data: {
-    text: string
-  } = inject(MAT_DIALOG_DATA);
+export class ConfettiComponent implements AfterViewInit {
+  @Inject(MAT_DIALOG_DATA) data: { text: string } = inject(MAT_DIALOG_DATA);
+  @ViewChild('confettiCanvas') confettiCanvas: ElementRef<HTMLCanvasElement>;
+
+  private W: number;
+  private H: number;
+  private context: CanvasRenderingContext2D;
+  private maxConfetti = 70;
+  private particles: any[] = [];
+  private possibleColors = [
+    '#56B8A5A6',
+    '#FDA5A599',
+    '#FDA5A573',
+    '#ECB43C99',
+    '#ECB43CD9',
+    '#ff7336',
+    '#f9e038',
+    '#02cca4',
+    '#383082',
+    '#fed3f5',
+    '#b1245a',
+    '#f2733f'
+  ];
 
   ngAfterViewInit() {
-    let W = window.innerWidth;
-    let H = document.getElementById('confetti').clientHeight;
-    const canvas = document.getElementById('confetti');
-    const context = (canvas as HTMLCanvasElement).getContext('2d');
-    const maxConfetti = 70;
-    const particles: any[] = [];
+    this.W = window.innerWidth;
+    this.H = this.confettiCanvas.nativeElement.clientHeight;
+    this.context = this.confettiCanvas.nativeElement.getContext('2d');
 
-    const possibleColors = [
-      '#56B8A5A6',
-      '#FDA5A599',
-      '#FDA5A573',
-      '#ECB43C99',
-      '#ECB43CD9',
-      '#ff7336',
-      '#f9e038',
-      '#02cca4',
-      '#383082',
-      '#fed3f5',
-      '#b1245a',
-      '#f2733f'
-    ];
+    this.confettiCanvas.nativeElement.width = this.W;
+    this.confettiCanvas.nativeElement.height = this.H;
 
-    function randomFromTo(from: number, to: number) {
-      return Math.floor(Math.random() * (to - from + 1) + from);
+    for (let i = 0; i < this.maxConfetti; i++) {
+      this.particles.push(this.createConfettiParticle());
     }
 
-    function confettiParticle(): void {
-      this.x = Math.random() * W;
-      this.y = Math.random() * H - H;
-      this.r = randomFromTo(0, 30);
-      this.d = Math.random() * maxConfetti + 11;
-      this.color = possibleColors[Math.floor(Math.random() * possibleColors.length)];
-      this.tilt = Math.floor(Math.random() * 33) - 11;
-      this.tiltAngleIncremental = Math.random() * 0.07 + 0.05;
-      this.tiltAngle = 0;
+    this.draw();
+  }
 
-      this.draw = function () {
-        context.beginPath();
-        context.lineWidth = this.r / 2;
-        context.strokeStyle = this.color;
-        context.moveTo(this.x + this.tilt + this.r / 3, this.y);
-        context.lineTo(this.x + this.tilt, this.y + this.tilt + this.r / 5);
-        return context.stroke();
-      };
-    }
+  private createConfettiParticle(): any {
+    const element = {
+      x: Math.random() * this.W,
+      y: Math.random() * this.H - this.H,
+      r: this.randomFromTo(0, 30),
+      d: Math.random() * this.maxConfetti + 11,
+      color: this.possibleColors[Math.floor(Math.random() * this.possibleColors.length)],
+      tilt: Math.floor(Math.random() * 33) - 11,
+      tiltAngleIncremental: Math.random() * 0.07 + 0.05,
+      tiltAngle: 0,
 
-    function Draw() {
-      const results = [];
-      requestAnimationFrame(Draw);
-      context.clearRect(0, 0, W, window.innerHeight);
-      for (let i = 0; i < maxConfetti; i++) {
-        results.push(particles[i].draw());
+      draw: () => {
+        this.context.beginPath();
+        this.context.lineWidth = element.r / 2;
+        this.context.strokeStyle = element.color;
+        this.context.moveTo(element.x + element.tilt + element.r / 3, element.y);
+        this.context.lineTo(element.x + element.tilt, element.y + element.tilt + element.r / 5);
+        this.context.stroke();
       }
+    };
+    return element;
+  }
 
-      let particle: {
-        tiltAngle?: number;
-        tiltAngleIncremental?: number;
-        x?: number;
-        y?: number;
-        d?: number;
-        r?: number;
-        tilt?: number;
-      } = {};
-      let remainingFlakes = 0;
-      for (let i = 0; i < maxConfetti; i++) {
-        particle = particles[i];
+  private randomFromTo(from: number, to: number): number {
+    return Math.floor(Math.random() * (to - from + 1) + from);
+  }
 
-        particle.tiltAngle += particle.tiltAngleIncremental;
-        particle.y += (Math.cos(particle.d) + 3 + particle.r / 2) / 2;
-        particle.tilt = Math.sin(particle.tiltAngle - i / 3) * 15;
-        if (particle.y <= H) remainingFlakes++;
-        if (particle.x > W + 30 || particle.x < -30 || particle.y > H) {
-          particle.x = Math.random() * W;
-          particle.y = -30;
-          particle.tilt = Math.floor(Math.random() * 10) - 20;
-        }
+  private draw() {
+    requestAnimationFrame(() => {
+      this.draw();
+    });
+    this.context.clearRect(0, 0, this.W, window.innerHeight);
+
+    for (let i = 0; i < this.maxConfetti; i++) {
+      this.particles[i].draw();
+    }
+
+    let remainingFlakes = 0;
+    for (let i = 0; i < this.maxConfetti; i++) {
+      const particle = this.particles[i];
+
+      particle.tiltAngle += particle.tiltAngleIncremental;
+      particle.y += (Math.cos(particle.d) + 3 + particle.r / 2) / 2;
+      particle.tilt = Math.sin(particle.tiltAngle - i / 3) * 15;
+
+      if (particle.y <= this.H) remainingFlakes++;
+      if (particle.x > this.W + 30 || particle.x < -30 || particle.y > this.H) {
+        particle.x = Math.random() * this.W;
+        particle.y = -30;
+        particle.tilt = this.randomFromTo(10, -20);
       }
-      return results;
     }
-
-    for (let i = 0; i < maxConfetti; i++) {
-      particles.push(new confettiParticle());
-    }
-
-    (canvas as HTMLCanvasElement).width = W;
-    (canvas as HTMLCanvasElement).height = H;
-    Draw();
   }
 }
