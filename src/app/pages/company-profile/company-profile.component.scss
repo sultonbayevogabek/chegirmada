@@ -10,6 +10,65 @@
   aspect-ratio: 4.38;
   border-radius: 0.5rem;
   overflow: hidden;
+  background-color: $background-grey-color;
+}
+
+.company-profile-banner.edit-mode {
+  border: 1px dashed $border-grey-color;
+}
+
+.company-profile-banner-img {
+  position: relative;
+  z-index: 1;
+}
+
+.company-profile-banner-requirements {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  @include flex-column(1rem);
+  align-items: center;
+}
+
+.company-profile-banner-requirements-icon {
+  position: relative;
+  width: 5rem;
+  aspect-ratio: 19/12;
+}
+
+.company-profile-banner-requirements-text {
+  color: $secondary-text-color;
+}
+
+.company-profile-banner-actions {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 2;
+  @include flex-center(0.5rem);
+}
+
+.company-profile-banner-button {
+  @include flex-center-center(0.5rem);
+  height: 2.75rem;
+  background-color: $white-color;
+  border: 1px solid $border-grey-color;
+  border-radius: 0.25rem;
+  color: $dialog-title-black;
+
+  &.camera {
+    padding: 0 0.75rem;
+  }
+
+  &.trash {
+    aspect-ratio: 1;
+  }
+
+  .mat-icon {
+    height: 1.25rem;
+    color: $secondary-text-color;
+  }
 }
 
 .company-profile-top {
@@ -174,6 +233,7 @@
 .company-profile-rate-body {
   @include grid(1fr 5.76fr, 1.5fr);
   padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .company-profile-rate-number {
@@ -221,6 +281,38 @@
   }
 }
 
-.company-profile-video, .company-profile-tabs {
+.company-profile-tabs {
   padding-top: 1.5rem;
+}
+
+.company-profile-video {
+  position: relative;
+  padding-top: 1.5rem;
+  aspect-ratio: 16/9;
+  background-color: $background-grey-color;
+  border-radius: 0.5rem;
+}
+
+.company-profile-video-player {
+  position: relative;
+  z-index: 1;
+}
+
+.company-profile-video-requirements {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  @include flex-column(1rem);
+  align-items: center;
+}
+
+.company-profile-video-requirements-icon {
+  position: relative;
+  width: 5rem;
+  aspect-ratio: 7/5;
+}
+
+.company-profile-video-requirements-text {
+  color: $secondary-text-color;
 }

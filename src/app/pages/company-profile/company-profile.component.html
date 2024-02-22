@@ -1,8 +1,33 @@
 <section class="company-profile section">
   <div class="container">
-    <div class="company-profile-banner">
-      <img [ngSrc]="'/assets/banner/korzinka.jpg'" [fill]="true" [alt]="">
-    </div>
+    @if (mode !== 'edit') {
+      <div class="company-profile-banner">
+        <img [ngSrc]="'/assets/banner/korzinka.jpg'" [fill]="true" [alt]="">
+      </div>
+    } @else {
+      <div class="company-profile-banner edit-mode">
+        <!--        <img class="company-profile-banner-img" [ngSrc]="'/assets/banner/korzinka.jpg'" [fill]="true" [alt]="">-->
+
+        <div class="company-profile-banner-requirements">
+          <div class="company-profile-banner-requirements-icon">
+            <img [ngSrc]="'/assets/icons/img.svg'" [fill]="true" [alt]="">
+          </div>
+
+          <p class="company-profile-banner-requirements-text">Загрузить изображение до 5 МБ (1440 x 330px)</p>
+        </div>
+
+        <div class="company-profile-banner-actions">
+          <button class="company-profile-banner-button camera" mat-ripple>
+            <span>Загрузить</span>
+            <mat-icon [svgIcon]="'icon:solid-camera'"/>
+          </button>
+
+          <button class="company-profile-banner-button trash" mat-ripple>
+            <mat-icon [svgIcon]="'icon:solid-trash'"/>
+          </button>
+        </div>
+      </div>
+    }
 
     <div class="company-profile-top">
       <div class="company-profile-main-left">
@@ -47,7 +72,17 @@
             </div>
           </div>
 
-          <ui-button [text]="'Подписаться'"/>
+          @if (mode !== 'edit') {
+            <ui-button
+              [text]="'Подписаться'"
+            />
+          } @else {
+            <ui-button
+              [text]="'Редактировать профиль'"
+              [type]="'gray'"
+            />
+          }
+
         </div>
       </div>
 
@@ -99,18 +134,20 @@
           </div>
         </div>
 
-        <div class="company-profile-balance">
-          <div class="company-profile-balance-info">
-            <div class="company-profile-balance-label">
-              Баланс
+        @if (mode !== 'edit') {
+          <div class="company-profile-balance">
+            <div class="company-profile-balance-info">
+              <div class="company-profile-balance-label">
+                Баланс
+              </div>
+              <div class="company-profile-balance-value">
+                1 200 000 сум
+              </div>
             </div>
-            <div class="company-profile-balance-value">
-              1 200 000 сум
-            </div>
-          </div>
 
-          <ui-button [text]="'Пополнить'"/>
-        </div>
+            <ui-button [text]="'Пополнить'"/>
+          </div>
+        }
       </div>
     </div>
 
@@ -228,9 +265,33 @@
           </div>
 
           <div class="company-profile-video">
-            <video-player
-              [videoID]="'9nhd_YiPaLg'"
-            />
+            @if (mode !== 'edit') {
+              <video-player
+                class="company-profile-video-player"
+                [videoID]="'9nhd_YiPaLg'"
+              />
+            }
+
+            @if (mode === 'edit') {
+              <div class="company-profile-video-requirements">
+                <div class="company-profile-video-requirements-icon">
+                  <img [ngSrc]="'/assets/icons/video.svg'" [fill]="true" [alt]="">
+                </div>
+
+                <p class="company-profile-video-requirements-text">Загрузить видео до 20 МБ</p>
+              </div>
+
+              <div class="company-profile-banner-actions">
+                <button class="company-profile-banner-button camera" mat-ripple>
+                  <span>Загрузить</span>
+                  <mat-icon [svgIcon]="'icon:solid-camera'"/>
+                </button>
+
+                <button class="company-profile-banner-button trash" mat-ripple>
+                  <mat-icon [svgIcon]="'icon:solid-trash'"/>
+                </button>
+              </div>
+            }
           </div>
         </div>
       </div>

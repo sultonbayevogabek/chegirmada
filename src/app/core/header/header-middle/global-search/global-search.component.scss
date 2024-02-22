@@ -117,16 +117,9 @@ div.global-search-result.mat-mdc-autocomplete-panel {
   border-radius: 0.5rem;
   background-color: $white-color;
   box-shadow: 0 4px 24px 0 rgba(176, 176, 176, 0.16), 0 4px 24px 0 rgba(176, 176, 176, 0.16);
-  overflow: auto;
+  overflow: hidden;
 
   .mat-mdc-tab-header {
-    display: none;
-  }
-
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
     display: none;
   }
 }
