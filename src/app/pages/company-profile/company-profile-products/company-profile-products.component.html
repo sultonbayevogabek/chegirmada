@@ -1,0 +1,27 @@
+<div class="company-profile-products">
+  <div class="company-profile-products-header">
+    <div class="company-profile-products-total">
+      <span>Всего объявлений:</span>
+      <span>42</span>
+    </div>
+
+    <div class="company-profile-products-filter">
+      <div class="company-profile-products-search">
+        <input class="form-input" type="text" placeholder="Искать">
+
+        <mat-icon [svgIcon]="'icon:search'"/>
+      </div>
+      <ui-button
+        [type]="'gray-outline'"
+        [icon]="'icon:filter'"
+        [text]="'Все фильтры'"
+      />
+    </div>
+  </div>
+
+  <div class="company-profile-products-cards">
+    @for (product of products; track product) {
+      <product-card [product]="product"/>
+    }
+  </div>
+</div>

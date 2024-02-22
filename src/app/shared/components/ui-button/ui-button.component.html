@@ -1,7 +1,14 @@
 <button
   [class]="'ui-button ' + type"
   [class.full]="full"
+  [ngClass]="{
+   'full': full,
+   'with-icon': icon
+  }"
   mat-ripple
 >
-  {{ text }}
+  @if (icon) {
+    <mat-icon [svgIcon]="icon"/>
+  }
+  <span>{{ text }}</span>
 </button>

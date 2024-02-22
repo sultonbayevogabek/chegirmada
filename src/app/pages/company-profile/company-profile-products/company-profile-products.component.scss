@@ -1,0 +1,44 @@
+@import "variables";
+@import "mixins";
+
+.company-profile-products {
+  padding-top: 1.5rem;
+}
+
+.company-profile-products-header {
+  @include flex-center-between;
+}
+
+.company-profile-products-total {
+  @include flex-center(0.5rem);
+  color: $secondary-black-color;
+}
+
+.company-profile-products-filter {
+  @include flex-center(0.5rem);
+}
+
+.company-profile-products-search {
+  width: 20rem;
+  max-width: 100%;
+  position: relative;
+
+  .form-input {
+    background-color: $white-color;
+    padding-right: 2.75rem;
+    border-color: $border-grey-color
+  }
+
+  .mat-icon {
+    position: absolute;
+    right: 0.875rem;
+    top: 50%;
+    width: 1rem;
+    transform: translateY(-50%);
+  }
+}
+
+.company-profile-products-cards {
+  @include grid(repeat(4, 1fr), 1.5rem);
+  padding-top: 1.5rem;
+}

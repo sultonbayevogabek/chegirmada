@@ -1,0 +1,38 @@
+@import "variables";
+@import "mixins";
+
+.company-profile-branches-list {
+  @include grid(1fr 1fr, 1rem);
+  padding-top: 1.5rem;
+}
+
+.company-profile-branches-item {
+  padding: 1rem;
+  border: 1px solid $border-grey-color;
+  border-radius: 0.5rem;
+}
+
+.company-branch-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: $dialog-title-black;
+}
+
+.company-branch-details {
+  @include grid(1fr 1fr, 0.75rem 1.5rem);
+  padding-top: 1rem;
+}
+
+.company-branch-details-item {
+  @include flex-center(0.25rem);
+  font-size: 0.875rem;
+}
+
+.company-branch-details-label {
+  color: $secondary-text-color;
+}
+
+.company-branch-details-value {
+  font-weight: 500;
+  color: $dialog-title-black;
+}

@@ -18,10 +18,6 @@ export const pagesRoutes: Routes = [
     loadComponent: () => import('./wish-list/wish-list.component').then(c => c.WishListComponent)
   },
   {
-    path: 'company-profile',
-    loadComponent: () => import('./company-profile/company-profile.component').then(c => c.CompanyProfileComponent)
-  },
-  {
     path: 'not-found-404',
     loadComponent: () => import('./not-found-404/not-found-404.component').then(c => c.NotFound404Component)
   },
@@ -32,6 +28,10 @@ export const pagesRoutes: Routes = [
   {
     path: 'category',
     loadChildren: () => import('./category/category.routes').then(r => r.categoryRoutes)
+  },
+  {
+    path: 'company-profile',
+    loadChildren: () => import('./company-profile/company-profile.routes').then(r => r.companyProfileRoutes)
   },
   {
     path: '**',

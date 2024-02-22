@@ -1,4 +1,5 @@
 @import "variables";
+@import "mixins";
 
 :host {
   display: block;
@@ -31,11 +32,19 @@
   &.gray-outline {
     background-color: $white-color;
     border: 1px solid $border-grey-color;
-    color: $secondary-black-color
+    color: $dialog-title-black
   }
 
   &.full {
     width: 100%;
+  }
+
+  &.with-icon {
+    @include flex-center-center(0.675rem);
+  }
+
+  .mat-icon {
+    width: 1.25rem;
   }
 }
 

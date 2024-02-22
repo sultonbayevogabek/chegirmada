@@ -1,37 +1,41 @@
 import { Component } from '@angular/core';
-import { BreadCrumbsComponent } from '../../shared/components/bread-crumbs/bread-crumbs.component';
 import { NgOptimizedImage } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { UiButtonComponent } from '../../shared/components/ui-button/ui-button.component';
 import { YoutubePlayer } from '../../shared/components/youtube-player/youtube-player.component';
+import { TabsComponent } from '../../shared/components/tabs/tabs.component';
 
 @Component({
   selector: 'company-profile',
   templateUrl: 'company-profile.component.html',
   styleUrl: 'company-profile.component.scss',
   imports: [
-    BreadCrumbsComponent,
     NgOptimizedImage,
     MatIcon,
     UiButtonComponent,
-    YoutubePlayer
+    YoutubePlayer,
+    TabsComponent
   ],
   standalone: true
 })
 
 export class CompanyProfileComponent {
-  breadCrumbs = [
+  tabs = [
     {
-      text: 'Главная',
-      url: 'home'
+      routerLink: ['discounts'],
+      text: 'Скидки'
     },
     {
-      text: 'Смартфоны',
-      url: 'smartphones'
+      routerLink: ['products'],
+      text: 'Продукты'
     },
     {
-      text: 'Мобильные телефоны',
-      url: ''
+      routerLink: ['branches'],
+      text: 'Филиали'
+    },
+    {
+      routerLink: ['expired-discounts'],
+      text: 'Законченный скидки'
     }
   ]
 }
