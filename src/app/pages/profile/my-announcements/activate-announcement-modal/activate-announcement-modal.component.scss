@@ -1,0 +1,33 @@
+@import "variables";
+@import "mixins";
+
+.activate-announcement-header {
+  @include flex-center-between;
+  padding: 2rem;
+}
+
+.activate-announcement-heading {
+  font-size: 1.5rem;
+  color: $dialog-title-black;
+}
+
+.activate-announcement-form {
+  @include flex-column(1rem);
+  padding: 0 2rem;
+}
+
+.activate-announcement-submit {
+  padding: 1.5rem 2rem;
+  text-align: right;
+}
+
+.activate-announcement-range {
+  width: calc(100% - 1rem);
+}
+
+::ng-deep {
+  .mdc-slider__track {
+    margin-left: -7px;
+    width: calc(100% + 14px) !important;
+  }
+}

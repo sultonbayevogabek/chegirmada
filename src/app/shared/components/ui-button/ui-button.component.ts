@@ -18,6 +18,6 @@ import { MatIcon } from '@angular/material/icon';
 export class UiButtonComponent {
   @Input() text = 'Сохранить'
   @Input() full = false;
-  @Input() type: 'gray' | 'red' | 'blue' | 'gray-outline' = 'blue';
+  @Input() type: 'gray' | 'red' | 'blue' | 'gray-outline' | 'green-outline' = 'blue';
   @Input() icon: string;
 }

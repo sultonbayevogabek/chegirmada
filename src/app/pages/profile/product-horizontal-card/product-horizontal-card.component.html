@@ -1,0 +1,130 @@
+<div class="product-horizontal-card">
+  <div class="product-horizontal-card-body">
+    <div class="product-horizontal-card-images">
+      <div class="product-horizontal-card-gallery">
+        <img [ngSrc]="product.productCardImageUrl" [fill]="true" [alt]="product.productCardTitle">
+
+        <div class="product-horizontal-card-dots">
+          <div class="product-horizontal-card-dot"></div>
+          <div class="product-horizontal-card-dot active"></div>
+          <div class="product-horizontal-card-dot"></div>
+          <div class="product-horizontal-card-dot"></div>
+          <div class="product-horizontal-card-dot"></div>
+        </div>
+
+      </div>
+
+      <div class="product-top-indicator">
+        Топ
+      </div>
+
+      <div class="product-horizontal-card-percent">
+        50%
+      </div>
+    </div>
+
+    <div class="product-horizontal-card-right">
+      <div class="product-horizontal-card-main">
+        <div class="product-horizontal-card-main-info">
+          <h3 class="product-horizontal-card-title">{{ product.productCardTitle }}</h3>
+
+          <div class="product-horizontal-card-price">
+            <del class="product-horizontal-card-price-old">{{ product.productCardOldPrice }}</del>
+            <strong class="product-horizontal-card-price-new">{{ product.productCardNewPrice }}</strong>
+          </div>
+
+          <div class="product-horizontal-card-brand">
+            <div class="product-horizontal-card-brand-logo">
+              <img [ngSrc]="product.productCardBrandLogo" [fill]="true" [alt]="product.productCardBrandName">
+            </div>
+
+            <div class="product-horizontal-card-brand-name">{{ product.productCardBrandName }}</div>
+          </div>
+
+          <div class="product-horizontal-card-breadcrumb">
+            <div class="product-horizontal-card-breadcrumb-item">Электроника</div>
+            <div class="product-horizontal-card-breadcrumb-item">Мобил телефонлар</div>
+            <div class="product-horizontal-card-breadcrumb-item">Смартфон</div>
+          </div>
+
+          <div class="product-horizontal-card-address">
+            <mat-icon [svgIcon]="'icon:location'"/>
+
+            <span>Ташкент Юнусобот-14, 75-дом</span>
+          </div>
+        </div>
+
+        <div class="product-horizontal-card-main-actions">
+          <icon-button
+            [buttonType]="'blue'"
+            [icon]="'icon:pencil'"
+          />
+
+          <icon-button
+            [buttonType]="'red'"
+            [icon]="'icon:trash'"
+          />
+        </div>
+      </div>
+
+      <div class="product-horizontal-card-secondary">
+        <div class="product-horizontal-card-secondary-left">
+          <div class="product-horizontal-card-secondary-item">
+            <button class="product-horizontal-card-secondary-btn">
+              <mat-icon [svgIcon]="'icon:like'"></mat-icon>
+              <span>1223</span>
+            </button>
+
+            <div class="product-horizontal-card-secondary-divider"></div>
+
+            <button class="product-horizontal-card-secondary-btn">
+              <mat-icon [svgIcon]="'icon:dislike'"></mat-icon>
+              <span>345</span>
+            </button>
+          </div>
+
+          <div class="product-horizontal-card-secondary-item">
+            <mat-icon [svgIcon]="'icon:eye'"></mat-icon>
+            <span>{{ product.productCardBrandViews }}</span>
+          </div>
+
+          <div class="product-horizontal-card-secondary-item">
+            14 но. – 21 дек.
+          </div>
+        </div>
+
+        @if (product.productCardImageUrl.includes('1')) {
+          <div class="product-horizontal-card-status success">
+            <mat-icon [svgIcon]="'icon:success'"/>
+            <span>Актив</span>
+          </div>
+        } @else {
+          <ui-button
+            [text]="'Активация рекламы'"
+            (click)="openModal()"
+          />
+        }
+
+      </div>
+    </div>
+  </div>
+
+  <div class="product-horizontal-card-footer">
+    <div class="product-horizontal-card-footer-item">
+      <div class="product-horizontal-card-footer-label">ID:</div>
+      <div class="product-horizontal-card-footer-value">131200</div>
+    </div>
+    <div class="product-horizontal-card-footer-item">
+      <div class="product-horizontal-card-footer-label">Создать дату:</div>
+      <div class="product-horizontal-card-footer-value">12.01.2024</div>
+    </div>
+    <div class="product-horizontal-card-footer-item">
+      <div class="product-horizontal-card-footer-label">Время начала и окончания:</div>
+      <div class="product-horizontal-card-footer-value">12.01.2024 - 20.01.2024</div>
+    </div>
+    <div class="product-horizontal-card-footer-item">
+      <div class="product-horizontal-card-footer-label">Категория:</div>
+      <div class="product-horizontal-card-footer-value">Техника</div>
+    </div>
+  </div>
+</div>

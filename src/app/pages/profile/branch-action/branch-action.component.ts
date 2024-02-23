@@ -7,6 +7,7 @@ import { MatSelect } from '@angular/material/select';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
+import { ScrollbarDirective } from '../../../shared/directives/scrollbar/scrollbar.directive';
 
 @Component({
   selector: 'branch-action',
@@ -22,7 +23,8 @@ import { UiButtonComponent } from '../../../shared/components/ui-button/ui-butto
     NgxMaskDirective,
     MatRadioButton,
     MatRadioGroup,
-    UiButtonComponent
+    UiButtonComponent,
+    ScrollbarDirective
   ],
   providers: [
     provideNgxMask()

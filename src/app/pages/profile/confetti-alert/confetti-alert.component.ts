@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, ElementRef, inject, Inject, ViewChild } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'confetti-alert',
   templateUrl: 'confetti-alert.component.html',
   styleUrl: 'confetti-alert.component.scss',
   imports: [
-    NgOptimizedImage
+    MatIcon
   ],
   standalone: true
 })

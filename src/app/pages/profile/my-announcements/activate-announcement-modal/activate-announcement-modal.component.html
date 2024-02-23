@@ -1,0 +1,39 @@
+<div class="activate-announcement-header">
+  <h2 class="activate-announcement-heading">Активация рекламы</h2>
+</div>
+
+<mat-dialog-content class="activate-announcement-content">
+  <div class="activate-announcement-form">
+    <label class="form-label">
+      <span class="form-label-text">Сколько дней</span>
+      <input class="form-input" type="text" placeholder="0" [(ngModel)]="count">
+
+      <mat-slider
+        class="activate-announcement-range"
+        [min]="0"
+        [max]="30"
+      >
+        <input matSliderThumb [(ngModel)]="count">
+      </mat-slider>
+    </label>
+
+    <label class="form-label">
+      <span class="form-label-text">Сколько раз поднимать</span>
+      <input class="form-input" type="text" placeholder="0" [(ngModel)]="count2">
+
+      <mat-slider
+        class="activate-announcement-range"
+        [min]="0"
+        [max]="30"
+      >
+        <input matSliderThumb [(ngModel)]="count2">
+      </mat-slider>
+    </label>
+  </div>
+</mat-dialog-content>
+
+<div class="activate-announcement-submit">
+  <ui-button
+    [text]="'Оплата'"
+  />
+</div>

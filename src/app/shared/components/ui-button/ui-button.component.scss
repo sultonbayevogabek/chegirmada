@@ -35,6 +35,12 @@
     color: $dialog-title-black
   }
 
+  &.green-outline {
+    background-color: rgba($success-green, 0.1);
+    border: 1px solid $success-green;
+    color: $success-green
+  }
+
   &.full {
     width: 100%;
   }

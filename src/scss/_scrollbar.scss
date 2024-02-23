@@ -1,4 +1,6 @@
 @import 'perfect-scrollbar/css/perfect-scrollbar.css';
+@import 'variables';
+
 .ps {
   position: relative;
 
@@ -20,7 +22,7 @@
 
   > .ps__rail-x {
     height: 14px;
-    background: transparent !important;
+    background-color: transparent !important;
     transition: none !important;
 
     &:hover,
@@ -34,7 +36,7 @@
     }
 
     .ps__thumb-x {
-      background: rgba(0, 0, 0, 0.5);
+      background-color: $border-grey-color;
       box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
       height: 6px;
       transition: height 225ms cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -58,7 +60,7 @@
     }
 
     .ps__thumb-y {
-      background: rgba(0, 0, 0, 0.5);
+      background-color: $border-grey-color;
       box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
       width: 6px;
       transition: width 225ms cubic-bezier(0.25, 0.8, 0.25, 1);

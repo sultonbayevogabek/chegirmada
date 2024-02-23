@@ -3,16 +3,12 @@
 
 .branch-action-header {
   @include flex-center-between;
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 2rem 1rem;
 }
 
 .branch-action-heading {
   font-size: 1.5rem;
   color: $dialog-title-black;
-}
-
-.branch-action-content {
-  @include custom-scrollbar;
 }
 
 .branch-action-form {

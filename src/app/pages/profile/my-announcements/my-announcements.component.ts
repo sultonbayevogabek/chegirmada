@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { TabsComponent } from '../../../shared/components/tabs/tabs.component';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'my-announcements',
   templateUrl: 'my-announcements.component.html',
   styleUrl: 'my-announcements.component.scss',
   imports: [
-    TabsComponent
+    TabsComponent,
+    MatIcon
 
   ],
   standalone: true
