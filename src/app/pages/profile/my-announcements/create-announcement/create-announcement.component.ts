@@ -84,6 +84,5 @@ export class CreateAnnouncementComponent implements OnInit {
 
   drop($event: CdkDragDrop<any, any>): void {
     moveItemInArray(this.imagesList, $event.previousIndex, $event.currentIndex);
-    console.log(this.imagesList);
   }
 }

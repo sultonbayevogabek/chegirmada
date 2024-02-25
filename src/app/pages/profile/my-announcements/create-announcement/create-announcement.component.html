@@ -120,14 +120,16 @@
       @for (img of imagesList; track img; let i = $index) {
         <div class="create-announcement-image" cdkDrag>
           <div class="create-announcement-image-placeholder" *cdkDragPlaceholder></div>
-          <img [src]="img.buffer" [alt]="">
 
-          <button
+          <img class="create-announcement-image-original" [src]="img.buffer" [alt]="">
+
+
+          <icon-button
             class="create-announcement-image-remove"
+            [buttonType]="'red'"
+            [icon]="'icon:trash'"
             (click)="removeImage(i)"
-          >
-            <mat-icon [svgIcon]="'icon:x'"/>
-          </button>
+          />
         </div>
       }
     </div>
