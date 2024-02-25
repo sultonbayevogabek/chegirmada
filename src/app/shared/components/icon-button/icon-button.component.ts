@@ -16,7 +16,7 @@ import { NgStyle } from '@angular/common';
 })
 
 export class IconButtonComponent implements OnInit {
-  @Input() buttonType: 'simple' | 'blue' | 'red' | 'icon-secondary' | 'red-flat' = 'simple';
+  @Input() buttonType: 'simple' | 'blue' | 'red' | 'gray' | 'icon-secondary' | 'red-flat' = 'simple';
   @Input() icon = 'icon:x';
   @Input() iconWidth = 1;
 

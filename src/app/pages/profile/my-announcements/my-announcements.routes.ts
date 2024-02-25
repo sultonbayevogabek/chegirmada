@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AnnouncementsListComponent } from './announcements-list/announcements-list.component';
 
 export const myAnnouncementsRoutes: Routes = [
   {
@@ -8,27 +9,42 @@ export const myAnnouncementsRoutes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'active'
+        redirectTo: 'list'
       },
       {
-        path: 'active',
-        loadComponent: () => import('./active-announcements/active-announcements.component').then(c => c.ActiveAnnouncementsComponent)
+        path: 'list',
+        loadComponent: () => import('./announcements-list/announcements-list.component').then(c => c.AnnouncementsListComponent),
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'active'
+          },
+          {
+            path: 'active',
+            loadComponent: () => import('./active-announcements/active-announcements.component').then(c => c.ActiveAnnouncementsComponent)
+          },
+          {
+            path: 'pending',
+            loadComponent: () => import('./active-announcements/active-announcements.component').then(c => c.ActiveAnnouncementsComponent)
+          },
+          {
+            path: 'not-payed',
+            loadComponent: () => import('./active-announcements/active-announcements.component').then(c => c.ActiveAnnouncementsComponent)
+          },
+          {
+            path: 'not-active',
+            loadComponent: () => import('./active-announcements/active-announcements.component').then(c => c.ActiveAnnouncementsComponent)
+          },
+          {
+            path: 'rejected',
+            loadComponent: () => import('./active-announcements/active-announcements.component').then(c => c.ActiveAnnouncementsComponent)
+          },
+        ]
       },
       {
-        path: 'pending',
-        loadComponent: () => import('./active-announcements/active-announcements.component').then(c => c.ActiveAnnouncementsComponent)
-      },
-      {
-        path: 'not-payed',
-        loadComponent: () => import('./active-announcements/active-announcements.component').then(c => c.ActiveAnnouncementsComponent)
-      },
-      {
-        path: 'not-active',
-        loadComponent: () => import('./active-announcements/active-announcements.component').then(c => c.ActiveAnnouncementsComponent)
-      },
-      {
-        path: 'rejected',
-        loadComponent: () => import('./active-announcements/active-announcements.component').then(c => c.ActiveAnnouncementsComponent)
+        path: 'create',
+        loadComponent: () => import('./create-announcement/create-announcement.component').then(c => c.CreateAnnouncementComponent)
       }
     ]
   }

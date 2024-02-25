@@ -20,7 +20,8 @@ import { RouterLink } from '@angular/router';
     MatRippleModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatDatepickerModule, MatNativeDateModule, FormsModule, ProductCardComponent, MatSelect, MatOption, RouterLink
+    MatDatepickerModule,
+    MatNativeDateModule, FormsModule, ProductCardComponent, MatSelect, MatOption, RouterLink
   ],
   standalone: true
 })

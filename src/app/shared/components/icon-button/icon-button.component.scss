@@ -16,6 +16,11 @@
     }
   }
 
+  &.gray {
+    color: $dialog-title-black;
+    background-color: $background-grey-color;
+  }
+
   &.blue {
     background-color: rgba($primary-blue-color, 0.12);
     color: $primary-blue-color;
