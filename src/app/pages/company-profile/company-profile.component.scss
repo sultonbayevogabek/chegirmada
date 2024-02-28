@@ -163,7 +163,7 @@
   @include flex-start-between(1rem);
   padding: 1rem;
   border-radius: 0.5rem;
-  background-color: $dialog-input-background;
+  background-color: $input-background;
 }
 
 .company-profile-contact-label {
@@ -272,7 +272,7 @@
   flex-grow: 1;
   height: 0.5rem;
   border-radius: 0.5rem;
-  background-color: $dialog-input-background;
+  background-color: $input-background;
 
   div {
     height: 100%;

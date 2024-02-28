@@ -99,7 +99,7 @@
   height: 2rem;
   flex-shrink: 0;
   border-radius: 50%;
-  background-color: $dialog-input-background;
+  background-color: $input-background;
 }
 
 .product-horizontal-card-brand-name {
@@ -191,7 +191,7 @@
   height: 1.75rem;
   padding: 0 0.5rem;
   border-radius: 0.25rem;
-  background-color: $dialog-input-background;
+  background-color: $input-background;
   color: $secondary-black-color;
 
   .mat-icon {

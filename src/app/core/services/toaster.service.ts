@@ -7,7 +7,7 @@ import { ToasterComponent } from '../toaster/toaster.component';
 export class ToasterService {
   private _snackbar: MatSnackBar = inject(MatSnackBar);
 
-  toaster({
+  open({
             type = 'success',
             title,
             message,

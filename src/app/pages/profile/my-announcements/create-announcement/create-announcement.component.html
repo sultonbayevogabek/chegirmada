@@ -8,7 +8,11 @@
 </div>
 
 <div class="create-announcement-tabs">
-  <div class="create-announcement-tabs-item active" mat-ripple [matRippleColor]="'#F1F5F955'">
+  <div
+    class="create-announcement-tabs-item active"
+    mat-ripple [matRippleColor]="'#F1F5F955'"
+    (click)="currentTab = 1"
+  >
     <div class="create-announcement-tabs-index">
       1
     </div>
@@ -22,7 +26,11 @@
     />
   </div>
 
-  <div class="create-announcement-tabs-item enabled" mat-ripple [matRippleColor]="'#F1F5F955'">
+  <div
+    class="create-announcement-tabs-item enabled"
+    mat-ripple [matRippleColor]="'#F1F5F955'"
+    (click)="currentTab = 2"
+  >
     <div class="create-announcement-tabs-index">
       2
     </div>
@@ -36,7 +44,11 @@
     />
   </div>
 
-  <div class="create-announcement-tabs-item disabled" mat-ripple [matRippleColor]="'#F1F5F955'" [matRippleDisabled]="true" >
+  <div
+    class="create-announcement-tabs-item disabled"
+    mat-ripple [matRippleColor]="'#F1F5F955'"
+    (click)="currentTab = 3"
+  >
     <div class="create-announcement-tabs-index">
       3
     </div>
@@ -45,101 +57,11 @@
   </div>
 </div>
 
-<div class="create-announcement-information">
-  <div class="create-announcement-information-inner">
-    <div class="create-announcement-information-fields">
-      <label class="create-announcement-information-field form-label">
-        <span class="create-announcement-information-field-title form-label-text">Заголовок (UZ)</span>
-        <input class="create-announcement-information-input form-input" type="text" placeholder="Введите заголовок">
-      </label>
-
-      <label class="create-announcement-information-field form-label">
-        <span class="create-announcement-information-field-title form-label-text">Заголовок (RU)</span>
-        <input class="create-announcement-information-input form-input" type="text" placeholder="Введите заголовок">
-      </label>
-
-      <label class="create-announcement-information-field form-label">
-        <span class="create-announcement-information-field-title form-label-text">Категория</span>
-        <input class="create-announcement-information-input form-input" type="text" placeholder="Добавить категория">
-      </label>
-
-      <div class="create-announcement-information-field date-interval">
-        <label class="form-label date-interval-label">
-          <span class="create-announcement-information-field-title form-label-text">Дата начала</span>
-          <input
-            class="create-announcement-information-input form-input"
-            [matDatepicker]="fromDatePicker"
-            [(ngModel)]="date"
-          >
-          <mat-icon
-            class="date-interval-calendar-icon"
-            [svgIcon]="'icon:calendar'"
-            (click)="fromDatePicker.open()"
-          ></mat-icon>
-          <mat-datepicker #fromDatePicker></mat-datepicker>
-        </label>
-
-        <label class="form-label date-interval-label">
-          <span class="create-announcement-information-field-title form-label-text">Дата окончания</span>
-          <input
-            class="create-announcement-information-input form-input"
-            [matDatepicker]="toDatePicker"
-            [(ngModel)]="date"
-          >
-          <mat-icon
-            class="date-interval-calendar-icon"
-            [svgIcon]="'icon:calendar'"
-            (click)="toDatePicker.open()"
-          ></mat-icon>
-          <mat-datepicker #toDatePicker></mat-datepicker>
-        </label>
-      </div>
-    </div>
-
-    <div class="create-announcement-dropzone" dragAndDrop (fileDropped)="onImagesDropped($event)">
-      <mat-icon class="create-announcement-upload-icon" [svgIcon]="'icon:drag-drop-images'"/>
-
-      <h3 class="create-announcement-drop-title">Перетащите изображения сюда</h3>
-
-      <p class="create-announcement-drop-or-text">или</p>
-
-      <label class="create-announcement-show-images" mat-ripple>
-        <p>Укажите изображения (.jpg, .png, .webp)</p>
-        <input
-          #fileInput
-          type="file"
-          multiple
-          (change)="onImagesSelectedByFileInput($event)"
-          [accept]="'.jpg, .png, .webp'"
-        >
-      </label>
-
-    </div>
-
-    <div cdkDropList cdkDropListOrientation="horizontal" class="create-announcement-images" (cdkDropListDropped)="drop($event)">
-      @for (img of imagesList; track img; let i = $index) {
-        <div class="create-announcement-image" cdkDrag>
-          <div class="create-announcement-image-placeholder" *cdkDragPlaceholder></div>
-
-          <img class="create-announcement-image-original" [src]="img.buffer" [alt]="">
-
-
-          <icon-button
-            class="create-announcement-image-remove"
-            [buttonType]="'red'"
-            [icon]="'icon:trash'"
-            (click)="removeImage(i)"
-          />
-        </div>
-      }
-    </div>
-  </div>
-</div>
-
-
+<create-announcement-first-step [hidden]="currentTab !== 1"/>
+<create-announcement-third-step [hidden]="currentTab !== 3"/>
 
 <ng-template #decorationItems>
-  @for(i of Array(20).fill(1); track i) {
+  @for (i of Array(20).fill(1); track i) {
     <div class="create-announcement-tabs-decoration-item"></div>
   }
 </ng-template>

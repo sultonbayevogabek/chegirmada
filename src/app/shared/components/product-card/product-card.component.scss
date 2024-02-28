@@ -96,7 +96,7 @@
   height: 2rem;
   flex-shrink: 0;
   border-radius: 50%;
-  background-color: $dialog-input-background;
+  background-color: $input-background;
 }
 
 .product-card-brand-name {
@@ -153,7 +153,7 @@
   @include flex-center-center(0.25rem);
   height: 1.75rem;
   padding: 0.25rem 0.5rem;
-  background-color: $dialog-input-background;
+  background-color: $input-background;
   border-radius: 0.25rem;
   color: $dialog-title-black;
   font-size: 0.875rem;

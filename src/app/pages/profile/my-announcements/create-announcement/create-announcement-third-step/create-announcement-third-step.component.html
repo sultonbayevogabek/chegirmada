@@ -1,0 +1,153 @@
+<div class="create-announcement-third-step">
+  <div class="create-announcement-third-step-inner">
+
+    <div class="grid-2">
+      <label class="create-announcement-new-price-label form-label">
+        <span class="form-label-text">Новая цена</span>
+        <input class="form-input" type="text" placeholder="Введите цена">
+
+        <div class="create-announcement-currency-toggle">
+          <div
+            class="create-announcement-currency-toggle-item"
+            [class.active]="currency === 'uzs'"
+            (click)="currency = 'uzs'">UZS
+          </div>
+          <div
+            class="create-announcement-currency-toggle-item"
+            [class.active]="currency === 'usd'"
+            (click)="currency = 'usd'"
+          >USD
+          </div>
+        </div>
+      </label>
+
+      <div class="create-announcement-installments">
+        <span class="form-label-text">Рассрочка</span>
+
+        <div class="grid-2">
+          <mat-radio-button [color]="'primary'" class="form-radio">Да</mat-radio-button>
+          <mat-radio-button [color]="'primary'" class="form-radio">Нет</mat-radio-button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="create-announcement-discount-combinations"
+      [ngClass]="{
+          'grid-2': [0, 1].includes(discountType),
+          'grid-4': [2, 3].includes(discountType),
+        }"
+    >
+      <label class="form-label">
+        <span class="form-label-text">Тип скидки</span>
+
+        <mat-select class="solid-select" [(ngModel)]="discountType" [hideSingleSelectionIndicator]="true">
+          <mat-option [value]="0">Выберите тип</mat-option>
+          <mat-option [value]="1">Обычная скидка</mat-option>
+          <mat-option [value]="2">Добавить бесплатно</mat-option>
+          <mat-option [value]="3">Скидка на услугу</mat-option>
+        </mat-select>
+      </label>
+
+      @if (discountType === 1) {
+        <div class="create-announcement-percent-or-price">
+          <span class="form-label-text">Процент или цена</span>
+          <div class="create-announcement-percent-or-price-inner">
+            <label class="create-announcement-percent-or-price-label">
+              <input class="create-announcement-percent-or-price-input form-input" type="text"
+                     placeholder="Введите количество">
+              <span class="create-announcement-percent-or-price-unit">
+                @switch (percentOrPriceType) {
+                  @case ('percent') {
+                    %
+                  }
+                  @case ('uzs') {
+                    сум
+                  }
+                  @case ('usd') {
+                    доллар
+                  }
+                }
+              </span>
+            </label>
+
+            <mat-select class="solid-select" [(ngModel)]="percentOrPriceType" [hideSingleSelectionIndicator]="true">
+              <mat-option [value]="'none'">Выберите тип</mat-option>
+              <mat-option [value]="'percent'">Процент (%)</mat-option>
+              <mat-option [value]="'uzs'">UZS (сум)</mat-option>
+              <mat-option [value]="'usd'">USD (сум)</mat-option>
+            </mat-select>
+          </div>
+        </div>
+      }
+
+      @if (discountType === 2) {
+        <label class="form-label">
+          <span class="form-label-text">Сколько продуктов</span>
+          <input class="form-input" type="text" placeholder="Сколько">
+        </label>
+
+        <div class="create-announcement-add-free">
+          <span class="form-label-text">Сколько бесплатных (максимум 5)</span>
+          <div class="create-announcement-add-free-inner">
+            <label class="create-announcement-add-free-label">
+              <input class="create-announcement-add-free-input form-input" type="text" placeholder="Сколько бесплатных">
+            </label>
+
+            <div class="create-announcement-add-free-checkboxes">
+              <mat-radio-button class="form-radio" [color]="'primary'">Этот продукт</mat-radio-button>
+              <mat-radio-button class="form-radio" [color]="'primary'">Другой продукт</mat-radio-button>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (discountType === 3) {
+        <div class="create-announcement-service-discount">
+          <span class="form-label-text">Введите бесплатной услуги</span>
+
+          <div class="create-announcement-service-discount-inner">
+            <div class="create-announcement-service-list">
+              <div class="create-announcement-service-item active" mat-ripple>
+                <mat-icon
+                  [svgIcon]="'icon:tick'"
+                />
+                <span>Доставка бесплатна</span>
+              </div>
+              <div class="create-announcement-service-item" mat-ripple>
+                <span>Установка бесплатна</span>
+              </div>
+              <div class="create-announcement-service-item" mat-ripple>
+                <span>Услуга бесплатна</span>
+              </div>
+              <div class="create-announcement-service-item" mat-ripple>
+                <span>Услуга бесплатна</span>
+              </div>
+              <div class="create-announcement-service-item" mat-ripple>
+                <span>Установка бесплатна</span>
+              </div>
+              <div class="create-announcement-service-item active" mat-ripple>
+                <mat-icon
+                  [svgIcon]="'icon:tick'"
+                />
+                <span>Доставка бесплатна</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="grid-2">
+      <label class="form-label">
+        <span class="form-label-text">Описание (UZ)</span>
+        <textarea class="form-textarea" placeholder="Описание (UZ)"></textarea>
+      </label>
+
+      <label class="form-label">
+        <span class="form-label-text">Описание (RU)</span>
+        <textarea class="form-textarea" placeholder="Описание (RU)"></textarea>
+      </label>
+    </div>
+  </div>
+</div>

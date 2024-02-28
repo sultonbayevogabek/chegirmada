@@ -16,7 +16,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatIcon,
     MatRipple,
     ProfileEmptyListComponent,
-    IconButtonComponent
+    IconButtonComponent,
+    BranchActionComponent
   ],
   providers: [
     ConfirmationService

@@ -1,41 +1,27 @@
 import { YaApiLoaderService } from 'angular8-yandex-maps';
-import { inject, Injectable } from '@angular/core';
+import { computed, ElementRef, EventEmitter, inject, Injectable, signal } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class YandexMapsService {
   private _map: ymaps.Map;
-  private _yandexApiLoaderService = inject(YaApiLoaderService);
+  private _yandexApiLoaderService: YaApiLoaderService = inject(YaApiLoaderService);
+  private _elementRef = inject(ElementRef);
+  private _tashkent = [ 41.311151, 69.279737 ];
 
-  _points = [
-    [ 41.297865, 69.249339 ],
-    [ 41.301983, 69.286716 ],
-    [ 41.325948, 69.254544 ],
-    [ 41.311171, 69.328623 ],
-    [ 41.306766, 69.3380719 ],
-    [ 41.295693, 69.275240 ],
-    [ 41.301983, 69.286716 ],
-    [ 41.277278, 69.287222 ]
-  ];
+  public coordinates$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>(this._tashkent);
 
-  initMap(id: string): void {
-    console.log(id);
+  setMultipleLocationPoints(mapContainerId: string, points: number[][]): void {
     this._yandexApiLoaderService.load()
-      .subscribe( _ => {
-        this._map = new ymaps.Map(id, {
-          // The map center coordinates.
-          // Default order: «latitude, longitude».
-          // To not manually determine the map center coordinates,
-          // use the Coordinate detection tool.
-          center: [ 41.311171, 69.328623 ],
-          // Zoom level. Acceptable values:
-          // from 0 (the entire world) to 19.
-          zoom: 12,
-          controls: [ 'geolocationControl' ],
-        }, {
+      .subscribe(_ => {
+        this._map = new ymaps.Map(mapContainerId, {
+          center: points[0],
+          zoom: 10,
+          controls: [ 'geolocationControl' ]
         });
 
-        this._points.forEach(async point => {
-          const myPlaceMark = new ymaps.Placemark(
+        points.forEach(async point => {
+          const placeMark = new ymaps.Placemark(
             point,
             {
               balloonContent: `
@@ -46,22 +32,118 @@ export class YandexMapsService {
               `
             },
             {
-              // Опции.
-              // Необходимо указать данный тип макета.
               iconLayout: 'default#image',
-              // Своё изображение иконки метки.
               iconImageHref: '/assets/icons/location.svg',
-              // Размеры метки.
               iconImageSize: [ 30, 36.67 ],
-              // Смещение левого верхнего угла иконки относительно
-              // её "ножки" (точки привязки).
               iconImageOffset: [ -15, 0 ],
               balloonCloseButton: false,
               hideIconOnBalloonOpen: false
             });
 
-          this._map.geoObjects.add(myPlaceMark)
+          this._map.geoObjects.add(placeMark);
         });
+
+        const bounds = this._map.geoObjects.getBounds();
+
+        if (bounds) {
+          const { clientWidth, clientHeight } = this._elementRef.nativeElement.querySelector('#' + mapContainerId);
+          const { center, zoom }: { center?: number[], zoom?: number } = ymaps.util.bounds.getCenterAndZoom(
+            bounds, [ clientWidth, clientHeight ]
+          );
+          this._map.setCenter(center);
+
+          if (points.length > 1) {
+            this._map.setZoom(zoom);
+          } else {
+            this._map.setZoom(18);
+          }
+        }
       });
+  }
+
+  setSingleLocationPoint(mapContainerId: string, currentPoint?: number[]): void {
+    this._yandexApiLoaderService.load()
+      .subscribe(_ => {
+        this._map = new ymaps.Map(mapContainerId, {
+          center: currentPoint || this._tashkent,
+          zoom: 17,
+          controls: []
+        }, {});
+
+        // Placemark
+        const placeMark = new ymaps.Placemark(
+          currentPoint || this._tashkent,
+          {},
+          {
+            iconLayout: 'default#image',
+            iconImageHref: '/assets/icons/location.svg',
+            iconImageSize: [ 40, 47.5 ],
+            iconImageOffset: [ -20, -47.5 ],
+            balloonCloseButton: false,
+            hideIconOnBalloonOpen: false,
+            draggable: true,
+            hasBalloon: false
+          });
+
+        placeMark.events.add('dragend', e => {
+          const coordinates = e.get('target').geometry.getCoordinates();
+          this.setCoordinatesAndEmit(placeMark, coordinates, this._map);
+          this._map.setCenter(coordinates);
+        });
+
+        this._map.geoObjects.add(placeMark);
+
+        // Geo location control
+        const geolocationControl = new ymaps.control.GeolocationControl({
+          options: {
+            float: 'right',
+            floatIndex: 100,
+            noPlacemark: false
+          },
+          data: {
+            image: '/assets/icons/location.svg'
+          }
+        });
+
+        geolocationControl.events.add('locationchange', e => {
+          this.setCoordinatesAndEmit(placeMark, e.get('position'), this._map);
+        });
+
+        this._map.controls.add(geolocationControl);
+
+        // Search control
+        const searchControl = new ymaps.control.SearchControl({
+          options: {
+            float: 'left',
+            noPlacemark: true,
+            size: 'large',
+            provider: 'yandex#search',
+            noSuggestPanel: true,
+            noCentering: false
+          }
+        });
+        searchControl.events.add('load', e => {
+          const results = e.get('target').getResultsArray();
+          if (results.length) {
+            this.setCoordinatesAndEmit(placeMark, results[0].geometry.getCoordinates(), this._map);
+          }
+        });
+        searchControl.events.add('resultselect', resultSelected => {
+          resultSelected.stopImmediatePropagation();
+          const index = resultSelected.get('index');
+          searchControl.getResult(index).then(res => {
+            const coordinates = res.geometry.getCoordinates();
+            this.setCoordinatesAndEmit(placeMark, coordinates, this._map);
+          });
+        });
+        this._map.controls.add(searchControl);
+      });
+  }
+
+  setCoordinatesAndEmit(placeMark: ymaps.Placemark, coordinates: number[], map: ymaps.Map): void {
+    placeMark.geometry.setCoordinates(coordinates);
+    map.setCenter(coordinates);
+    map.setZoom(17);
+    this.coordinates$.next(coordinates);
   }
 }

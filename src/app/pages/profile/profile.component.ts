@@ -5,7 +5,6 @@ import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { ToasterService } from '../../core/services/toaster.service';
-import { ToasterComponent } from '../../core/toaster/toaster.component';
 
 @Component({
   selector: 'profile',
@@ -28,7 +27,7 @@ export class ProfileComponent {
   toasterService = inject(ToasterService);
 
   constructor() {
-    this.toasterService.toaster({
+    this.toasterService.open({
       message: 'Нимадир амалга оширишда муаммо юзага келди',
       title: 'Диккат',
       dismissible: true,

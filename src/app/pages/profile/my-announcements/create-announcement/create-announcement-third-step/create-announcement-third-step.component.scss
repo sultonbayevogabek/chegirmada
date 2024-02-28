@@ -1,0 +1,130 @@
+@import "variables";
+@import "mixins";
+
+.create-announcement-third-step-inner {
+  @include flex-column(1.25rem);
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-grey-color;
+}
+
+.grid-2 {
+  @include grid(repeat(2, 1fr), 1.25rem)
+}
+
+.create-announcement-new-price-label {
+  position: relative;
+}
+
+.create-announcement-currency-toggle {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  @include flex-center;
+  height: calc(2.75rem - 6px);
+  padding: 0.25rem;
+  background-color: $white-color;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 8px 0 rgba(74, 74, 74, 0.1);
+}
+
+.create-announcement-currency-toggle-item {
+  @include flex-center;
+  height: 100%;
+  padding: 0 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  color: $dialog-title-black;
+  cursor: pointer;
+
+  &.active {
+    background-color: $primary-blue-color;
+    color: $white-color;
+    cursor: default;
+  }
+}
+
+.create-announcement-discount-combinations {
+  &.grid-2 {
+    @include grid(repeat(2, 1fr), 1.25rem);
+  }
+
+  &.grid-4 {
+    @include grid(repeat(4, 1fr), 1.25rem);
+  }
+}
+
+.create-announcement-percent-or-price-inner {
+  @include grid(1fr 1fr);
+  background-color: $input-background;
+  border-radius: 0.5rem;
+}
+
+.create-announcement-percent-or-price-label {
+  position: relative;
+}
+
+.create-announcement-percent-or-price-input {
+  padding-right: 4.5rem;
+  border-radius: 0.5rem 0 0 0.5rem;
+  border-right: 1px solid $border-grey-color;
+}
+
+.create-announcement-percent-or-price-unit {
+  position: absolute;
+  top: 50%;
+  right: 0.875rem;
+  transform: translateY(-50%);
+  color: $secondary-black-color;
+}
+
+.create-announcement-add-free {
+  grid-column: 3/5;
+}
+
+.create-announcement-add-free-inner {
+  @include grid(2fr 3fr);
+  background-color: $input-background;
+  border-radius: 0.5rem;
+}
+
+.create-announcement-add-free-input {
+  border-radius: 0.5rem 0 0 0.5rem;
+  border-right: 1px solid $border-grey-color;
+}
+
+.create-announcement-add-free-checkboxes {
+  @include flex-center-center;
+}
+
+.create-announcement-service-discount {
+  grid-column: 2/5;
+}
+
+.create-announcement-service-discount-inner {
+  padding: 1rem;
+  border: 1px solid $border-grey-color;
+  border-radius: 0.5rem;
+}
+
+.create-announcement-service-list {
+  @include flex-center(0.75rem);
+}
+
+.create-announcement-service-item {
+  @include flex-center-center(0.75rem);
+  height: 2.75rem;
+  padding: 0 0.875rem;
+  border: 1px solid $border-grey-color;
+  border-radius: 0.5rem;
+  color: $dialog-title-black;
+
+  .mat-icon {
+    width: 1rem;
+  }
+
+  &.active {
+    color: $primary-blue-color;
+    border-color: $primary-blue-color;
+  }
+}

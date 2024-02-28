@@ -23,6 +23,10 @@
   @include grid(1fr 1fr, 1rem);
 }
 
+.branch-action-map {
+  aspect-ratio: 2;
+}
+
 .branch-action-submit {
   padding: 1.5rem 2rem;
   text-align: right;
