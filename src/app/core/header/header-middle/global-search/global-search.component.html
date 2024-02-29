@@ -7,10 +7,10 @@
     [matAutocomplete]="globalSearchInput"
     [matAutocompleteConnectedTo]="globalSearchWrapper"
     type="text"
-    placeholder="Поиск"
+    [placeholder]="'search'| translate"
   >
   <button class="global-search-location" #locationButton (click)="overlayPanel.openPanel()">
-    <span>{{ selectedRegion }}</span>
+    <span>{{ selectedRegion| translate }}</span>
     <mat-icon [svgIcon]="'icon:arrow-down'"></mat-icon>
   </button>
   <button class="global-search-submit">
@@ -60,7 +60,7 @@
           @for (region of regions; track region) {
             <li class="global-search-location-item" mat-ripple (click)="selectRegion(region)">
               <div>
-                <span>{{ region }}</span>
+                <span>{{ region | translate }}</span>
 
                 <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
               </div>
@@ -74,7 +74,9 @@
             <mat-icon [svgIcon]="'icon:arrow-back'"></mat-icon>
           </button>
 
-          <h2 class="global-search-location-region-name">{{ selectedRegion }}</h2>
+          <h2 class="global-search-location-region-name">
+            {{ selectedRegion | translate }}
+          </h2>
         </div>
         <ul class="global-search-location-list districts">
           @for (district of districts; track district) {

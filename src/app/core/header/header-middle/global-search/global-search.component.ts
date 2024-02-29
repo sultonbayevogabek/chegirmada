@@ -1,11 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRippleModule } from '@angular/material/core';
 import { OverlayComponent } from '../../../../shared/components/overlay-panel/overlay-panel.component';
 import { ScrollbarDirective } from '../../../../shared/directives/scrollbar/scrollbar.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'global-search',
@@ -19,7 +20,8 @@ import { ScrollbarDirective } from '../../../../shared/directives/scrollbar/scro
     MatTabsModule,
     MatRippleModule,
     NgTemplateOutlet,
-    ScrollbarDirective
+    ScrollbarDirective,
+    TranslateModule
   ],
   standalone: true,
   encapsulation: ViewEncapsulation.None
@@ -31,14 +33,13 @@ export class GlobalSearchComponent {
     'Fifth Avenue' ];
 
   tabIndex = 0;
-  selectedRegion = 'Вся страна';
+  selectedRegion = 'whole.country';
   regions = [
-    'Все регионы',
-    'Қорақалпоғистон',
-    'Андижон', 'Бухоро', 'Жиззах',
-    'Қашқадарё', 'Навоий', 'Наманган', 'Самарқанд',
-    'Сурхандарё', 'Сирдарё', 'Тошкент', 'Фарғона',
-    'Хоразм', 'Тошкент шаҳри'
+    'all.regions',
+    'karakalpakstan',
+    'andijan', 'bukhara', 'jizzakh', 'kashkadarya', 'namangan', 'samarkand',
+    'surkhandarya', 'sirdarya', 'tashkent.region', 'fergana',
+    'khorezm', 'tashkent'
   ];
 
   districts = [

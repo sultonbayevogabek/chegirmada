@@ -3,6 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatRippleModule } from '@angular/material/core';
 import { RatingStarsComponent } from '../../../shared/components/rating-stars/rating-stars.component';
+import { ScrollbarDirective } from '../../../shared/directives/scrollbar/scrollbar.directive';
 
 type tabType = 'about' | 'characteristics' | 'comments'
 
@@ -15,7 +16,8 @@ type tabType = 'about' | 'characteristics' | 'comments'
     RatingStarsComponent,
     NgTemplateOutlet,
     NgOptimizedImage,
-    MatRippleModule
+    MatRippleModule,
+    ScrollbarDirective
   ],
   standalone: true
 })

@@ -1,10 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { SectionHeaderComponent } from '../../shared/components/section-header/section-header.component';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { ToasterService } from '../../core/services/toaster.service';
 
 @Component({
   selector: 'profile',
@@ -20,21 +19,14 @@ import { ToasterService } from '../../core/services/toaster.service';
     NgTemplateOutlet
   ],
   standalone: true,
-  providers: [ ToasterService ]
+  providers: []
 })
 
 export class ProfileComponent {
-  toasterService = inject(ToasterService);
 
   constructor() {
-    this.toasterService.open({
-      message: 'Нимадир амалга оширишда муаммо юзага келди',
-      title: 'Диккат',
-      dismissible: true,
-      duration: 10000,
-      type: 'info'
-    })
   }
+
   menu = [
     {
       icon: 'icon:my-information',
@@ -66,5 +58,5 @@ export class ProfileComponent {
       link: 'settings',
       name: 'Настройки'
     }
-  ]
+  ];
 }

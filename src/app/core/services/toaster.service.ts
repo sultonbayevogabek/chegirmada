@@ -2,7 +2,9 @@ import { inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToasterComponent } from '../toaster/toaster.component';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 
 export class ToasterService {
   private _snackbar: MatSnackBar = inject(MatSnackBar);

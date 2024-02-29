@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UiButtonComponent } from '../ui-button/ui-button.component';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatPrefix } from '@angular/material/form-field';
 
 @Component({
   selector: 'login-dialog',
@@ -17,7 +19,10 @@ import { IconButtonComponent } from '../icon-button/icon-button.component';
     NgxMaskDirective,
     MatProgressSpinnerModule,
     UiButtonComponent,
-    IconButtonComponent
+    IconButtonComponent,
+    FormsModule,
+    MatPrefix,
+    ReactiveFormsModule
   ],
   standalone: true,
   providers: [
@@ -25,8 +30,14 @@ import { IconButtonComponent } from '../icon-button/icon-button.component';
   ]
 })
 
-export class LoginDialogComponent {
+export class LoginDialogComponent implements OnInit {
   selectedTab: 'phone' | 'code' | 'name' = 'phone';
+
+  phoneForm = new FormGroup({
+    phone_number: new FormControl('+998 ')
+  })
+  ngOnInit(): void {
+  }
 
   sendPhoneNumber(): void {
     this.selectedTab = 'code';

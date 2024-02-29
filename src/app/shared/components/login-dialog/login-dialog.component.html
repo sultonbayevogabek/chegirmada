@@ -20,10 +20,15 @@
       <h2 class="login-dialog-title">Введите номер телефона</h2>
       <p class="login-dialog-text">Отправим смс с кодом подтверждения</p>
 
-      <form class="login-dialog-form">
+      <form class="login-dialog-form" [formGroup]="phoneForm">
         <label class="login-dialog-label form-label">
           <span class="login-dialog-label-text form-label-text">Номер телефона</span>
-          <input class="login-dialog-phone-input form-input" type="text" mask="00 000 00 00" prefix="+998 ">
+          <input
+            class="login-dialog-phone-input form-input"
+            type="text"
+            [mask]="' 00 000 00 00'"
+            [prefix]="'+998'"
+            [formControlName]="'phone_number'">
         </label>
 
         <ui-button

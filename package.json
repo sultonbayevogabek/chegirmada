@@ -24,6 +24,8 @@
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@angular/youtube-player": "^17.1.2",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "angular8-yandex-maps": "^17.1.0",
     "lodash-es": "4.17.21",
     "ngx-mask": "^17.0.4",

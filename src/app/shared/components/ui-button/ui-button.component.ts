@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatRipple } from '@angular/material/core';
 import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'ui-button',
@@ -10,7 +11,8 @@ import { MatIcon } from '@angular/material/icon';
   imports: [
     MatRipple,
     NgClass,
-    MatIcon
+    MatIcon,
+    TranslateModule
   ],
   standalone: true
 })

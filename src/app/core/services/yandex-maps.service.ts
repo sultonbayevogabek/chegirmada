@@ -1,11 +1,13 @@
 import { YaApiLoaderService } from 'angular8-yandex-maps';
-import { computed, ElementRef, EventEmitter, inject, Injectable, signal } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ElementRef, inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { ToasterService } from './toaster.service';
 
 @Injectable()
 export class YandexMapsService {
   private _map: ymaps.Map;
   private _yandexApiLoaderService: YaApiLoaderService = inject(YaApiLoaderService);
+  private _toaster = inject(ToasterService);
   private _elementRef = inject(ElementRef);
   private _tashkent = [ 41.311151, 69.279737 ];
 
@@ -106,7 +108,21 @@ export class YandexMapsService {
         });
 
         geolocationControl.events.add('locationchange', e => {
-          this.setCoordinatesAndEmit(placeMark, e.get('position'), this._map);
+          const coordinates: number[] = e.get('position');
+
+          if (this._tashkent.toString() === coordinates.toString()) {
+            this.getUserGeoLocation()
+              .subscribe(res => {
+                console.log(res);
+              });
+            this._toaster.open({
+              type: 'warning',
+              title: 'Внимание',
+              message: 'Вы не разрешили определять ваше местоположение'
+            });
+            return;
+          }
+          this.setCoordinatesAndEmit(placeMark, coordinates, this._map);
         });
 
         this._map.controls.add(geolocationControl);
@@ -145,5 +161,14 @@ export class YandexMapsService {
     map.setCenter(coordinates);
     map.setZoom(17);
     this.coordinates$.next(coordinates);
+  }
+
+  getUserGeoLocation(): Observable<string | number[]> {
+    if (!('geolocations' in navigator)) {
+      return of('Ваше устройство не имеет возможности определять вашу геолокацию.');
+    }
+
+    return of([ 2 ]);
+
   }
 }

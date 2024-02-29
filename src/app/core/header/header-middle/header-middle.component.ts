@@ -7,6 +7,7 @@ import { WishListButtonComponent } from './wish-list-button/wish-list-button.com
 import { LoginButtonComponent } from './login-button/login-button.component';
 import { NgOptimizedImage } from '@angular/common';
 import { CategoriesPanelComponent } from './catalog-panel/categories-panel.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'header-middle',
@@ -20,7 +21,8 @@ import { CategoriesPanelComponent } from './catalog-panel/categories-panel.compo
     WishListButtonComponent,
     LoginButtonComponent,
     NgOptimizedImage,
-    CategoriesPanelComponent
+    CategoriesPanelComponent,
+    TranslateModule
   ],
   standalone: true
 })

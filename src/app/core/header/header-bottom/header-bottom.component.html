@@ -1,27 +1,13 @@
 <nav class="header-bottom-nav">
   <div class="container">
     <ul class="header-bottom-ul">
-      <li class="header-bottom-li">
-        <a class="header-bottom-link" [routerLink]="['/category/list-view']">Категории</a>
-      </li>
-      <li class="header-bottom-li">
-        <a class="header-bottom-link" [routerLink]="['/category/list-view']">Лучшие объявления</a>
-      </li>
-      <li class="header-bottom-li">
-        <a class="header-bottom-link" [routerLink]="['/category/list-view']">Объявления о начале скидки</a>
-      </li>
-      <li class="header-bottom-li">
-        <a class="header-bottom-link active" [routerLink]="['/category/list-view']">Для тебя</a>
-      </li>
-      <li class="header-bottom-li">
-        <a class="header-bottom-link" [routerLink]="['/category/list-view']">Скидки рядом</a>
-      </li>
-      <li class="header-bottom-li">
-        <a class="header-bottom-link" [routerLink]="['/category/list-view']">Последние просмотренные объявления</a>
-      </li>
-      <li class="header-bottom-li">
-        <a class="header-bottom-link" [routerLink]="['/category/list-view']">Остановленные объявления</a>
-      </li>
+      @for (navItem of navs; track navItem) {
+        <li class="header-bottom-li">
+          <a class="header-bottom-link" [routerLink]="['/category/list-view']">
+            {{ navItem| translate }}
+          </a>
+        </li>
+      }
     </ul>
   </div>
 </nav>

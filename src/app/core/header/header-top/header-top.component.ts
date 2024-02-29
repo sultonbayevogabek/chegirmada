@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { LanguageComponent } from './language/language.component';
 import { LinksComponent } from './links/links.component';
@@ -18,4 +18,5 @@ import { LocationComponent } from './location/location.component';
 })
 
 export class HeaderTopComponent {
+
 }
