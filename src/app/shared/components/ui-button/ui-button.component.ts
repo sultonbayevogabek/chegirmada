@@ -3,6 +3,7 @@ import { MatRipple } from '@angular/material/core';
 import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'ui-button',
@@ -12,7 +13,8 @@ import { TranslateModule } from '@ngx-translate/core';
     MatRipple,
     NgClass,
     MatIcon,
-    TranslateModule
+    TranslateModule,
+    MatProgressSpinner
   ],
   standalone: true
 })
@@ -22,4 +24,8 @@ export class UiButtonComponent {
   @Input() full = false;
   @Input() type: 'gray' | 'red' | 'blue' | 'gray-outline' | 'green-outline' = 'blue';
   @Input() icon: string;
+  @Input() actionType: 'submit' | 'reset' | 'button' = 'button';
+  @Input() disabled = false;
+  @Input() title: string;
+  @Input() loading = false;
 }

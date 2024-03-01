@@ -1,6 +1,6 @@
 <mat-dialog-content>
-  <div class="login-dialog-actions" [class.code]="selectedTab === 'code'">
-    @if (selectedTab === 'code') {
+  <div class="login-dialog-actions" [class.code]="step === 'code'">
+    @if (step === 'code') {
       <icon-button
         (click)="back()"
         [iconWidth]="1.25"
@@ -15,49 +15,60 @@
     />
   </div>
 
-  @if (selectedTab === 'phone') {
+  @if (step === 'phone') {
     <div class="login-dialog-content">
-      <h2 class="login-dialog-title">Введите номер телефона</h2>
-      <p class="login-dialog-text">Отправим смс с кодом подтверждения</p>
+      <h2 class="login-dialog-title">{{ 'enter.phone.number'| translate }}</h2>
+      <p class="login-dialog-text">{{ 'we.will.send.sms.with.code'| translate }}</p>
 
-      <form class="login-dialog-form" [formGroup]="phoneForm">
+      <form class="login-dialog-form" [formGroup]="phoneForm" (ngSubmit)="sendPhoneNumber()">
         <label class="login-dialog-label form-label">
-          <span class="login-dialog-label-text form-label-text">Номер телефона</span>
+          <span class="login-dialog-label-text form-label-text">{{ 'phone.number'| translate }}</span>
           <input
             class="login-dialog-phone-input form-input"
             type="text"
             [mask]="' 00 000 00 00'"
             [prefix]="'+998'"
-            [formControlName]="'phone_number'">
+            [formControlName]="'phoneNumber'">
         </label>
 
         <ui-button
-          (click)="sendPhoneNumber()"
-          [text]="'Получить код'"
+          [text]="'get.code'"
           [full]="true"
+          [actionType]="'submit'"
+          [disabled]="phoneForm.invalid"
+          [title]="phoneForm.invalid ? 'enter.your.phone.number.correctly' : ''"
+          [loading]="phoneForm.disabled"
         />
       </form>
     </div>
   }
 
-  @if (selectedTab === 'code') {
+  @if (step === 'code') {
     <div class="login-dialog-content">
-      <h2 class="login-dialog-title">Введите код</h2>
-      <p class="login-dialog-text">Для подтверждения телефона отправили 5-значный код на <strong>+998 33
-        695-95-50</strong></p>
+      <h2 class="login-dialog-title">{{ 'enter.code'| translate }}</h2>
+      <p class="login-dialog-text">
+        @if (activeLang === 'uz') {
+          <strong>+998{{ phoneForm.get('phoneNumber').value }}</strong>
+        }
+        {{ 'we.sent.five.digit.code.to'| translate }}
+
+        @if (activeLang === 'ru') {
+          <strong>+998{{ phoneForm.get('phoneNumber').value }}</strong>
+        }
+      </p>
 
       <form class="login-dialog-form">
         <div class="login-dialog-code">
-          <input class="login-dialog-code-input" type="text" mask="0">
-          <input class="login-dialog-code-input" type="text" mask="0">
-          <input class="login-dialog-code-input" type="text" mask="0">
-          <input class="login-dialog-code-input" type="text" mask="0">
-          <input class="login-dialog-code-input" type="text" mask="0">
+          <input #codeInput class="login-dialog-code-input" type="text" mask="0">
+          <input #codeInput class="login-dialog-code-input" type="text" mask="0">
+          <input #codeInput class="login-dialog-code-input" type="text" mask="0">
+          <input #codeInput class="login-dialog-code-input" type="text" mask="0">
+          <input #codeInput class="login-dialog-code-input" type="text" mask="0">
         </div>
 
         <ui-button
           (click)="sendCode()"
-          [text]="'Отправить'"
+          [text]="'send'"
           [full]="true"
         />
 
@@ -70,7 +81,7 @@
     </div>
   }
 
-  @if (selectedTab === 'name') {
+  @if (step === 'name') {
     <div class="login-dialog-content">
       <h2 class="login-dialog-title">Введите имя</h2>
 

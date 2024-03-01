@@ -3,6 +3,7 @@ import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar'
 import { IconButtonComponent } from '../../shared/components/icon-button/icon-button.component';
 import { NgClass, NgStyle } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'toaster',
@@ -12,7 +13,8 @@ import { MatIcon } from '@angular/material/icon';
     IconButtonComponent,
     NgStyle,
     NgClass,
-    MatIcon
+    MatIcon,
+    TranslateModule
   ],
   standalone: true
 })

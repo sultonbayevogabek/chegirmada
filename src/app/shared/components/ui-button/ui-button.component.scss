@@ -6,6 +6,7 @@
 }
 
 .ui-button {
+  @include flex-center-center(0.5rem);
   height: 2.75rem;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -27,6 +28,12 @@
   &.blue {
     background-color: $primary-blue-color;
     color: $white-color;
+
+    &[disabled] {
+      background-color: $secondary-text-color;
+      color: $white-color;
+      cursor: default;
+    }
   }
 
   &.gray-outline {
@@ -49,8 +56,11 @@
     @include flex-center-center(0.675rem);
   }
 
+  &.loading {
+    cursor: wait;
+  }
+
   .mat-icon {
     width: 1.25rem;
   }
 }
-

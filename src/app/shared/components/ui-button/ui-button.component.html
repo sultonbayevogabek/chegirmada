@@ -1,14 +1,24 @@
 <button
+  [type]="actionType"
+  [title]="title ? (title| translate) : ''"
+  [disabled]="disabled"
   [class]="'ui-button ' + type"
   [class.full]="full"
   [ngClass]="{
    'full': full,
-   'with-icon': icon
+   'with-icon': icon,
+   'loading': loading
   }"
   mat-ripple
 >
   @if (icon) {
     <mat-icon [svgIcon]="icon"/>
   }
-  <span>{{ text| translate }}</span>
+  @if (!loading) {
+    <span>{{ text| translate }}</span>
+  }
+
+  @if (loading) {
+    <mat-spinner class="ui-button-spinner" [diameter]="22"/>
+  }
 </button>

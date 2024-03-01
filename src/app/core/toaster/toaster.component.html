@@ -6,10 +6,10 @@
 
     <div class="toaster-body">
       @if (data.title) {
-        <div class="toaster-title">{{ data.title }}</div>
+        <div class="toaster-title">{{ data.title| translate }}</div>
       }
 
-      <p class="toaster-text">{{ data.message }}</p>
+      <p class="toaster-text">{{ data.message| translate }}</p>
     </div>
 
     <icon-button
