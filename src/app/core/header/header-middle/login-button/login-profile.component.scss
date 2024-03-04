@@ -1,0 +1,22 @@
+@import "variables";
+@import "mixins";
+
+.profile {
+  @include flex-center-center(0.5rem);
+  max-width: 15rem;
+  cursor: pointer;
+}
+
+.profile-logo {
+  position: relative;
+  width: 2.75rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: $background-grey-color;
+}
+
+.profile-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $dialog-title-black;
+}

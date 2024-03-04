@@ -1,6 +1,6 @@
 <section class="profile section">
   <div class="container">
-    <section-header [heading]="'Мой кабинет'"/>
+    <section-header [heading]="'my.profile'"/>
 
     <div class="profile-inner">
       <aside class="profile-menu">
@@ -22,7 +22,7 @@
       <li class="profile-menu-item" mat-ripple [routerLink]="[menuItem.link]" [routerLinkActive]="'active'">
         <a class="profile-menu-link">
           <mat-icon [svgIcon]="menuItem.icon"/>
-          <span>{{ menuItem.name }}</span>
+          <span>{{ menuItem.name| translate }}</span>
         </a>
       </li>
     }
@@ -30,7 +30,7 @@
     <li class="profile-menu-item exit" mat-ripple>
       <a class="profile-menu-link">
         <mat-icon [svgIcon]="'icon:logout'"/>
-        <span>Выход</span>
+        <span>{{ 'exit'| translate }}</span>
       </a>
     </li>
   </ul>

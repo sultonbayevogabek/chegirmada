@@ -1,16 +1,54 @@
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { UserModel } from '../models/user.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 
 export class AuthService {
-  private _httpClient = inject(HttpClient);
   private _host = environment.host;
-  sendPhoneNumber(phoneNumber: string): Observable<{ success: boolean }> {
-    return this._httpClient.post<{ success: boolean }>(this._host + 'auth/code/', {
+  private _httpClient = inject(HttpClient);
+
+  currentUser: UserModel;
+
+  public currentUser$: BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>(null);
+
+  sendPhoneNumber(phoneNumber: string): Observable<{ code: number }> {
+    return this._httpClient.post<{ code: number }>(this._host + 'auth/code/', {
       phone_number: phoneNumber
-    })
+    });
+  }
+
+  sendCode(phoneNumber: string, code: string): Observable<{ token: string }> {
+    return this._httpClient.post<{ token: string }>(this._host + 'auth/token/', {
+      phone_number: phoneNumber,
+      auth_code: code
+    });
+  }
+
+  getUserByToken(): Observable<UserModel> {
+    if (this.currentUser) {
+      return of(this.currentUser);
+    }
+
+    return this._httpClient.get<UserModel>(this._host + 'users/profile/')
+      .pipe(
+        switchMap((user: UserModel) => {
+          this.currentUser = user;
+          this.currentUser$.next(user);
+          return of(user);
+        }),
+        catchError(() => {
+          this.currentUser$.next(null);
+          return of(null);
+        })
+      );
+  }
+
+  get token(): string {
+    return localStorage.getItem('token') || '';
   }
 }

@@ -78,6 +78,7 @@ img {
 }
 
 .form-label {
+  position: relative;
   display: block;
 }
 
@@ -102,6 +103,11 @@ img {
   &:focus {
     background-color: $white-color;
     border: 1px solid $border-grey-color;
+  }
+
+  &.invalid {
+    border: 1px solid $primary-red-color;
+    color: $primary-red-color;
   }
 }
 
@@ -149,6 +155,14 @@ img {
   .mdc-radio__outer-circle {
     border-width: 1px;
   }
+}
+
+.form-error {
+  display: block;
+  padding-top: 0.25rem;
+  font-size: 0.75rem;
+  color: $primary-red-color;
+  @include line-clamp(1)
 }
 
 .carousel-navigation-button {
@@ -232,8 +246,20 @@ div.mat-mdc-select-panel {
   color: $dialog-title-black;
 }
 
-.solid-select .mat-mdc-select-trigger {
-  background-color: $input-background;
+.solid-select {
+  .mat-mdc-select-trigger {
+    background-color: $input-background;
+    border: 1px solid $input-background;
+  }
+
+  &[aria-expanded="true"] .mat-mdc-select-trigger {
+    background-color: $white-color;
+    border: 1px solid $border-grey-color;
+  }
+
+  &.invalid .mat-mdc-select-trigger {
+    border: 1px solid $primary-red-color
+  }
 }
 
 .outlined-select .mat-mdc-select-trigger {

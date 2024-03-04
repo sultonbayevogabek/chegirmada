@@ -1,15 +1,15 @@
 import {
-  AfterViewChecked,
   AfterViewInit,
   Component,
-  DestroyRef, ElementRef,
+  DestroyRef,
+  ElementRef,
   inject,
   OnInit,
-  QueryList, Renderer2,
+  QueryList,
   ViewChildren
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogClose, MatDialogContent } from '@angular/material/dialog';
+import { MatDialogClose, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UiButtonComponent } from '../ui-button/ui-button.component';
@@ -17,10 +17,13 @@ import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatPrefix } from '@angular/material/form-field';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ToasterComponent } from '../../../core/toaster/toaster.component';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DecimalPipe } from '@angular/common';
+import { PhoneNumberPipe } from '../../../core/pipes/phone-number.pipe';
+import { interval, Subscription } from 'rxjs';
+import { ScrollbarDirective } from '../../directives/scrollbar/scrollbar.directive';
 
 @Component({
   selector: 'login-dialog',
@@ -37,7 +40,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     FormsModule,
     MatPrefix,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateModule,
+    DecimalPipe,
+    PhoneNumberPipe,
+    ScrollbarDirective
   ],
   standalone: true,
   providers: [
@@ -47,23 +53,33 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 
 export class LoginDialogComponent implements OnInit, AfterViewInit {
-  codeInputs: QueryList<ElementRef<HTMLInputElement>>;
-
   @ViewChildren('codeInput') set getCodeInputs(codeInputs: QueryList<ElementRef<HTMLInputElement>>) {
     this.codeInputsHandler(codeInputs);
   }
 
   private _translateService = inject(TranslateService);
+  private _dialogRef = inject(MatDialogRef);
   private _toaster = inject(ToasterService);
   private _authService = inject(AuthService);
   private _destroyRef = inject(DestroyRef);
-  private _renderer = inject(Renderer2);
+  private _intervalSubscription: Subscription;
 
   activeLang = 'uz';
-  step: 'phone' | 'code' | 'name' = 'phone';
+  step: 'phone' | 'code' = 'phone';
 
   phoneForm = new FormGroup({
     phoneNumber: new FormControl('+998 ', [ Validators.minLength(9) ])
+  });
+
+  codeForm = new FormGroup({
+    '0': new FormControl('', [ Validators.required ]),
+    '1': new FormControl('', [ Validators.required ]),
+    '2': new FormControl('', [ Validators.required ]),
+    '3': new FormControl('', [ Validators.required ]),
+    '4': new FormControl('', [ Validators.required ]),
+    attemptsCount: new FormControl(0),
+    remainedTime: new FormControl(60),
+    invalidCode: new FormControl(true)
   });
 
   ngOnInit(): void {
@@ -71,43 +87,57 @@ export class LoginDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.codeInputs);
   }
 
   sendPhoneNumber(): void {
-    if (this.phoneForm.invalid) {
-      this._toaster.open({
-        title: 'dear.user',
-        message: 'enter.your.phone.number.correctly',
-        type: 'warning'
-      });
+    if (this.phoneForm.invalid || this.phoneForm.disabled) {
       return;
     }
+
+    if (this._intervalSubscription) {
+      this._intervalSubscription.unsubscribe();
+    }
+
     this.phoneForm.disable();
-    this._authService.sendPhoneNumber(`+998${this.phoneForm.get('phoneNumber').value}`)
+
+    this._authService.sendPhoneNumber(`+998${ this.phoneForm.get('phoneNumber').value }`)
       .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(res => {
-        this.phoneForm.enable();
-        this.step = 'code';
+      .subscribe({
+        next: res => {
+          this.phoneForm.enable();
+
+          if (!res.code) {
+            return;
+          }
+
+          this.resetCodeForm();
+          this.countDown();
+          this.step = 'code';
+        },
+        error: _ => {
+          this.phoneForm.enable();
+          this._toaster.open({
+            title: 'dear.user',
+            message: 'enter.your.phone.number.correctly',
+            type: 'error'
+          });
+        }
       });
-  }
-
-  back(): void {
-    this.step = 'phone';
-  }
-
-  sendCode(): void {
-    this.step = 'name';
   }
 
   codeInputsHandler(codeInputs: QueryList<ElementRef<HTMLInputElement>>): void {
+    codeInputs.first?.nativeElement.focus();
+
     codeInputs.forEach((input, index) => {
       input.nativeElement.onkeydown = (e: KeyboardEvent) => {
-        e.preventDefault();
         const key = e.key;
 
+        if (key !== 'Enter') {
+          e.preventDefault();
+        }
+
         if (key === 'Backspace') {
-          this._renderer.setProperty(input.nativeElement, 'value', '');
+          this.codeForm.get(index.toString()).setValue('');
 
           if (!index) {
             return;
@@ -118,12 +148,113 @@ export class LoginDialogComponent implements OnInit, AfterViewInit {
         }
 
         if (/^\d+$/.test(key)) {
-          this._renderer.setProperty(input.nativeElement, 'value', key);
+          this.codeForm.get(index.toString()).setValue(key);
+
           if (index < 4) {
             codeInputs.get(index + 1).nativeElement.focus();
           }
         }
       };
     });
+  }
+
+  back(): void {
+    this.resetCodeForm();
+    this.step = 'phone';
+  }
+
+  sendCode(): void {
+    if (this.codeForm.get('attemptsCount').value === 3) {
+      this._toaster.open({
+        title: 'dear.user',
+        message: 'attempts.exceeded',
+        type: 'warning'
+      });
+      return;
+    }
+
+    if (!this.codeForm.get('remainedTime').value) {
+      this._toaster.open({
+        title: 'dear.user',
+        message: 'you.have.timed.out.to.enter.your.verification.code',
+        type: 'warning'
+      });
+      return;
+    }
+
+    if (this.codeForm.invalid || this.codeForm.disabled) {
+      return;
+    }
+
+    let phoneNumber = `+998${ this.phoneForm.get('phoneNumber').value }`;
+    let code = '';
+    for (let i = 0; i < 5; i++) {
+      code += this.codeForm.get(i.toString()).value;
+    }
+    this.codeForm.disable();
+
+    this._authService.sendCode(phoneNumber, code)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: res => {
+          if (res.token) {
+            localStorage.setItem('token', res.token);
+            this._dialogRef.close({
+              authorized: true
+            })
+          }
+        },
+        error: err => {
+          this.codeForm.enable();
+
+          let attempts = this.codeForm.get('attemptsCount').value;
+          this.codeForm.get('attemptsCount').setValue(++attempts);
+
+          let errorMessage = '';
+
+          if (err?.detail?.auth_code?.includes('Invalid auth code')) {
+            errorMessage = 'entered.code.is.incorrect';
+            this.codeForm.get('invalidCode').setValue(true);
+          }
+
+          this._toaster.open({
+            message: errorMessage,
+            type: 'error',
+            title: 'attention'
+          });
+        }
+      });
+  }
+
+  countDown(): void {
+    let remainedTime = this.codeForm.get('remainedTime').value;
+    this._intervalSubscription = interval(1000)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(_ => {
+        if (!remainedTime) {
+          this._intervalSubscription.unsubscribe();
+          return;
+        }
+
+        remainedTime--;
+        this.codeForm.get('remainedTime').setValue(remainedTime);
+      });
+  }
+
+  resetCodeForm(): void {
+    this.codeForm.reset({
+      '0': '',
+      '1': '',
+      '2': '',
+      '3': '',
+      '4': '',
+      attemptsCount: 0,
+      remainedTime: 60,
+      invalidCode: false
+    });
+  }
+
+  resendCode(): void {
+    this.sendPhoneNumber();
   }
 }

@@ -4,6 +4,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'profile',
@@ -16,7 +17,8 @@ import { NgTemplateOutlet } from '@angular/common';
     MatRipple,
     RouterOutlet,
     RouterLinkActive,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    TranslateModule
   ],
   standalone: true,
   providers: []
@@ -31,32 +33,32 @@ export class ProfileComponent {
     {
       icon: 'icon:my-information',
       link: 'my-information',
-      name: 'Моя информация'
+      name: 'my.information'
     },
     {
       icon: 'icon:my-information',
       link: 'my-announcements',
-      name: 'Мои объявления'
+      name: 'my.announcements'
     },
     {
       icon: 'icon:my-information',
       link: 'branches',
-      name: 'Филиалы'
+      name: 'branches'
     },
     {
       icon: 'icon:favourite-companies',
       link: 'favourite-companies',
-      name: 'Следующая компания'
+      name: 'favourite.brands'
     },
     {
       icon: 'icon:like-outline',
       link: 'favourite-products',
-      name: 'Нравится'
+      name: 'liked.announcements'
     },
     {
       icon: 'icon:settings',
       link: 'settings',
-      name: 'Настройки'
+      name: 'settings'
     }
   ];
 }

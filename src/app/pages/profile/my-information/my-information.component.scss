@@ -35,3 +35,15 @@
   @include grid(repeat(3, 1fr), 1.25rem);
   padding-top: 1rem;
 }
+
+.my-information-calendar-icon {
+  position: absolute;
+  top: 1.125rem;
+  right: 1rem;
+  transform: translateY(50%);
+  cursor: pointer;
+}
+
+.my-information-submit {
+  margin-left: auto;
+}

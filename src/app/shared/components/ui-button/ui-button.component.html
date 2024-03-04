@@ -10,6 +10,7 @@
    'loading': loading
   }"
   mat-ripple
+  [matRippleDisabled]="loading"
 >
   @if (icon) {
     <mat-icon [svgIcon]="icon"/>

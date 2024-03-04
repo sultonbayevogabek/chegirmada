@@ -1,53 +1,137 @@
 <div class="my-information">
   <div class="my-information-header">
-    <h2 class="my-information-heading">Моя информация</h2>
+    <h2 class="my-information-heading">{{ 'my.information'| translate }}</h2>
 
     <button class="my-information-add-company" mat-ripple [matRippleColor]="'#0CA4FA12'">
       <mat-icon [svgIcon]="'icon:solid-plus'"/>
-      <span>Добавить компанию</span>
+      <span>{{ 'add.company'| translate }}</span>
     </button>
   </div>
 
-  <form class="my-information-form">
+  <form class="my-information-form" [formGroup]="myInfoForm" (ngSubmit)="updateInformation()">
     <div class="my-information-fields">
       <label class="my-information-label form-label">
-        <span class="my-information-label-text form-label-text">Ваше имя</span>
-        <input class="my-information-input form-input" type="text" [value]="'Огабек'">
+        <span class="my-information-label-text form-label-text">{{ 'name'| translate }} *</span>
+        <input
+          class="my-information-input form-input"
+          [class.invalid]="myInfoForm.get('full_name').invalid && myInfoForm.get('full_name').touched"
+          type="text"
+          [placeholder]="'name'| translate"
+          [formControlName]="'full_name'"
+        >
+        @if (myInfoForm.get('full_name').invalid && myInfoForm.get('full_name').touched) {
+          <span class="form-error">{{ 'required.field'| translate }}</span>
+        }
       </label>
 
       <label class="my-information-label form-label">
-        <span class="my-information-label-text form-label-text">Электронная почта</span>
-        <input class="my-information-input form-input" type="text" [value]="'sultonbayev@gmail.com'">
+        <span class="my-information-label-text form-label-text">{{ 'date.of.birth'| translate }} *</span>
+        <input
+          class="my-information-input form-input"
+          [class.invalid]="myInfoForm.get('birthday').invalid && myInfoForm.get('birthday').touched"
+          type="text"
+          [readOnly]="true"
+          [placeholder]="'dd.mm.yyyy'| translate"
+          [matDatepicker]="fromDatePicker"
+          [formControlName]="'birthday'"
+        >
+
+        <mat-icon
+          class="my-information-calendar-icon"
+          [svgIcon]="'icon:calendar'"
+          (click)="fromDatePicker.open()"
+        ></mat-icon>
+        <mat-datepicker #fromDatePicker></mat-datepicker>
+
+        @if (myInfoForm.get('birthday').invalid && myInfoForm.get('birthday').touched) {
+          <span class="form-error">{{ 'required.field'| translate }}</span>
+        }
       </label>
 
       <label class="my-information-label form-label">
-        <span class="my-information-label-text form-label-text">Дата рождения</span>
-        <input class="my-information-input form-input" type="text" [value]="'31.10.1999'">
+        <span class="my-information-label-text form-label-text">{{ 'gender'| translate }} *</span>
+
+        <mat-select
+          class="solid-select"
+          [class.invalid]="myInfoForm.get('gender').invalid && myInfoForm.get('gender').touched"
+          [formControlName]="'gender'"
+          [placeholder]="'gender'| translate"
+        >
+          <mat-option [value]="0">{{ 'male'| translate }}</mat-option>
+          <mat-option [value]="1">{{ 'female'| translate }}</mat-option>
+        </mat-select>
+
+        @if (myInfoForm.get('gender').invalid && myInfoForm.get('gender').touched) {
+          <span class="form-error">{{ 'required.field'| translate }}</span>
+        }
       </label>
 
       <label class="my-information-label form-label">
-        <span class="my-information-label-text form-label-text">Фамилия</span>
-        <input class="my-information-input form-input" type="text" [value]="'Султонбаев'">
+        <span class="my-information-label-text form-label-text">{{ 'region'| translate }} *</span>
+
+        <mat-select
+          class="solid-select"
+          [class.invalid]="myInfoForm.get('region').invalid && myInfoForm.get('region').touched"
+          [formControlName]="'region'"
+          [placeholder]="'region'| translate"
+        >
+          @for (region of regions; track region) {
+            <mat-option [value]="region.id">{{ region.name| translate }}</mat-option>
+          }
+        </mat-select>
+
+        @if (myInfoForm.get('region').invalid && myInfoForm.get('region').touched) {
+          <span class="form-error">{{ 'required.field'| translate }}</span>
+        }
       </label>
 
       <label class="my-information-label form-label">
-        <span class="my-information-label-text form-label-text">Адрес</span>
-        <input class="my-information-input form-input" type="text" [value]="'ул.Истикбол 18а'">
+        <span class="my-information-label-text form-label-text">{{ 'district'| translate }} *</span>
+
+        <mat-select
+          class="solid-select"
+          [class.invalid]="myInfoForm.get('district').invalid && myInfoForm.get('district').touched"
+          [formControlName]="'district'"
+          [placeholder]="'district'| translate"
+        >
+          @for (district of districts; track district) {
+            <mat-option [value]="district.id">{{ district.name_uz }}</mat-option>
+          }
+        </mat-select>
+
+        @if (myInfoForm.get('district').invalid && myInfoForm.get('district').touched) {
+          <span class="form-error">{{ 'required.field'| translate }}</span>
+        }
       </label>
 
       <label class="my-information-label form-label">
-        <span class="my-information-label-text form-label-text">Номер телефона</span>
-        <input class="my-information-input form-input" type="text" [value]="'+99 899 963 97 73'">
+        <span class="my-information-label-text form-label-text">{{ 'phone.number'| translate }}</span>
+        <input
+          class="my-information-input form-input"
+          type="text"
+          [readOnly]="true"
+          [formControlName]="'phone_number'"
+        >
       </label>
 
       <label class="my-information-label form-label">
-        <span class="my-information-label-text form-label-text">Пол</span>
-        <input class="my-information-input form-input" type="text" [value]="'Мужской'">
+        <span class="my-information-label-text form-label-text">{{ 'email'| translate }}</span>
+        <input
+          class="my-information-input form-input"
+          type="text"
+          [mask]="'A*@A*.SSS'"
+          [validation]="true"
+          [dropSpecialCharacters]="false"
+          [placeholder]="'email'| translate"
+          [formControlName]="'email'"
+        >
       </label>
     </div>
 
     <ui-button
-      [text]="'Сохранить'"
+      class="my-information-submit"
+      [actionType]="'submit'"
+      [loading]="myInfoForm.disabled"
     />
   </form>
 </div>

@@ -4,10 +4,18 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideIcons } from './config/icons/icons.provider';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AngularYandexMapsModule, YaConfig } from 'angular8-yandex-maps';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { TranslateLoader, TranslateModule, TranslatePipe } from "@ngx-translate/core";
+import { TranslateLoader, TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
+import { loggingInterceptor } from './core/interceptors/logging.interceptor';
+import { languageInterceptor } from './core/interceptors/language.interceptor';
+import { errorInterceptor } from './core/interceptors/error.interceptor';
+import localeRu from '@angular/common/locales/ru';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeRu);
 
 // Yandex Map Config
 const mapConfig: YaConfig = {
@@ -25,9 +33,9 @@ const I18N_CONFIG = {
   loader: {
     provide: TranslateLoader,
     useFactory: HttpLoaderFactory,
-    deps: [HttpClient]
+    deps: [ HttpClient ]
   }
-}
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -37,8 +45,16 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       HttpClientModule
     ),
-    { provide: LOCALE_ID, useValue: 'ru-RU' },
+    { provide: LOCALE_ID, useValue: 'ru' },
     importProvidersFrom(AngularYandexMapsModule.forRoot(mapConfig)),
-    importProvidersFrom(TranslateModule.forRoot(I18N_CONFIG))
+    importProvidersFrom(TranslateModule.forRoot(I18N_CONFIG)),
+    provideHttpClient(
+      withInterceptors([
+        authInterceptor,
+        loggingInterceptor,
+        languageInterceptor,
+        errorInterceptor
+      ])
+    )
   ]
 };

@@ -20,7 +20,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 })
 
 export class UiButtonComponent {
-  @Input() text = 'Сохранить'
+  @Input() text = 'save'
   @Input() full = false;
   @Input() type: 'gray' | 'red' | 'blue' | 'gray-outline' | 'green-outline' = 'blue';
   @Input() icon: string;

@@ -4,7 +4,7 @@ import { HeaderMiddleComponent } from './header-middle/header-middle.component';
 import { HeaderBottomComponent } from './header-bottom/header-bottom.component';
 
 @Component({
-  selector: 'header',
+  selector: 'site-header',
   templateUrl: './header.component.html',
   imports: [
     HeaderTopComponent,

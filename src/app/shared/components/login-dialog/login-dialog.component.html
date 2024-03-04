@@ -1,20 +1,19 @@
-<mat-dialog-content>
-  <div class="login-dialog-actions" [class.code]="step === 'code'">
-    @if (step === 'code') {
-      <icon-button
-        (click)="back()"
-        [iconWidth]="1.25"
-        [icon]="'icon:arrow-back'"
-      />
-    }
-
+<div class="login-dialog-actions" [class.code]="step === 'code'">
+  @if (step === 'code') {
     <icon-button
       (click)="back()"
-      [iconWidth]="0.875"
-      mat-dialog-close
+      [iconWidth]="1.25"
+      [icon]="'icon:arrow-back'"
     />
-  </div>
+  }
 
+  <icon-button
+    (click)="back()"
+    [iconWidth]="0.875"
+    mat-dialog-close
+  />
+</div>
+<mat-dialog-content style="overflow: hidden" scrollbar [scrollbarOptions]="{}">
   @if (step === 'phone') {
     <div class="login-dialog-content">
       <h2 class="login-dialog-title">{{ 'enter.phone.number'| translate }}</h2>
@@ -47,53 +46,45 @@
     <div class="login-dialog-content">
       <h2 class="login-dialog-title">{{ 'enter.code'| translate }}</h2>
       <p class="login-dialog-text">
-        @if (activeLang === 'uz') {
-          <strong>+998{{ phoneForm.get('phoneNumber').value }}</strong>
-        }
-        {{ 'we.sent.five.digit.code.to'| translate }}
-
-        @if (activeLang === 'ru') {
-          <strong>+998{{ phoneForm.get('phoneNumber').value }}</strong>
-        }
+        {{ 'we.sent.five.digit.code.to'| translate:
+        { phone: ('+998' + phoneForm.get('phoneNumber').value)| phoneNumber }
+        }}
       </p>
 
-      <form class="login-dialog-form">
-        <div class="login-dialog-code">
-          <input #codeInput class="login-dialog-code-input" type="text" mask="0">
-          <input #codeInput class="login-dialog-code-input" type="text" mask="0">
-          <input #codeInput class="login-dialog-code-input" type="text" mask="0">
-          <input #codeInput class="login-dialog-code-input" type="text" mask="0">
-          <input #codeInput class="login-dialog-code-input" type="text" mask="0">
+      <form class="login-dialog-form" [formGroup]="codeForm" (ngSubmit)="sendCode()">
+        <div class="login-dialog-code" [class.invalid-code]="codeForm.get('invalidCode').value">
+          <input class="login-dialog-code-input" #codeInput [formControlName]="'0'" [mask]="'0'">
+          <input class="login-dialog-code-input" #codeInput [formControlName]="'1'" [mask]="'0'">
+          <input class="login-dialog-code-input" #codeInput [formControlName]="'2'" [mask]="'0'">
+          <input class="login-dialog-code-input" #codeInput [formControlName]="'3'" [mask]="'0'">
+          <input class="login-dialog-code-input" #codeInput [formControlName]="'4'" [mask]="'0'">
         </div>
 
         <ui-button
-          (click)="sendCode()"
           [text]="'send'"
           [full]="true"
+          [loading]="codeForm.disabled"
+          [actionType]="'submit'"
+          [disabled]="codeForm.invalid"
         />
 
         <div class="login-dialog-timer">
-          <p class="login-dialog-timer-text">Если код не придёт, можно получить новый через 36 сек</p>
-
-          <!--<button class="login-dialog-timer-resend">Отправить код повторно</button>-->
+          @if (codeForm.get('remainedTime').value) {
+            <p class="login-dialog-timer-text">
+              {{ 'if.you.do.not.receive.verification.code.you.can.get.new.code.after.few.seconds'| translate:
+              { remainedTime: codeForm.get('remainedTime').value }
+              }}
+            </p>
+          }
+          @else {
+            <button
+              type="button"
+              (click)="sendPhoneNumber()"
+              class="login-dialog-timer-resend">
+              {{ 'resend.the.code'| translate }}
+            </button>
+          }
         </div>
-      </form>
-    </div>
-  }
-
-  @if (step === 'name') {
-    <div class="login-dialog-content">
-      <h2 class="login-dialog-title">Введите имя</h2>
-
-      <form class="login-dialog-form">
-        <label class="login-dialog-label form-label">
-          <input class="login-dialog-phone-input form-input" type="text" placeholder="Имя">
-        </label>
-
-        <ui-button
-          [text]="'Продолжать'"
-          [full]="true"
-        />
       </form>
     </div>
   }

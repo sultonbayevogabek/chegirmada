@@ -4,7 +4,7 @@ import { DragAndDropDirective } from '../../../../../core/directives/drag-and-dr
 import { IconButtonComponent } from '../../../../../shared/components/icon-button/icon-button.component';
 import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
 import { MatIcon } from '@angular/material/icon';
-import { MatNativeDateModule, MatRipple } from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule, MatRipple } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({

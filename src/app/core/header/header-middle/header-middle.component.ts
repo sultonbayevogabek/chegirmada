@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { GlobalSearchComponent } from './global-search/global-search.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { WishListButtonComponent } from './wish-list-button/wish-list-button.component';
-import { LoginButtonComponent } from './login-button/login-button.component';
+import { LoginProfileComponent } from './login-button/login-profile.component';
 import { NgOptimizedImage } from '@angular/common';
 import { CategoriesPanelComponent } from './catalog-panel/categories-panel.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -19,7 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
     GlobalSearchComponent,
     NotificationsComponent,
     WishListButtonComponent,
-    LoginButtonComponent,
+    LoginProfileComponent,
     NgOptimizedImage,
     CategoriesPanelComponent,
     TranslateModule

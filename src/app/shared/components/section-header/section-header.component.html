@@ -1,5 +1,8 @@
-<div class="section-header" [class.clickable]="url" [routerLink]="[url]">
-  <h2>{{ heading }}</h2>
+<div
+  class="section-header"
+  [class.clickable]="url"
+  [routerLink]="url ? [url] : null">
+  <h2>{{ heading| translate }}</h2>
 
   @if (url) {
     <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
