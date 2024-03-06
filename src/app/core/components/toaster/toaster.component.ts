@@ -1,9 +1,9 @@
 import { Component, inject, Inject } from '@angular/core';
 import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar';
-import { IconButtonComponent } from '../../shared/components/icon-button/icon-button.component';
 import { NgClass, NgStyle } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
 
 @Component({
   selector: 'toaster',

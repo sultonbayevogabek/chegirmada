@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './core/header/header.component';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 
@@ -13,8 +12,7 @@ export interface ILanguageOption {
   templateUrl: 'app.component.html',
   styleUrl: 'app.component.scss',
   imports: [
-    RouterOutlet,
-    HeaderComponent
+    RouterOutlet
   ],
   standalone: true
 })

@@ -5,14 +5,12 @@ import { ProductsSectionComponent } from '../../shared/components/products-secti
 import { BannerComponent } from '../../shared/components/banner/banner.component';
 import { PartnersComponent } from './partners/partners.component';
 import { DownloadAppComponent } from '../../shared/components/download-app/download-app.component';
-import { HeaderComponent } from '../../core/header/header.component';
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html',
   standalone: true,
   imports: [
-    HeaderComponent,
     IntroBannerComponent,
     CategoriesCarouselComponent,
     ProductsSectionComponent,

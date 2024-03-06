@@ -1,12 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { AsyncPipe, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
+import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRippleModule } from '@angular/material/core';
-import { OverlayComponent } from '../../../../shared/components/overlay-panel/overlay-panel.component';
-import { ScrollbarDirective } from '../../../../shared/directives/scrollbar/scrollbar.directive';
 import { TranslateModule } from '@ngx-translate/core';
+import { OverlayComponent } from '../../../../../shared/components/overlay-panel/overlay-panel.component';
+import { ScrollbarDirective } from '../../../../../shared/directives/scrollbar/scrollbar.directive';
 
 @Component({
   selector: 'global-search',

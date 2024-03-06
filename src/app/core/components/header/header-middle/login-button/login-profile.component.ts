@@ -1,14 +1,14 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginDialogComponent } from '../../../../shared/components/login-dialog/login-dialog.component';
-import { UiButtonComponent } from '../../../../shared/components/ui-button/ui-button.component';
-import { AuthService } from '../../../services/auth.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
-import { UserModel } from '../../../models/user.model';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { UiButtonComponent } from '../../../../../shared/components/ui-button/ui-button.component';
+import { AuthService } from '../../../../services/auth.service';
+import { UserModel } from '../../../../models/user.model';
+import { LoginDialogComponent } from '../../../../../shared/components/login-dialog/login-dialog.component';
 
 @Component({
   selector: 'login-profile',

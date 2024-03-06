@@ -1,7 +1,8 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet, Event } from '@angular/router';
-import { HeaderComponent } from '../core/header/header.component';
+import { HeaderComponent } from '../core/components/header/header.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ScrollToTopComponent } from '../core/components/scroll-to-top/scroll-to-top.component';
 
 @Component({
   selector: 'pages',
@@ -9,7 +10,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: 'pages.component.scss',
   imports: [
     RouterOutlet,
-    HeaderComponent
+    HeaderComponent,
+    ScrollToTopComponent
   ],
   standalone: true
 })
