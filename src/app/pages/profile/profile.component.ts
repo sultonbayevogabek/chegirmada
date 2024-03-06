@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SectionHeaderComponent } from '../../shared/components/section-header/section-header.component';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'profile',
@@ -25,6 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 
 export class ProfileComponent {
+  private _authService = inject(AuthService);
 
   constructor() {
   }
@@ -61,4 +63,8 @@ export class ProfileComponent {
       name: 'settings'
     }
   ];
+
+  signOut(): void {
+    this._authService.signOut();
+  }
 }

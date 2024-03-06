@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatNativeDateModule, MatOption, MatRipple } from '@angular/material/core';
 import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';

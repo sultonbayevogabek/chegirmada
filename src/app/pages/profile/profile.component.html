@@ -27,7 +27,7 @@
       </li>
     }
 
-    <li class="profile-menu-item exit" mat-ripple>
+    <li class="profile-menu-item exit" mat-ripple (click)="signOut()">
       <a class="profile-menu-link">
         <mat-icon [svgIcon]="'icon:logout'"/>
         <span>{{ 'exit'| translate }}</span>

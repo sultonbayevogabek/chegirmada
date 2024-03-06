@@ -3,6 +3,7 @@ import { BehaviorSubject, catchError, Observable, of, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { UserModel } from '../models/user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { UserModel } from '../models/user.model';
 export class AuthService {
   private _host = environment.host;
   private _httpClient = inject(HttpClient);
+  private _router = inject(Router);
 
   currentUser: UserModel;
 
@@ -50,5 +52,12 @@ export class AuthService {
 
   get token(): string {
     return localStorage.getItem('token') || '';
+  }
+
+  signOut(): void {
+    this.currentUser = null;
+    this.currentUser$.next(null);
+    localStorage.removeItem('token');
+    this._router.navigate(['/']);
   }
 }
