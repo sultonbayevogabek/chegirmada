@@ -1,3 +1,3 @@
 export const environment = {
-  host: 'http://api.aksiyamix.uz/api/v1/'
+  host: 'https://api.aksiyamix.uz/api/v1/'
 }

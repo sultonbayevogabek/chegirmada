@@ -6,7 +6,7 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./pages/pages.component').then(c => c.PagesComponent),
-    //resolve: { initialData: initialDataResolver },
+    resolve: { initialData: initialDataResolver },
     children: [
       {
         path: '',
