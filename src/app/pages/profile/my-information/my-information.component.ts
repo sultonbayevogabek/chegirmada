@@ -9,11 +9,12 @@ import { MatSelect } from '@angular/material/select';
 import { UserModel } from '../../../core/models/user.model';
 import { AuthService } from '../../../core/services/auth.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DISTRICTS, REGIONS } from '../../../core/constants/regions';
+import { REGIONS } from '../../../core/constants/regions';
 import { MyInformationService } from '../../../core/services/my-information.service';
 import { MatDatepicker, MatDatepickerInput, MatDatepickerModule } from '@angular/material/datepicker';
 import { formatDate } from '@angular/common';
 import { ToasterService } from '../../../core/services/toaster.service';
+import { DistrictModel } from '../../../core/models/district.model';
 
 @Component({
   selector: 'my-information',
@@ -46,16 +47,17 @@ export class MyInformationComponent implements OnInit {
   private _toasterService = inject(ToasterService);
   private _destroyRef = inject(DestroyRef);
   protected readonly regions = REGIONS;
-  protected readonly districts = DISTRICTS;
+
+  districts: DistrictModel[] = [];
   currentUser: UserModel;
   myInfoForm = new FormGroup({
     phone_number: new FormControl({ value: null, disabled: true }, [ Validators.required ]),
     email: new FormControl(null),
     full_name: new FormControl(null, [ Validators.required ]),
-    gender: new FormControl(null, [ Validators.required ]),
-    region: new FormControl(null, [ Validators.required ]),
-    district: new FormControl(null, [ Validators.required ]),
-    birthday: new FormControl(null, [ Validators.required ])
+    gender: new FormControl(null),
+    region: new FormControl(null),
+    district: new FormControl(null),
+    birthday: new FormControl(null)
   });
 
   ngOnInit(): void {
@@ -63,7 +65,10 @@ export class MyInformationComponent implements OnInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: user => {
+          if (!user) return;
+
           this.myInfoForm.setValue(user);
+          this.getDistrictsList();
         }
       });
   }
@@ -83,8 +88,10 @@ export class MyInformationComponent implements OnInit {
     })
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
-        next: res => {
-          this._authService.currentUser$.next(res);
+        next: user => {
+          if (!user) return;
+
+          this._authService.currentUser$.next(user);
           this._toasterService.open({
             message: 'changes.successfully.changed'
           });
@@ -94,5 +101,29 @@ export class MyInformationComponent implements OnInit {
           this.myInfoForm.enable();
         }
       });
+  }
+
+  getDistrictsList(): void {
+    const regionId: number = this.myInfoForm.get('region').value;
+
+    if (!regionId) {
+      return;
+    }
+
+    this._myInformationService.getDistrictsByRegionId(regionId)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: districts => {
+          this.districts = districts;
+        },
+        error: () => {
+          this.districts = [];
+        }
+      })
+  }
+
+  onRegionSelected(): void {
+    this.myInfoForm.get('district').setValue(null);
+    this.getDistrictsList();
   }
 }

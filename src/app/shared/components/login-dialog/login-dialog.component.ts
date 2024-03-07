@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   Component,
   DestroyRef,
-  ElementRef,
+  ElementRef, HostListener,
   inject,
   OnInit,
   QueryList,
@@ -55,6 +55,10 @@ import { ScrollbarDirective } from '../../directives/scrollbar/scrollbar.directi
 export class LoginDialogComponent implements OnInit, AfterViewInit {
   @ViewChildren('codeInput') set getCodeInputs(codeInputs: QueryList<ElementRef<HTMLInputElement>>) {
     this.codeInputsHandler(codeInputs);
+  }
+
+  @HostListener('paste', [ '$event' ]) paste($event: ClipboardEvent) {
+    this.pasteCode($event);
   }
 
   private _translateService = inject(TranslateService);
@@ -132,7 +136,7 @@ export class LoginDialogComponent implements OnInit, AfterViewInit {
       input.nativeElement.onkeydown = (e: KeyboardEvent) => {
         const key = e.key;
 
-        if (key !== 'Enter') {
+        if (!((e.ctrlKey || e.metaKey) && e.key === 'v') && e.key !== 'Enter') {
           e.preventDefault();
         }
 
@@ -155,6 +159,10 @@ export class LoginDialogComponent implements OnInit, AfterViewInit {
           }
         }
       };
+
+      input.nativeElement.onpaste = (e: ClipboardEvent) => {
+        this.pasteCode(e);
+      }
     });
   }
 
@@ -201,7 +209,7 @@ export class LoginDialogComponent implements OnInit, AfterViewInit {
             localStorage.setItem('token', res.token);
             this._dialogRef.close({
               authorized: true
-            })
+            });
           }
         },
         error: err => {
@@ -224,6 +232,18 @@ export class LoginDialogComponent implements OnInit, AfterViewInit {
           });
         }
       });
+  }
+
+  pasteCode($event: ClipboardEvent): void {
+    $event.preventDefault();
+
+    const code = $event.clipboardData.getData('text');
+
+    if (code && /(?<!\d)\d{5}(?!\d)/.test(code) && this.step === 'code') {
+      for (let i = 0; i < 5; i++) {
+        this.codeForm.get(i.toString()).setValue(code[i]);
+      }
+    }
   }
 
   countDown(): void {
