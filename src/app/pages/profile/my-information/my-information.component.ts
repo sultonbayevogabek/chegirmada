@@ -119,11 +119,23 @@ export class MyInformationComponent implements OnInit {
         error: () => {
           this.districts = [];
         }
-      })
+      });
   }
 
   onRegionSelected(): void {
     this.myInfoForm.get('district').setValue(null);
     this.getDistrictsList();
+  }
+
+  onClickDistrictsSelect(): void {
+    if (this.myInfoForm.get('region').value) {
+      return;
+    }
+
+    this._toasterService.open({
+      type: 'info',
+      title: 'dear.user',
+      message: 'please.specify.your.region.first'
+    });
   }
 }

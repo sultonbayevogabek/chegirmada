@@ -82,6 +82,7 @@
           [class.invalid]="myInfoForm.get('district').invalid && myInfoForm.get('district').touched"
           [formControlName]="'district'"
           [placeholder]="'district'| translate"
+          (click)="onClickDistrictsSelect()"
         >
           @for (district of districts; track district) {
             <mat-option [value]="district.pk">{{ district.label }}</mat-option>
