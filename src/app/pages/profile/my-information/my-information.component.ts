@@ -2,7 +2,7 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatNativeDateModule, MatOption, MatRipple } from '@angular/material/core';
 import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatSelect } from '@angular/material/select';
@@ -12,9 +12,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { REGIONS } from '../../../core/constants/regions';
 import { MyInformationService } from '../../../core/services/my-information.service';
 import { MatDatepicker, MatDatepickerInput, MatDatepickerModule } from '@angular/material/datepicker';
-import { formatDate } from '@angular/common';
+import { AsyncPipe, formatDate } from '@angular/common';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { DistrictModel } from '../../../core/models/district.model';
+import { ShowByLangPipe } from '../../../core/pipes/show-by-lang.pipe';
+import { BaseComponent } from '../../../core/components/base/base.component';
 
 @Component({
   selector: 'my-information',
@@ -32,7 +34,9 @@ import { DistrictModel } from '../../../core/models/district.model';
     MatDatepicker,
     MatDatepickerInput,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    ShowByLangPipe,
+    AsyncPipe
   ],
   providers: [
     provideNgxMask(),
@@ -41,12 +45,15 @@ import { DistrictModel } from '../../../core/models/district.model';
   standalone: true
 })
 
-export class MyInformationComponent implements OnInit {
+export class MyInformationComponent extends BaseComponent implements OnInit {
   private _authService = inject(AuthService);
   private _myInformationService = inject(MyInformationService);
   private _toasterService = inject(ToasterService);
-  private _destroyRef = inject(DestroyRef);
   protected readonly regions = REGIONS;
+
+  constructor() {
+    super();
+  }
 
   districts: DistrictModel[] = [];
   currentUser: UserModel;
@@ -62,7 +69,7 @@ export class MyInformationComponent implements OnInit {
 
   ngOnInit(): void {
     this._authService.currentUser$
-      .pipe(takeUntilDestroyed(this._destroyRef))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: user => {
           if (!user) return;
@@ -86,7 +93,7 @@ export class MyInformationComponent implements OnInit {
       ...this.myInfoForm.getRawValue(),
       birthday: formatDate(this.myInfoForm.get('birthday').value, 'yyyy-MM-dd', 'ru')
     })
-      .pipe(takeUntilDestroyed(this._destroyRef))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: user => {
           if (!user) return;
@@ -111,7 +118,7 @@ export class MyInformationComponent implements OnInit {
     }
 
     this._myInformationService.getDistrictsByRegionId(regionId)
-      .pipe(takeUntilDestroyed(this._destroyRef))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: districts => {
           this.districts = districts;

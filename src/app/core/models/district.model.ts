@@ -1,4 +1,5 @@
 export interface DistrictModel {
   pk: number;
-  label: string;
+  name_uz: string;
+  name_ru: string;
 }

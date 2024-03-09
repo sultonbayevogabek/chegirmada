@@ -85,7 +85,7 @@
           (click)="onClickDistrictsSelect()"
         >
           @for (district of districts; track district) {
-            <mat-option [value]="district.pk">{{ district.label }}</mat-option>
+            <mat-option [value]="district.pk">{{ district | showByLang: activeLang }}</mat-option>
           }
         </mat-select>
       </label>

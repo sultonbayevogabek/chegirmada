@@ -47,8 +47,7 @@
       <h2 class="login-dialog-title">{{ 'enter.code'| translate }}</h2>
       <p class="login-dialog-text">
         {{ 'we.sent.five.digit.code.to'| translate:
-        { phone: ('+998' + phoneForm.get('phoneNumber').value)| phoneNumber }
-        }}
+        { phone: ('+998' + phoneForm.get('phoneNumber').value)| phoneNumber } }}
       </p>
 
       <form class="login-dialog-form" [formGroup]="codeForm" (ngSubmit)="sendCode()">

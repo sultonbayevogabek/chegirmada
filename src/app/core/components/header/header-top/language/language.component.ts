@@ -3,8 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { NgOptimizedImage } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-
-type language = 'uz' | 'ru';
+import { language } from '../../../../models/language.model';
 
 @Component({
   selector: 'language',
@@ -30,7 +29,7 @@ export class LanguageComponent implements OnInit {
     }
   }
 
-  changeLanguage(lang: 'uz' | 'ru') {
+  changeLanguage(lang: language): void {
     this.activeLanguage = lang;
     this._translateService.use(lang);
     localStorage.setItem('lang', lang);
