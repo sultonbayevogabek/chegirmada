@@ -1,0 +1,152 @@
+<form class="register">
+  <h2 class="register-heading">{{ 'store.registration'| translate }}</h2>
+
+  <fieldset class="register-fieldset">
+    <p class="register-info">{{ 'store.registration.description'| translate }}</p>
+  </fieldset>
+
+  <fieldset class="register-fieldset">
+    <div class="register-legend">{{ 'store.owner.information'| translate }}</div>
+    <div class="register-main-fields">
+      <label class="form-label">
+        <span class="form-label-text">{{ 'surname'| translate }}</span>
+        <input class="form-input" type="text" [placeholder]="'enter.your.surname'| translate">
+      </label>
+
+      <label class="form-label">
+        <span class="form-label-text">{{ 'name'| translate }}</span>
+        <input class="form-input" type="text" [placeholder]="'enter.your.name'| translate">
+      </label>
+
+      <label class="form-label">
+        <span class="form-label-text">{{ 'middlename'| translate }}</span>
+        <input class="form-input" type="text" [placeholder]="'enter.your.middlename'| translate">
+      </label>
+
+      <label class="form-label">
+        <span class="form-label-text">{{ 'phone.number'| translate }}</span>
+        <input class="form-input" type="text" [placeholder]="'enter.phone.number'| translate">
+      </label>
+
+      <label class="form-label">
+        <span class="form-label-text">{{ 'email'| translate }}</span>
+        <input class="form-input" type="text" [placeholder]="'enter.your.email'| translate">
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset class="register-fieldset">
+    <div class="register-legend">{{ 'store.information'| translate }}</div>
+
+    <div class="register-company-info">
+      <div class="register-company-info-top">
+        <div class="register-company-info-fields">
+          <label class="form-label">
+            <span class="form-label-text">{{ 'store.name'| translate }}</span>
+            <input class="form-input" type="text" [placeholder]="'enter.store.name'| translate">
+          </label>
+
+          <label class="form-label">
+            <span class="form-label-text">{{ 'short.name.of.store'| translate }}</span>
+            <input class="form-input" type="text" [placeholder]="'enter.short.name'| translate">
+          </label>
+
+          <div class="form-label">
+            <span class="form-label-text">{{ 'working.time'| translate }}</span>
+            <div class="register-work-times">
+              <mat-select class="register-work-times-select solid-select" [value]="1" [hideSingleSelectionIndicator]="true">
+                <mat-option [value]="1">{{ 'mon'| translate }}</mat-option>
+                <mat-option [value]="2">{{ 'tue'| translate }}</mat-option>
+                <mat-option [value]="3">{{ 'wed'| translate }}</mat-option>
+                <mat-option [value]="4">{{ 'thu'| translate }}</mat-option>
+                <mat-option [value]="5">{{ 'fri'| translate }}</mat-option>
+                <mat-option [value]="6">{{ 'sat'| translate }}</mat-option>
+                <mat-option [value]="7">{{ 'sun'| translate }}</mat-option>
+              </mat-select>
+              <input class="register-work-times-input form-input" type="text" placeholder="00:00" [mask]="'Hh:m0'">
+              <mat-select class="solid-select" [value]="1" [hideSingleSelectionIndicator]="true">
+                <mat-option [value]="1">{{ 'mon'| translate }}</mat-option>
+                <mat-option [value]="2">{{ 'tue'| translate }}</mat-option>
+                <mat-option [value]="3">{{ 'wed'| translate }}</mat-option>
+                <mat-option [value]="4">{{ 'thu'| translate }}</mat-option>
+                <mat-option [value]="5">{{ 'fri'| translate }}</mat-option>
+                <mat-option [value]="6">{{ 'sat'| translate }}</mat-option>
+                <mat-option [value]="7">{{ 'sun'| translate }}</mat-option>
+              </mat-select>
+              <input class="register-work-times-input form-input" type="text" placeholder="00:00" [mask]="'Hh:m0'">
+            </div>
+          </div>
+
+          <label class="form-label">
+            <span class="form-label-text">{{ 'category'| translate }}</span>
+
+            <mat-select class="solid-select" [value]="1" [hideSingleSelectionIndicator]="true">
+            </mat-select>
+          </label>
+
+          <label class="form-label">
+            <span class="form-label-text">{{ 'delivery'| translate }}</span>
+
+            <mat-radio-group class="register-delivery-type">
+              <mat-radio-button
+                class="form-radio"
+                [color]="'primary'">{{ 'yes'| translate }}</mat-radio-button>
+              <mat-radio-button
+                class="form-radio"
+                [color]="'primary'"
+              >{{ 'no'| translate }}</mat-radio-button>
+            </mat-radio-group>
+          </label>
+
+          <label class="form-label">
+            <span class="form-label-text">{{ 'phone.number'| translate }}</span>
+            <input class="form-input" type="text" [placeholder]="'enter.phone.number'| translate">
+          </label>
+
+          <label class="form-label">
+            <span class="form-label-text">{{ 'slogan'| translate }} (uz)</span>
+            <input class="form-input" type="text" [placeholder]="'enter.slogan'| translate">
+          </label>
+
+          <label class="form-label">
+            <span class="form-label-text">{{ 'slogan'| translate }} (ru)</span>
+            <input class="form-input" type="text" [placeholder]="'enter.slogan'| translate">
+          </label>
+        </div>
+
+        <div class="register-company-upload-logo" (click)="logoFileInput.click()">
+          <div class="register-company-logo-preview">
+            <p class="register-company-logo-requirements" [innerHTML]="'store.logo.requirements'| translate"></p>
+          </div>
+
+          <ui-button
+            [type]="'gray-outline'"
+            [text]="'upload'"
+            [icon]="'icon:camera'"
+          />
+          <input #logoFileInput class="register-company-logo-file-input" type="file">
+        </div>
+      </div>
+
+      <div class="register-company-descriptions">
+        <label class="form-label">
+          <span class="form-label-text">{{ 'description'| translate }} (uz)</span>
+          <textarea class="form-textarea" [placeholder]="'enter.description'| translate"></textarea>
+        </label>
+
+        <label class="form-label">
+          <span class="form-label-text">{{ 'description'| translate }} (ru)</span>
+          <textarea class="form-textarea" [placeholder]="'enter.description'| translate"></textarea>
+        </label>
+      </div>
+
+      <div class="register-map" id="map"></div>
+    </div>
+  </fieldset>
+
+  <div class="register-submit">
+    <ui-button
+      [actionType]="'submit'"
+    />
+  </div>
+</form>

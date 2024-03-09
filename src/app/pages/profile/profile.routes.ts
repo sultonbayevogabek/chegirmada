@@ -23,8 +23,8 @@ export const profileRoutes: Routes = [
         loadComponent: () => import('./favourite-products/favourite-products.component').then(c => c.FavouriteProductsComponent)
       },
       {
-        path: 'register',
-        loadComponent: () => import('./register/register.component').then(c => c.RegisterComponent)
+        path: 'register-store',
+        loadComponent: () => import('./register-store/register-store.component').then(c => c.RegisterStoreComponent)
       },
       {
         path: 'branches',

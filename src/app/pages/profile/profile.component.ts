@@ -50,7 +50,7 @@ export class ProfileComponent {
     {
       icon: 'icon:favourite-companies',
       link: 'favourite-companies',
-      name: 'favourite.brands'
+      name: 'favourite.stores'
     },
     {
       icon: 'icon:like-outline',

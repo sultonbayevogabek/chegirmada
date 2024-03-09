@@ -152,6 +152,7 @@ export class YandexMapsService {
             this.setCoordinatesAndEmit(placeMark, coordinates, this._map);
           });
         });
+
         this._map.controls.add(searchControl);
       });
   }

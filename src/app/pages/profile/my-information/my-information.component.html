@@ -2,7 +2,7 @@
   <div class="my-information-header">
     <h2 class="my-information-heading">{{ 'my.information'| translate }}</h2>
 
-    <button class="my-information-add-company" mat-ripple [matRippleColor]="'#0CA4FA12'">
+    <button class="my-information-add-company" mat-ripple [matRippleColor]="'#0CA4FA12'" [routerLink]="['../register-store']">
       <mat-icon [svgIcon]="'icon:solid-plus'"/>
       <span>{{ 'add.company'| translate }}</span>
     </button>

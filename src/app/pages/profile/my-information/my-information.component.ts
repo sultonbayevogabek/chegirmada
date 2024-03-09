@@ -17,6 +17,7 @@ import { ToasterService } from '../../../core/services/toaster.service';
 import { DistrictModel } from '../../../core/models/district.model';
 import { ShowByLangPipe } from '../../../core/pipes/show-by-lang.pipe';
 import { BaseComponent } from '../../../core/components/base/base.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'my-information',
@@ -36,7 +37,8 @@ import { BaseComponent } from '../../../core/components/base/base.component';
     MatNativeDateModule,
     MatDatepickerModule,
     ShowByLangPipe,
-    AsyncPipe
+    AsyncPipe,
+    RouterLink
   ],
   providers: [
     provideNgxMask(),
