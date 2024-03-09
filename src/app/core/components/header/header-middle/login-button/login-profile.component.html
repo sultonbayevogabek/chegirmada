@@ -1,9 +1,11 @@
 @if (currentUser) {
   <div class="profile" [routerLink]="['/profile']">
     <div class="profile-logo">
-      <img [ngSrc]="'/assets/logos/mac-bro.svg'" [fill]="true" [alt]="">
+      <img [ngSrc]="'/assets/icons/avatar.svg'" [fill]="true" [alt]="">
     </div>
-    <div class="profile-name">{{ currentUser.full_name || currentUser.phone_number }}</div>
+    @if (currentUser.full_name) {
+      <div class="profile-name">{{ currentUser.full_name }}</div>
+    }
   </div>
 } @else {
   <ui-button
