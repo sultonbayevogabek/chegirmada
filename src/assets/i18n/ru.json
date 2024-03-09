@@ -62,7 +62,7 @@
   "tashkent": "Ташкент",
   "tashkent.region": "Ташкентская область",
   "the.best.announcements": "Лучшие объявления",
-  "we.sent.five.digit.code.to": "Для подтверждения телефона отправили 5-значный код на <font color=#0CA4FA>{{ phone }}</font>",
+  "we.sent.five.digit.code.to": "Для подтверждения телефона отправили 5-значный код на {{ phone }}",
   "we.will.send.sms.with.code": "Отправим смс с кодом подтверждения",
   "whole.country": "Вся страна",
   "you.have.timed.out.to.enter.your.verification.code": "У вас истекло время для ввода кода подтверждения"

@@ -4,15 +4,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { language } from '../../models/language.model';
 
 @Component({
-  selector: 'base',
   standalone: true,
   template: ''
 })
 
 export class BaseComponent {
-  private _activeLang: language = 'uz';
   private _destroyRef = inject(DestroyRef);
   private _translateService = inject(TranslateService);
+  private _activeLang: language = (this._translateService.currentLang as language) || 'uz';
 
   constructor() {
     this._translateService.onLangChange

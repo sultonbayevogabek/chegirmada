@@ -3,11 +3,12 @@ import { language } from '../models/language.model';
 
 @Pipe({
   name: 'showByLang',
-  standalone: true
+  standalone: true,
 })
 
 export class ShowByLangPipe implements PipeTransform {
   transform(value: any, activeLang: language, keyUz = 'name_uz', keyRu = 'name_ru'): string {
+    console.log('active lang', activeLang);
     if (value && value[keyUz] && activeLang === 'uz') {
       return value[keyUz];
     }

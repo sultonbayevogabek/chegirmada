@@ -1,8 +1,8 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatNativeDateModule, MatOption, MatRipple } from '@angular/material/core';
 import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatSelect } from '@angular/material/select';
@@ -57,6 +57,7 @@ export class MyInformationComponent extends BaseComponent implements OnInit {
 
   districts: DistrictModel[] = [];
   currentUser: UserModel;
+  maxBirthday = new Date(new Date().getFullYear() - 10, 11, 31);
   myInfoForm = new FormGroup({
     phone_number: new FormControl({ value: null, disabled: true }, [ Validators.required ]),
     email: new FormControl(null),
@@ -97,14 +98,13 @@ export class MyInformationComponent extends BaseComponent implements OnInit {
       .subscribe({
         next: user => {
           if (!user) return;
-
           this._authService.currentUser$.next(user);
           this._toasterService.open({
             message: 'changes.successfully.changed'
           });
           this.myInfoForm.enable();
         },
-        error: err => {
+        error: () => {
           this.myInfoForm.enable();
         }
       });
