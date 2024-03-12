@@ -33,14 +33,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export class ComplaintModalComponent implements OnInit {
   @Inject(MAT_DIALOG_DATA) data: {
-    complaintType?: number
+    complaintType?: number;
+    storeShortname?: string;
   } = inject(MAT_DIALOG_DATA);
 
   complaintTypes = COMPLAINT_TYPES;
   complaintForm = new FormGroup({
     complaint_type: new FormControl(null, [ Validators.required ]),
     message: new FormControl('', [ Validators.maxLength(255) ]),
-    store: new FormControl(1)
+    store_shortname: new FormControl({ value: null, disabled: true })
   });
 
   private _complaintService = inject(ComplaintService);
@@ -48,7 +49,14 @@ export class ComplaintModalComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data && 'complaintType' in this.data) {
-      this.complaintForm.get('complaint_type').setValue(this.data.complaintType);
+      const complaintTypeControl = this.complaintForm.get('complaint_type');
+      complaintTypeControl.setValue(this.data.complaintType);
+      complaintTypeControl.disable();
+    }
+
+    if (this.data && 'storeShortname' in this.data) {
+      const storeShortnameControl = this.complaintForm.get('store_shortname');
+      storeShortnameControl.setValue(this.data.storeShortname);
     }
   }
 

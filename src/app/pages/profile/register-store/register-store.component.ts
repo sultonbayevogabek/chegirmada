@@ -17,6 +17,7 @@ import { ScrollbarDirective } from '../../../shared/directives/scrollbar/scrollb
 import { ComplaintModalComponent } from '../complaint-modal/complaint-modal.component';
 import { RegisterStoreService } from '../../../core/services/register-store.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { shortnameValidator } from '../../../core/validators/shortname.validator';
 
 @Component({
   selector: 'register-store',
@@ -57,7 +58,7 @@ export class RegisterStoreComponent implements OnInit, AfterViewInit {
     owner_fathername: new FormControl(null, [ Validators.required, nameValidator ]),
     owner_phone_number: new FormControl('+998 ', [ Validators.required, Validators.minLength(9) ]),
     name_uz: new FormControl(null, [ Validators.required ]),
-    shortname: new FormControl(null, [ Validators.required ]),
+    shortname: new FormControl(null, [ Validators.required, shortnameValidator ]),
     is_shortname_free: new FormControl(true, [ Validators.required ])
   });
 
@@ -68,7 +69,6 @@ export class RegisterStoreComponent implements OnInit, AfterViewInit {
       },
       maxWidth: '35rem'
     })*/
-
   }
 
   ngOnInit(): void {
@@ -82,7 +82,7 @@ export class RegisterStoreComponent implements OnInit, AfterViewInit {
   checkShortname(): void {
     const shortname = this.registerStoreForm.get('shortname').value;
 
-    if (shortname?.trim()?.length < 3) {
+    if (shortname?.trim()?.length < 3 || !/^[a-zA-Z][a-zA-Z0-9_]*$/.test(shortname)) {
       return;
     }
 
@@ -99,8 +99,9 @@ export class RegisterStoreComponent implements OnInit, AfterViewInit {
     this._dialog.open(ComplaintModalComponent, {
       width: '25rem',
       data: {
-        complaintType: 0
+        complaintType: 0,
+        storeShortname: this.registerStoreForm.get('shortname').value
       }
-    })
+    });
   }
 }

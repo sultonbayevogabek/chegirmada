@@ -93,11 +93,20 @@
               <span class="form-label-text">{{ 'short.name.of.store'| translate }} *</span>
               <input
                 class="form-input"
+                [class.invalid]="registerStoreForm.get('shortname').invalid && registerStoreForm.get('shortname').touched"
                 type="text"
                 [placeholder]="'enter.short.name'| translate"
                 [formControlName]="'shortname'"
-                (input)="checkShortname()"
               >
+              @if (registerStoreForm.get('shortname').touched) {
+                @if (registerStoreForm.get('shortname').hasError('required')) {
+                  <span class="form-error">{{ 'required.field'| translate }}</span>
+                }
+
+                @if (!registerStoreForm.get('shortname').hasError('required') && registerStoreForm.get('shortname').hasError('invalidShortname')) {
+                  <span class="form-error">{{ 'shortname.requirements'| translate }}</span>
+                }
+              }
             </label>
             @if (!registerStoreForm.get('is_shortname_free').value) {
               <div class="register-company-shortname-error">
