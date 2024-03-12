@@ -86,6 +86,7 @@
   "send": "Yuborish",
   "settings": "Sozlamalar",
   "short.name.of.store": "Do'konning qisqacha nomi",
+  "shortname.requirements": "Qisqa nom lotin harfi bilan boshlanishi kerak. Nomda 0 dan 9 gacha bo'lgan raqamlar va tag chiziq (_) qatnashishi mumkin.",
   "sirdarya": "Sirdaryo",
   "slogan": "Shior",
   "spam": "Spam",
