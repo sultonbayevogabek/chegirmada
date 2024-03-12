@@ -5,34 +5,32 @@ export const COMPLAINT_TYPES = [
   },
   {
     id: 1,
-    title: 'comment'
-  },
-  {
-    id: 2,
     title: 'porn'
   },
   {
-    id: 3,
+    id: 2,
     title: 'spam'
   },
   {
-    id: 4,
+    id: 3,
     title: 'fake.seller'
   },
   {
-    id: 5,
+    id: 4,
     title: 'defective'
   },
   {
-    id: 6,
+    id: 5,
     title: 'violence'
   },
   {
-    id: 7,
+    id: 6,
     title: 'drugs'
   },
   {
-    id: 8,
+    id: 7,
     title: 'other'
   }
 ];
+
+

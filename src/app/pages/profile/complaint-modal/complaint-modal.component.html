@@ -10,6 +10,13 @@
 
 <mat-dialog-content class="complaint-modal-content">
   <form class="complaint-modal-form" [formGroup]="complaintForm" (ngSubmit)="sendComplaint()">
+    @if (data?.storeShortname) {
+      <label class="form-label">
+        <span class="form-label-text">{{ 'short.name.of.store'| translate }}</span>
+        <input class="form-input" [formControlName]="'store_shortname'">
+      </label>
+    }
+
     <label class="form-label">
       <span class="form-label-text">{{ 'complaint.type'| translate }}</span>
 
