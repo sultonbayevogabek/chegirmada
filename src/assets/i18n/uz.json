@@ -39,6 +39,7 @@
   "enter.your.phone.number.correctly": "Telefon raqamingizni to'liq kiriting",
   "enter.your.surname": "Familiyangizni kiriting",
   "entered.code.is.incorrect": "Kiritilgan kod noto'g'ri",
+  "error.occurred": "Xatolik sodir bo'ldi",
   "exit": "Chiqish",
   "expired.announcements": "Tugagan e'lonlar",
   "fake.seller": "Soxta sotuvchi",
@@ -85,7 +86,7 @@
   "send": "Yuborish",
   "settings": "Sozlamalar",
   "short.name.of.store": "Do'konning qisqacha nomi",
-  "shortname.requirements": "Qisqa nom lotin harfi bilan boshlanishi kerak. Nomda 0 dan 9 gacha bo'lgan raqamlar va tag chiziq (_) qatnashishi mumkin.",
+  "shortname.requirements": "Qisqa nom lotin harfi bilan boshlanishi kerak. Nomda 0 dan 9 gacha bo'lgan raqamlar va tag chiziq (_) qatnashishi mumkin. Nom uzunligi eng kamida 3 ta va ko'pi bilan 20 ta belgidan iborat bo'lishi mumkin. Ikkita ketma-ket tagchiziqlar kelishi mumkin emas",
   "sirdarya": "Sirdaryo",
   "slogan": "Shior",
   "spam": "Spam",
@@ -113,5 +114,6 @@
   "working.time": "Ish vaqti",
   "write.your.complaint": "Shikoyatingizni yozing",
   "yes": "Ha",
-  "you.have.timed.out.to.enter.your.verification.code": "Tasdiqlash kodini kiritish vaqti tugadi"
+  "you.have.timed.out.to.enter.your.verification.code": "Tasdiqlash kodini kiritish vaqti tugadi",
+  "your.complaint.has.been.successfully.submitted": "Shikoyatingiz muvaffaqiyatli yuborildi"
 }

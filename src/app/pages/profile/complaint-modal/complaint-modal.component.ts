@@ -9,6 +9,8 @@ import { COMPLAINT_TYPES } from '../../../core/constants/complaint-types';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ComplaintService } from '../../../core/services/complaint.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ToasterService } from '../../../core/services/toaster.service';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'complaint-modal',
@@ -41,22 +43,21 @@ export class ComplaintModalComponent implements OnInit {
   complaintForm = new FormGroup({
     complaint_type: new FormControl(null, [ Validators.required ]),
     message: new FormControl('', [ Validators.maxLength(255) ]),
-    store_shortname: new FormControl({ value: null, disabled: true })
+    store_shortname: new FormControl(null)
   });
 
   private _complaintService = inject(ComplaintService);
+  private _toasterService = inject(ToasterService);
   private _destroyRef = inject(DestroyRef);
+  private _dialogRef = inject(DialogRef);
 
   ngOnInit(): void {
     if (this.data && 'complaintType' in this.data) {
-      const complaintTypeControl = this.complaintForm.get('complaint_type');
-      complaintTypeControl.setValue(this.data.complaintType);
-      complaintTypeControl.disable();
+      this.complaintForm.get('complaint_type').setValue(this.data.complaintType);
     }
 
     if (this.data && 'storeShortname' in this.data) {
-      const storeShortnameControl = this.complaintForm.get('store_shortname');
-      storeShortnameControl.setValue(this.data.storeShortname);
+      this.complaintForm.get('store_shortname').setValue(this.data.storeShortname);
     }
   }
 
@@ -70,13 +71,18 @@ export class ComplaintModalComponent implements OnInit {
     this._complaintService.sendComplaint(this.complaintForm.getRawValue())
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
-        next: res => {
-          this.complaintForm.enable()
-          console.log(res);
+        next: () => {
+          this._toasterService.open({
+            message: 'your.complaint.has.been.successfully.submitted'
+          });
+          this._dialogRef.close();
         },
-        error: err => {
-          this.complaintForm.enable()
-          console.log(err);
+        error: () => {
+          this._toasterService.open({
+            message: 'error.occurred',
+            type: 'error',
+            title: 'attention'
+          });
         }
       });
   }

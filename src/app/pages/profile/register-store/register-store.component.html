@@ -16,10 +16,13 @@
           type="text"
           [placeholder]="'enter.your.surname'| translate"
           [formControlName]="'owner_lastname'"
+          [mask]="'XXXXXXXXXXXXXXXXXXXXXXXXX'"
+          [patterns]="customPatterns"
+          [validation]="false"
         >
 
         <ng-container
-          *ngTemplateOutlet="nameErrors; context: { $implicit: 'owner_lastname' }"
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'owner_lastname' }"
         />
       </label>
 
@@ -31,9 +34,12 @@
           type="text"
           [placeholder]="'enter.your.name'| translate"
           [formControlName]="'owner_firstname'"
+          [mask]="'XXXXXXXXXXXXXXXXXXXXXXXXX'"
+          [patterns]="customPatterns"
+          [validation]="false"
         >
         <ng-container
-          *ngTemplateOutlet="nameErrors; context: { $implicit: 'owner_firstname' }"
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'owner_firstname' }"
         />
       </label>
 
@@ -45,9 +51,12 @@
           type="text"
           [placeholder]="'enter.your.middlename'| translate"
           [formControlName]="'owner_fathername'"
+          [mask]="'XXXXXXXXXXXXXXXXXXXXXXXXX'"
+          [patterns]="customPatterns"
+          [validation]="false"
         >
         <ng-container
-          *ngTemplateOutlet="nameErrors; context: { $implicit: 'owner_fathername' }"
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'owner_fathername' }"
         />
       </label>
 
@@ -79,6 +88,8 @@
             <input
               class="form-input"
               type="text"
+              trim
+              [maxlength]="255"
               [placeholder]="'enter.store.name'| translate"
               [class.invalid]="registerStoreForm.get('name_uz').invalid && registerStoreForm.get('name_uz').touched"
               [formControlName]="'name_uz'"
@@ -93,18 +104,25 @@
               <span class="form-label-text">{{ 'short.name.of.store'| translate }} *</span>
               <input
                 class="form-input"
-                [class.invalid]="registerStoreForm.get('shortname').invalid && registerStoreForm.get('shortname').touched"
+                [class.invalid]="(registerStoreForm.get('shortname').invalid && registerStoreForm.get('shortname').touched) || !registerStoreForm.get('is_shortname_free').value"
                 type="text"
+                [maxlength]="20"
                 [placeholder]="'enter.short.name'| translate"
                 [formControlName]="'shortname'"
+                [mask]="'YYYYYYYYYYYYYYYYYYYY'"
+                [patterns]="customPatterns"
+                [validation]="false"
+                (input)="checkShortname()"
               >
               @if (registerStoreForm.get('shortname').touched) {
                 @if (registerStoreForm.get('shortname').hasError('required')) {
                   <span class="form-error">{{ 'required.field'| translate }}</span>
                 }
-
-                @if (!registerStoreForm.get('shortname').hasError('required') && registerStoreForm.get('shortname').hasError('invalidShortname')) {
-                  <span class="form-error">{{ 'shortname.requirements'| translate }}</span>
+                @if (!registerStoreForm.get('shortname').hasError('required') && registerStoreForm.get('shortname').invalid) {
+                  <span
+                    class="form-error"
+                    [title]="'shortname.requirements'| translate"
+                  >{{ 'shortname.requirements'| translate }}</span>
                 }
               }
             </label>
@@ -144,27 +162,41 @@
           <div class="form-label">
             <span class="form-label-text">{{ 'working.time'| translate }}</span>
             <div class="register-work-times">
-              <mat-select class="register-work-times-select solid-select" [value]="1"
-                          [hideSingleSelectionIndicator]="true">
-                <mat-option [value]="1">{{ 'mon'| translate }}</mat-option>
-                <mat-option [value]="2">{{ 'tue'| translate }}</mat-option>
-                <mat-option [value]="3">{{ 'wed'| translate }}</mat-option>
-                <mat-option [value]="4">{{ 'thu'| translate }}</mat-option>
-                <mat-option [value]="5">{{ 'fri'| translate }}</mat-option>
-                <mat-option [value]="6">{{ 'sat'| translate }}</mat-option>
-                <mat-option [value]="7">{{ 'sun'| translate }}</mat-option>
+              <mat-select
+                class="register-work-times-select solid-select"
+                [hideSingleSelectionIndicator]="true"
+                [formControlName]="'working_day_start'"
+              >
+                @for (weekday of weekdays; track weekday) {
+                  <mat-option [value]="weekday.id">{{ weekday.name | translate }}</mat-option>
+                }
               </mat-select>
-              <input class="register-work-times-input form-input" type="text" placeholder="00:00" [mask]="'Hh:m0'">
-              <mat-select class="solid-select" [value]="1" [hideSingleSelectionIndicator]="true">
-                <mat-option [value]="1">{{ 'mon'| translate }}</mat-option>
-                <mat-option [value]="2">{{ 'tue'| translate }}</mat-option>
-                <mat-option [value]="3">{{ 'wed'| translate }}</mat-option>
-                <mat-option [value]="4">{{ 'thu'| translate }}</mat-option>
-                <mat-option [value]="5">{{ 'fri'| translate }}</mat-option>
-                <mat-option [value]="6">{{ 'sat'| translate }}</mat-option>
-                <mat-option [value]="7">{{ 'sun'| translate }}</mat-option>
+              <input
+                class="register-work-times-input form-input"
+                [class.invalid]="registerStoreForm.get('working_time_start').invalid && registerStoreForm.get('working_time_start').touched"
+                type="text"
+                placeholder="00:00"
+                [mask]="'Hh:m0'"
+                [formControlName]="'working_time_start'"
+              >
+              <mat-select
+                class="solid-select"
+                [hideSingleSelectionIndicator]="true"
+                [formControlName]="'working_day_end'"
+              >
+                @for (weekday of weekdays; track weekday) {
+                  <mat-option [value]="weekday.id">{{ weekday.name | translate }}</mat-option>
+                }
               </mat-select>
-              <input class="register-work-times-input form-input" type="text" placeholder="00:00" [mask]="'Hh:m0'">
+              <input
+                class="register-work-times-input form-input"
+                [class.invalid]="registerStoreForm.get('working_time_end').invalid && registerStoreForm.get('working_time_end').touched"
+                type="text"
+                placeholder="00:00"
+                [mask]="'Hh:m0'"
+                [formControlName]="'working_time_end'"
+                [leadZero]="true"
+              >
             </div>
           </div>
 
@@ -178,32 +210,68 @@
           <label class="form-label">
             <span class="form-label-text">{{ 'delivery'| translate }}</span>
 
-            <mat-radio-group class="register-delivery-type">
+            <mat-radio-group class="register-delivery-type" [formControlName]="'delivery'">
               <mat-radio-button
                 class="form-radio"
-                [color]="'primary'">{{ 'yes'| translate }}
+                [color]="'primary'"
+                [value]="true"
+              >
+                {{ 'yes'| translate }}
               </mat-radio-button>
               <mat-radio-button
                 class="form-radio"
                 [color]="'primary'"
+                [value]="false"
               >{{ 'no'| translate }}
               </mat-radio-button>
             </mat-radio-group>
           </label>
 
           <label class="form-label">
-            <span class="form-label-text">{{ 'phone.number'| translate }}</span>
-            <input class="form-input" type="text" [placeholder]="'enter.phone.number'| translate">
+            <span class="form-label-text">{{ 'phone.number'| translate }} *</span>
+            <input
+              class="form-input"
+              [class.invalid]="registerStoreForm.get('main_phone_number').invalid && registerStoreForm.get('main_phone_number').touched"
+              type="text"
+              [mask]="' 00 000 00 00'"
+              [prefix]="'+998'"
+              [formControlName]="'main_phone_number'"
+            >
+            <ng-container
+              *ngTemplateOutlet="requiredErrors; context: { $implicit: 'main_phone_number' }"
+            />
           </label>
 
           <label class="form-label">
             <span class="form-label-text">{{ 'slogan'| translate }} (uz)</span>
-            <input class="form-input" type="text" [placeholder]="'enter.slogan'| translate">
+            <input
+              class="form-input"
+              [class.invalid]="registerStoreForm.get('slogan_uz').hasError('maxlength')"
+              type="text"
+              trim
+              [placeholder]="'enter.slogan'| translate"
+              [maxlength]="255"
+              [formControlName]="'slogan_uz'"
+            >
+            @if (registerStoreForm.get('slogan_uz').hasError('maxlength')) {
+              <span class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 255 } }}</span>
+            }
           </label>
 
           <label class="form-label">
             <span class="form-label-text">{{ 'slogan'| translate }} (ru)</span>
-            <input class="form-input" type="text" [placeholder]="'enter.slogan'| translate">
+            <input
+              class="form-input"
+              [class.invalid]="registerStoreForm.get('slogan_ru').hasError('maxlength')"
+              type="text"
+              trim
+              [placeholder]="'enter.slogan'| translate"
+              [maxlength]="255"
+              [formControlName]="'slogan_ru'"
+            >
+            @if (registerStoreForm.get('slogan_ru').hasError('maxlength')) {
+              <span class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 255 } }}</span>
+            }
           </label>
         </div>
 
@@ -223,13 +291,38 @@
 
       <div class="register-company-descriptions">
         <label class="form-label">
-          <span class="form-label-text">{{ 'description'| translate }} (uz)</span>
-          <textarea class="form-textarea" [placeholder]="'enter.description'| translate"></textarea>
+          <span class="form-label-text">{{ 'description'| translate }} (uz) *</span>
+          <textarea
+            class="form-textarea"
+            [class.invalid]="registerStoreForm.get('desc_uz').touched && (registerStoreForm.get('desc_uz').hasError('required') || registerStoreForm.get('desc_uz').hasError('maxlength'))"
+            trim
+            [maxlength]="1500"
+            [placeholder]="'enter.description'| translate"
+            [formControlName]="'desc_uz'"
+          ></textarea>
+          @if (registerStoreForm.get('desc_uz').touched) {
+            @if (registerStoreForm.get('desc_uz').hasError('required') && !registerStoreForm.get('desc_uz').hasError('maxlength')) {
+              <span class="form-error">{{ 'required.field'| translate }}</span>
+            }
+            @if (!registerStoreForm.get('desc_uz').hasError('required') && registerStoreForm.get('desc_uz').hasError('maxlength')) {
+              <span class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 1500 } }}</span>
+            }
+          }
         </label>
 
         <label class="form-label">
           <span class="form-label-text">{{ 'description'| translate }} (ru)</span>
-          <textarea class="form-textarea" [placeholder]="'enter.description'| translate"></textarea>
+          <textarea
+            class="form-textarea"
+            [class.invalid]="registerStoreForm.get('desc_ru').touched && registerStoreForm.get('desc_ru').hasError('maxlength')"
+            trim
+            [maxlength]="1500"
+            [placeholder]="'enter.description'| translate"
+            [formControlName]="'desc_ru'"
+          ></textarea>
+          @if (registerStoreForm.get('desc_ru').touched && registerStoreForm.get('desc_ru').hasError('maxlength')) {
+            <span class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 1500 } }}</span>
+          }
         </label>
       </div>
 
@@ -242,7 +335,8 @@
 
   <div class="register-submit">
     <ui-button
-      [actionType]="'submit'"
+      [actionType]="'button'"
+      (click)="submit()"
     />
   </div>
 </form>

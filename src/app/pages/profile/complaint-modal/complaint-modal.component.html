@@ -13,7 +13,7 @@
     @if (data?.storeShortname) {
       <label class="form-label">
         <span class="form-label-text">{{ 'short.name.of.store'| translate }}</span>
-        <input class="form-input" [formControlName]="'store_shortname'">
+        <input class="form-input" [formControlName]="'store_shortname'" readonly>
       </label>
     }
 
