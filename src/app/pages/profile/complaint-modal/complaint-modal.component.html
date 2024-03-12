@@ -1,0 +1,54 @@
+<div class="complaint-modal-header">
+  <h2 class="complaint-modal-heading">{{ 'complaining'| translate }}</h2>
+
+  <icon-button
+    mat-dialog-close
+    [icon]="'icon:x'"
+    [iconWidth]="0.875"
+  />
+</div>
+
+<mat-dialog-content class="complaint-modal-content">
+  <form class="complaint-modal-form" [formGroup]="complaintForm" (ngSubmit)="sendComplaint()">
+    <label class="form-label">
+      <span class="form-label-text">{{ 'complaint.type'| translate }}</span>
+
+      <mat-select
+        class="solid-select"
+        [placeholder]="'select.complaint.type'| translate"
+        [class.invalid]="complaintForm.get('complaint_type').touched && complaintForm.get('complaint_type').invalid"
+        [formControlName]="'complaint_type'"
+      >
+        @for (complaintType of complaintTypes; track complaintType) {
+          <mat-option [value]="complaintType.id">{{ complaintType.title| translate }}</mat-option>
+        }
+      </mat-select>
+      @if (complaintForm.get('complaint_type').touched && complaintForm.get('complaint_type').invalid) {
+        <span class="form-error">{{ 'required.field'| translate }}</span>
+      }
+    </label>
+
+    <label class="form-label">
+      <span class="form-label-text">{{ 'complaint.text'| translate }}</span>
+      <textarea
+        class="form-textarea"
+        [class.invalid]="complaintForm.get('message').hasError('maxlength')"
+        [placeholder]="'write.your.complaint'| translate"
+        [formControlName]="'message'"
+        [maxlength]="255"
+      ></textarea>
+
+      @if (complaintForm.get('message').hasError('maxlength')) {
+        <span class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 255 } }}</span>
+      }
+    </label>
+
+    <div class="complaint-modal-submit">
+      <ui-button
+        [actionType]="'submit'"
+        [text]="'send'"
+        [loading]="complaintForm.disabled"
+      />
+    </div>
+  </form>
+</mat-dialog-content>

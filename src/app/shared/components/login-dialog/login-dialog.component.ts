@@ -72,7 +72,7 @@ export class LoginDialogComponent implements OnInit, AfterViewInit {
   step: 'phone' | 'code' = 'phone';
 
   phoneForm = new FormGroup({
-    phoneNumber: new FormControl('+998 ', [ Validators.minLength(9) ])
+    phoneNumber: new FormControl('+998 ', [ Validators.required, Validators.minLength(9) ])
   });
 
   codeForm = new FormGroup({

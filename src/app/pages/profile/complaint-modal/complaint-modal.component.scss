@@ -1,0 +1,22 @@
+@import "variables";
+@import "mixins";
+
+.complaint-modal-header {
+  @include flex-center-between;
+  padding: 1.5rem 2rem 1rem;
+}
+
+.complaint-modal-heading {
+  font-size: 1.5rem;
+  color: $dialog-title-black;
+}
+
+.complaint-modal-form {
+  @include flex-column(1rem);
+  padding: 0 2rem 2rem;
+}
+
+.complaint-modal-submit {
+  @include flex-center-end;
+  padding-top: 0.5rem;
+}

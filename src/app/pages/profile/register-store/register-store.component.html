@@ -1,4 +1,4 @@
-<form class="register">
+<form class="register" [formGroup]="registerStoreForm">
   <h2 class="register-heading">{{ 'store.registration'| translate }}</h2>
 
   <fieldset class="register-fieldset">
@@ -9,28 +9,61 @@
     <div class="register-legend">{{ 'store.owner.information'| translate }}</div>
     <div class="register-main-fields">
       <label class="form-label">
-        <span class="form-label-text">{{ 'surname'| translate }}</span>
-        <input class="form-input" type="text" [placeholder]="'enter.your.surname'| translate">
+        <span class="form-label-text">{{ 'surname'| translate }} *</span>
+        <input
+          class="form-input"
+          [class.invalid]="registerStoreForm.get('owner_lastname').invalid && registerStoreForm.get('owner_lastname').touched"
+          type="text"
+          [placeholder]="'enter.your.surname'| translate"
+          [formControlName]="'owner_lastname'"
+        >
+
+        <ng-container
+          *ngTemplateOutlet="nameErrors; context: { $implicit: 'owner_lastname' }"
+        />
       </label>
 
       <label class="form-label">
-        <span class="form-label-text">{{ 'name'| translate }}</span>
-        <input class="form-input" type="text" [placeholder]="'enter.your.name'| translate">
+        <span class="form-label-text">{{ 'name'| translate }} *</span>
+        <input
+          class="form-input"
+          [class.invalid]="registerStoreForm.get('owner_firstname').invalid && registerStoreForm.get('owner_firstname').touched"
+          type="text"
+          [placeholder]="'enter.your.name'| translate"
+          [formControlName]="'owner_firstname'"
+        >
+        <ng-container
+          *ngTemplateOutlet="nameErrors; context: { $implicit: 'owner_firstname' }"
+        />
       </label>
 
       <label class="form-label">
-        <span class="form-label-text">{{ 'middlename'| translate }}</span>
-        <input class="form-input" type="text" [placeholder]="'enter.your.middlename'| translate">
+        <span class="form-label-text">{{ 'middlename'| translate }} *</span>
+        <input
+          class="form-input"
+          [class.invalid]="registerStoreForm.get('owner_fathername').invalid && registerStoreForm.get('owner_fathername').touched"
+          type="text"
+          [placeholder]="'enter.your.middlename'| translate"
+          [formControlName]="'owner_fathername'"
+        >
+        <ng-container
+          *ngTemplateOutlet="nameErrors; context: { $implicit: 'owner_fathername' }"
+        />
       </label>
 
       <label class="form-label">
-        <span class="form-label-text">{{ 'phone.number'| translate }}</span>
-        <input class="form-input" type="text" [placeholder]="'enter.phone.number'| translate">
-      </label>
-
-      <label class="form-label">
-        <span class="form-label-text">{{ 'email'| translate }}</span>
-        <input class="form-input" type="text" [placeholder]="'enter.your.email'| translate">
+        <span class="form-label-text">{{ 'phone.number'| translate }} *</span>
+        <input
+          class="form-input"
+          [class.invalid]="registerStoreForm.get('owner_phone_number').invalid && registerStoreForm.get('owner_phone_number').touched"
+          type="text"
+          [mask]="' 00 000 00 00'"
+          [prefix]="'+998'"
+          [formControlName]="'owner_phone_number'"
+        >
+        <ng-container
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'owner_phone_number' }"
+        />
       </label>
     </div>
   </fieldset>
@@ -42,19 +75,68 @@
       <div class="register-company-info-top">
         <div class="register-company-info-fields">
           <label class="form-label">
-            <span class="form-label-text">{{ 'store.name'| translate }}</span>
-            <input class="form-input" type="text" [placeholder]="'enter.store.name'| translate">
+            <span class="form-label-text">{{ 'store.name'| translate }} *</span>
+            <input
+              class="form-input"
+              type="text"
+              [placeholder]="'enter.store.name'| translate"
+              [class.invalid]="registerStoreForm.get('name_uz').invalid && registerStoreForm.get('name_uz').touched"
+              [formControlName]="'name_uz'"
+            >
+            <ng-container
+              *ngTemplateOutlet="requiredErrors; context: { $implicit: 'name_uz' }"
+            />
           </label>
 
-          <label class="form-label">
-            <span class="form-label-text">{{ 'short.name.of.store'| translate }}</span>
-            <input class="form-input" type="text" [placeholder]="'enter.short.name'| translate">
-          </label>
+          <div class="register-company-shortname">
+            <label class="form-label">
+              <span class="form-label-text">{{ 'short.name.of.store'| translate }} *</span>
+              <input
+                class="form-input"
+                type="text"
+                [placeholder]="'enter.short.name'| translate"
+                [formControlName]="'shortname'"
+                (input)="checkShortname()"
+              >
+            </label>
+            @if (!registerStoreForm.get('is_shortname_free').value) {
+              <div class="register-company-shortname-error">
+                <mat-icon
+                  class="register-company-shortname-error-icon"
+                  [svgIcon]="'icon:info'"
+                  #shortNameErrorIcon
+                  (click)="overlayPanel.openPanel()"
+                />
+
+                <overlay-panel [originElement]="shortNameErrorIcon._elementRef.nativeElement" #overlayPanel>
+                  <div
+                    class="register-company-shortname-error-panel"
+                    overlay-content
+                  >
+                    <div class="register-company-shortname-error-info">
+                      <mat-icon
+                        [svgIcon]="'icon:info'"
+                      />
+                      <p>{{ 'name.is.reserved.you.can.report'| translate }}</p>
+                    </div>
+                    <div class="register-company-shortname-error-report">
+                      <ui-button
+                        [text]="'complaining'"
+                        (click)="openShortnameComplainingModal()"
+                      />
+                    </div>
+
+                  </div>
+                </overlay-panel>
+              </div>
+            }
+          </div>
 
           <div class="form-label">
             <span class="form-label-text">{{ 'working.time'| translate }}</span>
             <div class="register-work-times">
-              <mat-select class="register-work-times-select solid-select" [value]="1" [hideSingleSelectionIndicator]="true">
+              <mat-select class="register-work-times-select solid-select" [value]="1"
+                          [hideSingleSelectionIndicator]="true">
                 <mat-option [value]="1">{{ 'mon'| translate }}</mat-option>
                 <mat-option [value]="2">{{ 'tue'| translate }}</mat-option>
                 <mat-option [value]="3">{{ 'wed'| translate }}</mat-option>
@@ -90,11 +172,13 @@
             <mat-radio-group class="register-delivery-type">
               <mat-radio-button
                 class="form-radio"
-                [color]="'primary'">{{ 'yes'| translate }}</mat-radio-button>
+                [color]="'primary'">{{ 'yes'| translate }}
+              </mat-radio-button>
               <mat-radio-button
                 class="form-radio"
                 [color]="'primary'"
-              >{{ 'no'| translate }}</mat-radio-button>
+              >{{ 'no'| translate }}
+              </mat-radio-button>
             </mat-radio-group>
           </label>
 
@@ -140,7 +224,10 @@
         </label>
       </div>
 
-      <div class="register-map" id="map"></div>
+      <div class="form-label">
+        <span class="form-label-text">{{ 'location'| translate }}</span>
+        <div class="register-map" id="map"></div>
+      </div>
     </div>
   </fieldset>
 
@@ -150,3 +237,21 @@
     />
   </div>
 </form>
+
+<ng-template #nameErrors let-controlName>
+  @if (registerStoreForm.get(controlName).touched) {
+    @if (registerStoreForm.get(controlName).hasError('required') && !registerStoreForm.get(controlName).hasError('invalidName')) {
+      <span class="form-error">{{ 'required.field'| translate }}</span>
+    }
+
+    @if (!registerStoreForm.get(controlName).hasError('required') && registerStoreForm.get(controlName).hasError('invalidName')) {
+      <span class="form-error">{{ 'enter.correct.information'| translate }}</span>
+    }
+  }
+</ng-template>
+
+<ng-template #requiredErrors let-controlName>
+  @if (registerStoreForm.get(controlName).invalid && registerStoreForm.get(controlName).touched) {
+    <span class="form-error">{{ 'required.field'| translate }}</span>
+  }
+</ng-template>

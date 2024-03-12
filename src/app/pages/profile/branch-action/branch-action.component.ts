@@ -32,8 +32,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     provideNgxMask(),
     YandexMapsService
   ],
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  standalone: true
 })
 
 export class BranchActionComponent implements OnInit {
