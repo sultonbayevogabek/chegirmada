@@ -18,6 +18,7 @@ import { DistrictModel } from '../../../core/models/district.model';
 import { ShowByLangPipe } from '../../../core/pipes/show-by-lang.pipe';
 import { BaseComponent } from '../../../core/components/base/base.component';
 import { RouterLink } from '@angular/router';
+import { TrimDirective } from '../../../core/directives/trim.directive';
 
 @Component({
   selector: 'my-information',
@@ -38,7 +39,8 @@ import { RouterLink } from '@angular/router';
     MatDatepickerModule,
     ShowByLangPipe,
     AsyncPipe,
-    RouterLink
+    RouterLink,
+    TrimDirective
   ],
   providers: [
     provideNgxMask(),
@@ -113,11 +115,7 @@ export class MyInformationComponent extends BaseComponent implements OnInit {
   }
 
   getDistrictsList(): void {
-    const regionId: number = this.myInfoForm.get('region').value;
-
-    if (!regionId) {
-      return;
-    }
+    const regionId = this.myInfoForm.get('region').value;
 
     this._myInformationService.getDistrictsByRegionId(regionId)
       .pipe(takeUntilDestroyed(this.destroyRef))

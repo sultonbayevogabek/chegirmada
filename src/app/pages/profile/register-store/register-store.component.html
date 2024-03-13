@@ -1,4 +1,4 @@
-<form class="register" [formGroup]="registerStoreForm">
+<form class="register" [formGroup]="registerStoreForm" (ngSubmit)="registerStore()">
   <h2 class="register-heading">{{ 'store.registration'| translate }}</h2>
 
   <fieldset class="register-fieldset">
@@ -203,7 +203,13 @@
           <label class="form-label">
             <span class="form-label-text">{{ 'category'| translate }}</span>
 
-            <mat-select class="solid-select" [value]="1" [hideSingleSelectionIndicator]="true">
+            <mat-select
+              class="solid-select"
+              [formControlName]="'category'"
+            >
+              @for (category of categories; track category) {
+                <mat-option [value]="category.id">{{ category| showByLang: activeLang }}</mat-option>
+              }
             </mat-select>
           </label>
 
@@ -276,17 +282,95 @@
         </div>
 
         <div class="register-company-upload-logo" (click)="logoFileInput.click()">
-          <div class="register-company-logo-preview">
-            <p class="register-company-logo-requirements" [innerHTML]="'store.logo.requirements'| translate"></p>
+          <div
+            class="register-company-logo-preview"
+            [class.invalid]="registerStoreForm.get('logo').hasError('required') && registerStoreForm.get('logo').touched"
+          >
+            @if (logoBuffer) {
+              <img [src]="logoBuffer" [alt]="">
+            } @else {
+              <p class="register-company-logo-requirements" [innerHTML]="'store.logo.requirements'| translate"></p>
+            }
           </div>
+
+          @if (registerStoreForm.get('logo').hasError('required') && registerStoreForm.get('logo').touched) {
+            <span class="form-error">{{ 'required.field'| translate }}</span>
+          }
 
           <ui-button
             [type]="'gray-outline'"
             [text]="'upload'"
             [icon]="'icon:camera'"
           />
-          <input #logoFileInput class="register-company-logo-file-input" type="file">
+
+          <input
+            class="register-company-logo-file-input"
+            #logoFileInput
+            type="file"
+            (change)="onLogoSelected($event)"
+            [accept]="'.jpg, .jpeg, .png, .svg'"
+          >
         </div>
+      </div>
+
+      <div class="register-company-address">
+        <div class="register-company-info-fields">
+          <label class="my-information-label form-label">
+            <span class="my-information-label-text form-label-text">{{ 'region'| translate }} *</span>
+
+            <mat-select
+              class="solid-select"
+              [class.invalid]="registerStoreForm.get('region').invalid && registerStoreForm.get('region').touched"
+              [formControlName]="'region'"
+              [placeholder]="'region'| translate"
+              (selectionChange)="onRegionSelected()"
+            >
+              @for (region of regions; track region) {
+                <mat-option [value]="region.id">{{ region.name| translate }}</mat-option>
+              }
+            </mat-select>
+
+            <ng-container
+              *ngTemplateOutlet="requiredErrors; context: { $implicit: 'region' }"
+            />
+          </label>
+
+          <label class="my-information-label form-label">
+            <span class="my-information-label-text form-label-text">{{ 'district'| translate }} *</span>
+
+            <mat-select
+              class="solid-select"
+              [class.invalid]="registerStoreForm.get('district').invalid && registerStoreForm.get('district').touched"
+              [formControlName]="'district'"
+              [placeholder]="'district'| translate"
+              (click)="onClickDistrictsSelect()"
+            >
+              @for (district of districts; track district) {
+                <mat-option [value]="district.pk">{{ district | showByLang: activeLang }}</mat-option>
+              }
+            </mat-select>
+
+            <ng-container
+              *ngTemplateOutlet="requiredErrors; context: { $implicit: 'district' }"
+            />
+          </label>
+        </div>
+
+        <label class="form-label">
+          <span class="form-label-text">{{ 'address'| translate }} *</span>
+          <input
+            class="form-input"
+            type="text"
+            trim
+            [maxlength]="255"
+            [placeholder]="'enter.address'| translate"
+            [class.invalid]="registerStoreForm.get('address').invalid && registerStoreForm.get('address').touched"
+            [formControlName]="'address'"
+          >
+          <ng-container
+            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'address' }"
+          />
+        </label>
       </div>
 
       <div class="register-company-descriptions">
@@ -335,23 +419,11 @@
 
   <div class="register-submit">
     <ui-button
-      [actionType]="'button'"
-      (click)="submit()"
+      [actionType]="'submit'"
+      [loading]="registerStoreForm.disabled"
     />
   </div>
 </form>
-
-<ng-template #nameErrors let-controlName>
-  @if (registerStoreForm.get(controlName).touched) {
-    @if (registerStoreForm.get(controlName).hasError('required') && !registerStoreForm.get(controlName).hasError('invalidName')) {
-      <span class="form-error">{{ 'required.field'| translate }}</span>
-    }
-
-    @if (!registerStoreForm.get(controlName).hasError('required') && registerStoreForm.get(controlName).hasError('invalidName')) {
-      <span class="form-error">{{ 'enter.correct.information'| translate }}</span>
-    }
-  }
-</ng-template>
 
 <ng-template #requiredErrors let-controlName>
   @if (registerStoreForm.get(controlName).invalid && registerStoreForm.get(controlName).touched) {

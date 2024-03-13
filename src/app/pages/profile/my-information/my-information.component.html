@@ -15,6 +15,7 @@
         <input
           class="my-information-input form-input"
           [class.invalid]="myInfoForm.get('full_name').invalid && myInfoForm.get('full_name').touched"
+          trim
           type="text"
           [placeholder]="'name'| translate"
           [formControlName]="'full_name'"
@@ -28,7 +29,6 @@
         <span class="my-information-label-text form-label-text">{{ 'date.of.birth'| translate }}</span>
         <input
           class="my-information-input form-input"
-          [class.invalid]="myInfoForm.get('birthday').invalid && myInfoForm.get('birthday').touched"
           type="text"
           [readOnly]="true"
           [placeholder]="'dd.mm.yyyy'| translate"
@@ -50,7 +50,6 @@
 
         <mat-select
           class="solid-select"
-          [class.invalid]="myInfoForm.get('gender').invalid && myInfoForm.get('gender').touched"
           [formControlName]="'gender'"
           [placeholder]="'gender'| translate"
         >
@@ -64,7 +63,6 @@
 
         <mat-select
           class="solid-select"
-          [class.invalid]="myInfoForm.get('region').invalid && myInfoForm.get('region').touched"
           [formControlName]="'region'"
           [placeholder]="'region'| translate"
           (selectionChange)="onRegionSelected()"
@@ -80,7 +78,6 @@
 
         <mat-select
           class="solid-select"
-          [class.invalid]="myInfoForm.get('district').invalid && myInfoForm.get('district').touched"
           [formControlName]="'district'"
           [placeholder]="'district'| translate"
           (click)="onClickDistrictsSelect()"
@@ -105,6 +102,7 @@
         <span class="my-information-label-text form-label-text">{{ 'email'| translate }}</span>
         <input
           class="my-information-input form-input"
+          [class.invalid]="myInfoForm.get('email').invalid && myInfoForm.get('email').touched"
           type="text"
           [mask]="'A*@A*.SSS'"
           [validation]="true"
@@ -112,6 +110,9 @@
           [placeholder]="'email'| translate"
           [formControlName]="'email'"
         >
+        @if (myInfoForm.get('email').invalid && myInfoForm.get('email').touched) {
+          <span class="form-error">{{ 'enter.valid.email'| translate }}</span>
+        }
       </label>
     </div>
 

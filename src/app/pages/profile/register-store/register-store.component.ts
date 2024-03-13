@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
@@ -9,7 +9,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
 import { YandexMapsService } from '../../../core/services/yandex-maps.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { nameValidator } from '../../../core/validators/name.validator';
 import { NgTemplateOutlet } from '@angular/common';
 import { OverlayComponent } from '../../../shared/components/overlay-panel/overlay-panel.component';
 import { ScrollbarDirective } from '../../../shared/directives/scrollbar/scrollbar.directive';
@@ -19,6 +18,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { shortnameValidator } from '../../../core/validators/shortname.validator';
 import { TrimDirective } from '../../../core/directives/trim.directive';
 import { WEEKDAYS } from '../../../core/constants/weekdays';
+import { BaseComponent } from '../../../core/components/base/base.component';
+import { CATEGORIES } from '../../../core/constants/categories';
+import { ShowByLangPipe } from '../../../core/pipes/show-by-lang.pipe';
+import { AuthService } from '../../../core/services/auth.service';
+import { ToasterService } from '../../../core/services/toaster.service';
+import { REGIONS } from '../../../core/constants/regions';
+import { DistrictModel } from '../../../core/models/district.model';
+import { MyInformationService } from '../../../core/services/my-information.service';
+import { ConfettiComponent } from '../confetti-alert/confetti-alert.component';
 
 @Component({
   selector: 'register-store',
@@ -38,69 +46,86 @@ import { WEEKDAYS } from '../../../core/constants/weekdays';
     NgTemplateOutlet,
     OverlayComponent,
     ScrollbarDirective,
-    TrimDirective
+    TrimDirective,
+    ShowByLangPipe
   ],
   providers: [
     provideNgxMask(),
     YandexMapsService,
-    RegisterStoreService
+    RegisterStoreService,
+    MyInformationService
   ],
   standalone: true
 })
 
-export class RegisterStoreComponent implements OnInit, AfterViewInit {
+export class RegisterStoreComponent extends BaseComponent implements OnInit, AfterViewInit {
+  @ViewChild('logoFileInput') logoFileInput: ElementRef<HTMLInputElement>;
+
   private _dialog = inject(MatDialog);
   private _yandexMapService = inject(YandexMapsService);
   private _registerStoreService = inject(RegisterStoreService);
-  private _destroyRef = inject(DestroyRef);
+  private _myInfoService = inject(MyInformationService);
+  private _authService = inject(AuthService);
+  private _toasterService = inject(ToasterService);
 
   customPatterns = {
-    'X': { pattern: new RegExp("[a-zA-Z']") },
-    'Y': { pattern: new RegExp("[a-zA-Z0-9_]") },
-  }
+    'X': { pattern: new RegExp('[a-zA-Z\']') },
+    'Y': { pattern: new RegExp('[a-zA-Z0-9_]') }
+  };
   weekdays = WEEKDAYS;
+  categories = CATEGORIES;
+  regions = REGIONS;
+  logoBuffer: string | ArrayBuffer;
+  districts: DistrictModel[] = [];
   registerStoreForm = new FormGroup({
-    owner_firstname: new FormControl(null, [ Validators.required ]),
-    owner_lastname: new FormControl(null, [ Validators.required ]),
-    owner_fathername: new FormControl(null, [ Validators.required ]),
+    owner_firstname: new FormControl('Alexander', [ Validators.required ]),
+    owner_lastname: new FormControl('Lucky', [ Validators.required ]),
+    owner_fathername: new FormControl('Jonathan', [ Validators.required ]),
     owner_phone_number: new FormControl('+998 ', [ Validators.required, Validators.minLength(9) ]),
-    name_uz: new FormControl(null, [ Validators.required, Validators.maxLength(255) ]),
-    shortname: new FormControl(null, [ Validators.required, Validators.minLength(3), Validators.maxLength(20), shortnameValidator ]),
+    name_uz: new FormControl('Brand Clothes LLC', [ Validators.required, Validators.maxLength(255) ]),
+    shortname: new FormControl('brand_clothes', [ Validators.required, Validators.minLength(3), Validators.maxLength(20), shortnameValidator ]),
     is_shortname_free: new FormControl(true, [ Validators.required ]),
     working_day_start: new FormControl(0),
     working_day_end: new FormControl(4),
-    working_time_start: new FormControl('09:00', [ Validators.required, Validators.minLength(4)]),
-    working_time_end: new FormControl('18:00', [ Validators.required, Validators.minLength(4)]),
-    delivery: new FormControl(false),
+    working_time_start: new FormControl('09:00', [ Validators.required, Validators.minLength(4) ]),
+    working_time_end: new FormControl('18:00', [ Validators.required, Validators.minLength(4) ]),
+    category: new FormControl(2, [ Validators.required ]),
+    delivery: new FormControl(true),
     main_phone_number: new FormControl('+998 ', [ Validators.required, Validators.minLength(9) ]),
     slogan_uz: new FormControl(null, [ Validators.maxLength(255) ]),
     slogan_ru: new FormControl(null, [ Validators.maxLength(255) ]),
-    desc_uz: new FormControl(null, [ Validators.required, Validators.maxLength(1500) ]),
+    region: new FormControl(null, [ Validators.required ]),
+    address: new FormControl('Tashkent City, str. Ali Nava', [ Validators.required, Validators.maxLength(255) ]),
+    district: new FormControl(null, [ Validators.required ]),
+    desc_uz: new FormControl('Our company works for users and we want to help to humanity', [ Validators.required, Validators.maxLength(1500) ]),
     desc_ru: new FormControl(null, [ Validators.maxLength(1500) ]),
     longitude: new FormControl(null, [ Validators.required ]),
     latitude: new FormControl(null, [ Validators.required ]),
+    logo: new FormControl(null, [ Validators.required ])
   });
 
   constructor() {
-    /*this._dialog.open(ConfettiComponent, {
-      data: {
-        text: 'Ваш запрос принят. Ответ будет дан в ближайшее время. Спасибо, что вы с нами!'
-      },
-      maxWidth: '35rem'
-    })*/
+    super();
   }
 
   ngOnInit(): void {
+    this._authService.currentUser$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(user => {
+        this.registerStoreForm.get('owner_phone_number').setValue(user.phone_number);
+        this.registerStoreForm.get('main_phone_number').setValue(user.phone_number);
+      });
+
     this._yandexMapService.setSingleLocationPoint('map');
 
     this._yandexMapService.coordinates$
-      .pipe(takeUntilDestroyed(this._destroyRef))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: coordinates => {
           this.registerStoreForm.get('longitude').setValue(coordinates[0]);
           this.registerStoreForm.get('latitude').setValue(coordinates[1]);
         }
-      })
+      });
   }
 
   ngAfterViewInit(): void {
@@ -117,7 +142,7 @@ export class RegisterStoreComponent implements OnInit, AfterViewInit {
     }
 
     this._registerStoreService.checkShortName(shortname)
-      .pipe(takeUntilDestroyed(this._destroyRef))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
           isShortnameFreeControl.setValue(true);
@@ -138,7 +163,95 @@ export class RegisterStoreComponent implements OnInit, AfterViewInit {
     });
   }
 
-  submit(): void {
-    console.log(this.registerStoreForm.getRawValue());
+  onLogoSelected($event: Event): void {
+    const file = ($event.target as HTMLInputElement).files[0];
+
+    if (!file) {
+      return;
+    }
+
+    if (![ 'image/jpeg', 'image/jpg', 'image/png', 'image/svg+xml' ].includes(file.type)) {
+      return;
+    }
+
+    if (file.size > 5242880) {
+      this._toasterService.open({
+        type: 'warning',
+        message: 'file.size.should.not.exceed.5.mb',
+        title: 'dear.user'
+      });
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = event => {
+      this.logoBuffer = event.target.result;
+    };
+    reader.readAsDataURL(file);
+    this.registerStoreForm.get('logo').setValue(file);
+    this.logoFileInput.nativeElement.value = null;
+  }
+
+  onRegionSelected(): void {
+    this.registerStoreForm.get('district').setValue(null);
+    this.getDistrictsList();
+  }
+
+  getDistrictsList(): void {
+    const regionId = this.registerStoreForm.get('region').value;
+
+    this._myInfoService.getDistrictsByRegionId(regionId)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: districts => {
+          this.districts = districts;
+        },
+        error: () => {
+          this.districts = [];
+        }
+      });
+  }
+
+  onClickDistrictsSelect(): void {
+    if (this.registerStoreForm.get('region').value) {
+      return;
+    }
+
+    this._toasterService.open({
+      type: 'info',
+      title: 'dear.user',
+      message: 'please.specify.your.region.first'
+    });
+  }
+
+  registerStore(): void {
+    const form = this.registerStoreForm;
+    form.markAllAsTouched();
+
+    if (form.invalid || form.disabled) {
+      return;
+    }
+
+    const formData = new FormData();
+    const formValue = this.registerStoreForm.getRawValue();
+    for (const key in formValue) {
+      if (key === 'working_time_start' || key === 'working_time_end') {
+        formData.append(key, '2');
+      } else {
+        formData.append(key, formValue[key]);
+      }
+    }
+    this._registerStoreService.registerStore(formData)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: _ => {
+          this._dialog.open(ConfettiComponent, {
+            data: {
+              text: 'Ваш запрос принят. Ответ будет дан в ближайшее время. Спасибо, что вы с нами!'
+            },
+            maxWidth: '35rem'
+          });
+        }
+      });
   }
 }

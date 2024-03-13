@@ -14,4 +14,8 @@ export class RegisterStoreService {
       shortname
     });
   }
+
+  registerStore(payload: FormData): Observable<any> {
+    return this._httpClient.post<any>(this._host + 'stores/', payload);
+  }
 }

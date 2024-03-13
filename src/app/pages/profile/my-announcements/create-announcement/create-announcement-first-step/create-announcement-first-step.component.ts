@@ -35,7 +35,6 @@ export class CreateAnnouncementFirstStepComponent {
   }[] = [];
 
   onImagesDropped($event: FileList): void {
-    console.log($event);
     for (const file of Array.from($event)) {
       if (![ 'image/jpeg', 'image/png', 'image/webp' ].includes(file.type)) {
         continue;
@@ -65,7 +64,7 @@ export class CreateAnnouncementFirstStepComponent {
   }
 
   onImagesSelectedByFileInput($event: Event): void {
-    this.onImagesDropped(($event.srcElement as HTMLInputElement).files);
+    this.onImagesDropped(($event.target as HTMLInputElement).files);
     this.fileInput.nativeElement.value = null;
   }
 
