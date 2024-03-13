@@ -234,6 +234,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
 
     const formData = new FormData();
     const formValue = this.registerStoreForm.getRawValue();
+
     for (const key in formValue) {
       if (key === 'working_time_start' || key === 'working_time_end') {
         formData.append(key, '2');
@@ -241,6 +242,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
         formData.append(key, formValue[key]);
       }
     }
+
     this._registerStoreService.registerStore(formData)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -250,6 +252,13 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
               text: 'Ваш запрос принят. Ответ будет дан в ближайшее время. Спасибо, что вы с нами!'
             },
             maxWidth: '35rem'
+          });
+        },
+        error: _ => {
+          this._toasterService.open({
+            type: 'error',
+            title: 'attention',
+            message: 'error.occurred'
           });
         }
       });
