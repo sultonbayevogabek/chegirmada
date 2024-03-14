@@ -7,6 +7,7 @@ import { BranchActionComponent } from '../branch-action/branch-action.component'
 import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
 import { ConfirmationService } from '../../../core/services/confirmation.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'branches',
@@ -17,7 +18,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatRipple,
     ProfileEmptyListComponent,
     IconButtonComponent,
-    BranchActionComponent
+    BranchActionComponent,
+    TranslateModule
   ],
   providers: [
     ConfirmationService
@@ -34,7 +36,8 @@ export class BranchesComponent {
   }
   openBranchActionDialog(): void {
     this.dialog.open(BranchActionComponent, {
-      width: '60%'
+      width: '100%',
+      maxWidth: '75rem'
     })
   }
 

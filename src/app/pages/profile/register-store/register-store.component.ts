@@ -27,6 +27,7 @@ import { REGIONS } from '../../../core/constants/regions';
 import { DistrictModel } from '../../../core/models/district.model';
 import { MyInformationService } from '../../../core/services/my-information.service';
 import { ConfettiComponent } from '../confetti-alert/confetti-alert.component';
+import { GeneralService } from '../../../core/services/general.service';
 
 @Component({
   selector: 'register-store',
@@ -53,7 +54,8 @@ import { ConfettiComponent } from '../confetti-alert/confetti-alert.component';
     provideNgxMask(),
     YandexMapsService,
     RegisterStoreService,
-    MyInformationService
+    MyInformationService,
+    GeneralService
   ],
   standalone: true
 })
@@ -64,7 +66,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
   private _dialog = inject(MatDialog);
   private _yandexMapService = inject(YandexMapsService);
   private _registerStoreService = inject(RegisterStoreService);
-  private _myInfoService = inject(MyInformationService);
+  private _generalService = inject(GeneralService);
   private _authService = inject(AuthService);
   private _toasterService = inject(ToasterService);
 
@@ -200,7 +202,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
   getDistrictsList(): void {
     const regionId = this.registerStoreForm.get('region').value;
 
-    this._myInfoService.getDistrictsByRegionId(regionId)
+    this._generalService.getDistrictsByRegionId(regionId)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: districts => {
@@ -220,7 +222,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
     this._toasterService.open({
       type: 'info',
       title: 'dear.user',
-      message: 'please.specify.your.region.first'
+      message: 'please.specify.region.first'
     });
   }
 
@@ -232,12 +234,14 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
       return;
     }
 
+    form.disable();
+
     const formData = new FormData();
-    const formValue = this.registerStoreForm.getRawValue();
+    const formValue = form.getRawValue();
 
     for (const key in formValue) {
       if (key === 'working_time_start' || key === 'working_time_end') {
-        formData.append(key, '2');
+        formData.append(key, formValue[key].replace(/:/g, ''));
       } else {
         formData.append(key, formValue[key]);
       }
@@ -255,6 +259,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
           });
         },
         error: _ => {
+          form.enable();
           this._toasterService.open({
             type: 'error',
             title: 'attention',

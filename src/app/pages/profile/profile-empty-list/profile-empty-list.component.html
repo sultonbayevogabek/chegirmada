@@ -3,7 +3,7 @@
     <img [ngSrc]="emptyListImg" [fill]="true" [alt]="">
   </div>
 
-  <p class="profile-empty-list-text">{{ emptyListText }}</p>
+  <p class="profile-empty-list-text">{{ emptyListText| translate }}</p>
 
   @if (emptyListButton) {
     <ui-button

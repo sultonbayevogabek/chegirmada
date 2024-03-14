@@ -16,18 +16,32 @@
 }
 
 .branch-action-fields {
-  @include grid(repeat(3, 1fr), 0.5rem 1rem);
+  @include grid(repeat(3, 1fr), 0.75rem 1rem);
 }
 
-.branch-action-times, .branch-action-delivery {
+.branch-action-times {
+  @include grid(repeat(4, 1fr), 1rem);
+}
+
+.branch-action-times-input {
+  text-align: center;
+}
+
+.branch-action-delivery {
   @include grid(1fr 1fr, 1rem);
 }
 
+.branch-action-location {
+  padding-top: 1rem;
+}
+
 .branch-action-map {
-  aspect-ratio: 2.5;
+  aspect-ratio: 3;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .branch-action-submit {
+  @include flex-center-end;
   padding: 1.5rem 2rem;
-  text-align: right;
 }

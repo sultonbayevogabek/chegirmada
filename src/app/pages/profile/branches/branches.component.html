@@ -1,10 +1,10 @@
 <div class="branches">
-  <h2 class="branches-heading">Филиалы</h2>
+  <h2 class="branches-heading">{{ 'branches'| translate }}</h2>
 
   <profile-empty-list
-    [emptyListText]="'Если у вашей компании несколько филиалов, укажите и их'"
+    [emptyListText]="'if.you.have.branches.add.them'"
     [emptyListImg]="'/assets/empty-list-icons/branches.svg'"
-    [emptyListButton]="'Добавить'"
+    [emptyListButton]="'add'"
     (onEmptyListButtonClick)="openBranchActionDialog()"
   />
 
@@ -16,19 +16,19 @@
 
           <div class="branch-details">
             <div class="branch-details-item">
-              <div class="branch-details-label">Рабочее время:</div>
+              <div class="branch-details-label">{{ 'working.time'| translate }}:</div>
               <div class="branch-details-value">Пон. - Пят. 09:00 - 18:00</div>
             </div>
             <div class="branch-details-item">
-              <div class="branch-details-label">Доставка:</div>
+              <div class="branch-details-label">{{ 'delivery'| translate }}:</div>
               <div class="branch-details-value">есть</div>
             </div>
             <div class="branch-details-item">
-              <div class="branch-details-label">Номер телефона:</div>
+              <div class="branch-details-label">{{ 'phone.number'| translate }}:</div>
               <div class="branch-details-value">+998 33 695 95 50</div>
             </div>
             <div class="branch-details-item">
-              <div class="branch-details-label">Адрес:</div>
+              <div class="branch-details-label">{{ 'address'| translate }}:</div>
               <div class="branch-details-value">улица Ислама Каримова, 51</div>
             </div>
           </div>

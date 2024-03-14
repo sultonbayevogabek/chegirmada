@@ -19,6 +19,7 @@ import { ShowByLangPipe } from '../../../core/pipes/show-by-lang.pipe';
 import { BaseComponent } from '../../../core/components/base/base.component';
 import { RouterLink } from '@angular/router';
 import { TrimDirective } from '../../../core/directives/trim.directive';
+import { GeneralService } from '../../../core/services/general.service';
 
 @Component({
   selector: 'my-information',
@@ -44,13 +45,15 @@ import { TrimDirective } from '../../../core/directives/trim.directive';
   ],
   providers: [
     provideNgxMask(),
-    MyInformationService
+    MyInformationService,
+    GeneralService
   ],
   standalone: true
 })
 
 export class MyInformationComponent extends BaseComponent implements OnInit {
   private _authService = inject(AuthService);
+  private _generalService = inject(GeneralService);
   private _myInformationService = inject(MyInformationService);
   private _toasterService = inject(ToasterService);
   protected readonly regions = REGIONS;
@@ -117,7 +120,7 @@ export class MyInformationComponent extends BaseComponent implements OnInit {
   getDistrictsList(): void {
     const regionId = this.myInfoForm.get('region').value;
 
-    this._myInformationService.getDistrictsByRegionId(regionId)
+    this._generalService.getDistrictsByRegionId(regionId)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: districts => {
@@ -142,7 +145,7 @@ export class MyInformationComponent extends BaseComponent implements OnInit {
     this._toasterService.open({
       type: 'info',
       title: 'dear.user',
-      message: 'please.specify.your.region.first'
+      message: 'please.specify.region.first'
     });
   }
 }

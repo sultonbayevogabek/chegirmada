@@ -14,10 +14,4 @@ export class MyInformationService {
   updateUserInformation(payload: UserModel): Observable<UserModel> {
     return this._httpClient.put<UserModel>(this._host + 'users/profile/', payload);
   }
-
-  getDistrictsByRegionId(regionId: number): Observable<DistrictModel[]> {
-    return this._httpClient.post<{ districts: DistrictModel[] }>(this._host + 'general/districts/', {
-      region: regionId
-    }).pipe(map(res => res.districts || []));
-  }
 }

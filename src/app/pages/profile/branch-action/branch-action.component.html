@@ -1,60 +1,176 @@
-<div class="branch-action-header">
-  <h2 class="branch-action-heading">Добавить филиал</h2>
+<form [formGroup]="addBranchForm" (ngSubmit)="addBranch()">
+  <div class="branch-action-header">
+    <h2 class="branch-action-heading">{{ 'add.branch'| translate }}</h2>
 
-  <icon-button
-    mat-dialog-close
-    [icon]="'icon:x'"
-    [iconWidth]="0.875"
-  />
-</div>
+    <icon-button
+      mat-dialog-close
+      [icon]="'icon:x'"
+      [iconWidth]="0.875"
+    />
+  </div>
 
-<mat-dialog-content class="branch-action-content">
-  <form class="branch-action-form">
-    <div class="branch-action-fields">
-      <label class="form-label">
-        <span class="form-label-text">Название фирма</span>
-        <input class="form-input" type="text" placeholder="Введите название">
-      </label>
+  <mat-dialog-content class="branch-action-content">
+    <div class="branch-action-form">
+      <div class="branch-action-fields">
+        <label class="form-label">
+          <span class="form-label-text">{{ 'branch.name'| translate }} *</span>
+          <input
+            class="form-input"
+            type="text"
+            trim
+            [placeholder]="'enter.branch.name'| translate"
+            [class.invalid]="addBranchForm.get('name').invalid && addBranchForm.get('name').touched"
+            [maxlength]="255"
+            [formControlName]="'name'"
+          >
+          <ng-container
+            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'name' }"
+          />
+        </label>
 
-      <label class="form-label">
-        <span class="form-label-text">Номер телефона</span>
-        <input class="form-input" type="text" placeholder="Введите номер телефона">
-      </label>
+        <label class="form-label">
+          <span class="form-label-text">{{ 'phone.number'| translate }} *</span>
+          <input
+            class="form-input"
+            type="text"
+            [placeholder]="'enter.phone.number'| translate"
+            [class.invalid]="addBranchForm.get('main_phone_number').invalid && addBranchForm.get('main_phone_number').touched"
+            [mask]="' 00 000 00 00'"
+            [prefix]="'+998'"
+            [formControlName]="'main_phone_number'"
+          >
+          <ng-container
+            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'main_phone_number' }"
+          />
+        </label>
 
-      <label class="form-label">
-        <span class="form-label-text">Электронная почта</span>
-        <input class="form-input" type="text" placeholder="Введите электронную почту">
-      </label>
+        <label class="form-label">
+          <span class="form-label-text">{{ 'delivery'| translate }}</span>
 
-      <label class="form-label">
-        <span class="form-label-text">Рабочее время</span>
-        <div class="branch-action-times">
-          <input class="branch-action-time form-input" type="text" placeholder="00:00" [mask]="'Hh:m0'">
-          <input class="branch-action-time form-input" type="text" placeholder="00:00" [mask]="'Hh:m0'">
+          <mat-radio-group class="branch-action-delivery" [formControlName]="'delivery'">
+            <mat-radio-button class="form-radio" [value]="true" [color]="'primary'">{{ 'available'| translate }}</mat-radio-button>
+            <mat-radio-button class="form-radio" [value]="false" [color]="'primary'">{{ 'no'| translate }}</mat-radio-button>
+          </mat-radio-group>
+        </label>
+
+        <div class="form-label">
+          <span class="form-label-text">{{ 'working.time'| translate }}</span>
+          <div class="branch-action-times">
+            <mat-select
+              class="branch-action-times-select solid-select"
+              [hideSingleSelectionIndicator]="true"
+              [formControlName]="'working_day_start'"
+            >
+              @for (weekday of weekdays; track weekday) {
+                <mat-option [value]="weekday.id">{{ weekday.name | translate }}</mat-option>
+              }
+            </mat-select>
+            <input
+              class="branch-action-times-input form-input"
+              [class.invalid]="addBranchForm.get('working_time_start').invalid && addBranchForm.get('working_time_start').touched"
+              type="text"
+              placeholder="00:00"
+              [mask]="'Hh:m0'"
+              [formControlName]="'working_time_start'"
+            >
+            <mat-select
+              class="solid-select"
+              [hideSingleSelectionIndicator]="true"
+              [formControlName]="'working_day_end'"
+            >
+              @for (weekday of weekdays; track weekday) {
+                <mat-option [value]="weekday.id">{{ weekday.name | translate }}</mat-option>
+              }
+            </mat-select>
+            <input
+              class="branch-action-times-input form-input"
+              [class.invalid]="addBranchForm.get('working_time_end').invalid && addBranchForm.get('working_time_end').touched"
+              type="text"
+              placeholder="00:00"
+              [mask]="'Hh:m0'"
+              [formControlName]="'working_time_end'"
+              [leadZero]="true"
+            >
+          </div>
+        </div>
+
+        <label class="my-information-label form-label">
+          <span class="my-information-label-text form-label-text">{{ 'region'| translate }} *</span>
+
+          <mat-select
+            class="solid-select"
+            [class.invalid]="addBranchForm.get('region').invalid && addBranchForm.get('region').touched"
+            [formControlName]="'region'"
+            [placeholder]="'region'| translate"
+            (selectionChange)="onRegionSelected()"
+          >
+            @for (region of regions; track region) {
+              <mat-option [value]="region.id">{{ region.name| translate }}</mat-option>
+            }
+          </mat-select>
+
+          <ng-container
+            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'region' }"
+          />
+        </label>
+
+        <label class="my-information-label form-label">
+          <span class="my-information-label-text form-label-text">{{ 'district'| translate }} *</span>
+
+          <mat-select
+            class="solid-select"
+            [class.invalid]="addBranchForm.get('district').invalid && addBranchForm.get('district').touched"
+            [formControlName]="'district'"
+            [placeholder]="'district'| translate"
+            (click)="onClickDistrictsSelect()"
+          >
+            @for (district of districts; track district) {
+              <mat-option [value]="district.pk">{{ district | showByLang: activeLang }}</mat-option>
+            }
+          </mat-select>
+
+          <ng-container
+            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'district' }"
+          />
+        </label>
+
+        <label class="form-label">
+          <span class="form-label-text">{{ 'address'| translate }} *</span>
+          <input
+            class="form-input"
+            type="text"
+            trim
+            [maxlength]="255"
+            [placeholder]="'enter.address'| translate"
+            [class.invalid]="addBranchForm.get('address').invalid && addBranchForm.get('address').touched"
+            [formControlName]="'address'"
+          >
+          <ng-container
+            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'address' }"
+          />
+        </label>
+      </div>
+
+      <label class="branch-action-location form-label">
+        <span class="form-label-text">{{ 'location'| translate }}</span>
+
+        <div class="branch-action-map" id="map">
         </div>
       </label>
-
-      <label class="form-label">
-        <span class="form-label-text">Доставка</span>
-
-        <mat-radio-group class="branch-action-delivery">
-          <mat-radio-button class="form-radio" [color]="'primary'">Да</mat-radio-button>
-          <mat-radio-button class="form-radio" [color]="'primary'">Нет</mat-radio-button>
-        </mat-radio-group>
-      </label>
     </div>
+  </mat-dialog-content>
 
-    <label class="form-label" style="margin-top: 1rem; aspect-ratio: 2.56">
-      <span class="form-label-text">Адрес</span>
+  <div class="branch-action-submit">
+    <ui-button
+      [text]="'add'"
+      [actionType]="'submit'"
+      [loading]="addBranchForm.disabled"
+    />
+  </div>
+</form>
 
-      <div class="branch-action-map" id="map">
-      </div>
-    </label>
-  </form>
-</mat-dialog-content>
-
-<div class="branch-action-submit">
-  <ui-button
-    [text]="'Добавить'"
-  />
-</div>
+<ng-template #requiredErrors let-controlName>
+  @if (addBranchForm.get(controlName).invalid && addBranchForm.get(controlName).touched) {
+    <span class="form-error">{{ 'required.field'| translate }}</span>
+  }
+</ng-template>
