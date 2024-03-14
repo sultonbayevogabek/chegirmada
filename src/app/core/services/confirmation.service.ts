@@ -9,16 +9,17 @@ export class ConfirmationService {
   dialogRef = inject(MatDialog);
 
   confirmation(
-    message: string = 'Вы действительно хотите удалить?',
-    cancel: string = 'Отмена',
-    confirm: string = 'Удалить'
+    message: string = 'are.you.sure.to.delete',
+    cancel: string = 'cancel',
+    confirm: string = 'delete'
   ): Observable<boolean> {
     const dialog = this.dialogRef.open(
       ConfirmationComponent, {
         data: {
           message, cancel, confirm
         },
-        width: '20rem'
+        width: '100%',
+        maxWidth: '22rem'
       });
     return dialog.afterClosed();
   }

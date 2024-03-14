@@ -2,6 +2,7 @@ import { Component, inject, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'confirmation',
@@ -10,7 +11,8 @@ import { UiButtonComponent } from '../../../shared/components/ui-button/ui-butto
   imports: [
     MatButton,
     MatDialogContent,
-    UiButtonComponent
+    UiButtonComponent,
+    TranslateModule
   ],
   standalone: true
 })

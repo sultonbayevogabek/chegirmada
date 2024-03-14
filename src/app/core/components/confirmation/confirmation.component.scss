@@ -2,7 +2,7 @@
 @import "mixins";
 
 .confirmation {
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
 }
 
 .confirmation-text {
@@ -13,6 +13,6 @@
 }
 
 .confirmation-actions {
-  @include flex-center-center(0.5rem);
+  @include flex-center-center(1rem);
   padding-top: 1rem;
 }

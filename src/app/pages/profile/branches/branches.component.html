@@ -1,12 +1,12 @@
 <div class="branches">
-  <h2 class="branches-heading">{{ 'branches'| translate }}</h2>
-
   <profile-empty-list
     [emptyListText]="'if.you.have.branches.add.them'"
     [emptyListImg]="'/assets/empty-list-icons/branches.svg'"
     [emptyListButton]="'add'"
     (onEmptyListButtonClick)="openBranchActionDialog()"
   />
+
+  <h2 class="branches-heading">{{ 'my.branches'| translate }}</h2>
 
   <ul class="branches-list">
     @for (i of [ 1, 2, 3 ]; track i) {

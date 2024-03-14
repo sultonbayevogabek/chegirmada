@@ -28,11 +28,12 @@ import { DistrictModel } from '../../../core/models/district.model';
 import { MyInformationService } from '../../../core/services/my-information.service';
 import { ConfettiComponent } from '../confetti-alert/confetti-alert.component';
 import { GeneralService } from '../../../core/services/general.service';
+import { ProfileEmptyListComponent } from '../profile-empty-list/profile-empty-list.component';
 
 @Component({
-  selector: 'register-store',
-  templateUrl: 'register-store.component.html',
-  styleUrl: 'register-store.component.scss',
+  selector: 'my-store',
+  templateUrl: 'my-store.component.html',
+  styleUrl: 'my-store.component.scss',
   imports: [
     MatSelect,
     MatOption,
@@ -48,7 +49,8 @@ import { GeneralService } from '../../../core/services/general.service';
     OverlayComponent,
     ScrollbarDirective,
     TrimDirective,
-    ShowByLangPipe
+    ShowByLangPipe,
+    ProfileEmptyListComponent
   ],
   providers: [
     provideNgxMask(),
@@ -60,7 +62,7 @@ import { GeneralService } from '../../../core/services/general.service';
   standalone: true
 })
 
-export class RegisterStoreComponent extends BaseComponent implements OnInit, AfterViewInit {
+export class MyStoreComponent extends BaseComponent implements OnInit, AfterViewInit {
   @ViewChild('logoFileInput') logoFileInput: ElementRef<HTMLInputElement>;
 
   private _dialog = inject(MatDialog);

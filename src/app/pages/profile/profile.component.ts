@@ -39,13 +39,18 @@ export class ProfileComponent {
     },
     {
       icon: 'icon:my-information',
-      link: 'my-announcements',
-      name: 'my.announcements'
+      link: 'my-store',
+      name: 'my.store'
     },
     {
       icon: 'icon:my-information',
-      link: 'branches',
-      name: 'branches'
+      link: 'my-branches',
+      name: 'my.branches'
+    },
+    {
+      icon: 'icon:my-information',
+      link: 'my-announcements',
+      name: 'my.announcements'
     },
     {
       icon: 'icon:favourite-companies',

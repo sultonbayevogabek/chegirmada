@@ -23,11 +23,11 @@ export const profileRoutes: Routes = [
         loadComponent: () => import('./favourite-products/favourite-products.component').then(c => c.FavouriteProductsComponent)
       },
       {
-        path: 'register-store',
-        loadComponent: () => import('./register-store/register-store.component').then(c => c.RegisterStoreComponent)
+        path: 'my-store',
+        loadComponent: () => import('./my-store/my-store.component').then(c => c.MyStoreComponent)
       },
       {
-        path: 'branches',
+        path: 'my-branches',
         loadComponent: () => import('./branches/branches.component').then(c => c.BranchesComponent)
       },
       {
