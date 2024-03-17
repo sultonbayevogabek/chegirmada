@@ -6,4 +6,6 @@ export interface UserModel {
   region: number;
   district: number;
   birthday: string;
+  store_id?: number;
+  store_is_active?: boolean;
 }

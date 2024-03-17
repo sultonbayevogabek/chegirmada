@@ -3,7 +3,7 @@
     <mat-icon [svgIcon]="'icon:success'"/>
   </div>
 
-  <p class="confetti-alert-text">{{ data.text }}</p>
+  <p class="confetti-alert-text">{{ data.text| translate }}</p>
 
   <canvas id="confetti" #confettiCanvas></canvas>
 </div>

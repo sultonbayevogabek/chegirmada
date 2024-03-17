@@ -1,13 +1,15 @@
 import { AfterViewInit, Component, ElementRef, inject, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'confetti-alert',
   templateUrl: 'confetti-alert.component.html',
   styleUrl: 'confetti-alert.component.scss',
   imports: [
-    MatIcon
+    MatIcon,
+    TranslateModule
   ],
   standalone: true
 })

@@ -1,11 +1,4 @@
 <div class="my-store">
-  <profile-empty-list
-    [hidden]="showRegisterForm"
-    [emptyListText]="'you.do.not.have.registered.store'"
-    [emptyListImg]="'/assets/empty-list-icons/branches.svg'"
-    [emptyListButton]="'store.registration'"
-    (onEmptyListButtonClick)="openRegisterStoreForm()"
-  />
   <form
     [hidden]="!showRegisterForm"
     class="register"

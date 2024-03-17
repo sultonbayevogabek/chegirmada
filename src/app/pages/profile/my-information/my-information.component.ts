@@ -72,7 +72,7 @@ export class MyInformationComponent extends BaseComponent implements OnInit {
     gender: new FormControl(null),
     region: new FormControl(null),
     district: new FormControl(null),
-    birthday: new FormControl(null)
+    birthday: new FormControl(null),
   });
 
   ngOnInit(): void {
@@ -80,9 +80,10 @@ export class MyInformationComponent extends BaseComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: user => {
+          this.currentUser = user;
           if (!user) return;
 
-          this.myInfoForm.setValue(user);
+          this.myInfoForm.patchValue(user);
           this.getDistrictsList();
         }
       });
@@ -119,6 +120,10 @@ export class MyInformationComponent extends BaseComponent implements OnInit {
 
   getDistrictsList(): void {
     const regionId = this.myInfoForm.get('region').value;
+
+    if (!regionId) {
+      return;
+    }
 
     this._generalService.getDistrictsByRegionId(regionId)
       .pipe(takeUntilDestroyed(this.destroyRef))

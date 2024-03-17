@@ -27,4 +27,9 @@ export class ProductCardComponent {
     productCardLocation: string;
     productCardDate: string;
   }
+
+  productImages = [
+    'https://picsum.photos/id/1/500/500',
+    'https://picsum.photos/id/2/500/500'
+  ]
 }

@@ -1,58 +1,36 @@
 import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { MatOption, MatSelect } from '@angular/material/select';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatRipple } from '@angular/material/core';
-import { MatIcon } from '@angular/material/icon';
+import { YandexMapsService } from '../../../../core/services/yandex-maps.service';
+import { RegisterStoreService } from '../../../../core/services/register-store.service';
+import { MyInformationService } from '../../../../core/services/my-information.service';
+import { GeneralService } from '../../../../core/services/general.service';
+import { BaseComponent } from '../../../../core/components/base/base.component';
 import { MatDialog } from '@angular/material/dialog';
-import { TranslateModule } from '@ngx-translate/core';
-import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
-import { YandexMapsService } from '../../../core/services/yandex-maps.service';
+import { AuthService } from '../../../../core/services/auth.service';
+import { ToasterService } from '../../../../core/services/toaster.service';
+import { UserModel } from '../../../../core/models/user.model';
+import { WEEKDAYS } from '../../../../core/constants/weekdays';
+import { CATEGORIES } from '../../../../core/constants/categories';
+import { REGIONS } from '../../../../core/constants/regions';
+import { DistrictModel } from '../../../../core/models/district.model';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgTemplateOutlet } from '@angular/common';
-import { OverlayComponent } from '../../../shared/components/overlay-panel/overlay-panel.component';
-import { ScrollbarDirective } from '../../../shared/directives/scrollbar/scrollbar.directive';
-import { ComplaintModalComponent } from '../complaint-modal/complaint-modal.component';
-import { RegisterStoreService } from '../../../core/services/register-store.service';
+import { shortnameValidator } from '../../../../core/validators/shortname.validator';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { shortnameValidator } from '../../../core/validators/shortname.validator';
-import { TrimDirective } from '../../../core/directives/trim.directive';
-import { WEEKDAYS } from '../../../core/constants/weekdays';
-import { BaseComponent } from '../../../core/components/base/base.component';
-import { CATEGORIES } from '../../../core/constants/categories';
-import { ShowByLangPipe } from '../../../core/pipes/show-by-lang.pipe';
-import { AuthService } from '../../../core/services/auth.service';
-import { ToasterService } from '../../../core/services/toaster.service';
-import { REGIONS } from '../../../core/constants/regions';
-import { DistrictModel } from '../../../core/models/district.model';
-import { MyInformationService } from '../../../core/services/my-information.service';
-import { ConfettiComponent } from '../confetti-alert/confetti-alert.component';
-import { GeneralService } from '../../../core/services/general.service';
-import { ProfileEmptyListComponent } from '../profile-empty-list/profile-empty-list.component';
-import { UserModel } from '../../../core/models/user.model';
+import { ComplaintModalComponent } from '../../complaint-modal/complaint-modal.component';
+import { ConfettiComponent } from '../../confetti-alert/confetti-alert.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { TrimDirective } from '../../../../core/directives/trim.directive';
+import { MatIcon } from '@angular/material/icon';
+import { OverlayComponent } from '../../../../shared/components/overlay-panel/overlay-panel.component';
+import { UiButtonComponent } from '../../../../shared/components/ui-button/ui-button.component';
+import { MatOption, MatSelect } from '@angular/material/select';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 
 @Component({
-  selector: 'my-store',
-  templateUrl: 'my-store.component.html',
-  styleUrl: 'my-store.component.scss',
-  imports: [
-    MatSelect,
-    MatOption,
-    NgxMaskDirective,
-    MatRadioGroup,
-    MatRadioButton,
-    MatRipple,
-    MatIcon,
-    TranslateModule,
-    UiButtonComponent,
-    ReactiveFormsModule,
-    NgTemplateOutlet,
-    OverlayComponent,
-    ScrollbarDirective,
-    TrimDirective,
-    ShowByLangPipe,
-    ProfileEmptyListComponent
-  ],
+  selector: 'register-store',
+  templateUrl: 'register-store.component.html',
+  styleUrl: '../my-store.component.scss',
+  standalone: true,
   providers: [
     provideNgxMask(),
     YandexMapsService,
@@ -60,10 +38,22 @@ import { UserModel } from '../../../core/models/user.model';
     MyInformationService,
     GeneralService
   ],
-  standalone: true
+  imports: [
+    TranslateModule,
+    ReactiveFormsModule,
+    NgxMaskDirective,
+    TrimDirective,
+    MatIcon,
+    OverlayComponent,
+    UiButtonComponent,
+    MatSelect,
+    MatOption,
+    MatRadioGroup,
+    MatRadioButton
+  ]
 })
 
-export class MyStoreComponent extends BaseComponent implements OnInit, AfterViewInit {
+export class RegisterStoreComponent extends BaseComponent implements OnInit, AfterViewInit {
   @ViewChild('logoFileInput') logoFileInput: ElementRef<HTMLInputElement>;
 
   private _dialog = inject(MatDialog);
@@ -84,7 +74,7 @@ export class MyStoreComponent extends BaseComponent implements OnInit, AfterView
   logoBuffer: string | ArrayBuffer;
   districts: DistrictModel[] = [];
   showRegisterForm = false;
-  storeForm = new FormGroup({
+  registerStoreForm = new FormGroup({
     owner_firstname: new FormControl('Alexander', [ Validators.required ]),
     owner_lastname: new FormControl('Lucky', [ Validators.required ]),
     owner_fathername: new FormControl('Jonathan', [ Validators.required ]),
@@ -124,16 +114,16 @@ export class MyStoreComponent extends BaseComponent implements OnInit, AfterView
           this.getStoreData();
         }
         this.currentUser = user;
-        this.storeForm.get('owner_phone_number').setValue(user.phone_number);
-        this.storeForm.get('main_phone_number').setValue(user.phone_number);
+        this.registerStoreForm.get('owner_phone_number').setValue(user.phone_number);
+        this.registerStoreForm.get('main_phone_number').setValue(user.phone_number);
       });
 
     this._yandexMapService.coordinates$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: coordinates => {
-          this.storeForm.get('longitude').setValue(coordinates[0]);
-          this.storeForm.get('latitude').setValue(coordinates[1]);
+          this.registerStoreForm.get('longitude').setValue(coordinates[0]);
+          this.registerStoreForm.get('latitude').setValue(coordinates[1]);
         }
       });
   }
@@ -143,8 +133,8 @@ export class MyStoreComponent extends BaseComponent implements OnInit, AfterView
   }
 
   checkShortname(): void {
-    const shortnameControl = this.storeForm.get('shortname');
-    const isShortnameFreeControl = this.storeForm.get('is_shortname_free');
+    const shortnameControl = this.registerStoreForm.get('shortname');
+    const isShortnameFreeControl = this.registerStoreForm.get('is_shortname_free');
     const shortname = shortnameControl.value;
 
     if (shortnameControl.invalid) {
@@ -168,7 +158,7 @@ export class MyStoreComponent extends BaseComponent implements OnInit, AfterView
       width: '25rem',
       data: {
         complaintType: 0,
-        storeShortname: this.storeForm.get('shortname').value
+        storeShortname: this.registerStoreForm.get('shortname').value
       }
     });
   }
@@ -198,17 +188,17 @@ export class MyStoreComponent extends BaseComponent implements OnInit, AfterView
       this.logoBuffer = event.target.result;
     };
     reader.readAsDataURL(file);
-    this.storeForm.get('logo').setValue(file);
+    this.registerStoreForm.get('logo').setValue(file);
     this.logoFileInput.nativeElement.value = null;
   }
 
   onRegionSelected(): void {
-    this.storeForm.get('district').setValue(null);
+    this.registerStoreForm.get('district').setValue(null);
     this.getDistrictsList();
   }
 
   getDistrictsList(): void {
-    const regionId = this.storeForm.get('region').value;
+    const regionId = this.registerStoreForm.get('region').value;
 
     this._generalService.getDistrictsByRegionId(regionId)
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -223,7 +213,7 @@ export class MyStoreComponent extends BaseComponent implements OnInit, AfterView
   }
 
   onClickDistrictsSelect(): void {
-    if (this.storeForm.get('region').value) {
+    if (this.registerStoreForm.get('region').value) {
       return;
     }
 
@@ -234,8 +224,8 @@ export class MyStoreComponent extends BaseComponent implements OnInit, AfterView
     });
   }
 
-  storeManage(): void {
-    const form = this.storeForm;
+  registerStoreSubmit(): void {
+    const form = this.registerStoreForm;
     form.markAllAsTouched();
 
     if (form.invalid || form.disabled) {
@@ -266,7 +256,7 @@ export class MyStoreComponent extends BaseComponent implements OnInit, AfterView
             maxWidth: '35rem'
           });
           this.currentUser.store_id = res.id;
-          this.storeForm.enable();
+          this.registerStoreForm.enable();
         },
         error: _ => {
           form.enable();
@@ -283,7 +273,7 @@ export class MyStoreComponent extends BaseComponent implements OnInit, AfterView
     this._registerStoreService.getMyStoreData()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {
-        this.storeForm.patchValue(res);
+        this.registerStoreForm.patchValue(res);
         this.logoBuffer = res.logo;
       });
   }
