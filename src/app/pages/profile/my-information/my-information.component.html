@@ -2,7 +2,7 @@
   <div class="my-information-header">
     <h2 class="my-information-heading">{{ 'my.information'| translate }}</h2>
 
-    @if (!currentUser.store_id) {
+    @if (!currentUser?.store_id) {
       <button
         class="my-information-add-company"
         mat-ripple

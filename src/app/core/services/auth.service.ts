@@ -14,7 +14,7 @@ export class AuthService {
   private _httpClient = inject(HttpClient);
   private _router = inject(Router);
 
-  currentUser: UserModel;
+  private _currentUser: UserModel;
 
   public currentUser$: BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>(null);
 
@@ -31,8 +31,8 @@ export class AuthService {
     });
   }
 
-  getUserByToken(): Observable<UserModel> {
-    if (this.currentUser) {
+  getUserByToken(force = false): Observable<UserModel> {
+    if (this._currentUser && !force) {
       return of(this.currentUser);
     }
 
@@ -52,6 +52,14 @@ export class AuthService {
 
   get token(): string {
     return localStorage.getItem('token') || '';
+  }
+
+  get currentUser(): UserModel {
+    return this._currentUser;
+  }
+
+  set currentUser(value) {
+    this._currentUser = value;
   }
 
   signOut(): void {

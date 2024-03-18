@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { YandexMapsService } from '../../../../core/services/yandex-maps.service';
-import { RegisterStoreService } from '../../../../core/services/register-store.service';
+import { MyStoreService } from '../../../../core/services/my-store.service';
 import { MyInformationService } from '../../../../core/services/my-information.service';
 import { GeneralService } from '../../../../core/services/general.service';
 import { BaseComponent } from '../../../../core/components/base/base.component';
@@ -25,6 +25,8 @@ import { OverlayComponent } from '../../../../shared/components/overlay-panel/ov
 import { UiButtonComponent } from '../../../../shared/components/ui-button/ui-button.component';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { ShowByLangPipe } from '../../../../core/pipes/show-by-lang.pipe';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'register-store',
@@ -34,7 +36,7 @@ import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
   providers: [
     provideNgxMask(),
     YandexMapsService,
-    RegisterStoreService,
+    MyStoreService,
     MyInformationService,
     GeneralService
   ],
@@ -49,16 +51,19 @@ import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
     MatSelect,
     MatOption,
     MatRadioGroup,
-    MatRadioButton
+    MatRadioButton,
+    ShowByLangPipe,
+    NgTemplateOutlet
   ]
 })
 
-export class RegisterStoreComponent extends BaseComponent implements OnInit, AfterViewInit {
+export class RegisterStoreComponent extends BaseComponent implements OnInit {
+  @Output() onStoreRegistered = new EventEmitter<void>();
   @ViewChild('logoFileInput') logoFileInput: ElementRef<HTMLInputElement>;
 
   private _dialog = inject(MatDialog);
   private _yandexMapService = inject(YandexMapsService);
-  private _registerStoreService = inject(RegisterStoreService);
+  private _registerStoreService = inject(MyStoreService);
   private _generalService = inject(GeneralService);
   private _authService = inject(AuthService);
   private _toasterService = inject(ToasterService);
@@ -73,12 +78,10 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
   regions = REGIONS;
   logoBuffer: string | ArrayBuffer;
   districts: DistrictModel[] = [];
-  showRegisterForm = false;
   registerStoreForm = new FormGroup({
     owner_firstname: new FormControl('Alexander', [ Validators.required ]),
     owner_lastname: new FormControl('Lucky', [ Validators.required ]),
     owner_fathername: new FormControl('Jonathan', [ Validators.required ]),
-    owner_phone_number: new FormControl('+998 ', [ Validators.required, Validators.minLength(9) ]),
     name_uz: new FormControl('Brand Clothes LLC', [ Validators.required, Validators.maxLength(255) ]),
     shortname: new FormControl('brand_clothes', [ Validators.required, Validators.minLength(3), Validators.maxLength(20), shortnameValidator ]),
     is_shortname_free: new FormControl(true, [ Validators.required ]),
@@ -109,14 +112,10 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
     this._authService.currentUser$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(user => {
-        if (user.store_id) {
-          this.showRegisterForm = true;
-          this.getStoreData();
-        }
-        this.currentUser = user;
-        this.registerStoreForm.get('owner_phone_number').setValue(user.phone_number);
         this.registerStoreForm.get('main_phone_number').setValue(user.phone_number);
       });
+
+    this._yandexMapService.setSingleLocationPoint('map');
 
     this._yandexMapService.coordinates$
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -126,10 +125,6 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
           this.registerStoreForm.get('latitude').setValue(coordinates[1]);
         }
       });
-  }
-
-  ngAfterViewInit(): void {
-
   }
 
   checkShortname(): void {
@@ -242,6 +237,9 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
       if ([ 'working_time_start', 'working_time_end' ].includes(key) && value.length === 4) {
         value = value.slice(0, 2) + ':' + value.slice(2);
       }
+      if ('main_phone_number' === key && value.length === 9) {
+        value = '+998' + value;
+      }
       formData.append(key, value);
     }
 
@@ -249,14 +247,15 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: res => {
+          this._authService.getUserByToken(true)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe();
           this._dialog.open(ConfettiComponent, {
             data: {
               text: 'congratulations.on.your.store.registration'
             },
             maxWidth: '35rem'
           });
-          this.currentUser.store_id = res.id;
-          this.registerStoreForm.enable();
         },
         error: _ => {
           form.enable();
@@ -267,18 +266,5 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit, Aft
           });
         }
       });
-  }
-
-  getStoreData(): void {
-    this._registerStoreService.getMyStoreData()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(res => {
-        this.registerStoreForm.patchValue(res);
-        this.logoBuffer = res.logo;
-      });
-  }
-
-  openRegisterStoreForm(): void {
-    this.showRegisterForm = true;
   }
 }

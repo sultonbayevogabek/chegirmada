@@ -118,6 +118,7 @@
 }
 
 .register-company-logo-preview {
+  position: relative;
   @include flex-center-center;
   width: 60%;
   aspect-ratio: 1;
@@ -125,6 +126,7 @@
   border-radius: 50%;
   color: $secondary-text-color;
   overflow: hidden;
+  box-shadow: 0 0.25rem 1.5rem 0 rgba(51, 51, 51, 0.12);
 
   &.invalid {
     border: 1px solid $primary-red-color;
@@ -136,6 +138,13 @@
     height: 100%;
     object-fit: cover;
   }
+}
+
+.register-company-logo-delete {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .register-company-logo-requirements {

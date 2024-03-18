@@ -1,17 +1,15 @@
 <form
-  [hidden]="!showRegisterForm"
   class="register"
   [formGroup]="registerStoreForm" (ngSubmit)="registerStoreSubmit()"
 >
   <h2 class="register-heading">{{ 'store.registration'| translate }}</h2>
 
-  @if (!currentUser.store_id) {
-    <fieldset class="register-fieldset">
-      <p class="register-info">
-        {{ 'store.registration.description'| translate }}
-      </p>
-    </fieldset>
-  }
+  <fieldset class="register-fieldset">
+    <p class="register-info">
+      {{ 'store.registration.description'| translate }}
+    </p>
+  </fieldset>
+
 
   <fieldset class="register-fieldset">
     <div class="register-legend">{{ 'store.owner.information'| translate }}</div>
@@ -65,21 +63,6 @@
         >
         <ng-container
           *ngTemplateOutlet="requiredErrors; context: { $implicit: 'owner_fathername' }"
-        />
-      </label>
-
-      <label class="form-label">
-        <span class="form-label-text">{{ 'phone.number'| translate }} *</span>
-        <input
-          class="form-input"
-          [class.invalid]="registerStoreForm.get('owner_phone_number').invalid && registerStoreForm.get('owner_phone_number').touched"
-          type="text"
-          [mask]="' 00 000 00 00'"
-          [prefix]="'+998'"
-          [formControlName]="'owner_phone_number'"
-        >
-        <ng-container
-          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'owner_phone_number' }"
         />
       </label>
     </div>
@@ -309,7 +292,7 @@
 
           <ui-button
             [type]="'gray-outline'"
-            [text]="currentUser.store_id ? 'change' :'upload'"
+            [text]="'upload'"
             [icon]="'icon:camera'"
           />
 
@@ -432,7 +415,7 @@
     <ui-button
       [actionType]="'submit'"
       [loading]="registerStoreForm.disabled"
-      [text]="currentUser.store_id ? 'change' : 'save'"
+      [text]="'save'"
     />
   </div>
 </form>

@@ -2,22 +2,30 @@ import { BaseComponent } from '../../../../core/components/base/base.component';
 import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { YandexMapsService } from '../../../../core/services/yandex-maps.service';
-import { RegisterStoreService } from '../../../../core/services/register-store.service';
+import { MyStoreService } from '../../../../core/services/my-store.service';
 import { GeneralService } from '../../../../core/services/general.service';
-import { AuthService } from '../../../../core/services/auth.service';
 import { ToasterService } from '../../../../core/services/toaster.service';
-import { UserModel } from '../../../../core/models/user.model';
 import { WEEKDAYS } from '../../../../core/constants/weekdays';
 import { CATEGORIES } from '../../../../core/constants/categories';
 import { REGIONS } from '../../../../core/constants/regions';
 import { DistrictModel } from '../../../../core/models/district.model';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { shortnameValidator } from '../../../../core/validators/shortname.validator';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ComplaintModalComponent } from '../../complaint-modal/complaint-modal.component';
 import { ConfettiComponent } from '../../confetti-alert/confetti-alert.component';
-import { provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MyInformationService } from '../../../../core/services/my-information.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { TrimDirective } from '../../../../core/directives/trim.directive';
+import { MatIcon } from '@angular/material/icon';
+import { OverlayComponent } from '../../../../shared/components/overlay-panel/overlay-panel.component';
+import { UiButtonComponent } from '../../../../shared/components/ui-button/ui-button.component';
+import { MatOption, MatSelect } from '@angular/material/select';
+import { ShowByLangPipe } from '../../../../core/pipes/show-by-lang.pipe';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { IconButtonComponent } from '../../../../shared/components/icon-button/icon-button.component';
 
 @Component({
   selector: 'edit-store',
@@ -27,10 +35,26 @@ import { MyInformationService } from '../../../../core/services/my-information.s
   providers: [
     provideNgxMask(),
     YandexMapsService,
-    RegisterStoreService,
+    MyStoreService,
     MyInformationService,
     GeneralService
   ],
+  imports: [
+    ReactiveFormsModule,
+    TranslateModule,
+    NgxMaskDirective,
+    NgTemplateOutlet,
+    TrimDirective,
+    MatIcon,
+    OverlayComponent,
+    UiButtonComponent,
+    MatSelect,
+    MatOption,
+    ShowByLangPipe,
+    MatRadioGroup,
+    MatRadioButton,
+    IconButtonComponent
+  ]
 })
 
 export class EditStoreComponent extends BaseComponent implements OnInit, AfterViewInit {
@@ -38,12 +62,10 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
 
   private _dialog = inject(MatDialog);
   private _yandexMapService = inject(YandexMapsService);
-  private _registerStoreService = inject(RegisterStoreService);
+  private _myStoreService = inject(MyStoreService);
   private _generalService = inject(GeneralService);
-  private _authService = inject(AuthService);
   private _toasterService = inject(ToasterService);
 
-  currentUser: UserModel;
   customPatterns = {
     'X': { pattern: new RegExp('[a-zA-Z\']') },
     'Y': { pattern: new RegExp('[a-zA-Z0-9_]') }
@@ -52,15 +74,14 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
   categories = CATEGORIES;
   regions = REGIONS;
   logoBuffer: string | ArrayBuffer;
+  currentLogo: string;
   districts: DistrictModel[] = [];
-  showRegisterForm = false;
   editStoreForm = new FormGroup({
-    owner_firstname: new FormControl('Alexander', [ Validators.required ]),
-    owner_lastname: new FormControl('Lucky', [ Validators.required ]),
-    owner_fathername: new FormControl('Jonathan', [ Validators.required ]),
-    owner_phone_number: new FormControl('+998 ', [ Validators.required, Validators.minLength(9) ]),
-    name_uz: new FormControl('Brand Clothes LLC', [ Validators.required, Validators.maxLength(255) ]),
-    shortname: new FormControl('brand_clothes', [ Validators.required, Validators.minLength(3), Validators.maxLength(20), shortnameValidator ]),
+    owner_firstname: new FormControl('', [ Validators.required ]),
+    owner_lastname: new FormControl('', [ Validators.required ]),
+    owner_fathername: new FormControl('', [ Validators.required ]),
+    name_uz: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
+    shortname: new FormControl('', [ Validators.required, Validators.minLength(3), Validators.maxLength(20), shortnameValidator ]),
     is_shortname_free: new FormControl(true, [ Validators.required ]),
     working_day_start: new FormControl(0),
     working_day_end: new FormControl(4),
@@ -72,13 +93,13 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
     slogan_uz: new FormControl('', [ Validators.maxLength(255) ]),
     slogan_ru: new FormControl('', [ Validators.maxLength(255) ]),
     region: new FormControl(null, [ Validators.required ]),
-    address: new FormControl('Tashkent City, str. Ali Nava', [ Validators.required, Validators.maxLength(255) ]),
+    address: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
     district: new FormControl(null, [ Validators.required ]),
-    desc_uz: new FormControl('Our company works for users and we want to help to humanity', [ Validators.required, Validators.maxLength(1500) ]),
+    desc_uz: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
     desc_ru: new FormControl('', [ Validators.maxLength(1500) ]),
     longitude: new FormControl(null, [ Validators.required ]),
     latitude: new FormControl(null, [ Validators.required ]),
-    logo: new FormControl(null, [ Validators.required ])
+    logo: new FormControl(null)
   });
 
   constructor() {
@@ -86,18 +107,6 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
   }
 
   ngOnInit(): void {
-    this._authService.currentUser$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(user => {
-        if (user.store_id) {
-          this.showRegisterForm = true;
-          this.getStoreData();
-        }
-        this.currentUser = user;
-        this.editStoreForm.get('owner_phone_number').setValue(user.phone_number);
-        this.editStoreForm.get('main_phone_number').setValue(user.phone_number);
-      });
-
     this._yandexMapService.coordinates$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -106,6 +115,8 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
           this.editStoreForm.get('latitude').setValue(coordinates[1]);
         }
       });
+
+    this.getStoreData();
   }
 
   ngAfterViewInit(): void {
@@ -121,7 +132,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
       return;
     }
 
-    this._registerStoreService.checkShortName(shortname)
+    this._myStoreService.checkShortName(shortname)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
@@ -193,7 +204,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
   }
 
   onClickDistrictsSelect(): void {
-    if (this.storeForm.get('region').value) {
+    if (this.editStoreForm.get('region').value) {
       return;
     }
 
@@ -204,8 +215,8 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
     });
   }
 
-  storeManage(): void {
-    const form = this.storeForm;
+  editStore(): void {
+    const form = this.editStoreForm;
     form.markAllAsTouched();
 
     if (form.invalid || form.disabled) {
@@ -222,21 +233,22 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
       if ([ 'working_time_start', 'working_time_end' ].includes(key) && value.length === 4) {
         value = value.slice(0, 2) + ':' + value.slice(2);
       }
+      if ('main_phone_number' === key && value.length === 9) {
+        value = '+998' + value;
+      }
       formData.append(key, value);
     }
 
-    this._registerStoreService.registerStore(formData)
+    this._myStoreService.editStore(formData)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: res => {
-          this._dialog.open(ConfettiComponent, {
-            data: {
-              text: 'congratulations.on.your.store.registration'
-            },
-            maxWidth: '35rem'
+          this._toasterService.open({
+            message: 'changes.successfully.changed'
           });
-          this.currentUser.store_id = res.id;
-          this.storeForm.enable();
+          this.logoBuffer = null;
+          this.currentLogo = res.logo;
+          this.editStoreForm.enable();
         },
         error: _ => {
           form.enable();
@@ -250,15 +262,17 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
   }
 
   getStoreData(): void {
-    this._registerStoreService.getMyStoreData()
+    this._myStoreService.getMyStoreData()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(res => {
-        this.storeForm.patchValue(res);
-        this.logoBuffer = res.logo;
+        this.editStoreForm.patchValue(res);
+        this._yandexMapService.setSingleLocationPoint('map', [ res.longitude, res.latitude ]);
+        this.currentLogo = res.logo;
       });
   }
 
-  openRegisterStoreForm(): void {
-    this.showRegisterForm = true;
+  removeLogo(): void {
+    this.editStoreForm.get('logo').setValue(null);
+    this.logoBuffer = null;
   }
 }

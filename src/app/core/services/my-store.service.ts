@@ -6,7 +6,7 @@ import { StoreModel } from '../models/store.model';
 
 @Injectable()
 
-export class RegisterStoreService {
+export class MyStoreService {
   private _host = environment.host;
   private _httpClient = inject(HttpClient);
 
@@ -22,5 +22,9 @@ export class RegisterStoreService {
 
   getMyStoreData(): Observable<StoreModel> {
     return this._httpClient.get<StoreModel>(this._host + 'stores/my/');
+  }
+
+  editStore(payload: FormData): Observable<StoreModel> {
+    return this._httpClient.patch<StoreModel>(this._host + 'stores/my/', payload);
   }
 }
