@@ -268,6 +268,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
         this.editStoreForm.patchValue(res);
         this._yandexMapService.setSingleLocationPoint('map', [ res.longitude, res.latitude ]);
         this.currentLogo = res.logo;
+        this.getDistrictsList();
       });
   }
 
