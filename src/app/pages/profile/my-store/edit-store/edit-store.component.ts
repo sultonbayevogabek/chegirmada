@@ -248,6 +248,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
           });
           this.logoBuffer = null;
           this.currentLogo = res.logo;
+          this.editStoreForm.get('logo').setValue(null);
           this.editStoreForm.enable();
         },
         error: _ => {
