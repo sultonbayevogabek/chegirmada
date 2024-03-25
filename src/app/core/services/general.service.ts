@@ -11,8 +11,7 @@ export class GeneralService {
   private _httpClient = inject(HttpClient);
 
   getDistrictsByRegionId(regionId: number): Observable<DistrictModel[]> {
-    return this._httpClient.post<{ districts: DistrictModel[] }>(this._host + 'general/districts/', {
-      region: regionId
-    }).pipe(map(res => res.districts || []));
+    return this._httpClient.get<DistrictModel[]>(this._host + `general/districts/${regionId}/`)
+      .pipe(map(res => res || []));
   }
 }

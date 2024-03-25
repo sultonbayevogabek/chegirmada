@@ -68,7 +68,7 @@ export class MyInformationComponent extends BaseComponent implements OnInit {
   myInfoForm = new FormGroup({
     phone_number: new FormControl({ value: null, disabled: true }, [ Validators.required ]),
     email: new FormControl(null),
-    full_name: new FormControl(null, [ Validators.required ]),
+    fullname: new FormControl(null, [ Validators.required ]),
     gender: new FormControl(null),
     region: new FormControl(null),
     district: new FormControl(null),

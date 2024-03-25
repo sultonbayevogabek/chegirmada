@@ -13,7 +13,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { shortnameValidator } from '../../../../core/validators/shortname.validator';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ComplaintModalComponent } from '../../complaint-modal/complaint-modal.component';
-import { ConfettiComponent } from '../../confetti-alert/confetti-alert.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MyInformationService } from '../../../../core/services/my-information.service';
 import { TranslateModule } from '@ngx-translate/core';
@@ -233,10 +232,15 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
       if ([ 'working_time_start', 'working_time_end' ].includes(key) && value.length === 4) {
         value = value.slice(0, 2) + ':' + value.slice(2);
       }
-      if ('main_phone_number' === key && value.length === 9) {
+      if (key === 'main_phone_number' && value.length === 9) {
         value = '+998' + value;
       }
+
       formData.append(key, value);
+
+      if (key === 'logo' && !(value instanceof File)) {
+        formData.delete('logo');
+      }
     }
 
     this._myStoreService.editStore(formData)

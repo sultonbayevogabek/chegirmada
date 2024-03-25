@@ -3,8 +3,8 @@
     <div class="profile-logo">
       <img [ngSrc]="'/assets/icons/avatar.svg'" [fill]="true" [alt]="">
     </div>
-    @if (currentUser.full_name) {
-      <div class="profile-name" [title]="currentUser.full_name">{{ currentUser.full_name }}</div>
+    @if (currentUser.fullname) {
+      <div class="profile-name" [title]="currentUser.fullname">{{ currentUser.fullname }}</div>
     }
   </div>
 } @else {
