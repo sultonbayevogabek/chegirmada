@@ -1,4 +1,4 @@
-import { YaApiLoaderService } from 'angular8-yandex-maps';
+import { YaApiLoaderService, YaGeocoderService } from 'angular8-yandex-maps';
 import { ElementRef, inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ToasterService } from './toaster.service';
@@ -7,11 +7,13 @@ import { ToasterService } from './toaster.service';
 export class YandexMapsService {
   private _map: ymaps.Map;
   private _yandexApiLoaderService: YaApiLoaderService = inject(YaApiLoaderService);
+  private _yandexGeoCodeService: YaGeocoderService = inject(YaGeocoderService);
   private _toaster = inject(ToasterService);
   private _elementRef = inject(ElementRef);
   private _tashkent = [ 41.311151, 69.279737 ];
 
   public coordinates$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>(this._tashkent);
+  public address$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   setMultipleLocationPoints(mapContainerId: string, points: number[][]): void {
     this._yandexApiLoaderService.load()
@@ -89,6 +91,7 @@ export class YandexMapsService {
 
         placeMark.events.add('dragend', e => {
           const coordinates = e.get('target').geometry.getCoordinates();
+          this.addressEmit(coordinates);
           this.setCoordinatesAndEmit(placeMark, coordinates, this._map);
           this._map.setCenter(coordinates);
         });
@@ -123,6 +126,7 @@ export class YandexMapsService {
             return;
           }
           this.setCoordinatesAndEmit(placeMark, coordinates, this._map);
+          this.addressEmit(coordinates);
         });
 
         this._map.controls.add(geolocationControl);
@@ -150,6 +154,7 @@ export class YandexMapsService {
           searchControl.getResult(index).then(res => {
             const coordinates = res.geometry.getCoordinates();
             this.setCoordinatesAndEmit(placeMark, coordinates, this._map);
+            this.addressEmit(coordinates);
           });
         });
 
@@ -164,12 +169,18 @@ export class YandexMapsService {
     this.coordinates$.next(coordinates);
   }
 
+  addressEmit(coordinates: number[]): void {
+    ymaps.geocode(coordinates, { kind: 'house' }).then((res: any) => {
+      console.log(res.geoObjects.get(0).properties._data.text);
+      this.address$.next(res.geoObjects.get(0).properties._data.text);
+    })
+  }
+
   getUserGeoLocation(): Observable<string | number[]> {
     if (!('geolocations' in navigator)) {
       return of('Ваше устройство не имеет возможности определять вашу геолокацию.');
     }
 
     return of([ 2 ]);
-
   }
 }

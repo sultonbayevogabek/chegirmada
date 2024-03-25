@@ -25,6 +25,7 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { ShowByLangPipe } from '../../../../core/pipes/show-by-lang.pipe';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { IconButtonComponent } from '../../../../shared/components/icon-button/icon-button.component';
+import { concat, concatAll, forkJoin, merge, mergeAll } from 'rxjs';
 
 @Component({
   selector: 'edit-store',
@@ -74,6 +75,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
   regions = REGIONS;
   logoBuffer: string | ArrayBuffer;
   currentLogo: string;
+  currentShortName: string;
   districts: DistrictModel[] = [];
   editStoreForm = new FormGroup({
     owner_firstname: new FormControl('', [ Validators.required ]),
@@ -106,10 +108,10 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
   }
 
   ngOnInit(): void {
-    this._yandexMapService.coordinates$
+    merge([this._yandexMapService.coordinates$, this._yandexMapService.address$])
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: coordinates => {
+        next: ([coordinates, a]) => {
           this.editStoreForm.get('longitude').setValue(coordinates[0]);
           this.editStoreForm.get('latitude').setValue(coordinates[1]);
         }
@@ -128,6 +130,11 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
     const shortname = shortnameControl.value;
 
     if (shortnameControl.invalid) {
+      return;
+    }
+
+    if (shortname === this.currentShortName) {
+      isShortnameFreeControl.setValue(true);
       return;
     }
 
@@ -273,6 +280,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
         this.editStoreForm.patchValue(res);
         this._yandexMapService.setSingleLocationPoint('map', [ res.longitude, res.latitude ]);
         this.currentLogo = res.logo;
+        this.currentShortName = res.shortname;
         this.getDistrictsList();
       });
   }
