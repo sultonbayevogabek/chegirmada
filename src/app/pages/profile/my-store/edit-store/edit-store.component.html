@@ -193,10 +193,15 @@
 
             <mat-select
               class="solid-select"
-              [formControlName]="'category'"
+              [placeholder]="'select.categories'| translate"
+              [multiple]="true"
+              [formControlName]="'categories'"
             >
               @for (category of categories; track category) {
-                <mat-option [value]="category.id">{{ category| showByLang: activeLang }}</mat-option>
+                <mat-option
+                  [value]="category.id">
+                  {{ category| showByLang: activeLang }}
+                </mat-option>
               }
             </mat-select>
           </label>

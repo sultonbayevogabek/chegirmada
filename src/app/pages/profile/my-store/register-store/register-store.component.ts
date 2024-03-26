@@ -92,7 +92,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
     working_day_end: new FormControl(4),
     working_time_start: new FormControl('09:00', [ Validators.required, Validators.minLength(4) ]),
     working_time_end: new FormControl('18:00', [ Validators.required, Validators.minLength(4) ]),
-    category: new FormControl(2, [ Validators.required ]),
+    categories: new FormControl([]),
     delivery: new FormControl(true),
     main_phone_number: new FormControl('+998 ', [ Validators.required, Validators.minLength(9) ]),
     slogan_uz: new FormControl('', [ Validators.maxLength(255) ]),
@@ -241,10 +241,20 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
       if ([ 'working_time_start', 'working_time_end' ].includes(key) && value.length === 4) {
         value = value.slice(0, 2) + ':' + value.slice(2);
       }
-      if ('main_phone_number' === key && value.length === 9) {
+
+      if (key === 'main_phone_number' && value.length === 9) {
         value = '+998' + value;
       }
-      formData.append(key, value);
+
+      if (key === 'categories') {
+        value.forEach((category: number) => {
+          formData.append('categories', JSON.stringify(category));
+        })
+      }
+
+      if (key !== 'categories') {
+        formData.append(key, value);
+      }
     }
 
     this._registerStoreService.registerStore(formData)

@@ -90,7 +90,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
     working_day_end: new FormControl(4),
     working_time_start: new FormControl('09:00', [ Validators.required, Validators.minLength(4) ]),
     working_time_end: new FormControl('18:00', [ Validators.required, Validators.minLength(4) ]),
-    category: new FormControl(2, [ Validators.required ]),
+    categories: new FormControl([]),
     delivery: new FormControl(true),
     main_phone_number: new FormControl('+998 ', [ Validators.required, Validators.minLength(9) ]),
     slogan_uz: new FormControl('', [ Validators.maxLength(255) ]),
@@ -246,7 +246,15 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
         value = '+998' + value;
       }
 
-      formData.append(key, value);
+      if (key === 'categories') {
+        value.forEach((category: number) => {
+          formData.append('categories', JSON.stringify(category));
+        })
+      }
+
+      if (key !== 'categories') {
+        formData.append(key, value);
+      }
 
       if (key === 'logo' && !(value instanceof File)) {
         formData.delete('logo');

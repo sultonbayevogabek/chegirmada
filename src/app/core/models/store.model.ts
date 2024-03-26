@@ -14,7 +14,7 @@ export interface StoreModel {
   working_day_start: number;
   working_day_end: number;
   created_at: string;
-  categories: number;
+  categories: number[];
   username: string;
   shortname: string;
   balance: number;
