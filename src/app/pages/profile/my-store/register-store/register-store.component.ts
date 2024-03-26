@@ -27,6 +27,7 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { ShowByLangPipe } from '../../../../core/pipes/show-by-lang.pipe';
 import { NgTemplateOutlet } from '@angular/common';
+import { ConfirmationService } from '../../../../core/services/confirmation.service';
 
 @Component({
   selector: 'register-store',
@@ -38,7 +39,8 @@ import { NgTemplateOutlet } from '@angular/common';
     YandexMapsService,
     MyStoreService,
     MyInformationService,
-    GeneralService
+    GeneralService,
+    ConfirmationService
   ],
   imports: [
     TranslateModule,
@@ -67,6 +69,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
   private _generalService = inject(GeneralService);
   private _authService = inject(AuthService);
   private _toasterService = inject(ToasterService);
+  private _confirmationService = inject(ConfirmationService);
 
   currentUser: UserModel;
   customPatterns = {
@@ -117,12 +120,13 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
 
     this._yandexMapService.setSingleLocationPoint('map');
 
-    this._yandexMapService.coordinates$
+    this._yandexMapService.coordinatesAndAddress$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: coordinates => {
+        next: ({ coordinates, address }) => {
           this.registerStoreForm.get('longitude').setValue(coordinates[0]);
           this.registerStoreForm.get('latitude').setValue(coordinates[1]);
+          this.updateAddress(address);
         }
       });
   }
@@ -264,6 +268,29 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
             title: 'attention',
             message: 'error.occurred'
           });
+        }
+      });
+  }
+
+  updateAddress(address: string): void {
+    if (!address) {
+      return;
+    }
+
+    this._confirmationService.confirmation({
+      message: 'location.point.changed.do.you.want.to.set.address.that.maps.gave',
+      confirm: 'yes',
+      cancel: 'no',
+      confirmButtonType: 'blue'
+    })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: res => {
+          if (!res) {
+            return;
+          }
+
+          this.registerStoreForm.get('address').setValue(address);
         }
       });
   }

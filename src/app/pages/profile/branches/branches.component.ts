@@ -42,7 +42,7 @@ export class BranchesComponent {
   }
 
   openConfirmation(): void {
-    this.confirmation.confirmation()
+    this.confirmation.confirmation({})
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(d => {
         console.log(d);

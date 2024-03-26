@@ -25,7 +25,7 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { ShowByLangPipe } from '../../../../core/pipes/show-by-lang.pipe';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { IconButtonComponent } from '../../../../shared/components/icon-button/icon-button.component';
-import { concat, concatAll, forkJoin, merge, mergeAll } from 'rxjs';
+import { ConfirmationService } from '../../../../core/services/confirmation.service';
 
 @Component({
   selector: 'edit-store',
@@ -37,7 +37,8 @@ import { concat, concatAll, forkJoin, merge, mergeAll } from 'rxjs';
     YandexMapsService,
     MyStoreService,
     MyInformationService,
-    GeneralService
+    GeneralService,
+    ConfirmationService
   ],
   imports: [
     ReactiveFormsModule,
@@ -65,6 +66,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
   private _myStoreService = inject(MyStoreService);
   private _generalService = inject(GeneralService);
   private _toasterService = inject(ToasterService);
+  private _confirmationService = inject(ConfirmationService);
 
   customPatterns = {
     'X': { pattern: new RegExp('[a-zA-Z\']') },
@@ -108,12 +110,13 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
   }
 
   ngOnInit(): void {
-    merge([this._yandexMapService.coordinates$, this._yandexMapService.address$])
+    this._yandexMapService.coordinatesAndAddress$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: ([coordinates, a]) => {
+        next: ({ coordinates, address }) => {
           this.editStoreForm.get('longitude').setValue(coordinates[0]);
           this.editStoreForm.get('latitude').setValue(coordinates[1]);
+          this.updateAddress(address);
         }
       });
 
@@ -288,5 +291,28 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
   removeLogo(): void {
     this.editStoreForm.get('logo').setValue(null);
     this.logoBuffer = null;
+  }
+
+  updateAddress(address: string): void {
+    if (!address) {
+      return;
+    }
+
+    this._confirmationService.confirmation({
+      message: 'location.point.changed.do.you.want.to.set.address.that.maps.gave',
+      confirm: 'yes',
+      cancel: 'no',
+      confirmButtonType: 'blue'
+    })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: res => {
+          if (!res) {
+            return;
+          }
+
+          this.editStoreForm.get('address').setValue(address);
+        }
+      });
   }
 }

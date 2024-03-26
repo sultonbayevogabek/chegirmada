@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
 import { MatDialogClose, MatDialogContent } from '@angular/material/dialog';
@@ -11,12 +11,11 @@ import { ScrollbarDirective } from '../../../shared/directives/scrollbar/scrollb
 import { YandexMapsService } from '../../../core/services/yandex-maps.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { shortnameValidator } from '../../../core/validators/shortname.validator';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { TrimDirective } from '../../../core/directives/trim.directive';
 import { WEEKDAYS } from '../../../core/constants/weekdays';
-import { DISTRICTS, REGIONS } from '../../../core/constants/regions';
+import { REGIONS } from '../../../core/constants/regions';
 import { ShowByLangPipe } from '../../../core/pipes/show-by-lang.pipe';
 import { GeneralService } from '../../../core/services/general.service';
 import { DistrictModel } from '../../../core/models/district.model';
@@ -80,11 +79,13 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this._yandexMapsService.setSingleLocationPoint('map');
 
-    this._yandexMapsService.coordinates$
+    this._yandexMapsService.coordinatesAndAddress$
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(coordinates => {
-        this.addBranchForm.get('longitude').setValue(coordinates[0]);
-        this.addBranchForm.get('latitude').setValue(coordinates[1]);
+      .subscribe({
+        next: ({ coordinates }) => {
+          this.addBranchForm.get('longitude').setValue(coordinates[0]);
+          this.addBranchForm.get('latitude').setValue(coordinates[1]);
+        }
       });
   }
 

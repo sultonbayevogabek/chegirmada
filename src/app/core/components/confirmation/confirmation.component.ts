@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogContent, MatDialogRef } from '@angular/materi
 import { MatButton } from '@angular/material/button';
 import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { UiButtonTypeModel } from '../../models/ui-button-type.model';
 
 @Component({
   selector: 'confirmation',
@@ -23,6 +24,7 @@ export class ConfirmationComponent {
     message: string;
     cancel: string;
     confirm: string;
+    confirmButtonType: UiButtonTypeModel;
   } = inject(MAT_DIALOG_DATA);
 
   confirmationAction(result: boolean): void {

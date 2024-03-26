@@ -4,6 +4,7 @@ import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { UiButtonTypeModel } from '../../../core/models/ui-button-type.model';
 
 @Component({
   selector: 'ui-button',
@@ -22,7 +23,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 export class UiButtonComponent {
   @Input() text = 'save'
   @Input() full = false;
-  @Input() type: 'gray' | 'red' | 'blue' | 'gray-outline' | 'green-outline' = 'blue';
+  @Input() type: UiButtonTypeModel = 'blue';
   @Input() icon: string;
   @Input() actionType: 'submit' | 'reset' | 'button' = 'button';
   @Input() disabled = false;
