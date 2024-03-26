@@ -22,9 +22,7 @@
           type="text"
           [placeholder]="'enter.your.surname'| translate"
           [formControlName]="'owner_lastname'"
-          [mask]="'XXXXXXXXXXXXXXXXXXXXXXXXX'"
-          [patterns]="customPatterns"
-          [validation]="false"
+          trim
         >
 
         <ng-container
@@ -40,9 +38,6 @@
           type="text"
           [placeholder]="'enter.your.name'| translate"
           [formControlName]="'owner_firstname'"
-          [mask]="'XXXXXXXXXXXXXXXXXXXXXXXXX'"
-          [patterns]="customPatterns"
-          [validation]="false"
         >
         <ng-container
           *ngTemplateOutlet="requiredErrors; context: { $implicit: 'owner_firstname' }"
@@ -57,9 +52,6 @@
           type="text"
           [placeholder]="'enter.your.middlename'| translate"
           [formControlName]="'owner_fathername'"
-          [mask]="'XXXXXXXXXXXXXXXXXXXXXXXXX'"
-          [patterns]="customPatterns"
-          [validation]="false"
         >
         <ng-container
           *ngTemplateOutlet="requiredErrors; context: { $implicit: 'owner_fathername' }"
