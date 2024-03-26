@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, inject, Injectable, OnInit } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
-import { MatDialogClose, MatDialogContent } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 import { MatOption } from '@angular/material/autocomplete';
 import { MatSelect } from '@angular/material/select';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
@@ -21,6 +21,10 @@ import { BaseComponent } from '../../../core/components/base/base.component';
 import { IconButtonComponent } from '../../../core/components/icon-button/icon-button.component';
 import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
 import { ScrollbarDirective } from '../../../core/directives/scrollbar.directive';
+import { MyStoreService } from '../../../core/services/my-store.service';
+import { BranchModel } from '../../../core/models/branch.model';
+import { ConfirmationService } from '../../../core/services/confirmation.service';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'branch-action',
@@ -47,54 +51,63 @@ import { ScrollbarDirective } from '../../../core/directives/scrollbar.directive
   providers: [
     provideNgxMask(),
     YandexMapsService,
-    GeneralService
+    GeneralService,
+    MyStoreService,
+    ConfirmationService
   ],
   standalone: true
 })
 
 export class BranchActionComponent extends BaseComponent implements OnInit {
+  @Inject(MAT_DIALOG_DATA) data: {
+    branchId?: number
+  } = inject(MAT_DIALOG_DATA);
   private _yandexMapsService: YandexMapsService = inject(YandexMapsService);
   private _generalService = inject(GeneralService);
   private _toasterService = inject(ToasterService);
+  private _myStoreService = inject(MyStoreService);
+  private _confirmationService = inject(ConfirmationService);
+  private _dialogRef = inject(DialogRef);
 
   weekdays = WEEKDAYS;
   regions = REGIONS;
   districts: DistrictModel[];
-  addBranchForm = new FormGroup({
-    name: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
+  manageBranchForm = new FormGroup({
+    name_uz: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
     working_day_start: new FormControl(0),
     working_day_end: new FormControl(4),
     working_time_start: new FormControl('09:00', [ Validators.required, Validators.minLength(4) ]),
     working_time_end: new FormControl('18:00', [ Validators.required, Validators.minLength(4) ]),
     delivery: new FormControl(true),
     main_phone_number: new FormControl('+998 ', [ Validators.required, Validators.minLength(9) ]),
-    region: new FormControl(null, [ Validators.required ]),
+    region: new FormControl<number>(null, [ Validators.required ]),
     address: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
-    district: new FormControl(null, [ Validators.required ]),
-    longitude: new FormControl(null, [ Validators.required ]),
-    latitude: new FormControl(null, [ Validators.required ])
+    district: new FormControl<number>(null, [ Validators.required ]),
+    longitude: new FormControl<number>(null, [ Validators.required ]),
+    latitude: new FormControl<number>(null, [ Validators.required ])
   });
 
   ngOnInit(): void {
-    this._yandexMapsService.setSingleLocationPoint('map');
-
     this._yandexMapsService.coordinatesAndAddress$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: ({ coordinates }) => {
-          this.addBranchForm.get('longitude').setValue(coordinates[0]);
-          this.addBranchForm.get('latitude').setValue(coordinates[1]);
+        next: ({ coordinates, address }) => {
+          this.manageBranchForm.get('longitude').setValue(coordinates[0]);
+          this.manageBranchForm.get('latitude').setValue(coordinates[1]);
+          this.updateAddress(address);
         }
       });
+
+    this.getBranchById();
   }
 
   onRegionSelected(): void {
-    this.addBranchForm.get('district').setValue(null);
+    this.manageBranchForm.get('district').setValue(null);
     this.getDistrictsList();
   }
 
   getDistrictsList(): void {
-    const regionId = this.addBranchForm.get('region').value;
+    const regionId = this.manageBranchForm.get('region').value;
 
     this._generalService.getDistrictsByRegionId(regionId)
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -109,7 +122,7 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
   }
 
   onClickDistrictsSelect(): void {
-    if (this.addBranchForm.get('region').value) {
+    if (this.manageBranchForm.get('region').value) {
       return;
     }
 
@@ -120,8 +133,49 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
     });
   }
 
-  addBranch(): void {
-    const form = this.addBranchForm;
+  updateAddress(address: string): void {
+    if (!address) {
+      return;
+    }
+
+    this._confirmationService.confirmation({
+      message: 'location.point.changed.do.you.want.to.set.address.that.maps.gave',
+      confirm: 'yes',
+      cancel: 'no',
+      confirmButtonType: 'blue'
+    })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: res => {
+          if (!res) {
+            return;
+          }
+
+          this.manageBranchForm.get('address').setValue(address);
+        }
+      });
+  }
+
+  getBranchById(): void {
+    if (!this.data.branchId) {
+      this._yandexMapsService.setSingleLocationPoint('map');
+      return;
+    }
+    this._myStoreService.getBranchById(this.data.branchId)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: branch => {
+          this._yandexMapsService
+            .setSingleLocationPoint('map', [branch.longitude, branch.latitude]);
+          this.manageBranchForm.patchValue(branch);
+          this.manageBranchForm.get('name_uz').setValue(branch.name);
+          this.getDistrictsList();
+        }
+      })
+  }
+
+  manageBranch(): void {
+    const form = this.manageBranchForm;
     form.markAllAsTouched();
 
     if (form.invalid || form.disabled) {
@@ -130,6 +184,69 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
 
     form.disable();
 
-    console.log(form.getRawValue());
+    let { working_time_start, working_time_end, main_phone_number } = form.getRawValue();
+
+    if (working_time_start.length === 4) {
+      working_time_start = working_time_start.slice(0, 2) + ':' + working_time_start.slice(2);
+    }
+
+    if (working_time_end.length === 4) {
+      working_time_end = working_time_end.slice(0, 2) + ':' + working_time_end.slice(2);
+    }
+
+    if (main_phone_number.length === 9) {
+      main_phone_number = '+998' + main_phone_number;
+    }
+
+    const payload = {
+      ...form.getRawValue(),
+      working_time_start,
+      working_time_end,
+      main_phone_number
+    };
+
+    if (this.data.branchId) {
+      this._myStoreService.updateBranch({
+        ...payload,
+        pk: this.data.branchId
+      })
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe({
+          next: _ => {
+            this._toasterService.open({
+              message: 'changes.successfully.changed'
+            })
+            this._dialogRef.close('changed');
+          },
+          error: _ => {
+            this._toasterService.open({
+              message: 'error.occurred',
+              type: 'error',
+              title: 'attention'
+            })
+            this.manageBranchForm.enable();
+          }
+        })
+      return;
+    }
+
+    this._myStoreService.createBranch(payload)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: _ => {
+          this._toasterService.open({
+            message: 'changes.successfully.changed'
+          })
+          this._dialogRef.close('created');
+        },
+        error: _ => {
+          this._toasterService.open({
+            message: 'error.occurred',
+            type: 'error',
+            title: 'attention'
+          })
+          this.manageBranchForm.enable();
+        }
+      })
   }
 }

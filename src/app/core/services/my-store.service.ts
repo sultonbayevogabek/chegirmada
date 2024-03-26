@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, of } from 'rxjs';
 import { StoreModel } from '../models/store.model';
+import { BranchModel } from '../models/branch.model';
 
 @Injectable()
 
@@ -28,8 +29,20 @@ export class MyStoreService {
     return this._httpClient.patch<StoreModel>(this._host + 'stores/my/', payload);
   }
 
-  getBranches(storeId: number): Observable<any> {
-    return this._httpClient.get<any>(this._host + `stores/branches/${storeId}/`)
-      .pipe(catchError(() => of([])))
+  getBranchById(branchId: number): Observable<BranchModel> {
+    return this._httpClient.get<BranchModel>(this._host + `stores/branches/${branchId}/`)
+      .pipe(catchError(() => of(null)))
+  }
+
+  createBranch(payload: BranchModel): Observable<BranchModel> {
+    return this._httpClient.post<BranchModel>(this._host + 'stores/branches/create/', payload);
+  }
+
+  updateBranch(payload: BranchModel): Observable<BranchModel> {
+    return this._httpClient.put<BranchModel>(this._host + `stores/branches/${payload?.pk}`, payload);
+  }
+
+  deleteBranch(branchId: number): Observable<BranchModel> {
+    return this._httpClient.delete<BranchModel>(this._host + `stores/branches/${branchId}`);
   }
 }

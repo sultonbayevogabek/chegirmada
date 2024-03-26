@@ -12,7 +12,11 @@ import { AuthService } from '../../../core/services/auth.service';
 import { UserModel } from '../../../core/models/user.model';
 import { IconButtonComponent } from '../../../core/components/icon-button/icon-button.component';
 import { SpinnerLoaderComponent } from '../../../core/components/spinner-loader/spinner-loader.component';
-import { tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
+import { BranchModel } from '../../../core/models/branch.model';
+import { WEEKDAYS } from '../../../core/constants/weekdays';
+import { LowerCasePipe } from '@angular/common';
+import { PhoneNumberPipe } from '../../../core/pipes/phone-number.pipe';
 
 @Component({
   selector: 'branches',
@@ -25,7 +29,9 @@ import { tap } from 'rxjs';
     IconButtonComponent,
     BranchActionComponent,
     TranslateModule,
-    SpinnerLoaderComponent
+    SpinnerLoaderComponent,
+    LowerCasePipe,
+    PhoneNumberPipe
   ],
   providers: [
     ConfirmationService,
@@ -37,7 +43,8 @@ import { tap } from 'rxjs';
 export class BranchesComponent implements OnInit {
   loading = true;
   currentUser: UserModel;
-  branches = [];
+  branches: BranchModel[] = [];
+  weekdays = WEEKDAYS;
 
   private _dialog = inject(MatDialog);
   private _confirmation = inject(ConfirmationService);
@@ -50,34 +57,51 @@ export class BranchesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBranches();
+    this.openBranchActionDialog()
   }
 
-  openBranchActionDialog(): void {
+  openBranchActionDialog(branchId?: number): void {
     this._dialog.open(BranchActionComponent, {
       width: '100%',
-      maxWidth: '75rem'
+      maxWidth: '75rem',
+      data: {
+        branchId
+      }
     });
-  }
-
-  openConfirmation(): void {
-    this._confirmation.confirmation({})
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(d => {
-        console.log(d);
-      });
   }
 
   getBranches(): void {
     this.loading = true;
-    this._myStoreService.getBranches(this._authService.currentUser?.store_id)
+    this._myStoreService.getBranchById(1)
       .pipe(
         tap(_ => this.loading = false),
         takeUntilDestroyed(this._destroyRef)
       )
       .subscribe({
         next: res => {
-
+          this.branches = [res];
         }
       })
+  }
+
+  deleteBranch(branchId: number): void {
+    this._confirmation.confirmation()
+      .pipe(
+        takeUntilDestroyed(this._destroyRef),
+        switchMap(res => {
+          if (!res) {
+            return [];
+          }
+          return this._myStoreService.deleteBranch(branchId);
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.getBranches()
+        },
+        error: (error) => {
+          // Handle errors
+        }
+      });
   }
 }

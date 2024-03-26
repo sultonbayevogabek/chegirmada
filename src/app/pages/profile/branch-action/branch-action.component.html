@@ -1,6 +1,8 @@
-<form [formGroup]="addBranchForm" (ngSubmit)="addBranch()">
+<form [formGroup]="manageBranchForm" (ngSubmit)="manageBranch()">
   <div class="branch-action-header">
-    <h2 class="branch-action-heading">{{ 'add.branch'| translate }}</h2>
+    <h2 class="branch-action-heading">
+      {{ (data.branchId ? 'change.branch.information' : 'add.branch')| translate }}
+    </h2>
 
     <icon-button
       mat-dialog-close
@@ -19,12 +21,12 @@
             type="text"
             trim
             [placeholder]="'enter.branch.name'| translate"
-            [class.invalid]="addBranchForm.get('name').invalid && addBranchForm.get('name').touched"
+            [class.invalid]="manageBranchForm.get('name_uz').invalid && manageBranchForm.get('name_uz').touched"
             [maxlength]="255"
-            [formControlName]="'name'"
+            [formControlName]="'name_uz'"
           >
           <ng-container
-            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'name' }"
+            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'name_uz' }"
           />
         </label>
 
@@ -34,7 +36,7 @@
             class="form-input"
             type="text"
             [placeholder]="'enter.phone.number'| translate"
-            [class.invalid]="addBranchForm.get('main_phone_number').invalid && addBranchForm.get('main_phone_number').touched"
+            [class.invalid]="manageBranchForm.get('main_phone_number').invalid && manageBranchForm.get('main_phone_number').touched"
             [mask]="' 00 000 00 00'"
             [prefix]="'+998'"
             [formControlName]="'main_phone_number'"
@@ -67,7 +69,7 @@
             </mat-select>
             <input
               class="branch-action-times-input form-input"
-              [class.invalid]="addBranchForm.get('working_time_start').invalid && addBranchForm.get('working_time_start').touched"
+              [class.invalid]="manageBranchForm.get('working_time_start').invalid && manageBranchForm.get('working_time_start').touched"
               type="text"
               placeholder="00:00"
               [mask]="'Hh:m0'"
@@ -84,7 +86,7 @@
             </mat-select>
             <input
               class="branch-action-times-input form-input"
-              [class.invalid]="addBranchForm.get('working_time_end').invalid && addBranchForm.get('working_time_end').touched"
+              [class.invalid]="manageBranchForm.get('working_time_end').invalid && manageBranchForm.get('working_time_end').touched"
               type="text"
               placeholder="00:00"
               [mask]="'Hh:m0'"
@@ -99,7 +101,7 @@
 
           <mat-select
             class="solid-select"
-            [class.invalid]="addBranchForm.get('region').invalid && addBranchForm.get('region').touched"
+            [class.invalid]="manageBranchForm.get('region').invalid && manageBranchForm.get('region').touched"
             [formControlName]="'region'"
             [placeholder]="'region'| translate"
             (selectionChange)="onRegionSelected()"
@@ -119,7 +121,7 @@
 
           <mat-select
             class="solid-select"
-            [class.invalid]="addBranchForm.get('district').invalid && addBranchForm.get('district').touched"
+            [class.invalid]="manageBranchForm.get('district').invalid && manageBranchForm.get('district').touched"
             [formControlName]="'district'"
             [placeholder]="'district'| translate"
             (click)="onClickDistrictsSelect()"
@@ -142,7 +144,7 @@
             trim
             [maxlength]="255"
             [placeholder]="'enter.address'| translate"
-            [class.invalid]="addBranchForm.get('address').invalid && addBranchForm.get('address').touched"
+            [class.invalid]="manageBranchForm.get('address').invalid && manageBranchForm.get('address').touched"
             [formControlName]="'address'"
           >
           <ng-container
@@ -162,15 +164,15 @@
 
   <div class="branch-action-submit">
     <ui-button
-      [text]="'add'"
+      [text]="(data.branchId ? 'change' : 'add')"
       [actionType]="'submit'"
-      [loading]="addBranchForm.disabled"
+      [loading]="manageBranchForm.disabled"
     />
   </div>
 </form>
 
 <ng-template #requiredErrors let-controlName>
-  @if (addBranchForm.get(controlName).invalid && addBranchForm.get(controlName).touched) {
+  @if (manageBranchForm.get(controlName).invalid && manageBranchForm.get(controlName).touched) {
     <span class="form-error">{{ 'required.field'| translate }}</span>
   }
 </ng-template>

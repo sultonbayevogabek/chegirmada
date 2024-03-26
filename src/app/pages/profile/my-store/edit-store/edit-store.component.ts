@@ -227,6 +227,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
   editStore(): void {
     const form = this.editStoreForm;
     form.markAllAsTouched();
+    console.log(form.getRawValue());
 
     if (form.invalid || form.disabled) {
       return;

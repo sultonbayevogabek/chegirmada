@@ -20,7 +20,7 @@ export class ConfirmationService {
       cancel?: string,
       confirm?: string,
       confirmButtonType?: UiButtonTypeModel
-    }
+    } = {}
   ): Observable<boolean> {
     const dialog = this.dialogRef.open(
       ConfirmationComponent, {
