@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { SectionHeaderComponent } from '../../shared/components/section-header/section-header.component';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
@@ -6,6 +6,8 @@ import { MatRipple } from '@angular/material/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../core/services/auth.service';
+import { UserModel } from '../../core/models/user.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'profile',
@@ -25,8 +27,10 @@ import { AuthService } from '../../core/services/auth.service';
   providers: []
 })
 
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
+  currentUser: UserModel;
   private _authService = inject(AuthService);
+  private _destroyRef = inject(DestroyRef);
 
   constructor() {
   }
@@ -35,39 +39,54 @@ export class ProfileComponent {
     {
       icon: 'icon:my-information',
       link: 'my-information',
-      name: 'my.information'
+      name: 'my.information',
+      isStoreRequired: false
     },
     {
       icon: 'icon:my-information',
       link: 'my-store',
-      name: 'my.store'
+      name: 'my.store',
+      isStoreRequired: false
     },
     {
       icon: 'icon:my-information',
       link: 'my-branches',
-      name: 'my.branches'
+      name: 'my.branches',
+      isStoreRequired: true
     },
     {
       icon: 'icon:my-information',
       link: 'my-announcements',
-      name: 'my.announcements'
+      name: 'my.announcements',
+      isStoreRequired: true
     },
     {
       icon: 'icon:favourite-companies',
       link: 'favourite-companies',
-      name: 'favourite.stores'
+      name: 'favourite.stores',
+      isStoreRequired: false
     },
     {
       icon: 'icon:like-outline',
       link: 'favourite-products',
-      name: 'liked.announcements'
+      name: 'liked.announcements',
+      isStoreRequired: false
     },
     {
       icon: 'icon:settings',
       link: 'settings',
-      name: 'settings'
+      name: 'settings',
+      isStoreRequired: false
     }
   ];
+
+  ngOnInit(): void {
+    this._authService.currentUser$
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(user => {
+        this.currentUser = user;
+      })
+  }
 
   signOut(): void {
     this._authService.signOut();

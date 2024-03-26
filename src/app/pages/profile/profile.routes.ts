@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { hasStoreGuard } from '../../core/guards/has-store.guard';
 
 export const profileRoutes: Routes = [
   {
@@ -24,15 +25,17 @@ export const profileRoutes: Routes = [
       },
       {
         path: 'my-store',
-        loadComponent: () => import('./my-store/my-store.component').then(c => c.MyStoreComponent)
+        loadComponent: () => import('./my-store/my-store.component').then(c => c.MyStoreComponent),
       },
       {
         path: 'my-branches',
-        loadComponent: () => import('./branches/branches.component').then(c => c.BranchesComponent)
+        loadComponent: () => import('./branches/branches.component').then(c => c.BranchesComponent),
+        canActivate: [hasStoreGuard]
       },
       {
         path: 'my-announcements',
-        loadChildren: () => import('./my-announcements/my-announcements.routes').then(r => r.myAnnouncementsRoutes)
+        loadChildren: () => import('./my-announcements/my-announcements.routes').then(r => r.myAnnouncementsRoutes),
+        canActivate: [hasStoreGuard]
       }
     ]
   }

@@ -19,12 +19,16 @@
 <ng-template #profileMenu>
   <ul class="profile-menu-list">
     @for (menuItem of menu; track menuItem) {
-      <li class="profile-menu-item" mat-ripple [routerLink]="[menuItem.link]" [routerLinkActive]="'active'">
-        <a class="profile-menu-link">
-          <mat-icon [svgIcon]="menuItem.icon"/>
-          <span>{{ menuItem.name| translate }}</span>
-        </a>
-      </li>
+      @if (menuItem.isStoreRequired && currentUser?.store_id) {
+        <ng-container
+          *ngTemplateOutlet="menuItemElement; context: { $implicit: menuItem }"
+        />
+      }
+      @if (!menuItem.isStoreRequired) {
+        <ng-container
+          *ngTemplateOutlet="menuItemElement; context: { $implicit: menuItem }"
+        />
+      }
     }
 
     <li class="profile-menu-item exit" mat-ripple (click)="signOut()">
@@ -34,4 +38,18 @@
       </a>
     </li>
   </ul>
+</ng-template>
+
+<ng-template #menuItemElement let-item>
+  <li
+    class="profile-menu-item"
+    mat-ripple
+    [routerLink]="[item.link]"
+    [routerLinkActive]="'active'"
+  >
+    <a class="profile-menu-link">
+      <mat-icon [svgIcon]="item.icon"/>
+      <span>{{ item.name| translate }}</span>
+    </a>
+  </li>
 </ng-template>

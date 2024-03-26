@@ -82,11 +82,11 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
   logoBuffer: string | ArrayBuffer;
   districts: DistrictModel[] = [];
   registerStoreForm = new FormGroup({
-    owner_firstname: new FormControl('Alexander', [ Validators.required ]),
-    owner_lastname: new FormControl('Lucky', [ Validators.required ]),
-    owner_fathername: new FormControl('Jonathan', [ Validators.required ]),
-    name_uz: new FormControl('Brand Clothes LLC', [ Validators.required, Validators.maxLength(255) ]),
-    shortname: new FormControl('brand_clothes', [ Validators.required, Validators.minLength(3), Validators.maxLength(20), shortnameValidator ]),
+    owner_firstname: new FormControl('', [ Validators.required ]),
+    owner_lastname: new FormControl('', [ Validators.required ]),
+    owner_fathername: new FormControl('', [ Validators.required ]),
+    name_uz: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
+    shortname: new FormControl('', [ Validators.required, Validators.minLength(3), Validators.maxLength(20), shortnameValidator ]),
     is_shortname_free: new FormControl(true, [ Validators.required ]),
     working_day_start: new FormControl(0),
     working_day_end: new FormControl(4),
@@ -100,7 +100,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
     region: new FormControl(null, [ Validators.required ]),
     address: new FormControl('Tashkent City, str. Ali Nava', [ Validators.required, Validators.maxLength(255) ]),
     district: new FormControl(null, [ Validators.required ]),
-    desc_uz: new FormControl('Our company works for users and we want to help to humanity', [ Validators.required, Validators.maxLength(1500) ]),
+    desc_uz: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
     desc_ru: new FormControl('', [ Validators.maxLength(1500) ]),
     longitude: new FormControl(null, [ Validators.required ]),
     latitude: new FormControl(null, [ Validators.required ]),
