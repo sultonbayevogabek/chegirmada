@@ -23,7 +23,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DecimalPipe } from '@angular/common';
 import { PhoneNumberPipe } from '../../../core/pipes/phone-number.pipe';
 import { interval, Subscription } from 'rxjs';
-import { ScrollbarDirective } from '../../directives/scrollbar/scrollbar.directive';
+import { ScrollbarDirective } from '../../directives/scrollbar.directive';
 
 @Component({
   selector: 'login-dialog',

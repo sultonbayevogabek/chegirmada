@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'profile-empty-list',

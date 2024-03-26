@@ -9,11 +9,11 @@ import {
   ViewChild
 } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogClose, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
-import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
 import { CarouselComponent, CarouselModule, OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
 import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
-import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
 import { MatIcon } from '@angular/material/icon';
+import { IconButtonComponent } from '../../../core/components/icon-button/icon-button.component';
+import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'product-details-gallery-modal',

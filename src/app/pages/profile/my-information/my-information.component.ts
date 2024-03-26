@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatNativeDateModule, MatOption, MatRipple } from '@angular/material/core';
-import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
@@ -20,6 +19,7 @@ import { BaseComponent } from '../../../core/components/base/base.component';
 import { RouterLink } from '@angular/router';
 import { TrimDirective } from '../../../core/directives/trim.directive';
 import { GeneralService } from '../../../core/services/general.service';
+import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'my-information',

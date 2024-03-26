@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
-import { SectionHeaderComponent } from '../../../shared/components/section-header/section-header.component';
+import { SectionHeaderComponent } from '../../../core/components/section-header/section-header.component';
 
 @Component({
   selector: 'product-details-other-shops',

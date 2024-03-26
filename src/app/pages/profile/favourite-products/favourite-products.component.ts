@@ -3,7 +3,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
 import { NgOptimizedImage } from '@angular/common';
 import { ProfileEmptyListComponent } from '../profile-empty-list/profile-empty-list.component';
-import { ProductCardComponent } from '../../../shared/components/product-card/product-card.component';
+import { ProductCardComponent } from '../../../core/components/product-card/product-card.component';
 
 @Component({
   selector: 'favourite-products',

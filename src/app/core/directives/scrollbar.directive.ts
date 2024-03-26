@@ -1,7 +1,6 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Platform } from '@angular/cdk/platform';
 import { Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { ScrollbarGeometry, ScrollbarPosition } from './scrollbar.types';
 import { merge } from 'lodash-es';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs';
@@ -386,5 +385,30 @@ export class ScrollbarDirective implements OnChanges, OnInit, OnDestroy {
 
     // Clean up
     this._ps = null;
+  }
+}
+
+export class ScrollbarGeometry {
+  public x: number;
+  public y: number;
+
+  public w: number;
+  public h: number;
+
+  constructor(x: number, y: number, w: number, h: number) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+  }
+}
+
+export class ScrollbarPosition {
+  public x: number | 'start' | 'end';
+  public y: number | 'start' | 'end';
+
+  constructor(x: number | 'start' | 'end', y: number | 'start' | 'end') {
+    this.x = x;
+    this.y = y;
   }
 }

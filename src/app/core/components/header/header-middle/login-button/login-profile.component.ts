@@ -5,10 +5,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { UiButtonComponent } from '../../../../../shared/components/ui-button/ui-button.component';
 import { AuthService } from '../../../../services/auth.service';
 import { UserModel } from '../../../../models/user.model';
-import { LoginDialogComponent } from '../../../../../shared/components/login-dialog/login-dialog.component';
+import { UiButtonComponent } from '../../../ui-button/ui-button.component';
+import { LoginDialogComponent } from '../../../login-dialog/login-dialog.component';
 
 @Component({
   selector: 'login-profile',

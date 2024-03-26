@@ -1,8 +1,6 @@
 import { Component, DestroyRef, Inject, inject, OnInit } from '@angular/core';
 import { NgxMaskDirective } from 'ngx-mask';
-import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
 import { MAT_DIALOG_DATA, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
-import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { COMPLAINT_TYPES } from '../../../core/constants/complaint-types';
@@ -11,6 +9,8 @@ import { ComplaintService } from '../../../core/services/complaint.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { DialogRef } from '@angular/cdk/dialog';
+import { IconButtonComponent } from '../../../core/components/icon-button/icon-button.component';
+import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'complaint-modal',

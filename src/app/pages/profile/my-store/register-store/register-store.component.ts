@@ -21,13 +21,13 @@ import { ConfettiComponent } from '../../confetti-alert/confetti-alert.component
 import { TranslateModule } from '@ngx-translate/core';
 import { TrimDirective } from '../../../../core/directives/trim.directive';
 import { MatIcon } from '@angular/material/icon';
-import { OverlayComponent } from '../../../../shared/components/overlay-panel/overlay-panel.component';
-import { UiButtonComponent } from '../../../../shared/components/ui-button/ui-button.component';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { ShowByLangPipe } from '../../../../core/pipes/show-by-lang.pipe';
 import { NgTemplateOutlet } from '@angular/common';
 import { ConfirmationService } from '../../../../core/services/confirmation.service';
+import { OverlayComponent } from '../../../../core/components/overlay-panel/overlay-panel.component';
+import { UiButtonComponent } from '../../../../core/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'register-store',

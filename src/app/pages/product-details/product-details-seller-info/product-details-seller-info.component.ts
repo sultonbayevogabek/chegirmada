@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { RatingStarsComponent } from '../../../shared/components/rating-stars/rating-stars.component';
-import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
+import { RatingStarsComponent } from '../../../core/components/rating-stars/rating-stars.component';
+import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'product-details-seller-info',

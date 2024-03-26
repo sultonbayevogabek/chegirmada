@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DragAndDropDirective } from '../../../../../core/directives/drag-and-drop.directive';
-import { IconButtonComponent } from '../../../../../shared/components/icon-button/icon-button.component';
 import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
 import { MatIcon } from '@angular/material/icon';
 import { DateAdapter, MatNativeDateModule, MatRipple } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IconButtonComponent } from '../../../../../core/components/icon-button/icon-button.component';
 
 @Component({
   selector: 'create-announcement-first-step',

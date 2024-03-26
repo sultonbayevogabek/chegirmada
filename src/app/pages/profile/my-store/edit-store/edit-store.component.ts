@@ -19,13 +19,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { TrimDirective } from '../../../../core/directives/trim.directive';
 import { MatIcon } from '@angular/material/icon';
-import { OverlayComponent } from '../../../../shared/components/overlay-panel/overlay-panel.component';
-import { UiButtonComponent } from '../../../../shared/components/ui-button/ui-button.component';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { ShowByLangPipe } from '../../../../core/pipes/show-by-lang.pipe';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { IconButtonComponent } from '../../../../shared/components/icon-button/icon-button.component';
 import { ConfirmationService } from '../../../../core/services/confirmation.service';
+import { OverlayComponent } from '../../../../core/components/overlay-panel/overlay-panel.component';
+import { UiButtonComponent } from '../../../../core/components/ui-button/ui-button.component';
+import { IconButtonComponent } from '../../../../core/components/icon-button/icon-button.component';
 
 @Component({
   selector: 'edit-store',

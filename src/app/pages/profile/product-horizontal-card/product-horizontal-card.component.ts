@@ -2,12 +2,12 @@ import { Component, inject, Input } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
-import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
 import { MatDialog } from '@angular/material/dialog';
 import {
   ActivateAnnouncementModalComponent
 } from '../my-announcements/activate-announcement-modal/activate-announcement-modal.component';
+import { IconButtonComponent } from '../../../core/components/icon-button/icon-button.component';
+import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'product-horizontal-card',

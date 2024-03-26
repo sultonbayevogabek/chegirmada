@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductHorizontalCardComponent } from '../../product-horizontal-card/product-horizontal-card.component';
 import { MatIcon } from '@angular/material/icon';
-import { UiButtonComponent } from '../../../../shared/components/ui-button/ui-button.component';
+import { UiButtonComponent } from '../../../../core/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'active-announcements',

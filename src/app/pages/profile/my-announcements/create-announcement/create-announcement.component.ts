@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { IconButtonComponent } from '../../../../shared/components/icon-button/icon-button.component';
 import { MatRipple } from '@angular/material/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { ToasterService } from '../../../../core/services/toaster.service';
@@ -9,6 +8,7 @@ import {
 import {
   CreateAnnouncementThirdStepComponent
 } from './create-announcement-third-step/create-announcement-third-step.component';
+import { IconButtonComponent } from '../../../../core/components/icon-button/icon-button.component';
 
 @Component({
   selector: 'create-announcement',

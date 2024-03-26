@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TabsComponent } from '../../../shared/components/tabs/tabs.component';
 import { MatIcon } from '@angular/material/icon';
 import { ProfileEmptyListComponent } from '../profile-empty-list/profile-empty-list.component';
 import { RouterOutlet } from '@angular/router';

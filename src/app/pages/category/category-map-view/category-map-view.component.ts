@@ -3,8 +3,8 @@ import { CategoryFilterComponent } from '../category-filter/category-filter.comp
 import { YandexMapsService } from '../../../core/services/yandex-maps.service';
 import { MatRipple } from '@angular/material/core';
 import { NgOptimizedImage } from '@angular/common';
-import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
-import { ScrollbarDirective } from '../../../shared/directives/scrollbar/scrollbar.directive';
+import { IconButtonComponent } from '../../../core/components/icon-button/icon-button.component';
+import { ScrollbarDirective } from '../../../core/directives/scrollbar.directive';
 
 @Component({
   selector: 'category-map-view',

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
 import { MatIcon } from '@angular/material/icon';
-import { ProductCardComponent } from '../../../shared/components/product-card/product-card.component';
+import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
+import { ProductCardComponent } from '../../../core/components/product-card/product-card.component';
 
 @Component({
   selector: 'company-profile-discounts',

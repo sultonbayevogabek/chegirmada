@@ -1,5 +1,4 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { SectionHeaderComponent } from '../../shared/components/section-header/section-header.component';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
@@ -8,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../core/services/auth.service';
 import { UserModel } from '../../core/models/user.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SectionHeaderComponent } from '../../core/components/section-header/section-header.component';
 
 @Component({
   selector: 'profile',

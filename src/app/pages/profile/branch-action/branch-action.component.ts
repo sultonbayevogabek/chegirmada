@@ -1,13 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
-import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
 import { MatDialogClose, MatDialogContent } from '@angular/material/dialog';
 import { MatOption } from '@angular/material/autocomplete';
 import { MatSelect } from '@angular/material/select';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { UiButtonComponent } from '../../../shared/components/ui-button/ui-button.component';
-import { ScrollbarDirective } from '../../../shared/directives/scrollbar/scrollbar.directive';
 import { YandexMapsService } from '../../../core/services/yandex-maps.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -21,6 +18,9 @@ import { GeneralService } from '../../../core/services/general.service';
 import { DistrictModel } from '../../../core/models/district.model';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { BaseComponent } from '../../../core/components/base/base.component';
+import { IconButtonComponent } from '../../../core/components/icon-button/icon-button.component';
+import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
+import { ScrollbarDirective } from '../../../core/directives/scrollbar.directive';
 
 @Component({
   selector: 'branch-action',
@@ -57,12 +57,11 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
   private _generalService = inject(GeneralService);
   private _toasterService = inject(ToasterService);
 
-
   weekdays = WEEKDAYS;
   regions = REGIONS;
   districts: DistrictModel[];
   addBranchForm = new FormGroup({
-    name: new FormControl('Samarkand branch', [ Validators.required, Validators.maxLength(255) ]),
+    name: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
     working_day_start: new FormControl(0),
     working_day_end: new FormControl(4),
     working_time_start: new FormControl('09:00', [ Validators.required, Validators.minLength(4) ]),
@@ -70,7 +69,7 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
     delivery: new FormControl(true),
     main_phone_number: new FormControl('+998 ', [ Validators.required, Validators.minLength(9) ]),
     region: new FormControl(null, [ Validators.required ]),
-    address: new FormControl('Samarkand City, str. Felix Atob', [ Validators.required, Validators.maxLength(255) ]),
+    address: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
     district: new FormControl(null, [ Validators.required ]),
     longitude: new FormControl(null, [ Validators.required ]),
     latitude: new FormControl(null, [ Validators.required ])

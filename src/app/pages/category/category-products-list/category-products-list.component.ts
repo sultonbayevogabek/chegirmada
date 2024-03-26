@@ -6,9 +6,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule } from '@angular/forms';
-import { ProductCardComponent } from '../../../shared/components/product-card/product-card.component';
 import { MatSelect } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
+import { ProductCardComponent } from '../../../core/components/product-card/product-card.component';
 
 @Component({
   selector: 'category-products-list',

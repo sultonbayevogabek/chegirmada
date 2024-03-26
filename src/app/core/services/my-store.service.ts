@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { StoreModel } from '../models/store.model';
 
 @Injectable()
@@ -26,5 +26,10 @@ export class MyStoreService {
 
   editStore(payload: FormData): Observable<StoreModel> {
     return this._httpClient.patch<StoreModel>(this._host + 'stores/my/', payload);
+  }
+
+  getBranches(storeId: number): Observable<any> {
+    return this._httpClient.get<any>(this._host + `stores/branches/${storeId}/`)
+      .pipe(catchError(() => of([])))
   }
 }

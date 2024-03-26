@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { RatingStarsComponent } from '../../../shared/components/rating-stars/rating-stars.component';
-import { SectionHeaderComponent } from '../../../shared/components/section-header/section-header.component';
 import { YandexMapsService } from '../../../core/services/yandex-maps.service';
+import { RatingStarsComponent } from '../../../core/components/rating-stars/rating-stars.component';
+import { SectionHeaderComponent } from '../../../core/components/section-header/section-header.component';
 
 @Component({
   selector: 'product-details-map',

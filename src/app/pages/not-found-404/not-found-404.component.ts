@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { UiButtonComponent } from '../../shared/components/ui-button/ui-button.component';
+import { UiButtonComponent } from '../../core/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'not-found-404',

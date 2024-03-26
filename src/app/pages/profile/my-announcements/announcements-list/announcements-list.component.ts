@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TabsComponent } from '../../../../shared/components/tabs/tabs.component';
 import { ProfileEmptyListComponent } from '../../profile-empty-list/profile-empty-list.component';
+import { TabsComponent } from '../../../../core/components/tabs/tabs.component';
 
 @Component({
   selector: 'announcements-list',

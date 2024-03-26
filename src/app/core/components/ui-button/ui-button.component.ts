@@ -4,7 +4,7 @@ import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { UiButtonTypeModel } from '../../../core/models/ui-button-type.model';
+import { UiButtonTypeModel } from '../../models/ui-button-type.model';
 
 @Component({
   selector: 'ui-button',

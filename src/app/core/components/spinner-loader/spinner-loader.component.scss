@@ -1,0 +1,8 @@
+@import "variables";
+@import "mixins";
+
+.spinner-loader {
+  height: 20rem;
+  @include flex-center-center;
+  color: $primary-blue-color;
+}

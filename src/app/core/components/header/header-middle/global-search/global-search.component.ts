@@ -5,8 +5,8 @@ import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRippleModule } from '@angular/material/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { OverlayComponent } from '../../../../../shared/components/overlay-panel/overlay-panel.component';
-import { ScrollbarDirective } from '../../../../../shared/directives/scrollbar/scrollbar.directive';
+import { OverlayComponent } from '../../../overlay-panel/overlay-panel.component';
+import { ScrollbarDirective } from '../../../../directives/scrollbar.directive';
 
 @Component({
   selector: 'global-search',

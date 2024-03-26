@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatRipple } from '@angular/material/core';
-import { OverlayComponent } from '../../../../../shared/components/overlay-panel/overlay-panel.component';
+import { OverlayComponent } from '../../../overlay-panel/overlay-panel.component';
 
 @Component({
   selector: 'notifications',

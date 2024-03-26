@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CarouselComponent, CarouselModule } from 'ngx-owl-carousel-o';
-import { RatingStarsComponent } from '../../../shared/components/rating-stars/rating-stars.component';
-import { SectionHeaderComponent } from '../../../shared/components/section-header/section-header.component';
-import { ProductCardComponent } from '../../../shared/components/product-card/product-card.component';
+import { RatingStarsComponent } from '../../../core/components/rating-stars/rating-stars.component';
+import { SectionHeaderComponent } from '../../../core/components/section-header/section-header.component';
+import { ProductCardComponent } from '../../../core/components/product-card/product-card.component';
 
 @Component({
   selector: 'product-details-similar-products',

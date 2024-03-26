@@ -6,10 +6,10 @@ import { ProductDetailsOtherShopsComponent } from './product-details-other-shops
 import {
   ProductDetailsSimilarProductsComponent
 } from './product-details-similar-products/product-details-similar-products.component';
-import { RatingStarsComponent } from '../../shared/components/rating-stars/rating-stars.component';
-import { BreadCrumbsComponent } from '../../shared/components/bread-crumbs/bread-crumbs.component';
 import { ProductDetailsGalleryComponent } from './product-details-gallery/product-details-gallery.component';
 import { ProductDetailsInfoBlockComponent } from './product-details-info-block/product-details-info-block.component';
+import { RatingStarsComponent } from '../../core/components/rating-stars/rating-stars.component';
+import { BreadCrumbsComponent } from '../../core/components/bread-crumbs/bread-crumbs.component';
 
 @Component({
   selector: 'product-details',

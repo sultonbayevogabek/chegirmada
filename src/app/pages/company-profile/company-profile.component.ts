@@ -1,12 +1,12 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
-import { UiButtonComponent } from '../../shared/components/ui-button/ui-button.component';
-import { YoutubePlayer } from '../../shared/components/youtube-player/youtube-player.component';
-import { TabsComponent } from '../../shared/components/tabs/tabs.component';
 import { ActivatedRoute, Params } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatRipple } from '@angular/material/core';
+import { UiButtonComponent } from '../../core/components/ui-button/ui-button.component';
+import { YoutubePlayer } from '../../core/components/youtube-player/youtube-player.component';
+import { TabsComponent } from '../../core/components/tabs/tabs.component';
 
 @Component({
   selector: 'company-profile',
