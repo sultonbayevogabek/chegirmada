@@ -1,6 +1,6 @@
-import { Component, Inject, inject, Injectable, OnInit } from '@angular/core';
+import { Component, Inject, inject, NgZone, OnInit } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogClose, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogClose, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatOption } from '@angular/material/autocomplete';
 import { MatSelect } from '@angular/material/select';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
@@ -22,9 +22,7 @@ import { IconButtonComponent } from '../../../core/components/icon-button/icon-b
 import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
 import { ScrollbarDirective } from '../../../core/directives/scrollbar.directive';
 import { MyStoreService } from '../../../core/services/my-store.service';
-import { BranchModel } from '../../../core/models/branch.model';
 import { ConfirmationService } from '../../../core/services/confirmation.service';
-import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'branch-action',
@@ -66,8 +64,8 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
   private _generalService = inject(GeneralService);
   private _toasterService = inject(ToasterService);
   private _myStoreService = inject(MyStoreService);
-  private _confirmationService = inject(ConfirmationService);
   private _dialog = inject(MatDialogRef);
+  private _zone = inject(NgZone);
 
   weekdays = WEEKDAYS;
   regions = REGIONS;
@@ -94,7 +92,9 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
         next: ({ coordinates, address }) => {
           this.manageBranchForm.get('longitude').setValue(coordinates[0]);
           this.manageBranchForm.get('latitude').setValue(coordinates[1]);
-          this.updateAddress(address);
+          this._zone.run(() => {
+            this.updateAddress(address);
+          })
         }
       });
 
@@ -138,22 +138,13 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
       return;
     }
 
-    this._confirmationService.confirmation({
-      message: 'location.point.changed.do.you.want.to.set.address.that.maps.gave',
-      confirm: 'yes',
-      cancel: 'no',
-      confirmButtonType: 'blue'
-    })
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: res => {
-          if (!res) {
-            return;
-          }
+    this.manageBranchForm.get('address').setValue(address);
 
-          this.manageBranchForm.get('address').setValue(address);
-        }
-      });
+    this._toasterService.open({
+      type: 'info',
+      title: 'attention',
+      message: 'you.changed.location.in.address.field.address.given.by.map.is.written'
+    });
   }
 
   getBranchById(): void {

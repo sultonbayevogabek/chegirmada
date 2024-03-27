@@ -134,6 +134,7 @@
   "working.time": "Рабочее время",
   "write.your.complaint": "Напишите вашу жалобу",
   "yes": "Да",
+  "you.changed.location.in.address.field.address.given.by.map.is.written": "Вы изменили точку местоположения на карте. В поле адреса пишется адрес, указанный на карте.",
   "you.do.not.have.registered.store": "У вас нет зарегистрированного магазина",
   "you.have.timed.out.to.enter.your.verification.code": "У вас истекло время для ввода кода подтверждения",
   "your.complaint.has.been.successfully.submitted": "Ваша жалоба успешно отправлена"

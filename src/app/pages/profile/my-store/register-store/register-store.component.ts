@@ -1,4 +1,13 @@
-import { Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  inject, NgZone,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { YandexMapsService } from '../../../../core/services/yandex-maps.service';
 import { MyStoreService } from '../../../../core/services/my-store.service';
@@ -69,7 +78,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
   private _generalService = inject(GeneralService);
   private _authService = inject(AuthService);
   private _toasterService = inject(ToasterService);
-  private _confirmationService = inject(ConfirmationService);
+  private _zone = inject(NgZone);
 
   currentUser: UserModel;
   customPatterns = {
@@ -107,7 +116,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
     logo: new FormControl(null, [ Validators.required ])
   });
 
-  constructor() {
+  constructor(){
     super();
   }
 
@@ -126,7 +135,9 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
         next: ({ coordinates, address }) => {
           this.registerStoreForm.get('longitude').setValue(coordinates[0]);
           this.registerStoreForm.get('latitude').setValue(coordinates[1]);
-          this.updateAddress(address);
+          this._zone.run(() => {
+            this.updateAddress(address);
+          })
         }
       });
   }
@@ -287,21 +298,12 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
       return;
     }
 
-    this._confirmationService.confirmation({
-      message: 'location.point.changed.do.you.want.to.set.address.that.maps.gave',
-      confirm: 'yes',
-      cancel: 'no',
-      confirmButtonType: 'blue'
-    })
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: res => {
-          if (!res) {
-            return;
-          }
+    this.registerStoreForm.get('address').setValue(address);
 
-          this.registerStoreForm.get('address').setValue(address);
-        }
-      });
+    this._toasterService.open({
+      type: 'info',
+      title: 'attention',
+      message: 'you.changed.location.in.address.field.address.given.by.map.is.written'
+    })
   }
 }

@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { ChangeDetectorRef, inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToasterComponent } from '../components/toaster/toaster.component';
 
@@ -10,12 +10,12 @@ export class ToasterService {
   private _snackbar: MatSnackBar = inject(MatSnackBar);
 
   open({
-            type = 'success',
-            title,
-            message,
-            dismissible = true,
-            duration = 5000
-          }: {
+         type = 'success',
+         title,
+         message,
+         dismissible = true,
+         duration = 5000
+       }: {
     type?: 'success' | 'warning' | 'info' | 'error';
     title?: string;
     message: string;

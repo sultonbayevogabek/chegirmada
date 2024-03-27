@@ -1,5 +1,5 @@
 import { BaseComponent } from '../../../../core/components/base/base.component';
-import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { YandexMapsService } from '../../../../core/services/yandex-maps.service';
 import { MyStoreService } from '../../../../core/services/my-store.service';
@@ -66,7 +66,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
   private _myStoreService = inject(MyStoreService);
   private _generalService = inject(GeneralService);
   private _toasterService = inject(ToasterService);
-  private _confirmationService = inject(ConfirmationService);
+  private _zone = inject(NgZone);
 
   customPatterns = {
     'X': { pattern: new RegExp('[a-zA-Z\']') },
@@ -116,7 +116,9 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
         next: ({ coordinates, address }) => {
           this.editStoreForm.get('longitude').setValue(coordinates[0]);
           this.editStoreForm.get('latitude').setValue(coordinates[1]);
-          this.updateAddress(address);
+          this._zone.run(() => {
+            this.updateAddress(address);
+          })
         }
       });
 
@@ -306,22 +308,12 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
     if (!address) {
       return;
     }
+    this.editStoreForm.get('address').setValue(address);
 
-    this._confirmationService.confirmation({
-      message: 'location.point.changed.do.you.want.to.set.address.that.maps.gave',
-      confirm: 'yes',
-      cancel: 'no',
-      confirmButtonType: 'blue'
+    this._toasterService.open({
+      type: 'info',
+      title: 'attention',
+      message: 'you.changed.location.in.address.field.address.given.by.map.is.written'
     })
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: res => {
-          if (!res) {
-            return;
-          }
-
-          this.editStoreForm.get('address').setValue(address);
-        }
-      });
   }
 }
