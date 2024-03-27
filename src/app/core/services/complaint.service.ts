@@ -10,6 +10,6 @@ export class ComplaintService {
   private _httpClient = inject(HttpClient);
 
   sendComplaint(payload: { complaint_type: number; message: string; store?: number }): Observable<any> {
-    return this._httpClient.post<any>(this._host + 'complaints/', payload);
+    return this._httpClient.post<any>(this._host + 'complaints/shortname/', payload);
   }
 }

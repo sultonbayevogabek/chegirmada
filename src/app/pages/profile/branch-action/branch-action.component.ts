@@ -23,6 +23,8 @@ import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.
 import { ScrollbarDirective } from '../../../core/directives/scrollbar.directive';
 import { MyStoreService } from '../../../core/services/my-store.service';
 import { ConfirmationService } from '../../../core/services/confirmation.service';
+import { Observable, Subscription } from 'rxjs';
+import { BranchModel } from '../../../core/models/branch.model';
 
 @Component({
   selector: 'branch-action',
@@ -94,7 +96,7 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
           this.manageBranchForm.get('latitude').setValue(coordinates[1]);
           this._zone.run(() => {
             this.updateAddress(address);
-          })
+          });
         }
       });
 
@@ -200,39 +202,27 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
       main_phone_number
     };
 
+    let subscription: Observable<BranchModel>;
+
     if (this.data.branchId) {
-      this._myStoreService.updateBranch({
+      subscription = this._myStoreService.updateBranch({
         ...payload,
         pk: this.data.branchId
-      })
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe({
-          next: _ => {
-            this._toasterService.open({
-              message: 'changes.successfully.changed'
-            });
-            this._dialog.close('changed');
-          },
-          error: _ => {
-            this._toasterService.open({
-              message: 'error.occurred',
-              type: 'error',
-              title: 'attention'
-            });
-            this.manageBranchForm.enable();
-          }
-        });
-      return;
+      });
+    } else {
+      subscription = this._myStoreService.createBranch(payload);
     }
 
-    this._myStoreService.createBranch(payload)
+    subscription
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: _ => {
-          this._toasterService.open({
-            message: 'changes.successfully.changed'
-          });
-          this._dialog.close('created');
+          if (this.data.branchId) {
+            this._toasterService.open({
+              message: 'changes.successfully.changed'
+            });
+          }
+          this._dialog.close('success');
         },
         error: _ => {
           this._toasterService.open({

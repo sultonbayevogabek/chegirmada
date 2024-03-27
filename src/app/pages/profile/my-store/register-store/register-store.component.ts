@@ -168,7 +168,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
       width: '25rem',
       data: {
         complaintType: 0,
-        storeShortname: this.registerStoreForm.get('shortname').value
+        shortname: this.registerStoreForm.get('shortname').value
       }
     });
   }

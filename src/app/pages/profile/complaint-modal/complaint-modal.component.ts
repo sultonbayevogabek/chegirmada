@@ -36,14 +36,14 @@ import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.
 export class ComplaintModalComponent implements OnInit {
   @Inject(MAT_DIALOG_DATA) data: {
     complaintType?: number;
-    storeShortname?: string;
+    shortname?: string;
   } = inject(MAT_DIALOG_DATA);
 
   complaintTypes = COMPLAINT_TYPES;
   complaintForm = new FormGroup({
-    complaint_type: new FormControl(null, [ Validators.required ]),
+    complaint_type: new FormControl({ value: null, disabled: true }, [ Validators.required ]),
     message: new FormControl('', [ Validators.maxLength(255) ]),
-    store_shortname: new FormControl(null)
+    shortname: new FormControl({ value: null, disabled: true })
   });
 
   private _complaintService = inject(ComplaintService);
@@ -56,8 +56,8 @@ export class ComplaintModalComponent implements OnInit {
       this.complaintForm.get('complaint_type').setValue(this.data.complaintType);
     }
 
-    if (this.data && 'storeShortname' in this.data) {
-      this.complaintForm.get('store_shortname').setValue(this.data.storeShortname);
+    if (this.data && 'shortname' in this.data) {
+      this.complaintForm.get('shortname').setValue(this.data.shortname);
     }
   }
 

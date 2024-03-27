@@ -160,7 +160,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
       width: '25rem',
       data: {
         complaintType: 0,
-        storeShortname: this.editStoreForm.get('shortname').value
+        shortname: this.editStoreForm.get('shortname').value
       }
     });
   }
