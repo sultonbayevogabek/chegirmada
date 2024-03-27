@@ -1,6 +1,6 @@
 import { Component, Inject, inject, Injectable, OnInit } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogClose, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatOption } from '@angular/material/autocomplete';
 import { MatSelect } from '@angular/material/select';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
@@ -67,7 +67,7 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
   private _toasterService = inject(ToasterService);
   private _myStoreService = inject(MyStoreService);
   private _confirmationService = inject(ConfirmationService);
-  private _dialogRef = inject(DialogRef);
+  private _dialog = inject(MatDialogRef);
 
   weekdays = WEEKDAYS;
   regions = REGIONS;
@@ -166,12 +166,12 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
       .subscribe({
         next: branch => {
           this._yandexMapsService
-            .setSingleLocationPoint('map', [branch.longitude, branch.latitude]);
+            .setSingleLocationPoint('map', [ branch.longitude, branch.latitude ]);
           this.manageBranchForm.patchValue(branch);
           this.manageBranchForm.get('name_uz').setValue(branch.name);
           this.getDistrictsList();
         }
-      })
+      });
   }
 
   manageBranch(): void {
@@ -184,7 +184,11 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
 
     form.disable();
 
-    let { working_time_start, working_time_end, main_phone_number } = form.getRawValue();
+    let {
+      working_time_start,
+      working_time_end,
+      main_phone_number
+    } = form.getRawValue();
 
     if (working_time_start.length === 4) {
       working_time_start = working_time_start.slice(0, 2) + ':' + working_time_start.slice(2);
@@ -215,18 +219,18 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
           next: _ => {
             this._toasterService.open({
               message: 'changes.successfully.changed'
-            })
-            this._dialogRef.close('changed');
+            });
+            this._dialog.close('changed');
           },
           error: _ => {
             this._toasterService.open({
               message: 'error.occurred',
               type: 'error',
               title: 'attention'
-            })
+            });
             this.manageBranchForm.enable();
           }
-        })
+        });
       return;
     }
 
@@ -236,17 +240,17 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
         next: _ => {
           this._toasterService.open({
             message: 'changes.successfully.changed'
-          })
-          this._dialogRef.close('created');
+          });
+          this._dialog.close('created');
         },
         error: _ => {
           this._toasterService.open({
             message: 'error.occurred',
             type: 'error',
             title: 'attention'
-          })
+          });
           this.manageBranchForm.enable();
         }
-      })
+      });
   }
 }

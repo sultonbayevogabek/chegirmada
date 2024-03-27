@@ -8,6 +8,7 @@
 }
 
 .branches-heading {
+  margin-bottom: 1.5rem;
   font-size: 1.25rem;
   font-weight: 500;
 }
@@ -18,7 +19,7 @@
 
 .branches-item {
   @include flex-start-between;
-  padding-bottom: 1rem;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid $border-grey-color;
 }
 
@@ -27,7 +28,6 @@
 }
 
 .branch-name {
-  margin-bottom: 0.75rem;
   font-size: 1.125rem;
   font-weight: 500;
   color: $dialog-title-black;
@@ -35,7 +35,7 @@
 
 .branch-details {
   @include grid(1fr 1fr, 0.75rem 1.5rem);
-  padding-top: 1rem;
+  padding-top: 0.75rem;
 }
 
 .branch-details-item {
@@ -54,4 +54,9 @@
 
 .branch-actions {
   @include flex-column(0.25rem)
+}
+
+.branch-new {
+  @include flex-center-end;
+  padding-top: 1.25rem;
 }

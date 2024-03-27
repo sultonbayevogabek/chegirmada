@@ -17,6 +17,8 @@ import { BranchModel } from '../../../core/models/branch.model';
 import { WEEKDAYS } from '../../../core/constants/weekdays';
 import { LowerCasePipe } from '@angular/common';
 import { PhoneNumberPipe } from '../../../core/pipes/phone-number.pipe';
+import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
+import { ToasterService } from '../../../core/services/toaster.service';
 
 @Component({
   selector: 'branches',
@@ -31,11 +33,13 @@ import { PhoneNumberPipe } from '../../../core/pipes/phone-number.pipe';
     TranslateModule,
     SpinnerLoaderComponent,
     LowerCasePipe,
-    PhoneNumberPipe
+    PhoneNumberPipe,
+    UiButtonComponent
   ],
   providers: [
     ConfirmationService,
-    MyStoreService
+    MyStoreService,
+    ToasterService
   ],
   standalone: true
 })
@@ -50,6 +54,7 @@ export class BranchesComponent implements OnInit {
   private _confirmation = inject(ConfirmationService);
   private _myStoreService = inject(MyStoreService);
   private _authService = inject(AuthService);
+  private _toasterService = inject(ToasterService);
   private _destroyRef = inject(DestroyRef);
 
   constructor() {
@@ -57,29 +62,39 @@ export class BranchesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBranches();
-    this.openBranchActionDialog()
   }
 
   openBranchActionDialog(branchId?: number): void {
-    this._dialog.open(BranchActionComponent, {
+    const branchActionDialog = this._dialog.open(BranchActionComponent, {
       width: '100%',
       maxWidth: '75rem',
       data: {
         branchId
       }
     });
+
+    branchActionDialog.afterClosed()
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: data => {
+          if (!data) return;
+
+          this.getBranches();
+        }
+      })
   }
 
   getBranches(): void {
-    this.loading = true;
-    this._myStoreService.getBranchById(1)
-      .pipe(
-        tap(_ => this.loading = false),
-        takeUntilDestroyed(this._destroyRef)
-      )
+    this._myStoreService.getBranches(this._authService.currentUser?.store_id)
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: res => {
-          this.branches = [res];
+          this.loading = false;
+          this.branches = res;
+        },
+        error: _ => {
+          this.loading = false;
+          this.branches = [];
         }
       })
   }
@@ -99,8 +114,12 @@ export class BranchesComponent implements OnInit {
         next: () => {
           this.getBranches()
         },
-        error: (error) => {
-          // Handle errors
+        error: _ => {
+          this._toasterService.open({
+            message: 'error.occurred',
+            type: 'error',
+            title: 'attention'
+          })
         }
       });
   }

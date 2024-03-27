@@ -18,7 +18,7 @@
       @for (branch of branches; track branch) {
         <li class="branches-item">
           <div class="branch-info">
-            <h3 class="branch-name">{{ branch.name_uz }}</h3>
+            <h3 class="branch-name">{{ branch.name }}</h3>
 
             <div class="branch-details">
               <div class="branch-details-item">
@@ -58,5 +58,12 @@
         </li>
       }
     </ul>
+
+    <div class="branch-new">
+      <ui-button
+        [text]="'add'"
+        (click)="openBranchActionDialog()"
+      />
+    </div>
   }
 </div>

@@ -34,15 +34,19 @@ export class MyStoreService {
       .pipe(catchError(() => of(null)))
   }
 
+  getBranches(storeId: number): Observable<BranchModel[]> {
+    return this._httpClient.get<BranchModel[]>(this._host + `stores/${storeId}/branches/`)
+  }
+
   createBranch(payload: BranchModel): Observable<BranchModel> {
     return this._httpClient.post<BranchModel>(this._host + 'stores/branches/create/', payload);
   }
 
   updateBranch(payload: BranchModel): Observable<BranchModel> {
-    return this._httpClient.put<BranchModel>(this._host + `stores/branches/${payload?.pk}`, payload);
+    return this._httpClient.put<BranchModel>(this._host + `stores/branches/${payload?.pk}/`, payload);
   }
 
   deleteBranch(branchId: number): Observable<BranchModel> {
-    return this._httpClient.delete<BranchModel>(this._host + `stores/branches/${branchId}`);
+    return this._httpClient.delete<BranchModel>(this._host + `stores/branches/${branchId}/`);
   }
 }
