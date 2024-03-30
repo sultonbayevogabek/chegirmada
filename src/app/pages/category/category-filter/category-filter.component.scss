@@ -47,6 +47,8 @@
 }
 
 .category-filter {
+  position: sticky;
+  top: 1rem;
   border-radius: 0.5rem;
 
   &.border {

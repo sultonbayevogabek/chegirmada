@@ -12,22 +12,6 @@
   @include grid(1fr 1fr, 1.25rem)
 }
 
-.date-interval {
-  @include grid(1fr 1fr, 1.25rem)
-}
-
-.date-interval-label {
-  position: relative;
-}
-
-.date-interval-calendar-icon {
-  position: absolute;
-  bottom: 1.375rem;
-  right: 1rem;
-  transform: translateY(50%);
-  cursor: pointer;
-}
-
 .create-announcement-dropzone {
   @include flex-column();
   align-items: center;
@@ -104,4 +88,12 @@
   right: 0.125rem;
   top: 0.125rem;
   z-index: 1;
+}
+
+.grid-2 {
+  @include grid(repeat(2, 1fr), 1.25rem)
+}
+
+.create-announcement-information-submit {
+  @include flex-center-end()
 }

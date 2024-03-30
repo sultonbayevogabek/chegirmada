@@ -6,6 +6,7 @@ import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
+import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
 
 @Component({
   selector: 'create-announcement-third-step',
@@ -17,7 +18,9 @@ import { MatRipple } from '@angular/material/core';
     NgClass,
     FormsModule,
     MatIcon,
-    MatRipple
+    MatRipple,
+    MatDatepicker,
+    MatDatepickerInput
   ],
   templateUrl: './create-announcement-third-step.component.html',
   styleUrl: './create-announcement-third-step.component.scss'

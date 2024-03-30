@@ -29,7 +29,7 @@ function HttpLoaderFactory(http: HttpClient) {
 }
 
 const I18N_CONFIG = {
-  defaultLanguage: localStorage.getItem('lang') || 'uz',
+  defaultLanguage: localStorage.getItem('lang') === 'ru' ? 'ru': 'uz',
   loader: {
     provide: TranslateLoader,
     useFactory: HttpLoaderFactory,

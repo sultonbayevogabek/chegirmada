@@ -1,5 +1,4 @@
-import { BaseComponent } from '../../../../core/components/base/base.component';
-import { AfterViewInit, Component, ElementRef, inject, NgZone, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, ElementRef, inject, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { YandexMapsService } from '../../../../core/services/yandex-maps.service';
 import { MyStoreService } from '../../../../core/services/my-store.service';
@@ -20,7 +19,6 @@ import { NgTemplateOutlet } from '@angular/common';
 import { TrimDirective } from '../../../../core/directives/trim.directive';
 import { MatIcon } from '@angular/material/icon';
 import { MatOption, MatSelect } from '@angular/material/select';
-import { ShowByLangPipe } from '../../../../core/pipes/show-by-lang.pipe';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { ConfirmationService } from '../../../../core/services/confirmation.service';
 import { OverlayComponent } from '../../../../core/components/overlay-panel/overlay-panel.component';
@@ -51,14 +49,13 @@ import { IconButtonComponent } from '../../../../core/components/icon-button/ico
     UiButtonComponent,
     MatSelect,
     MatOption,
-    ShowByLangPipe,
     MatRadioGroup,
     MatRadioButton,
     IconButtonComponent
   ]
 })
 
-export class EditStoreComponent extends BaseComponent implements OnInit, AfterViewInit {
+export class EditStoreComponent implements OnInit, AfterViewInit {
   @ViewChild('logoFileInput') logoFileInput: ElementRef<HTMLInputElement>;
 
   private _dialog = inject(MatDialog);
@@ -66,6 +63,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
   private _myStoreService = inject(MyStoreService);
   private _generalService = inject(GeneralService);
   private _toasterService = inject(ToasterService);
+  private _destroyRef = inject(DestroyRef);
   private _zone = inject(NgZone);
 
   customPatterns = {
@@ -105,13 +103,9 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
     logo: new FormControl(null)
   });
 
-  constructor() {
-    super();
-  }
-
   ngOnInit(): void {
     this._yandexMapService.coordinatesAndAddress$
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: ({ coordinates, address }) => {
           this.editStoreForm.get('longitude').setValue(coordinates[0]);
@@ -144,7 +138,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
     }
 
     this._myStoreService.checkShortName(shortname)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: () => {
           isShortnameFreeControl.setValue(true);
@@ -203,7 +197,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
     const regionId = this.editStoreForm.get('region').value;
 
     this._generalService.getDistrictsByRegionId(regionId)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: districts => {
           this.districts = districts;
@@ -265,7 +259,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
     }
 
     this._myStoreService.editStore(formData)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: res => {
           this._toasterService.open({
@@ -289,7 +283,7 @@ export class EditStoreComponent extends BaseComponent implements OnInit, AfterVi
 
   getStoreData(): void {
     this._myStoreService.getMyStoreData()
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(res => {
         this.editStoreForm.patchValue(res);
         this._yandexMapService.setSingleLocationPoint('map', [ res.longitude, res.latitude ]);

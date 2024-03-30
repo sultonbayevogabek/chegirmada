@@ -20,15 +20,6 @@
           </div>
         </div>
       </label>
-
-      <div class="create-announcement-installments">
-        <span class="form-label-text">Рассрочка</span>
-
-        <div class="grid-2">
-          <mat-radio-button [color]="'primary'" class="form-radio">Да</mat-radio-button>
-          <mat-radio-button [color]="'primary'" class="form-radio">Нет</mat-radio-button>
-        </div>
-      </div>
     </div>
 
     <div
@@ -138,15 +129,33 @@
       }
     </div>
 
-    <div class="grid-2">
-      <label class="form-label">
-        <span class="form-label-text">Описание (UZ)</span>
-        <textarea class="form-textarea" placeholder="Описание (UZ)"></textarea>
+    <div class="create-announcement-information-field date-interval">
+      <label class="form-label date-interval-label">
+        <span class="create-announcement-information-field-title form-label-text">Дата начала</span>
+        <input
+          class="create-announcement-information-input form-input"
+          [matDatepicker]="fromDatePicker"
+        >
+        <mat-icon
+          class="date-interval-calendar-icon"
+          [svgIcon]="'icon:calendar'"
+          (click)="fromDatePicker.open()"
+        ></mat-icon>
+        <mat-datepicker #fromDatePicker></mat-datepicker>
       </label>
 
-      <label class="form-label">
-        <span class="form-label-text">Описание (RU)</span>
-        <textarea class="form-textarea" placeholder="Описание (RU)"></textarea>
+      <label class="form-label date-interval-label">
+        <span class="create-announcement-information-field-title form-label-text">Дата окончания</span>
+        <input
+          class="create-announcement-information-input form-input"
+          [matDatepicker]="toDatePicker"
+        >
+        <mat-icon
+          class="date-interval-calendar-icon"
+          [svgIcon]="'icon:calendar'"
+          (click)="toDatePicker.open()"
+        ></mat-icon>
+        <mat-datepicker #toDatePicker></mat-datepicker>
       </label>
     </div>
   </div>

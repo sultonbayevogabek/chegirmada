@@ -1,7 +1,31 @@
 <tabs [tabs]="tabs"/>
 
+<div class="my-announcements-filter">
+  <ui-button
+    [icon]="'icon:solid-plus'"
+    [text]="'add.new.announcement'"
+    [routerLink]="['../../create']"
+  />
+
+  <label class="my-announcements-search">
+    <input class="form-input" type="text" [placeholder]="'search'| translate">
+
+    <ui-button
+      [type]="'gray-outline'"
+      [text]="'search'"
+      [icon]="'icon:search'"
+    />
+  </label>
+</div>
+
+@for (product of products; track product) {
+  <product-horizontal-card
+    [product]="product"
+  />
+}
+
 <profile-empty-list
-  [emptyListText]="'В настоящее время у вас нет активных объявлений'"
+  [emptyListText]="'no.data.found'"
   [emptyListImg]="'/assets/empty-list-icons/announcements.svg'"
-  [emptyListButton]="'Добавить'"
+  [emptyListButton]="'add'"
 />

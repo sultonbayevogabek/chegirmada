@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatTabLink, MatTabNav, MatTabNavPanel } from '@angular/material/tabs';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'tabs',
@@ -12,7 +13,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     MatTabNavPanel,
     RouterOutlet,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    TranslateModule
   ],
   standalone: true
 })

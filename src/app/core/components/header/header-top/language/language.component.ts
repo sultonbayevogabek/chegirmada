@@ -25,13 +25,11 @@ export class LanguageComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('lang') === 'ru') {
       this.activeLanguage = 'ru';
-      this.changeLanguage('ru');
     }
   }
 
   changeLanguage(lang: language): void {
-    this.activeLanguage = lang;
-    this._translateService.use(lang);
     localStorage.setItem('lang', lang);
+    window.location.reload();
   }
 }

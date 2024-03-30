@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BaseComponent } from '../../../core/components/base/base.component';
 import { AuthService } from '../../../core/services/auth.service';
 import { ProfileEmptyListComponent } from '../profile-empty-list/profile-empty-list.component';
 import { UserModel } from '../../../core/models/user.model';
@@ -22,19 +21,15 @@ import { EditStoreComponent } from './edit-store/edit-store.component';
   standalone: true
 })
 
-export class MyStoreComponent extends BaseComponent implements OnInit {
+export class MyStoreComponent implements OnInit {
   private _authService = inject(AuthService);
+  private _destroyRef = inject(DestroyRef);
 
   currentUser: UserModel;
   mode: 'empty' | 'register' | 'edit'  = 'empty'
-
-  constructor() {
-    super();
-  }
-
   ngOnInit(): void {
     this._authService.currentUser$
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(user => {
         this.currentUser = user;
 

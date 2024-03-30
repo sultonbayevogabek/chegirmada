@@ -9,6 +9,8 @@ import {
   CreateAnnouncementThirdStepComponent
 } from './create-announcement-third-step/create-announcement-third-step.component';
 import { IconButtonComponent } from '../../../../core/components/icon-button/icon-button.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'create-announcement',
@@ -20,7 +22,9 @@ import { IconButtonComponent } from '../../../../core/components/icon-button/ico
     MatRipple,
     CreateAnnouncementFirstStepComponent,
     NgTemplateOutlet,
-    CreateAnnouncementThirdStepComponent
+    CreateAnnouncementThirdStepComponent,
+    TranslateModule,
+    RouterLink
   ]
 })
 

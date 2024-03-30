@@ -1,0 +1,19 @@
+@import "variables";
+@import "mixins";
+
+.my-announcements-filter {
+  @include flex-center(4rem);
+  padding-top: 1rem;
+}
+
+.my-announcements-search {
+  @include flex-center(0.75rem);
+  flex-grow: 1;
+
+  .form-input {
+    width: auto;
+    flex-grow: 1;
+    background-color: $white-color;
+    border-color: $border-grey-color
+  }
+}

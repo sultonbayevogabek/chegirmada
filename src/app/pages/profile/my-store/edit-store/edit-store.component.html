@@ -194,7 +194,7 @@
               @for (category of categories; track category) {
                 <mat-option
                   [value]="category.id">
-                  {{ category| showByLang: activeLang }}
+                  {{ category.name| translate }}
                 </mat-option>
               }
             </mat-select>
@@ -336,7 +336,7 @@
               (click)="onClickDistrictsSelect()"
             >
               @for (district of districts; track district) {
-                <mat-option [value]="district.pk">{{ district | showByLang: activeLang }}</mat-option>
+                <mat-option [value]="district.pk">{{ district.name }}</mat-option>
               }
             </mat-select>
 
@@ -407,6 +407,7 @@
       </div>
     </div>
   </fieldset>
+
 
   <div class="register-submit">
     <ui-button

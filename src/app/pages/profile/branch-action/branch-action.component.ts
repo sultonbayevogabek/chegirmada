@@ -1,4 +1,4 @@
-import { Component, Inject, inject, NgZone, OnInit } from '@angular/core';
+import { Component, DestroyRef, Inject, inject, NgZone, OnInit } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogClose, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatOption } from '@angular/material/autocomplete';
@@ -13,17 +13,15 @@ import { NgTemplateOutlet } from '@angular/common';
 import { TrimDirective } from '../../../core/directives/trim.directive';
 import { WEEKDAYS } from '../../../core/constants/weekdays';
 import { REGIONS } from '../../../core/constants/regions';
-import { ShowByLangPipe } from '../../../core/pipes/show-by-lang.pipe';
 import { GeneralService } from '../../../core/services/general.service';
 import { DistrictModel } from '../../../core/models/district.model';
 import { ToasterService } from '../../../core/services/toaster.service';
-import { BaseComponent } from '../../../core/components/base/base.component';
 import { IconButtonComponent } from '../../../core/components/icon-button/icon-button.component';
 import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
 import { ScrollbarDirective } from '../../../core/directives/scrollbar.directive';
 import { MyStoreService } from '../../../core/services/my-store.service';
 import { ConfirmationService } from '../../../core/services/confirmation.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BranchModel } from '../../../core/models/branch.model';
 
 @Component({
@@ -45,8 +43,7 @@ import { BranchModel } from '../../../core/models/branch.model';
     TranslateModule,
     ReactiveFormsModule,
     NgTemplateOutlet,
-    TrimDirective,
-    ShowByLangPipe
+    TrimDirective
   ],
   providers: [
     provideNgxMask(),
@@ -58,7 +55,7 @@ import { BranchModel } from '../../../core/models/branch.model';
   standalone: true
 })
 
-export class BranchActionComponent extends BaseComponent implements OnInit {
+export class BranchActionComponent implements OnInit {
   @Inject(MAT_DIALOG_DATA) data: {
     branchId?: number
   } = inject(MAT_DIALOG_DATA);
@@ -68,6 +65,7 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
   private _myStoreService = inject(MyStoreService);
   private _dialog = inject(MatDialogRef);
   private _zone = inject(NgZone);
+  private _destroyRef = inject(DestroyRef);
 
   weekdays = WEEKDAYS;
   regions = REGIONS;
@@ -89,7 +87,7 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this._yandexMapsService.coordinatesAndAddress$
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: ({ coordinates, address }) => {
           this.manageBranchForm.get('longitude').setValue(coordinates[0]);
@@ -112,7 +110,7 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
     const regionId = this.manageBranchForm.get('region').value;
 
     this._generalService.getDistrictsByRegionId(regionId)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: districts => {
           this.districts = districts;
@@ -155,7 +153,7 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
       return;
     }
     this._myStoreService.getBranchById(this.data.branchId)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: branch => {
           this._yandexMapsService
@@ -214,7 +212,7 @@ export class BranchActionComponent extends BaseComponent implements OnInit {
     }
 
     subscription
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: _ => {
           if (this.data.branchId) {

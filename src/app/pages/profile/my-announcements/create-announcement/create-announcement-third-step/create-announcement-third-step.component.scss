@@ -128,3 +128,19 @@
     border-color: $primary-blue-color;
   }
 }
+
+.date-interval {
+  @include grid(1fr 1fr, 1.25rem)
+}
+
+.date-interval-label {
+  position: relative;
+}
+
+.date-interval-calendar-icon {
+  position: absolute;
+  bottom: 1.375rem;
+  right: 1rem;
+  transform: translateY(50%);
+  cursor: pointer;
+}

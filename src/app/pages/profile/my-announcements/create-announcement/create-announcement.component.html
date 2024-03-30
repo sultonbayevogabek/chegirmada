@@ -2,9 +2,10 @@
   <icon-button
     [buttonType]="'gray'"
     [icon]="'icon:arrow-back'"
+    [routerLink]="['../list/active']"
   />
 
-  <h2 class="create-announcement-heading">Добавить объявление</h2>
+  <h2 class="create-announcement-heading">{{ 'add.new.announcement'| translate }}</h2>
 </div>
 
 <div class="create-announcement-tabs">
@@ -17,7 +18,7 @@
       1
     </div>
 
-    <div class="create-announcement-tabs-title">Информация о продукте</div>
+    <div class="create-announcement-tabs-title">{{ 'main.information'| translate }}</div>
   </div>
 
   <div class="create-announcement-tabs-decoration">
@@ -35,7 +36,7 @@
       2
     </div>
 
-    <div class="create-announcement-tabs-title">Особенности продукта</div>
+    <div class="create-announcement-tabs-title">{{ 'product.features'| translate }}</div>
   </div>
 
   <div class="create-announcement-tabs-decoration">
@@ -53,7 +54,7 @@
       3
     </div>
 
-    <div class="create-announcement-tabs-title">Дополнительная информация</div>
+    <div class="create-announcement-tabs-title">{{ 'discount.details'| translate }}</div>
   </div>
 </div>
 

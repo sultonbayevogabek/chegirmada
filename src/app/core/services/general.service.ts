@@ -14,4 +14,8 @@ export class GeneralService {
     return this._httpClient.get<DistrictModel[]>(this._host + `general/districts/${regionId}/`)
       .pipe(map(res => res || []));
   }
+
+  getSubcategories(mainCategoryId: number): void {
+
+  }
 }

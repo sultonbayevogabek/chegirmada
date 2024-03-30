@@ -1,56 +1,73 @@
 <div class="create-announcement-information">
-  <div class="create-announcement-information-inner">
+  <form class="create-announcement-information-inner" [formGroup]="firstStepForm">
     <div class="create-announcement-information-fields">
       <label class="create-announcement-information-field form-label">
-        <span class="create-announcement-information-field-title form-label-text">Заголовок (UZ)</span>
-        <input class="create-announcement-information-input form-input" type="text" placeholder="Введите заголовок">
+        <span class="create-announcement-information-field-title form-label-text">{{ 'title'| translate }} (o'zb) *</span>
+        <input
+          class="create-announcement-information-input form-input"
+          type="text"
+          trim
+          [placeholder]="'enter.title'| translate"
+          [maxlength]="255"
+          [formControlName]="'title_uz'"
+          [class.invalid]="firstStepForm.get('title_uz').invalid && firstStepForm.get('title_uz').touched"
+        >
+        <ng-container
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'title_uz' }"
+        />
       </label>
 
       <label class="create-announcement-information-field form-label">
-        <span class="create-announcement-information-field-title form-label-text">Заголовок (RU)</span>
-        <input class="create-announcement-information-input form-input" type="text" placeholder="Введите заголовок">
+        <span class="create-announcement-information-field-title form-label-text">{{ 'title'| translate }} (rus) *</span>
+        <input
+          class="create-announcement-information-input form-input"
+          type="text"
+          trim
+          [placeholder]="'enter.title'| translate"
+          [maxlength]="255"
+          [formControlName]="'title_ru'"
+          [class.invalid]="firstStepForm.get('title_ru').invalid && firstStepForm.get('title_ru').touched"
+        >
+        <ng-container
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'title_ru' }"
+        />
       </label>
 
       <label class="create-announcement-information-field form-label">
-        <span class="create-announcement-information-field-title form-label-text">Категория</span>
-        <input class="create-announcement-information-input form-input" type="text" placeholder="Добавить категория">
+        <span class="create-announcement-information-field-title form-label-text">{{ 'main.category'| translate}} *</span>
+
+        <mat-select
+          class="solid-select"
+          [placeholder]="'select.main.category'| translate"
+          (selectionChange)="onMainCategoryChanged()"
+          [formControlName]="'main_category'"
+          [class.invalid]="firstStepForm.get('main_category').invalid && firstStepForm.get('main_category').touched"
+        >
+          @for (category of categories; track category) {
+            <mat-option [value]="category.id">{{ category.name| translate }}</mat-option>
+          }
+        </mat-select>
+
+        <ng-container
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'main_category' }"
+        />
       </label>
-
-      <div class="create-announcement-information-field date-interval">
-        <label class="form-label date-interval-label">
-          <span class="create-announcement-information-field-title form-label-text">Дата начала</span>
-          <input
-            class="create-announcement-information-input form-input"
-            [matDatepicker]="fromDatePicker"
-            [(ngModel)]="date"
-          >
-          <mat-icon
-            class="date-interval-calendar-icon"
-            [svgIcon]="'icon:calendar'"
-            (click)="fromDatePicker.open()"
-          ></mat-icon>
-          <mat-datepicker #fromDatePicker></mat-datepicker>
-        </label>
-
-        <label class="form-label date-interval-label">
-          <span class="create-announcement-information-field-title form-label-text">Дата окончания</span>
-          <input
-            class="create-announcement-information-input form-input"
-            [matDatepicker]="toDatePicker"
-            [(ngModel)]="date"
-          >
-          <mat-icon
-            class="date-interval-calendar-icon"
-            [svgIcon]="'icon:calendar'"
-            (click)="toDatePicker.open()"
-          ></mat-icon>
-          <mat-datepicker #toDatePicker></mat-datepicker>
-        </label>
-      </div>
 
       <label class="create-announcement-information-field form-label">
         <span class="create-announcement-information-field-title form-label-text">Ссылка на видео</span>
         <input class="create-announcement-information-input form-input" type="url" placeholder="Ссылка на видео">
+      </label>
+    </div>
+
+    <div class="grid-2">
+      <label class="form-label">
+        <span class="form-label-text">Описание (UZ)</span>
+        <textarea class="form-textarea" placeholder="Описание (UZ)"></textarea>
+      </label>
+
+      <label class="form-label">
+        <span class="form-label-text">Описание (RU)</span>
+        <textarea class="form-textarea" placeholder="Описание (RU)"></textarea>
       </label>
     </div>
 
@@ -98,5 +115,18 @@
         }
       </div>
     }
-  </div>
+
+    <div class="create-announcement-information-submit">
+      <ui-button
+        [text]="'next'"
+        [actionType]="'submit'"
+      />
+    </div>
+  </form>
 </div>
+
+<ng-template #requiredErrors let-controlName>
+  @if (firstStepForm.get(controlName).invalid && firstStepForm.get(controlName).touched) {
+    <span class="form-error">{{ 'required.field'| translate }}</span>
+  }
+</ng-template>

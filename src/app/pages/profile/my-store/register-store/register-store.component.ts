@@ -1,9 +1,10 @@
 import {
-  ChangeDetectorRef,
   Component,
+  DestroyRef,
   ElementRef,
   EventEmitter,
-  inject, NgZone,
+  inject,
+  NgZone,
   OnInit,
   Output,
   ViewChild
@@ -13,7 +14,6 @@ import { YandexMapsService } from '../../../../core/services/yandex-maps.service
 import { MyStoreService } from '../../../../core/services/my-store.service';
 import { MyInformationService } from '../../../../core/services/my-information.service';
 import { GeneralService } from '../../../../core/services/general.service';
-import { BaseComponent } from '../../../../core/components/base/base.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../../../core/services/auth.service';
 import { ToasterService } from '../../../../core/services/toaster.service';
@@ -32,7 +32,6 @@ import { TrimDirective } from '../../../../core/directives/trim.directive';
 import { MatIcon } from '@angular/material/icon';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { ShowByLangPipe } from '../../../../core/pipes/show-by-lang.pipe';
 import { NgTemplateOutlet } from '@angular/common';
 import { ConfirmationService } from '../../../../core/services/confirmation.service';
 import { OverlayComponent } from '../../../../core/components/overlay-panel/overlay-panel.component';
@@ -63,12 +62,11 @@ import { UiButtonComponent } from '../../../../core/components/ui-button/ui-butt
     MatOption,
     MatRadioGroup,
     MatRadioButton,
-    ShowByLangPipe,
     NgTemplateOutlet
   ]
 })
 
-export class RegisterStoreComponent extends BaseComponent implements OnInit {
+export class RegisterStoreComponent implements OnInit {
   @Output() onStoreRegistered = new EventEmitter<void>();
   @ViewChild('logoFileInput') logoFileInput: ElementRef<HTMLInputElement>;
 
@@ -79,6 +77,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
   private _authService = inject(AuthService);
   private _toasterService = inject(ToasterService);
   private _zone = inject(NgZone);
+  private _destroyRef = inject(DestroyRef);
 
   currentUser: UserModel;
   customPatterns = {
@@ -116,13 +115,9 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
     logo: new FormControl(null, [ Validators.required ])
   });
 
-  constructor(){
-    super();
-  }
-
   ngOnInit(): void {
     this._authService.currentUser$
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(user => {
         this.registerStoreForm.get('main_phone_number').setValue(user.phone_number);
       });
@@ -130,7 +125,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
     this._yandexMapService.setSingleLocationPoint('map');
 
     this._yandexMapService.coordinatesAndAddress$
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: ({ coordinates, address }) => {
           this.registerStoreForm.get('longitude').setValue(coordinates[0]);
@@ -152,7 +147,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
     }
 
     this._registerStoreService.checkShortName(shortname)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: () => {
           isShortnameFreeControl.setValue(true);
@@ -211,7 +206,7 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
     const regionId = this.registerStoreForm.get('region').value;
 
     this._generalService.getDistrictsByRegionId(regionId)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: districts => {
           this.districts = districts;
@@ -269,11 +264,11 @@ export class RegisterStoreComponent extends BaseComponent implements OnInit {
     }
 
     this._registerStoreService.registerStore(formData)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: res => {
           this._authService.getUserByToken(true)
-            .pipe(takeUntilDestroyed(this.destroyRef))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe();
           this._dialog.open(ConfettiComponent, {
             data: {

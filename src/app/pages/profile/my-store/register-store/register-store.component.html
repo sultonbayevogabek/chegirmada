@@ -197,7 +197,7 @@
               @for (category of categories; track category) {
                 <mat-option
                   [value]="category.id"
-                >{{ category| showByLang: activeLang }}</mat-option>
+                >{{ category.name }}</mat-option>
               }
             </mat-select>
           </label>
@@ -335,7 +335,7 @@
               (click)="onClickDistrictsSelect()"
             >
               @for (district of districts; track district) {
-                <mat-option [value]="district.pk">{{ district | showByLang: activeLang }}</mat-option>
+                <mat-option [value]="district.pk">{{ district.name }}</mat-option>
               }
             </mat-select>
 

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatNativeDateModule, MatOption, MatRipple } from '@angular/material/core';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,8 +14,6 @@ import { MatDatepicker, MatDatepickerInput, MatDatepickerModule } from '@angular
 import { AsyncPipe, formatDate } from '@angular/common';
 import { ToasterService } from '../../../core/services/toaster.service';
 import { DistrictModel } from '../../../core/models/district.model';
-import { ShowByLangPipe } from '../../../core/pipes/show-by-lang.pipe';
-import { BaseComponent } from '../../../core/components/base/base.component';
 import { RouterLink } from '@angular/router';
 import { TrimDirective } from '../../../core/directives/trim.directive';
 import { GeneralService } from '../../../core/services/general.service';
@@ -38,7 +36,6 @@ import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.
     MatDatepickerInput,
     MatNativeDateModule,
     MatDatepickerModule,
-    ShowByLangPipe,
     AsyncPipe,
     RouterLink,
     TrimDirective
@@ -51,17 +48,14 @@ import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.
   standalone: true
 })
 
-export class MyInformationComponent extends BaseComponent implements OnInit {
+export class MyInformationComponent implements OnInit {
   private _authService = inject(AuthService);
   private _generalService = inject(GeneralService);
   private _myInformationService = inject(MyInformationService);
   private _toasterService = inject(ToasterService);
-  protected readonly regions = REGIONS;
+  private _destroyRef = inject(DestroyRef);
 
-  constructor() {
-    super();
-  }
-
+  regions = REGIONS;
   districts: DistrictModel[] = [];
   currentUser: UserModel;
   maxBirthday = new Date(new Date().getFullYear() - 10, 11, 31);
@@ -77,7 +71,7 @@ export class MyInformationComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this._authService.currentUser$
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: user => {
           this.currentUser = user;
@@ -102,7 +96,7 @@ export class MyInformationComponent extends BaseComponent implements OnInit {
       ...this.myInfoForm.getRawValue(),
       birthday: formatDate(this.myInfoForm.get('birthday').value, 'yyyy-MM-dd', 'ru')
     })
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: user => {
           if (!user) return;
@@ -126,7 +120,7 @@ export class MyInformationComponent extends BaseComponent implements OnInit {
     }
 
     this._generalService.getDistrictsByRegionId(regionId)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: districts => {
           this.districts = districts;
