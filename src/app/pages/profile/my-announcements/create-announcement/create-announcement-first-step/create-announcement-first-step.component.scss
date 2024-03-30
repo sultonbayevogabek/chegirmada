@@ -97,3 +97,32 @@
 .create-announcement-information-submit {
   @include flex-center-end()
 }
+
+.create-announcement-information-video {
+  position: relative;
+}
+
+.create-announcement-information-video-icon {
+  position: absolute;
+  cursor: pointer;
+  bottom: 1.375rem;
+  right: 1rem;
+  transform: translateY(50%);
+}
+
+.create-announcement-information-video-preview {
+  position: relative;
+  width: 20rem;
+  aspect-ratio: 16/9;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: $white-color;
+  box-shadow: 0 0.25rem 1.5rem 0 rgba(51, 51, 51, 0.12);
+}
+
+.create-announcement-information-video-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

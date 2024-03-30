@@ -81,7 +81,6 @@ export class RegisterStoreComponent implements OnInit {
 
   currentUser: UserModel;
   customPatterns = {
-    'X': { pattern: new RegExp('[a-zA-Z\']') },
     'Y': { pattern: new RegExp('[a-zA-Z0-9_]') }
   };
   weekdays = WEEKDAYS;
@@ -106,10 +105,10 @@ export class RegisterStoreComponent implements OnInit {
     slogan_uz: new FormControl('', [ Validators.maxLength(255) ]),
     slogan_ru: new FormControl('', [ Validators.maxLength(255) ]),
     region: new FormControl(null, [ Validators.required ]),
-    address: new FormControl('Tashkent City, str. Ali Nava', [ Validators.required, Validators.maxLength(255) ]),
+    address: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
     district: new FormControl(null, [ Validators.required ]),
     desc_uz: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
-    desc_ru: new FormControl('', [ Validators.maxLength(1500) ]),
+    desc_ru: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
     longitude: new FormControl(null, [ Validators.required ]),
     latitude: new FormControl(null, [ Validators.required ]),
     logo: new FormControl(null, [ Validators.required ])

@@ -22,7 +22,15 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 
 export class YoutubePlayer implements OnInit, AfterViewInit {
   @ViewChild('youTubePlayer') youTubePlayer: ElementRef<HTMLDivElement>;
-  @Input('videoID') videoID: string;
+  @Input({
+    alias: 'videoURL',
+    transform: (url: string): string => {
+      const YOUTUBE_VIDEO_REGEX =
+        /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+
+      return url.match(YOUTUBE_VIDEO_REGEX)[1];
+    }
+  }) videoID: string;
 
   videoHeight: number | undefined;
   videoWidth: number | undefined;
@@ -49,3 +57,5 @@ export class YoutubePlayer implements OnInit, AfterViewInit {
     this._changeDetectorRef.detectChanges();
   }
 }
+
+

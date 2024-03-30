@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { map, Observable } from 'rxjs';
 import { DistrictModel } from '../models/district.model';
+import { SecondLevelCategory } from '../models/categories.model';
 
 @Injectable()
 
@@ -15,7 +16,7 @@ export class GeneralService {
       .pipe(map(res => res || []));
   }
 
-  getSubcategories(mainCategoryId: number): void {
-
+  getSubcategories(mainCategoryId: number): Observable<SecondLevelCategory[]> {
+    return this._httpClient.get<SecondLevelCategory[]>(this._host + `general/categories/${mainCategoryId}/`)
   }
 }

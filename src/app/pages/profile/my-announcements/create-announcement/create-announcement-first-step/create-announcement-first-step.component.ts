@@ -1,9 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, NgZone, ViewChild } from '@angular/core';
+import { CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DragAndDropDirective } from '../../../../../core/directives/drag-and-drop.directive';
 import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
 import { MatIcon } from '@angular/material/icon';
-import { DateAdapter, MatNativeDateModule, MatOption, MatRipple } from '@angular/material/core';
+import { MatNativeDateModule, MatOption, MatRipple } from '@angular/material/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IconButtonComponent } from '../../../../../core/components/icon-button/icon-button.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -12,6 +12,12 @@ import { CATEGORIES } from '../../../../../core/constants/categories';
 import { UiButtonComponent } from '../../../../../core/components/ui-button/ui-button.component';
 import { TrimDirective } from '../../../../../core/directives/trim.directive';
 import { NgTemplateOutlet } from '@angular/common';
+import { GeneralService } from '../../../../../core/services/general.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SecondLevelCategory, ThirdLevelCategory } from '../../../../../core/models/categories.model';
+import { OverlayComponent } from '../../../../../core/components/overlay-panel/overlay-panel.component';
+import { YoutubePlayer } from '../../../../../core/components/youtube-player/youtube-player.component';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'create-announcement-first-step',
@@ -33,27 +39,45 @@ import { NgTemplateOutlet } from '@angular/common';
     MatOption,
     UiButtonComponent,
     TrimDirective,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    CdkDragPlaceholder,
+    OverlayComponent,
+    YoutubePlayer,
+    MatProgressSpinner
+  ],
+  providers: [
+    GeneralService
   ],
   templateUrl: 'create-announcement-first-step.component.html',
   styleUrl: 'create-announcement-first-step.component.scss'
 })
 export class CreateAnnouncementFirstStepComponent {
   @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
+  @ViewChild('videoPreviewPanel') videoPreviewPanel: OverlayComponent;
   date: Date = new Date();
   imagesList: {
     file: File,
-    buffer: string  | ArrayBuffer
+    buffer: string | ArrayBuffer
   }[] = [];
 
   categories = CATEGORIES;
+  secondLevelCategories: SecondLevelCategory[] = [];
+  thirdLevelCategories: ThirdLevelCategory[] = [];
   firstStepForm = new FormGroup({
-    title_uz: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-    title_ru: new FormControl('', [Validators.required, Validators.maxLength(255)]),
     main_category: new FormControl(null, [ Validators.required ]),
-    sub_category: new FormControl(null, [ Validators.required ]),
+    subcategory: new FormControl(null, [ Validators.required ]),
     category: new FormControl(null, [ Validators.required ]),
-  })
+    desc_uz: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
+    desc_ru: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
+    title_uz: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
+    title_ru: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
+    video_link: new FormControl('', [ Validators.maxLength(200) ]),
+  });
+
+  private _generalService = inject(GeneralService);
+  private _destroyRef = inject(DestroyRef);
+  private _cdr = inject(ChangeDetectorRef);
+  private _zone = inject(NgZone);
 
   onImagesDropped($event: FileList): void {
     for (const file of Array.from($event)) {
@@ -68,7 +92,7 @@ export class CreateAnnouncementFirstStepComponent {
   transformImageFile(file: File): void {
     const reader = new FileReader();
     reader.onload = event => {
-      const buffer = event.target.result
+      const buffer = event.target.result;
       if (this.imagesList.find(image => image.buffer === buffer)) {
         return;
       }
@@ -94,6 +118,37 @@ export class CreateAnnouncementFirstStepComponent {
   }
 
   onMainCategoryChanged(): void {
+    this.secondLevelCategories = [];
+    this.thirdLevelCategories = [];
+    this.firstStepForm.get('subcategory').setValue(null);
+    this.firstStepForm.get('category').setValue(null);
+    this.firstStepForm.get('subcategory').markAsUntouched()
+    this.firstStepForm.get('category').markAsUntouched()
+    this._generalService.getSubcategories(this.firstStepForm.get('main_category').value)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: res => {
+          this.secondLevelCategories = res;
+        },
+        error: () => {
+          this.secondLevelCategories = [];
+        }
+      });
+  }
 
+  onSubcategoryChanged(): void {
+    this.thirdLevelCategories = [];
+    this.firstStepForm.get('category').setValue(null);
+    this.firstStepForm.get('category').markAsUntouched()
+    this.thirdLevelCategories = (this.secondLevelCategories.find(category => {
+      return category.pk === this.firstStepForm.get('subcategory').value;
+    })).children;
+  }
+
+  openVideoPreview($event: MouseEvent): void {
+    this._zone.run(() => {
+      $event.preventDefault();
+      this.videoPreviewPanel.openPanel();
+    })
   }
 }

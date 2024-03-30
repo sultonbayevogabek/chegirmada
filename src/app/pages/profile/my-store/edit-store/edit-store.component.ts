@@ -67,7 +67,6 @@ export class EditStoreComponent implements OnInit, AfterViewInit {
   private _zone = inject(NgZone);
 
   customPatterns = {
-    'X': { pattern: new RegExp('[a-zA-Z\']') },
     'Y': { pattern: new RegExp('[a-zA-Z0-9_]') }
   };
   weekdays = WEEKDAYS;
@@ -97,7 +96,7 @@ export class EditStoreComponent implements OnInit, AfterViewInit {
     address: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
     district: new FormControl(null, [ Validators.required ]),
     desc_uz: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
-    desc_ru: new FormControl('', [ Validators.maxLength(1500) ]),
+    desc_ru: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
     longitude: new FormControl(null, [ Validators.required ]),
     latitude: new FormControl(null, [ Validators.required ]),
     logo: new FormControl(null)

@@ -386,17 +386,23 @@
         </label>
 
         <label class="form-label">
-          <span class="form-label-text">{{ 'description'| translate }} (ru)</span>
+          <span class="form-label-text">{{ 'description'| translate }} (ru) *</span>
           <textarea
             class="form-textarea"
-            [class.invalid]="editStoreForm.get('desc_ru').touched && editStoreForm.get('desc_ru').hasError('maxlength')"
+            [class.invalid]="editStoreForm.get('desc_ru').touched && (editStoreForm.get('desc_ru').hasError('required') || editStoreForm.get('desc_ru').hasError('maxlength'))"
             trim
             [maxlength]="1500"
             [placeholder]="'enter.description'| translate"
             [formControlName]="'desc_ru'"
           ></textarea>
-          @if (editStoreForm.get('desc_ru').touched && editStoreForm.get('desc_ru').hasError('maxlength')) {
-            <span class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 1500 } }}</span>
+          @if (editStoreForm.get('desc_ru').touched) {
+            @if (editStoreForm.get('desc_ru').hasError('required') && !editStoreForm.get('desc_ru').hasError('maxlength')) {
+              <span class="form-error">{{ 'required.field'| translate }}</span>
+            }
+            @if (!editStoreForm.get('desc_ru').hasError('required') && editStoreForm.get('desc_ru').hasError('maxlength')) {
+              <span
+                class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 1500 } }}</span>
+            }
           }
         </label>
       </div>

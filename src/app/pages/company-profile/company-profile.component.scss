@@ -287,15 +287,9 @@
 
 .company-profile-video {
   position: relative;
-  padding-top: 1.5rem;
   aspect-ratio: 16/9;
   background-color: $background-grey-color;
   border-radius: 0.5rem;
-}
-
-.company-profile-video-player {
-  position: relative;
-  z-index: 1;
 }
 
 .company-profile-video-requirements {
