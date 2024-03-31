@@ -71,7 +71,7 @@ export class CreateAnnouncementFirstStepComponent {
     desc_ru: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
     title_uz: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
     title_ru: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
-    video_link: new FormControl('', [ Validators.maxLength(200) ]),
+    video_link: new FormControl('', [ Validators.maxLength(200) ])
   });
 
   private _generalService = inject(GeneralService);
@@ -122,8 +122,8 @@ export class CreateAnnouncementFirstStepComponent {
     this.thirdLevelCategories = [];
     this.firstStepForm.get('subcategory').setValue(null);
     this.firstStepForm.get('category').setValue(null);
-    this.firstStepForm.get('subcategory').markAsUntouched()
-    this.firstStepForm.get('category').markAsUntouched()
+    this.firstStepForm.get('subcategory').markAsUntouched();
+    this.firstStepForm.get('category').markAsUntouched();
     this._generalService.getSubcategories(this.firstStepForm.get('main_category').value)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
@@ -139,16 +139,17 @@ export class CreateAnnouncementFirstStepComponent {
   onSubcategoryChanged(): void {
     this.thirdLevelCategories = [];
     this.firstStepForm.get('category').setValue(null);
-    this.firstStepForm.get('category').markAsUntouched()
+    this.firstStepForm.get('category').markAsUntouched();
     this.thirdLevelCategories = (this.secondLevelCategories.find(category => {
       return category.pk === this.firstStepForm.get('subcategory').value;
     })).children;
   }
 
   openVideoPreview($event: MouseEvent): void {
-    this._zone.run(() => {
-      $event.preventDefault();
-      this.videoPreviewPanel.openPanel();
-    })
+    $event.preventDefault();
+    this.videoPreviewPanel.openPanel();
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 0)
   }
 }

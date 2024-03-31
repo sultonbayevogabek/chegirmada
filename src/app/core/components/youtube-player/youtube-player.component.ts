@@ -25,10 +25,13 @@ export class YoutubePlayer implements OnInit, AfterViewInit {
   @Input({
     alias: 'videoURL',
     transform: (url: string): string => {
-      const YOUTUBE_VIDEO_REGEX =
-        /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+      const YOUTUBE_VIDEO_REGEX = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/;
 
-      return url.match(YOUTUBE_VIDEO_REGEX)[1];
+      if (url.match(YOUTUBE_VIDEO_REGEX)?.length) {
+        return url.match(YOUTUBE_VIDEO_REGEX)[1];
+      }
+
+      return ''
     }
   }) videoID: string;
 
@@ -54,7 +57,6 @@ export class YoutubePlayer implements OnInit, AfterViewInit {
     );
 
     this.videoHeight = this.videoWidth * 9 / 16;
-    this._changeDetectorRef.detectChanges();
   }
 }
 
