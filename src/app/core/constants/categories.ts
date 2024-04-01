@@ -1,51 +1,59 @@
-export const CATEGORIES = [
+import { MainCategory } from '../models/categories.model';
+
+export const CATEGORIES: MainCategory[] = [
   {
     id: 0,
     name: 'electronics',
   },
   {
     id: 1,
-    name: 'men.clothes'
+    name: 'men.clothes',
   },
   {
     id: 2,
-    name: 'women.clothes'
+    name: 'women.clothes',
   },
   {
     id: 3,
-    name: 'household.appliances'
-  },
-
-  {
+    name: 'services',
+  }, {
     id: 4,
-    name: 'books'
+    name: 'education',
   },
   {
     id: 5,
-    name: 'services'
+    name: 'transport',
   },
   {
     id: 6,
-    name: 'watches'
+    name: 'furniture',
   },
   {
     id: 7,
-    name: 'accessories'
+    name: 'real.estate',
   },
   {
     id: 8,
-    name: 'transport'
+    name: 'household.appliances',
   },
   {
     id: 9,
-    name: 'tickets'
+    name: 'for.kids',
   },
   {
     id: 10,
-    name: 'furniture'
+    name: 'books',
   },
   {
     id: 11,
-    name: 'real.estate'
+    name: 'dishes',
+  },
+  {
+    id: 12,
+    name: 'construction.and.repair',
+  },
+  {
+    id: 13,
+    name: 'food.products',
   }
 ];

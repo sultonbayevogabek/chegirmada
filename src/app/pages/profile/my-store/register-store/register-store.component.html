@@ -197,7 +197,7 @@
               @for (category of categories; track category) {
                 <mat-option
                   [value]="category.id"
-                >{{ category.name }}</mat-option>
+                >{{ category.name| translate }}</mat-option>
               }
             </mat-select>
           </label>
