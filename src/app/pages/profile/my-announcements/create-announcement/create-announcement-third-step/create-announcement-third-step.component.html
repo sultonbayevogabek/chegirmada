@@ -3,8 +3,8 @@
 
     <div class="grid-2">
       <label class="create-announcement-new-price-label form-label">
-        <span class="form-label-text">Новая цена</span>
-        <input class="form-input" type="text" placeholder="Введите цена">
+        <span class="form-label-text">{{ 'new.price'| translate }}</span>
+        <input class="form-input" type="number" [placeholder]="'enter.new.price'| translate">
 
         <div class="create-announcement-currency-toggle">
           <div
@@ -30,10 +30,14 @@
         }"
     >
       <label class="form-label">
-        <span class="form-label-text">Тип скидки</span>
+        <span class="form-label-text">{{ 'discount.type'| translate }}</span>
 
-        <mat-select class="solid-select" [(ngModel)]="discountType" [hideSingleSelectionIndicator]="true">
-          <mat-option [value]="0">Выберите тип</mat-option>
+        <mat-select
+          class="solid-select"
+          [(ngModel)]="discountType"
+          [hideSingleSelectionIndicator]="true"
+          [placeholder]="'select.discount.type'| translate"
+        >
           <mat-option [value]="1">Обычная скидка</mat-option>
           <mat-option [value]="2">Добавить бесплатно</mat-option>
           <mat-option [value]="3">Скидка на услугу</mat-option>
@@ -131,31 +135,35 @@
 
     <div class="create-announcement-information-field date-interval">
       <label class="form-label date-interval-label">
-        <span class="create-announcement-information-field-title form-label-text">Дата начала</span>
+        <span class="create-announcement-information-field-title form-label-text">{{ 'start.date'| translate }}</span>
         <input
           class="create-announcement-information-input form-input"
-          [matDatepicker]="fromDatePicker"
+          [readOnly]="true"
+          [placeholder]="'dd.mm.yyyy'| translate"
+          [matDatepicker]="startDatePicker"
         >
         <mat-icon
           class="date-interval-calendar-icon"
           [svgIcon]="'icon:calendar'"
-          (click)="fromDatePicker.open()"
+          (click)="startDatePicker.open()"
         ></mat-icon>
-        <mat-datepicker #fromDatePicker></mat-datepicker>
+        <mat-datepicker #startDatePicker />
       </label>
 
       <label class="form-label date-interval-label">
-        <span class="create-announcement-information-field-title form-label-text">Дата окончания</span>
+        <span class="create-announcement-information-field-title form-label-text">{{ 'end.date'| translate }}</span>
         <input
           class="create-announcement-information-input form-input"
-          [matDatepicker]="toDatePicker"
+          [readOnly]="true"
+          [placeholder]="'dd.mm.yyyy'| translate"
+          [matDatepicker]="endDatePicker"
         >
         <mat-icon
           class="date-interval-calendar-icon"
           [svgIcon]="'icon:calendar'"
-          (click)="toDatePicker.open()"
+          (click)="endDatePicker.open()"
         ></mat-icon>
-        <mat-datepicker #toDatePicker></mat-datepicker>
+        <mat-datepicker #endDatePicker />
       </label>
     </div>
   </div>

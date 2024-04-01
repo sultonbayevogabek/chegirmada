@@ -1,0 +1,36 @@
+<div class="create-announcement-information">
+  <form class="create-announcement-information-inner" [formGroup]="secondStepForm">
+    <div class="grid-2">
+      <label class="create-announcement-information-field form-label">
+        <span class="create-announcement-information-field-title form-label-text">{{ 'title'| translate }}(o'zb) *</span>
+        <input
+          class="create-announcement-information-input form-input"
+          type="text"
+          trim
+          [placeholder]="'enter.title'| translate"
+          [maxlength]="255"
+          [formControlName]="'title_uz'"
+          [class.invalid]="secondStepForm.get('title_uz').invalid && secondStepForm.get('title_uz').touched"
+        >
+        <ng-container
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'title_uz' }"
+        />
+      </label>
+    </div>
+
+    <div class="create-announcement-information-submit">
+      <ui-button
+        [text]="'next'"
+        [actionType]="'submit'"
+        [disabled]="secondStepForm.invalid"
+        (click)="goToThirdStep()"
+      />
+    </div>
+  </form>
+</div>
+
+<ng-template #requiredErrors let-controlName>
+  @if (secondStepForm.get(controlName).invalid && secondStepForm.get(controlName).touched) {
+    <span class="form-error">{{ 'required.field'| translate }}</span>
+  }
+</ng-template>

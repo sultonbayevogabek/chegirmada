@@ -2,7 +2,7 @@
   <form class="create-announcement-information-inner" [formGroup]="firstStepForm">
     <div class="create-announcement-information-fields">
       <label class="create-announcement-information-field form-label">
-        <span class="create-announcement-information-field-title form-label-text">{{ 'main.category'| translate}} ( 1 ) *</span>
+        <span class="create-announcement-information-field-title form-label-text">{{ 'main.category'| translate }} ( 1 ) *</span>
 
         <mat-select
           class="solid-select"
@@ -23,7 +23,7 @@
 
       @if (firstStepForm.get('main_category').value != null && secondLevelCategories.length) {
         <label class="create-announcement-information-field form-label">
-          <span class="create-announcement-information-field-title form-label-text">{{ 'subcategory'| translate}} ( 2 ) *</span>
+          <span class="create-announcement-information-field-title form-label-text">{{ 'subcategory'| translate }} ( 2 ) *</span>
 
           <mat-select
             class="solid-select"
@@ -45,7 +45,7 @@
 
       @if (firstStepForm.get('subcategory').value != null && thirdLevelCategories.length) {
         <label class="create-announcement-information-field form-label">
-          <span class="create-announcement-information-field-title form-label-text">{{ 'subcategory'| translate}} ( 3 ) *</span>
+          <span class="create-announcement-information-field-title form-label-text">{{ 'subcategory'| translate }} ( 3 ) *</span>
 
           <mat-select
             class="solid-select"
@@ -67,7 +67,8 @@
 
     <div class="grid-2">
       <label class="create-announcement-information-field form-label">
-        <span class="create-announcement-information-field-title form-label-text">{{ 'title'| translate }} (o'zb) *</span>
+        <span class="create-announcement-information-field-title form-label-text">{{ 'title'| translate }}
+          (o'zb) *</span>
         <input
           class="create-announcement-information-input form-input"
           type="text"
@@ -83,7 +84,8 @@
       </label>
 
       <label class="create-announcement-information-field form-label">
-        <span class="create-announcement-information-field-title form-label-text">{{ 'title'| translate }} (rus) *</span>
+        <span class="create-announcement-information-field-title form-label-text">{{ 'title'| translate }}
+          (rus) *</span>
         <input
           class="create-announcement-information-input form-input"
           type="text"
@@ -144,14 +146,16 @@
     </div>
 
     <label class="create-announcement-information-field create-announcement-information-video form-label">
-      <span class="create-announcement-information-field-title form-label-text">{{ 'link.to.youtube.video.not.required'| translate }}</span>
+      <span
+        class="create-announcement-information-field-title form-label-text">{{ 'link.to.youtube.video.not.required'| translate }}</span>
       <input
         class="create-announcement-information-input form-input"
         type="url"
+        [class.invalid]="firstStepForm.get('video_link').invalid && firstStepForm.get('video_link').touched"
         [placeholder]="'https://www.youtube.com/watch?v=...'"
         [formControlName]="'video_link'"
       >
-      <div [hidden]="!firstStepForm.get('video_link').value">
+      @if (firstStepForm.get('video_link').value && firstStepForm.get('video_link').valid) {
         <mat-icon
           #videoPreviewIcon
           (click)="openVideoPreview($event)"
@@ -161,9 +165,9 @@
           <div
             overlay-content
             class="create-announcement-information-video-preview">
-              <video-player
-                [videoURL]="firstStepForm.get('video_link').value"
-              />
+            <video-player
+              [videoURL]="firstStepForm.get('video_link').value"
+            />
 
             <mat-spinner
               class="create-announcement-information-video-loader"
@@ -172,41 +176,52 @@
             />
           </div>
         </overlay-panel>
-      </div>
+      }
+
+      @if (firstStepForm.get('video_link').invalid && firstStepForm.get('video_link').touched) {
+        <span class="form-error">{{ 'url.entered.is.invalid'| translate }}</span>
+      }
     </label>
 
-    <div class="create-announcement-dropzone" dragAndDrop (fileDropped)="onImagesDropped($event)">
-      <mat-icon class="create-announcement-upload-icon" [svgIcon]="'icon:drag-drop-images'"/>
+    <div>
+      <span class="form-label-text">{{ 'product.images.up.to.8'| translate }} *</span>
+      <div
+        class="create-announcement-dropzone"
+        [class.invalid]="firstStepForm.get('images').invalid && firstStepForm.get('images').touched"
+        dragAndDrop
+        (fileDropped)="onImagesDropped($event)"
+      >
+        <mat-icon class="create-announcement-upload-icon" [svgIcon]="'icon:drag-drop-images'"/>
 
-      <h3 class="create-announcement-drop-title">{{ 'drag.and.drop.images.here'| translate }}</h3>
+        <h3 class="create-announcement-drop-title">{{ 'drag.and.drop.images.here'| translate }}</h3>
 
-      <p class="create-announcement-drop-or-text">{{ 'or'| translate }}</p>
+        <p class="create-announcement-drop-or-text">{{ 'or'| translate }}</p>
 
-      <label class="create-announcement-show-images" mat-ripple>
-        <p>{{ 'provide.images'| translate }} (.jpg, .png, .webp)</p>
-        <input
-          #fileInput
-          type="file"
-          multiple
-          (change)="onImagesSelectedByFileInput($event)"
-          [accept]="'.jpg, .png, .webp'"
-        >
-      </label>
-
+        <label class="create-announcement-show-images" mat-ripple>
+          <p>{{ 'provide.images'| translate }} (.jpg, .png, .webp)</p>
+          <input
+            #fileInput
+            type="file"
+            multiple
+            (change)="onImagesSelectedByFileInput($event)"
+            [accept]="'.jpg, .png, .webp'"
+          >
+        </label>
+      </div>
     </div>
 
-    @if (imagesList.length) {
+    @if (imagesBuffers.length) {
       <div
         cdkDropList
         cdkDropListOrientation="horizontal"
         class="create-announcement-images"
         (cdkDropListDropped)="drop($event)"
       >
-        @for (img of imagesList; track img; let i = $index) {
+        @for (buffer of imagesBuffers; track buffer; let i = $index) {
           <div class="create-announcement-image" cdkDrag>
             <div class="create-announcement-image-placeholder" *cdkDragPlaceholder></div>
 
-            <img class="create-announcement-image-original" [src]="img.buffer" [alt]="">
+            <img class="create-announcement-image-original" [src]="buffer" [alt]="">
 
 
             <icon-button
@@ -224,6 +239,8 @@
       <ui-button
         [text]="'next'"
         [actionType]="'submit'"
+        [disabled]="firstStepForm.invalid"
+        (click)="goToSecondStep()"
       />
     </div>
   </form>

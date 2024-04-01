@@ -5,8 +5,10 @@ import { MatSelect } from '@angular/material/select';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
-import { MatRipple } from '@angular/material/core';
-import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
+import { MatNativeDateModule, MatRipple } from '@angular/material/core';
+import { MatDatepicker, MatDatepickerInput, MatDatepickerModule } from '@angular/material/datepicker';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'create-announcement-third-step',
@@ -20,7 +22,12 @@ import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker'
     MatIcon,
     MatRipple,
     MatDatepicker,
-    MatDatepickerInput
+    MatDatepickerInput,
+    TranslateModule,
+    MatInput,
+    MatDatepickerInput,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   templateUrl: './create-announcement-third-step.component.html',
   styleUrl: './create-announcement-third-step.component.scss'

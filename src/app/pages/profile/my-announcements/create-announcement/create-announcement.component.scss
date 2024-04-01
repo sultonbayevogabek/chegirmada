@@ -19,8 +19,9 @@
 .create-announcement-tabs-item {
   @include flex-center(0.75rem);
   padding: 0.5rem;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   user-select: none;
+  font-family: "Inter", Arial, sans-serif;
 }
 
 .create-announcement-tabs-index {
@@ -52,6 +53,15 @@
   width: 0.375rem;
   height: 1px;
   background-color: $border-grey-color;
+  cursor: default;
+}
+
+.create-announcement-tabs-item.enabled {
+  cursor: pointer;
+
+  .create-announcement-tabs-index, .create-announcement-tabs-title {
+    color: $dialog-title-black;
+  }
 }
 
 .create-announcement-tabs-item.active {
@@ -67,16 +77,6 @@
   }
 }
 
-.create-announcement-tabs-item.enabled {
-  cursor: pointer;
-
-  &:hover {
-    .create-announcement-tabs-index {
-      color: $dialog-title-black;
-    }
-
-    .create-announcement-tabs-title {
-      color: $dialog-title-black;
-    }
-  }
+.create-announcement-tabs-item.disabled {
+  cursor: not-allowed;
 }

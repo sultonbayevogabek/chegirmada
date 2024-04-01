@@ -23,7 +23,7 @@ import { CATEGORIES } from '../../../../core/constants/categories';
 import { REGIONS } from '../../../../core/constants/regions';
 import { DistrictModel } from '../../../../core/models/district.model';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { shortnameValidator } from '../../../../core/validators/shortname.validator';
+import { shortname } from '../../../../core/validators/shortname.validator';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ComplaintModalComponent } from '../../complaint-modal/complaint-modal.component';
 import { ConfettiComponent } from '../../confetti-alert/confetti-alert.component';
@@ -93,7 +93,7 @@ export class RegisterStoreComponent implements OnInit {
     owner_lastname: new FormControl('', [ Validators.required ]),
     owner_fathername: new FormControl('', [ Validators.required ]),
     name_uz: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
-    shortname: new FormControl('', [ Validators.required, Validators.minLength(3), Validators.maxLength(20), shortnameValidator ]),
+    shortname: new FormControl('', [ Validators.required, Validators.minLength(3), Validators.maxLength(20), shortname ]),
     is_shortname_free: new FormControl(true, [ Validators.required ]),
     working_day_start: new FormControl(0),
     working_day_end: new FormControl(4),

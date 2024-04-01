@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, NgZone, ViewChild } from '@angular/core';
+import { Component, DestroyRef, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import { CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DragAndDropDirective } from '../../../../../core/directives/drag-and-drop.directive';
 import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
 import { MatIcon } from '@angular/material/icon';
 import { MatNativeDateModule, MatOption, MatRipple } from '@angular/material/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IconButtonComponent } from '../../../../../core/components/icon-button/icon-button.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatSelect } from '@angular/material/select';
@@ -18,6 +18,9 @@ import { SecondLevelCategory, ThirdLevelCategory } from '../../../../../core/mod
 import { OverlayComponent } from '../../../../../core/components/overlay-panel/overlay-panel.component';
 import { YoutubePlayer } from '../../../../../core/components/youtube-player/youtube-player.component';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { youtubeVideoURL } from '../../../../../core/validators/youtube-video.validator';
+import { productImages } from '../../../../../core/validators/product-images.validator';
+import { ToasterService } from '../../../../../core/services/toaster.service';
 
 @Component({
   selector: 'create-announcement-first-step',
@@ -46,19 +49,24 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     MatProgressSpinner
   ],
   providers: [
-    GeneralService
+    GeneralService,
+    ToasterService
   ],
   templateUrl: 'create-announcement-first-step.component.html',
   styleUrl: 'create-announcement-first-step.component.scss'
 })
-export class CreateAnnouncementFirstStepComponent {
+export class CreateAnnouncementFirstStepComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
   @ViewChild('videoPreviewPanel') videoPreviewPanel: OverlayComponent;
+
+  @Output() onFormStateChanged: EventEmitter<{ form: FormGroup<any>, step: number }> = new EventEmitter<{
+    form: FormGroup<any>,
+    step: number
+  }>();
+  @Output() onStepChanged: EventEmitter<number> = new EventEmitter<number>();
+
   date: Date = new Date();
-  imagesList: {
-    file: File,
-    buffer: string | ArrayBuffer
-  }[] = [];
+  imagesBuffers: (string | ArrayBuffer)[] = [];
 
   categories = CATEGORIES;
   secondLevelCategories: SecondLevelCategory[] = [];
@@ -67,19 +75,38 @@ export class CreateAnnouncementFirstStepComponent {
     main_category: new FormControl(null, [ Validators.required ]),
     subcategory: new FormControl(null, [ Validators.required ]),
     category: new FormControl(null, [ Validators.required ]),
-    desc_uz: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
-    desc_ru: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
-    title_uz: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
-    title_ru: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
-    video_link: new FormControl('', [ Validators.maxLength(200) ])
+    desc_uz: new FormControl('Juda sifatli tova', [ Validators.required, Validators.maxLength(1500) ]),
+    desc_ru: new FormControl('Очень качественный товар', [ Validators.required, Validators.maxLength(1500) ]),
+    title_uz: new FormControl('Polat Alandar erkaklar ich kiyimlari', [ Validators.required, Validators.maxLength(255) ]),
+    title_ru: new FormControl('Нижное беле Полат Алендар', [ Validators.required, Validators.maxLength(255) ]),
+    video_link: new FormControl('', [ Validators.maxLength(200), youtubeVideoURL ]),
+    images: new FormControl([], [ productImages ])
   });
 
   private _generalService = inject(GeneralService);
+  private _toasterService = inject(ToasterService);
   private _destroyRef = inject(DestroyRef);
-  private _cdr = inject(ChangeDetectorRef);
-  private _zone = inject(NgZone);
+
+  ngOnInit(): void {
+    this.firstStepForm.valueChanges
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(_ => {
+        if (this.firstStepForm.invalid) {
+          return;
+        }
+        this.onFormStateChanged.emit({ form: this.firstStepForm, step: 1 });
+      });
+  }
 
   onImagesDropped($event: FileList): void {
+    if (this.imagesBuffers.length === 8) {
+      this._toasterService.open({
+        title: 'dear.user',
+        message: 'you.can.upload.up.to.8.images',
+        type: 'warning'
+      });
+      return;
+    }
     for (const file of Array.from($event)) {
       if (![ 'image/jpeg', 'image/png', 'image/webp' ].includes(file.type)) {
         continue;
@@ -87,25 +114,29 @@ export class CreateAnnouncementFirstStepComponent {
 
       this.transformImageFile(file);
     }
+    this.firstStepForm.get('images').markAsTouched();
   }
 
   transformImageFile(file: File): void {
     const reader = new FileReader();
     reader.onload = event => {
       const buffer = event.target.result;
-      if (this.imagesList.find(image => image.buffer === buffer)) {
+      if (this.imagesBuffers.find(item => item === buffer) || this.imagesBuffers.length === 8) {
         return;
       }
-      this.imagesList.push({
-        file,
-        buffer
-      });
+      this.imagesBuffers.push(buffer);
+      const images: File[] = this.firstStepForm.get('images').value;
+      images.push(file);
+      this.firstStepForm.get('images').setValue(images);
     };
     reader.readAsDataURL(file);
   }
 
   removeImage(i: number): void {
-    this.imagesList.splice(i, 1);
+    this.imagesBuffers.splice(i, 1);
+    const images: File[] = this.firstStepForm.get('images').value;
+    images.splice(i, 1);
+    this.firstStepForm.get('images').setValue(images);
   }
 
   onImagesSelectedByFileInput($event: Event): void {
@@ -114,7 +145,10 @@ export class CreateAnnouncementFirstStepComponent {
   }
 
   drop($event: CdkDragDrop<any, any>): void {
-    moveItemInArray(this.imagesList, $event.previousIndex, $event.currentIndex);
+    const images: File[] = this.firstStepForm.get('images').value;
+    moveItemInArray(this.imagesBuffers, $event.previousIndex, $event.currentIndex);
+    moveItemInArray(images, $event.previousIndex, $event.currentIndex);
+    this.firstStepForm.get('images').setValue(images);
   }
 
   onMainCategoryChanged(): void {
@@ -150,6 +184,14 @@ export class CreateAnnouncementFirstStepComponent {
     this.videoPreviewPanel.openPanel();
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
-    }, 0)
+    }, 0);
+  }
+
+  goToSecondStep(): void {
+    if (this.firstStepForm.invalid) {
+      return;
+    }
+
+    this.onStepChanged.emit(2);
   }
 }

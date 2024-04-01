@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatRipple } from '@angular/material/core';
-import { NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ToasterService } from '../../../../core/services/toaster.service';
 import {
   CreateAnnouncementFirstStepComponent
@@ -11,6 +11,9 @@ import {
 import { IconButtonComponent } from '../../../../core/components/icon-button/icon-button.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
+import {
+  CreateAnnouncementSecondStepComponent
+} from './create-announcement-second-step/create-announcement-second-step.component';
 
 @Component({
   selector: 'create-announcement',
@@ -24,15 +27,47 @@ import { RouterLink } from '@angular/router';
     NgTemplateOutlet,
     CreateAnnouncementThirdStepComponent,
     TranslateModule,
-    RouterLink
+    RouterLink,
+    NgClass,
+    CreateAnnouncementSecondStepComponent
   ]
 })
 
 export class CreateAnnouncementComponent implements OnInit {
   currentTab = 1;
   readonly Array = Array;
+  data = {
+    '1': null,
+    '2': null,
+    '3': null
+  }
   private _toaster = inject(ToasterService);
 
+
   ngOnInit(): void {
+  }
+
+  onFormStateChanged({ form, step }: { form: Partial<any>; step: number }): void {
+    this.data[step] = form;
+  }
+
+  changeTab(tab: number): void {
+    switch (tab) {
+      case 1:
+        this.currentTab = tab;
+        break;
+      case 2:
+        if (!this.data['1'] || this.data['1'] && this.data['1'].invalid) {
+          return;
+        }
+        this.currentTab = tab;
+        break;
+      case 3:
+        if ((!this.data['1'] || this.data['1'] && this.data['1'].invalid) || (!this.data['2'] || this.data['2'] && this.data['2'].invalid)) {
+          return;
+        }
+        this.currentTab = tab;
+        break;
+    }
   }
 }

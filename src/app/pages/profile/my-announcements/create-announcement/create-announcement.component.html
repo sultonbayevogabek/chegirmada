@@ -9,17 +9,18 @@
 </div>
 
 <div class="create-announcement-tabs">
-  <div
+  <button
     class="create-announcement-tabs-item active"
-    mat-ripple [matRippleColor]="'#F1F5F955'"
-    (click)="currentTab = 1"
+    mat-ripple
+    [matRippleColor]="'#F1F5F990'"
+    (click)="changeTab(1)"
   >
     <div class="create-announcement-tabs-index">
       1
     </div>
 
     <div class="create-announcement-tabs-title">{{ 'main.information'| translate }}</div>
-  </div>
+  </button>
 
   <div class="create-announcement-tabs-decoration">
     <ng-container
@@ -27,17 +28,24 @@
     />
   </div>
 
-  <div
-    class="create-announcement-tabs-item enabled"
-    mat-ripple [matRippleColor]="'#F1F5F955'"
-    (click)="currentTab = 2"
+  <button
+    class="create-announcement-tabs-item"
+    mat-ripple
+    [matRippleColor]="'#F1F5F990'"
+    (click)="changeTab(2)"
+    [disabled]="!data['1'] || data['1'] && data['1'].invalid"
+    [ngClass]="{
+      'enabled': data['1'] && data['1'].valid,
+      'disabled': !data['1'] || data['1'] && data['1'].invalid,
+      'active': currentTab >= 2
+    }"
   >
     <div class="create-announcement-tabs-index">
       2
     </div>
 
     <div class="create-announcement-tabs-title">{{ 'product.features'| translate }}</div>
-  </div>
+  </button>
 
   <div class="create-announcement-tabs-decoration">
     <ng-container
@@ -45,21 +53,39 @@
     />
   </div>
 
-  <div
-    class="create-announcement-tabs-item disabled"
-    mat-ripple [matRippleColor]="'#F1F5F955'"
-    (click)="currentTab = 3"
+  <button
+    class="create-announcement-tabs-item"
+    mat-ripple
+    [matRippleColor]="'#F1F5F990'"
+    (click)="changeTab(3)"
+    [disabled]="(!data['1'] || data['1'] && data['1'].invalid) || (!data['2'] || data['2'] && data['2'].invalid)"
+    [ngClass]="{
+      'enabled': data['1'] && data['1'].valid && data['2'] && data['2'].valid,
+      'disabled': (!data['1'] || data['1'] && data['1'].invalid) || (!data['2'] || data['2'] && data['2'].invalid),
+      'active': currentTab >= 3
+    }"
   >
     <div class="create-announcement-tabs-index">
       3
     </div>
 
     <div class="create-announcement-tabs-title">{{ 'discount.details'| translate }}</div>
-  </div>
+  </button>
 </div>
 
-<create-announcement-first-step [hidden]="currentTab !== 1"/>
-<create-announcement-third-step [hidden]="currentTab !== 3"/>
+<create-announcement-first-step
+  [hidden]="currentTab !== 1"
+  (onFormStateChanged)="onFormStateChanged($event)"
+  (onStepChanged)="changeTab($event)"
+/>
+<create-announcement-second-step
+  [hidden]="currentTab !== 2"
+  (onFormStateChanged)="onFormStateChanged($event)"
+  (onStepChanged)="changeTab($event)"
+/>
+<create-announcement-third-step
+  [hidden]="currentTab !== 3"
+/>
 
 <ng-template #decorationItems>
   @for (i of Array(20).fill(1); track i) {
