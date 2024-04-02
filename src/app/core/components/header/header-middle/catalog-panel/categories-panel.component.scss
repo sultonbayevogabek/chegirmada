@@ -41,8 +41,18 @@
 }
 
 .parent-categories-icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  @include flex-center-center();
+  width: 1.75rem;
+
+  .mat-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .mat-icon[data-mat-icon-name="for.kids"], .mat-icon[data-mat-icon-name="dishes"] {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
 }
 
 .parent-categories-arrow {
