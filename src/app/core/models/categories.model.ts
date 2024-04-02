@@ -5,7 +5,11 @@ export interface MainCategory {
   loading?: boolean;
   icon?: string;
   img?: string;
-  children?: SecondLevelCategory[]
+  children?: {
+    '1': SecondLevelCategory[],
+    '2': SecondLevelCategory[],
+    '3': SecondLevelCategory[],
+  }
 }
 
 export interface SecondLevelCategory {

@@ -66,11 +66,24 @@ export class CategoriesPanelComponent {
       return
     }
 
+    category.children = {
+      '1': [],
+      '2': [],
+      '3': [],
+    }
     this._generalService.getSubcategories(category.id)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(res => {
-        category.children = res;
+        const partLength = Math.ceil(res.length / 3)
+        for (let i = 1; i <= 3; i++) {
+          if (i < 3) {
+            category.children[i] = res.slice((i - 1) * partLength, i * partLength);
+          } else {
+            category.children[i] = res.slice((i - 1) * partLength);
+          }
+        }
         this.selectedCategory = category;
+        console.log(this.selectedCategory);
       })
   }
 }

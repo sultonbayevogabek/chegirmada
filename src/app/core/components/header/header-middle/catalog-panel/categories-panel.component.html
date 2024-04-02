@@ -12,20 +12,11 @@
           <h2 class="category-groups-parent">{{ selectedCategory.name| translate }}</h2>
 
           <div class="category-groups-grid">
-            <div class="category-groups-column">
-              @for (categoryGroup of selectedCategory.children; track categoryGroup) {
-                <div class="category-groups-item">
-                  <h3 class="category-groups-heading">{{ categoryGroup.name }}</h3>
-
-                  <ul class="category-groups-list">
-                    @for (category of categoryGroup.children; track category) {
-                      <li class="category-groups-category-name">{{ category.name }}</li>
-                    }
-                  </ul>
-                </div>
-              }
-
-            </div>
+            @for (i of [1, 2, 3]; track i) {
+              <ng-container
+                *ngTemplateOutlet="categoryColumn; context: { $implicit: i }"
+              />
+            }
           </div>
         </div>
       }
@@ -35,7 +26,7 @@
 
 <ng-template #parentCategoriesList>
   <ul class="parent-categories-list">
-    @for(category of categories; track category) {
+    @for (category of categories; track category) {
       <li
         class="parent-categories-item"
         [class.active]="category.active"
@@ -44,13 +35,31 @@
         (mouseenter)="selectParentCategory(category)"
       >
         <span class="parent-categories-icon">
-          <mat-icon class="" [svgIcon]="'icon:' + category.name" />
+          <mat-icon class="" [svgIcon]="'icon:' + category.name"/>
         </span>
 
         <span class="parent-categories-name">{{ category.name| translate }}</span>
 
-        <mat-icon class="parent-categories-arrow" [svgIcon]="'icon:arrow-right'" />
+        <mat-icon class="parent-categories-arrow" [svgIcon]="'icon:arrow-right'"/>
       </li>
     }
   </ul>
 </ng-template>
+
+<ng-template #categoryColumn let-i>
+  <div class="category-groups-column">
+    @for (categoryGroup of selectedCategory?.children[i]; track categoryGroup) {
+      <div class="category-groups-item">
+        <h3 class="category-groups-heading">{{ categoryGroup.name }}</h3>
+
+        <ul class="category-groups-list">
+          @for (category of categoryGroup.children; track category) {
+            <li class="category-groups-category-name">{{ category.name }}</li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</ng-template>
+
+
