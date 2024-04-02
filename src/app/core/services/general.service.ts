@@ -19,4 +19,8 @@ export class GeneralService {
   getSubcategories(mainCategoryId: number): Observable<SecondLevelCategory[]> {
     return this._httpClient.get<SecondLevelCategory[]>(this._host + `general/categories/${mainCategoryId}/`)
   }
+
+  getCategoryFeatures(thirdLevelCategoryId: number): Observable<any> {
+    return this._httpClient.get<any>(this._host + `general/categories/${thirdLevelCategoryId}/features/`)
+  }
 }

@@ -50,6 +50,12 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
         }
         this.onFormStateChanged.emit({ form: this.secondStepForm, step: 2 });
       });
+
+    this._generalService.getCategoryFeatures(1)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(res => {
+        console.log(res);
+      })
   }
 
   goToThirdStep(): void {

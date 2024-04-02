@@ -83,7 +83,6 @@ export class CategoriesPanelComponent {
           }
         }
         this.selectedCategory = category;
-        console.log(this.selectedCategory);
       })
   }
 }

@@ -34,7 +34,7 @@ import {
 })
 
 export class CreateAnnouncementComponent implements OnInit {
-  currentTab = 1;
+  currentTab = 2;
   readonly Array = Array;
   data = {
     '1': null,
