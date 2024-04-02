@@ -43,7 +43,7 @@
         [matRippleColor]="'#4755691a'"
         (mouseenter)="selectParentCategory(category)"
       >
-        <mat-icon class="parent-categories-icon" [svgIcon]="'icon:electronics'" />
+        <mat-icon class="parent-categories-icon" [svgIcon]="'icon:' + category.name" />
         <span class="parent-categories-name">{{ category.name| translate }}</span>
 
         <mat-icon class="parent-categories-arrow" [svgIcon]="'icon:arrow-right'" />
