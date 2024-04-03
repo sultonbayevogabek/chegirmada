@@ -1,32 +1,149 @@
 <div class="create-announcement-features">
-  <form class="create-announcement-features-form" [formGroup]="secondStepForm">
-    <div class="grid-2">
-      <label class="form-label">
-        <span class="create-announcement-information-field-title form-label-text">{{ 'title'| translate }}(o'zb) *</span>
-        <input
-          class="create-announcement-information-input form-input"
-          type="text"
-          trim
-          [placeholder]="'enter.title'| translate"
-          [maxlength]="255"
-          [formControlName]="'title_uz'"
-          [class.invalid]="secondStepForm.get('title_uz').invalid && secondStepForm.get('title_uz').touched"
-        >
-        <ng-container
-          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'title_uz' }"
-        />
-      </label>
-    </div>
+  <form class="create-announcement-features-form">
+    @for (feature of features; track feature) {
+      <fieldset class="create-announcement-features-fieldset">
+        <legend class="create-announcement-features-legend">{{ feature?.name }}</legend>
 
-    <div class="create-announcement-information-submit">
+        <div class="create-announcement-features-item">
+          <mat-select class="create-announcement-features-select solid-select" [placeholder]="feature?.name">
+            @for (feature of features; track feature) {
+            <mat-option [value]="4">4 GB</mat-option>
+            <mat-option [value]="6">6 GB</mat-option>
+            <mat-option [value]="8">8 GB</mat-option>
+            <mat-option [value]="12">12 GB</mat-option>
+            <mat-option [value]="16">16 GB</mat-option>
+            }
+          </mat-select>
+
+          <div class="create-announcement-features-price-difference">
+            <input class="form-input" type="number" [placeholder]="'price'| translate">
+
+            <div class="create-announcement-features-price-difference-toggle">
+              <div class="create-announcement-features-price-difference-toggle-item active">-</div>
+              <div class="create-announcement-features-price-difference-toggle-item">+</div>
+            </div>
+          </div>
+
+          <icon-button
+            [buttonType]="'red'"
+            [icon]="'icon:trash'"
+          />
+        </div>
+
+        <div class="create-announcement-features-item">
+          <mat-select class="create-announcement-features-select solid-select" placeholder="Operativ xotira hajmi">
+            <mat-option [value]="4">4 GB</mat-option>
+            <mat-option [value]="6">6 GB</mat-option>
+            <mat-option [value]="8">8 GB</mat-option>
+            <mat-option [value]="12">12 GB</mat-option>
+            <mat-option [value]="16">16 GB</mat-option>
+          </mat-select>
+
+          <div class="create-announcement-features-price-difference">
+            <input class="form-input" type="number" [placeholder]="'price'| translate">
+
+            <div class="create-announcement-features-price-difference-toggle">
+              <div class="create-announcement-features-price-difference-toggle-item active">-</div>
+              <div class="create-announcement-features-price-difference-toggle-item">+</div>
+            </div>
+          </div>
+
+          <icon-button
+            [buttonType]="'red'"
+            [icon]="'icon:trash'"
+          />
+        </div>
+
+        <ui-button
+          [actionType]="'button'"
+          [type]="'gray-outline'"
+          [icon]="'icon:outline-plus'"
+          [text]="'add'"
+        />
+      </fieldset>
+    }
+
+
+    <fieldset class="create-announcement-features-fieldset">
+      <legend class="create-announcement-features-legend">Diagonal o'lchami</legend>
+
+      <div class="create-announcement-features-item">
+        <mat-select class="create-announcement-features-select solid-select" placeholder="Operativ xotira hajmi">
+          <mat-option [value]="4">4 GB</mat-option>
+          <mat-option [value]="6">6 GB</mat-option>
+          <mat-option [value]="8">8 GB</mat-option>
+          <mat-option [value]="12">12 GB</mat-option>
+          <mat-option [value]="16">16 GB</mat-option>
+        </mat-select>
+      </div>
+
+      <div class="create-announcement-features-item">
+        <mat-select class="create-announcement-features-select solid-select" placeholder="Operativ xotira hajmi">
+          <mat-option [value]="4">4 GB</mat-option>
+          <mat-option [value]="6">6 GB</mat-option>
+          <mat-option [value]="8">8 GB</mat-option>
+          <mat-option [value]="12">12 GB</mat-option>
+          <mat-option [value]="16">16 GB</mat-option>
+        </mat-select>
+
+        <div class="create-announcement-features-price-difference">
+          <input class="form-input" type="number" [placeholder]="'price'| translate">
+
+          <div class="create-announcement-features-price-difference-toggle">
+            <div class="create-announcement-features-price-difference-toggle-item active">-</div>
+            <div class="create-announcement-features-price-difference-toggle-item">+</div>
+          </div>
+        </div>
+
+        <icon-button
+          [buttonType]="'red'"
+          [icon]="'icon:trash'"
+        />
+      </div>
+
+      <div class="create-announcement-features-item">
+        <mat-select class="create-announcement-features-select solid-select" placeholder="Operativ xotira hajmi">
+          <mat-option [value]="4">4 GB</mat-option>
+          <mat-option [value]="6">6 GB</mat-option>
+          <mat-option [value]="8">8 GB</mat-option>
+          <mat-option [value]="12">12 GB</mat-option>
+          <mat-option [value]="16">16 GB</mat-option>
+        </mat-select>
+
+        <div class="create-announcement-features-price-difference">
+          <input class="form-input" type="number" [placeholder]="'price'| translate">
+
+          <div class="create-announcement-features-price-difference-toggle">
+            <div class="create-announcement-features-price-difference-toggle-item active">-</div>
+            <div class="create-announcement-features-price-difference-toggle-item">+</div>
+          </div>
+        </div>
+
+        <icon-button
+          [buttonType]="'red'"
+          [icon]="'icon:trash'"
+        />
+      </div>
+
       <ui-button
-        [text]="'next'"
-        [actionType]="'submit'"
-        [disabled]="secondStepForm.invalid"
-        (click)="goToThirdStep()"
+        [actionType]="'button'"
+        [type]="'gray-outline'"
+        [icon]="'icon:outline-plus'"
+        [text]="'add'"
       />
-    </div>
+    </fieldset>
   </form>
+
+  <div class="create-announcement-features-footer">
+    <ui-button
+      [type]="'gray-outline'"
+      [icon]="'icon:outline-plus'"
+      [text]="'add.new.feature'"
+    />
+    <ui-button
+      [text]="'next'"
+    />
+  </div>
 </div>
 
 <ng-template #requiredErrors let-controlName>

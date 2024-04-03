@@ -22,6 +22,7 @@ import { UiButtonTypeModel } from '../../models/ui-button-type.model';
 
 export class UiButtonComponent {
   @Input() text = 'save'
+  @Input() textSizeClass = ''
   @Input() full = false;
   @Input() type: UiButtonTypeModel = 'blue';
   @Input() icon: string;

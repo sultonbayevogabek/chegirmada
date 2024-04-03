@@ -2,7 +2,7 @@
   [type]="actionType"
   [title]="title ? (title| translate) : ''"
   [disabled]="disabled"
-  [class]="'ui-button ' + type"
+  class="ui-button {{ type }} {{ textSizeClass }}"
   [class.full]="full"
   [ngClass]="{
    'full': full,
@@ -20,6 +20,8 @@
   }
 
   @if (loading) {
-    <mat-spinner class="ui-button-spinner" [diameter]="22"/>
+    <mat-spinner
+      class="ui-button-spinner"
+      [diameter]="22"/>
   }
 </button>

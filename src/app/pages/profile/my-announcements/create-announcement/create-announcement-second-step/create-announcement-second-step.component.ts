@@ -1,5 +1,5 @@
 import { Component, DestroyRef, EventEmitter, inject, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
 import { GeneralService } from '../../../../../core/services/general.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ToasterService } from '../../../../../core/services/toaster.service';
@@ -7,6 +7,9 @@ import { TrimDirective } from '../../../../../core/directives/trim.directive';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { UiButtonComponent } from '../../../../../core/components/ui-button/ui-button.component';
+import { MatOption, MatSelect } from '@angular/material/select';
+import { IconButtonComponent } from '../../../../../core/components/icon-button/icon-button.component';
+import { Feature } from '../../../../../core/models/features.model';
 
 @Component({
   selector: 'create-announcement-second-step',
@@ -16,7 +19,10 @@ import { UiButtonComponent } from '../../../../../core/components/ui-button/ui-b
     TrimDirective,
     TranslateModule,
     NgTemplateOutlet,
-    UiButtonComponent
+    UiButtonComponent,
+    MatSelect,
+    MatOption,
+    IconButtonComponent
   ],
   providers: [
     GeneralService,
@@ -33,28 +39,27 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
   }>();
   @Output() onStepChanged: EventEmitter<number> = new EventEmitter<number>();
 
-  secondStepForm = new FormGroup({
-    title_uz: new FormControl('Polat Alandar erkaklar ich kiyimlari', [ Validators.required, Validators.maxLength(255) ]),
-  });
+  secondStepForm: UntypedFormGroup = new FormGroup({});
+  features: Feature[] = [];
 
   private _generalService = inject(GeneralService);
   private _toasterService = inject(ToasterService);
   private _destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.secondStepForm.valueChanges
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(_ => {
-        if (this.secondStepForm.invalid) {
-          return;
-        }
-        this.onFormStateChanged.emit({ form: this.secondStepForm, step: 2 });
-      });
+    // this.secondStepForm.valueChanges
+    //   .pipe(takeUntilDestroyed(this._destroyRef))
+    //   .subscribe(_ => {
+    //     if (this.secondStepForm.invalid) {
+    //       return;
+    //     }
+    //     this.onFormStateChanged.emit({ form: this.secondStepForm, step: 2 });
+    //   });
 
     this._generalService.getCategoryFeatures(1)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(res => {
-        console.log(res);
+        this.features = res;
       })
   }
 

@@ -6,9 +6,9 @@ export interface MainCategory {
   icon?: string;
   img?: string;
   children?: {
-    '1': SecondLevelCategory[],
-    '2': SecondLevelCategory[],
-    '3': SecondLevelCategory[],
+    1: SecondLevelCategory[],
+    2: SecondLevelCategory[],
+    3: SecondLevelCategory[]
   }
 }
 

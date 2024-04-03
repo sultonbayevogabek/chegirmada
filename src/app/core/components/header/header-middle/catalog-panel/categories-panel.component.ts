@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
@@ -46,12 +46,16 @@ export interface Category {
   ]
 })
 
-export class CategoriesPanelComponent {
+export class CategoriesPanelComponent implements OnInit {
   categories = CATEGORIES;
   selectedCategory: MainCategory;
 
   private _generalService = inject(GeneralService);
   private _destroyRef = inject(DestroyRef);
+
+  ngOnInit(): void {
+    this.selectParentCategory(this.categories[0]);
+  }
 
   selectParentCategory(category: MainCategory): void {
     this.categories.forEach(category => {
