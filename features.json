@@ -1,0 +1,22 @@
+{
+  "features": [
+    {
+      "feature_value": "pk",
+      "price": "-20000"
+    }
+  ],
+  "feature_custom_values": [
+    {
+      "feature": "main_feature_pk",
+      "value1": "",
+      "price1": ""
+    }
+  ],
+  "custom_features": [
+    {
+      "name": "",
+      "value1": "",
+      "price1": ""
+    }
+  ]
+}

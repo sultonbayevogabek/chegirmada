@@ -6,37 +6,9 @@
 
         <div class="create-announcement-features-item">
           <mat-select class="create-announcement-features-select solid-select" [placeholder]="feature?.name">
-            @for (feature of features; track feature) {
-            <mat-option [value]="4">4 GB</mat-option>
-            <mat-option [value]="6">6 GB</mat-option>
-            <mat-option [value]="8">8 GB</mat-option>
-            <mat-option [value]="12">12 GB</mat-option>
-            <mat-option [value]="16">16 GB</mat-option>
+            @for (item of feature.values; track item) {
+              <mat-option [value]="item.pk">{{ item.value }} {{ feature.value_extra_type }}</mat-option>
             }
-          </mat-select>
-
-          <div class="create-announcement-features-price-difference">
-            <input class="form-input" type="number" [placeholder]="'price'| translate">
-
-            <div class="create-announcement-features-price-difference-toggle">
-              <div class="create-announcement-features-price-difference-toggle-item active">-</div>
-              <div class="create-announcement-features-price-difference-toggle-item">+</div>
-            </div>
-          </div>
-
-          <icon-button
-            [buttonType]="'red'"
-            [icon]="'icon:trash'"
-          />
-        </div>
-
-        <div class="create-announcement-features-item">
-          <mat-select class="create-announcement-features-select solid-select" placeholder="Operativ xotira hajmi">
-            <mat-option [value]="4">4 GB</mat-option>
-            <mat-option [value]="6">6 GB</mat-option>
-            <mat-option [value]="8">8 GB</mat-option>
-            <mat-option [value]="12">12 GB</mat-option>
-            <mat-option [value]="16">16 GB</mat-option>
           </mat-select>
 
           <div class="create-announcement-features-price-difference">
@@ -62,76 +34,6 @@
         />
       </fieldset>
     }
-
-
-    <fieldset class="create-announcement-features-fieldset">
-      <legend class="create-announcement-features-legend">Diagonal o'lchami</legend>
-
-      <div class="create-announcement-features-item">
-        <mat-select class="create-announcement-features-select solid-select" placeholder="Operativ xotira hajmi">
-          <mat-option [value]="4">4 GB</mat-option>
-          <mat-option [value]="6">6 GB</mat-option>
-          <mat-option [value]="8">8 GB</mat-option>
-          <mat-option [value]="12">12 GB</mat-option>
-          <mat-option [value]="16">16 GB</mat-option>
-        </mat-select>
-      </div>
-
-      <div class="create-announcement-features-item">
-        <mat-select class="create-announcement-features-select solid-select" placeholder="Operativ xotira hajmi">
-          <mat-option [value]="4">4 GB</mat-option>
-          <mat-option [value]="6">6 GB</mat-option>
-          <mat-option [value]="8">8 GB</mat-option>
-          <mat-option [value]="12">12 GB</mat-option>
-          <mat-option [value]="16">16 GB</mat-option>
-        </mat-select>
-
-        <div class="create-announcement-features-price-difference">
-          <input class="form-input" type="number" [placeholder]="'price'| translate">
-
-          <div class="create-announcement-features-price-difference-toggle">
-            <div class="create-announcement-features-price-difference-toggle-item active">-</div>
-            <div class="create-announcement-features-price-difference-toggle-item">+</div>
-          </div>
-        </div>
-
-        <icon-button
-          [buttonType]="'red'"
-          [icon]="'icon:trash'"
-        />
-      </div>
-
-      <div class="create-announcement-features-item">
-        <mat-select class="create-announcement-features-select solid-select" placeholder="Operativ xotira hajmi">
-          <mat-option [value]="4">4 GB</mat-option>
-          <mat-option [value]="6">6 GB</mat-option>
-          <mat-option [value]="8">8 GB</mat-option>
-          <mat-option [value]="12">12 GB</mat-option>
-          <mat-option [value]="16">16 GB</mat-option>
-        </mat-select>
-
-        <div class="create-announcement-features-price-difference">
-          <input class="form-input" type="number" [placeholder]="'price'| translate">
-
-          <div class="create-announcement-features-price-difference-toggle">
-            <div class="create-announcement-features-price-difference-toggle-item active">-</div>
-            <div class="create-announcement-features-price-difference-toggle-item">+</div>
-          </div>
-        </div>
-
-        <icon-button
-          [buttonType]="'red'"
-          [icon]="'icon:trash'"
-        />
-      </div>
-
-      <ui-button
-        [actionType]="'button'"
-        [type]="'gray-outline'"
-        [icon]="'icon:outline-plus'"
-        [text]="'add'"
-      />
-    </fieldset>
   </form>
 
   <div class="create-announcement-features-footer">
