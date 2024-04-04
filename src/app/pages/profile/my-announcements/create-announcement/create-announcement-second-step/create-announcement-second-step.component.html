@@ -1,46 +1,74 @@
 <div class="create-announcement-features">
-  <form class="create-announcement-features-form">
-    @for (feature of features; track feature) {
+  <div class="create-announcement-features-form">
+    @for (featureTemplate of featureTemplates; track featureTemplate) {
       <fieldset class="create-announcement-features-fieldset">
-        <legend class="create-announcement-features-legend">{{ feature?.name }}</legend>
+        <legend class="create-announcement-features-legend">{{ featureTemplate?.name }}</legend>
 
-        <div class="create-announcement-features-item">
-          <mat-select class="create-announcement-features-select solid-select" [placeholder]="feature?.name">
-            @for (item of feature.values; track item) {
-              <mat-option [value]="item.pk">{{ item.value }} {{ feature.value_extra_type }}</mat-option>
-            }
-          </mat-select>
+        @for (featureItem of featureTemplate.selected; track featureItem; let i = $index) {
+          <div class="create-announcement-features-item">
+            <mat-select
+              class="create-announcement-features-select solid-select"
+              [placeholder]="featureTemplate?.name"
+              [(ngModel)]="featureItem.feature_value"
+            >
+              @for (item of featureTemplate.values; track item) {
+                <mat-option [value]="item.pk">{{ item.value }} {{ featureTemplate.value_extra_type }}</mat-option>
+              }
 
-          <div class="create-announcement-features-price-difference">
-            <input class="form-input" type="number" [placeholder]="'price'| translate">
+              <mat-option (click)="addNewOption()" [value]="null">{{ 'other'| translate }}</mat-option>
+            </mat-select>
 
-            <div class="create-announcement-features-price-difference-toggle">
-              <div class="create-announcement-features-price-difference-toggle-item active">-</div>
-              <div class="create-announcement-features-price-difference-toggle-item">+</div>
-            </div>
+              <div class="create-announcement-features-price-difference">
+                <input
+                  class="form-input"
+                  type="number"
+                  [placeholder]="'price'| translate"
+                  [(ngModel)]="featureItem.price"
+                >
+
+                <div class="create-announcement-features-price-difference-toggle">
+                  <div
+                    class="create-announcement-features-price-difference-toggle-item"
+                    [class.active]="featureItem.sign === '-'"
+                    (click)="featureItem.sign = '-'"
+                  >-
+                  </div>
+                  <div
+                    class="create-announcement-features-price-difference-toggle-item"
+                    [class.active]="featureItem.sign === '+'"
+                    (click)="featureItem.sign = '+'"
+                  >+
+                  </div>
+                </div>
+              </div>
+
+              <icon-button
+                [buttonType]="'red'"
+                [icon]="'icon:trash'"
+                (click)="removeFeatureItem(featureTemplate.selected, i)"
+              />
           </div>
+        }
 
-          <icon-button
-            [buttonType]="'red'"
-            [icon]="'icon:trash'"
+        @if (featureTemplate.selected.length < 5) {
+          <ui-button
+            [actionType]="'button'"
+            [type]="'gray-outline'"
+            [icon]="'icon:outline-plus'"
+            [text]="'add'"
+            (click)="addNewFeature(featureTemplate.selected)"
           />
-        </div>
-
-        <ui-button
-          [actionType]="'button'"
-          [type]="'gray-outline'"
-          [icon]="'icon:outline-plus'"
-          [text]="'add'"
-        />
+        }
       </fieldset>
     }
-  </form>
+  </div>
 
   <div class="create-announcement-features-footer">
     <ui-button
       [type]="'gray-outline'"
       [icon]="'icon:outline-plus'"
       [text]="'add.new.feature'"
+      (click)="cons()"
     />
     <ui-button
       [text]="'next'"

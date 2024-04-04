@@ -1,0 +1,23 @@
+<mat-dialog-content class="new-feature-modal-content">
+  <form class="new-feature-modal-form" [formGroup]="newFeatureForm">
+    <label class="form-label">
+      <span class="form-label-text">{{ (data.dialogType === 'value' ? 'new.value' : 'new.feature')| translate }}</span>
+      <input class="form-input" type="text" [formControlName]="'control'">
+    </label>
+
+    <div class="new-feature-modal-submit">
+      <ui-button
+        [type]="'gray'"
+        [actionType]="'button'"
+        [text]="'cancel'"
+        (click)="cancel()"
+      />
+      <ui-button
+        [disabled]="newFeatureForm.invalid"
+        [actionType]="'submit'"
+        [text]="'save'"
+        (click)="save()"
+      />
+    </div>
+  </form>
+</mat-dialog-content>

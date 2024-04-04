@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { map, Observable } from 'rxjs';
 import { DistrictModel } from '../models/district.model';
 import { SecondLevelCategory } from '../models/categories.model';
-import { Feature } from '../models/features.model';
+import { FeatureTemplate } from '../models/feature-template.model';
 
 @Injectable()
 
@@ -21,7 +21,7 @@ export class GeneralService {
     return this._httpClient.get<SecondLevelCategory[]>(this._host + `general/categories/${mainCategoryId}/`)
   }
 
-  getCategoryFeatures(thirdLevelCategoryId: number): Observable<Feature[]> {
-    return this._httpClient.get<Feature[]>(this._host + `general/categories/${thirdLevelCategoryId}/features/`)
+  getCategoryFeatures(thirdLevelCategoryId: number): Observable<FeatureTemplate[]> {
+    return this._httpClient.get<FeatureTemplate[]>(this._host + `general/categories/${thirdLevelCategoryId}/features/`)
   }
 }

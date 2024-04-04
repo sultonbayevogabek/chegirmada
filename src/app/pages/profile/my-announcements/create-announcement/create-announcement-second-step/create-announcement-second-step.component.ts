@@ -1,5 +1,5 @@
 import { Component, DestroyRef, EventEmitter, inject, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { GeneralService } from '../../../../../core/services/general.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ToasterService } from '../../../../../core/services/toaster.service';
@@ -9,7 +9,10 @@ import { NgTemplateOutlet } from '@angular/common';
 import { UiButtonComponent } from '../../../../../core/components/ui-button/ui-button.component';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { IconButtonComponent } from '../../../../../core/components/icon-button/icon-button.component';
-import { Feature } from '../../../../../core/models/features.model';
+import { FeatureTemplate, SelectedValue } from '../../../../../core/models/feature-template.model';
+import { MatRipple } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { NewFeatureModalComponent } from '../../new-feature-modal/new-feature-modal.component';
 
 @Component({
   selector: 'create-announcement-second-step',
@@ -22,7 +25,9 @@ import { Feature } from '../../../../../core/models/features.model';
     UiButtonComponent,
     MatSelect,
     MatOption,
-    IconButtonComponent
+    IconButtonComponent,
+    FormsModule,
+    MatRipple
   ],
   providers: [
     GeneralService,
@@ -40,27 +45,24 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
   @Output() onStepChanged: EventEmitter<number> = new EventEmitter<number>();
 
   secondStepForm: UntypedFormGroup = new FormGroup({});
-  features: Feature[] = [];
+  featureTemplates: FeatureTemplate[] = [];
 
   private _generalService = inject(GeneralService);
   private _toasterService = inject(ToasterService);
   private _destroyRef = inject(DestroyRef);
+  private _dialog = inject(MatDialog);
 
   ngOnInit(): void {
-    // this.secondStepForm.valueChanges
-    //   .pipe(takeUntilDestroyed(this._destroyRef))
-    //   .subscribe(_ => {
-    //     if (this.secondStepForm.invalid) {
-    //       return;
-    //     }
-    //     this.onFormStateChanged.emit({ form: this.secondStepForm, step: 2 });
-    //   });
-
     this._generalService.getCategoryFeatures(1)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(res => {
-        this.features = res;
-      })
+        this.featureTemplates = res.map(item => {
+          return {
+            ...item,
+            selected: [ { feature_value: null, price: '0', sign: '-' } ]
+          };
+        });
+      });
   }
 
   goToThirdStep(): void {
@@ -69,5 +71,27 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
     }
 
     this.onStepChanged.emit(3);
+  }
+
+  cons(): void {
+    console.log(this.featureTemplates);
+  }
+
+  removeFeatureItem(selected: SelectedValue[], i: number) {
+    selected.splice(i, 1);
+  }
+
+  addNewFeature(selected: SelectedValue[]): void {
+    selected.push({ feature_value: null, price: '0', sign: '-' });
+  }
+
+  addNewOption(): void {
+    const newFeatureDialog = this._dialog.open(NewFeatureModalComponent, {
+      width: '25rem',
+      maxWidth: '100%',
+      data: {
+        dialogType: 'value'
+      }
+    })
   }
 }

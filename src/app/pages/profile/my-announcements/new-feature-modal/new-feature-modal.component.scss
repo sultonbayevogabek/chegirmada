@@ -1,0 +1,12 @@
+@import "variables";
+@import "mixins";
+
+.new-feature-modal-form {
+  @include flex-column(1rem);
+  padding: 2rem;
+}
+
+.new-feature-modal-submit {
+  @include flex-center-end(0.5rem);
+  padding-top: 0.25rem;
+}
