@@ -10,6 +10,7 @@
               class="create-announcement-features-select solid-select"
               [placeholder]="featureTemplate?.name"
               [(ngModel)]="featureItem.feature_value"
+              (ngModelChange)="transformDataAndEmit()"
             >
               @for (item of featureTemplate.values; track item) {
                 <mat-option [value]="item.pk">{{ item.value }} {{ featureTemplate.value_extra_type }}</mat-option>
@@ -20,30 +21,32 @@
               </mat-option>
             </mat-select>
 
-            <div class="create-announcement-features-price-difference">
-              <input
-                class="form-input"
-                type="number"
-                [placeholder]="'price'| translate"
-                [(ngModel)]="featureItem.price"
-              >
+            @if (i !== 0) {
+              <div class="create-announcement-features-price-difference">
+                <input
+                  class="form-input"
+                  type="number"
+                  [placeholder]="'price.difference'| translate"
+                  [(ngModel)]="featureItem.price"
+                  (blur)="transformDataAndEmit()"
+                >
 
-              <div class="create-announcement-features-price-difference-toggle">
-                <div
-                  class="create-announcement-features-price-difference-toggle-item"
-                  [class.active]="featureItem.sign === '-'"
-                  (click)="featureItem.sign = '-'"
-                >-
-                </div>
-                <div
-                  class="create-announcement-features-price-difference-toggle-item"
-                  [class.active]="featureItem.sign === '+'"
-                  (click)="featureItem.sign = '+'"
-                >+
+                <div class="create-announcement-features-price-difference-toggle">
+                  <div
+                    class="create-announcement-features-price-difference-toggle-item"
+                    [class.active]="featureItem.sign === '-'"
+                    (click)="featureItem.sign = '-'; transformDataAndEmit()"
+                  >-
+                  </div>
+                  <div
+                    class="create-announcement-features-price-difference-toggle-item"
+                    [class.active]="featureItem.sign === '+'"
+                    (click)="featureItem.sign = '+'; transformDataAndEmit()"
+                  >+
+                  </div>
                 </div>
               </div>
-            </div>
-
+            }
             <icon-button
               [buttonType]="'red'"
               [icon]="'icon:trash'"
@@ -75,31 +78,35 @@
               type="text"
               trim
               [(ngModel)]="item.value"
+              (blur)="transformDataAndEmit()"
             >
 
-            <div class="create-announcement-features-price-difference">
-              <input
-                class="form-input"
-                type="number"
-                [placeholder]="'price'| translate"
-                [(ngModel)]="item.price"
-              >
+            @if (i !== 0) {
+              <div class="create-announcement-features-price-difference">
+                <input
+                  class="form-input"
+                  type="number"
+                  [placeholder]="'price.difference'| translate"
+                  [(ngModel)]="item.price"
+                  (blur)="transformDataAndEmit()"
+                >
 
-              <div class="create-announcement-features-price-difference-toggle">
-                <div
-                  class="create-announcement-features-price-difference-toggle-item"
-                  [class.active]="item.sign === '-'"
-                  (click)="item.sign = '-'"
-                >-
-                </div>
-                <div
-                  class="create-announcement-features-price-difference-toggle-item"
-                  [class.active]="item.sign === '+'"
-                  (click)="item.sign = '+'"
-                >+
+                <div class="create-announcement-features-price-difference-toggle">
+                  <div
+                    class="create-announcement-features-price-difference-toggle-item"
+                    [class.active]="item.sign === '-'"
+                    (click)="item.sign = '-'; transformDataAndEmit()"
+                  >-
+                  </div>
+                  <div
+                    class="create-announcement-features-price-difference-toggle-item"
+                    [class.active]="item.sign === '+'"
+                    (click)="item.sign = '+'; transformDataAndEmit()"
+                  >+
+                  </div>
                 </div>
               </div>
-            </div>
+            }
 
             <icon-button
               [buttonType]="'red'"
@@ -131,7 +138,7 @@
     />
     <ui-button
       [text]="'next'"
-      (click)="generateFeatures()"
+      (click)="goToThirdStep()"
     />
   </div>
 </div>

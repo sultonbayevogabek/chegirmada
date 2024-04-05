@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { MatRipple } from '@angular/material/core';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ToasterService } from '../../../../core/services/toaster.service';
@@ -34,7 +34,12 @@ import {
 })
 
 export class CreateAnnouncementComponent implements OnInit {
-  currentTab = 2;
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+    $event.returnValue = false;
+  }
+
+  currentTab = 1;
   readonly Array = Array;
   data = {
     '1': null,
@@ -48,6 +53,7 @@ export class CreateAnnouncementComponent implements OnInit {
   }
 
   onFormStateChanged({ form, step }: { form: Partial<any>; step: number }): void {
+    console.log(form);
     this.data[step] = form;
   }
 

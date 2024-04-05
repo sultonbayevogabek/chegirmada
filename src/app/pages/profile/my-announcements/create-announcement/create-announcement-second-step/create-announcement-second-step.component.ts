@@ -1,4 +1,4 @@
-import { Component, DestroyRef, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { GeneralService } from '../../../../../core/services/general.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -18,7 +18,6 @@ import {
 import { MatRipple } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFeatureModalComponent } from '../../new-feature-modal/new-feature-modal.component';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'create-announcement-second-step',
@@ -43,9 +42,9 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
   styleUrl: 'create-announcement-second-step.component.scss'
 })
 
-export class CreateAnnouncementSecondStepComponent implements OnInit {
-  @Output() onFormStateChanged: EventEmitter<{ form: FormGroup<any>, step: number }> = new EventEmitter<{
-    form: FormGroup<any>,
+export class CreateAnnouncementSecondStepComponent implements OnInit, OnChanges {
+  @Output() onFormStateChanged: EventEmitter<{ form: any, step: number }> = new EventEmitter<{
+    form: any,
     step: number
   }>();
   @Output() onStepChanged: EventEmitter<number> = new EventEmitter<number>();
@@ -53,6 +52,12 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
   secondStepForm: UntypedFormGroup = new FormGroup({});
   featureTemplates: FeatureTemplate[] = [];
   customTemplates: CustomTemplate[] = [];
+
+  data = {
+    features: [],
+    feature_custom_values: [],
+    custom_features: []
+  };
 
 
   private _generalService = inject(GeneralService);
@@ -70,19 +75,92 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
             selected: [ { feature_value: null, price: '', sign: '-' } ]
           };
         });
+
+        this.transformDataAndEmit();
       });
   }
 
-  goToThirdStep(): void {
-    if (this.secondStepForm.invalid) {
-      return;
-    }
+  transformDataAndEmit(): void {
+    this.data = {
+      features: [],
+      feature_custom_values: [],
+      custom_features: []
+    };
 
-    this.onStepChanged.emit(3);
+    this.featureTemplates.forEach(featureTemplate => {
+      featureTemplate.selected.forEach(selectedValue => {
+        const featureValue = selectedValue.feature_value;
+
+        if (!featureValue) {
+          return;
+        }
+
+        if (typeof featureValue === 'number') {
+          let price: string;
+
+          if (selectedValue.price) {
+            price = `${ selectedValue.sign === '-' ? '-' : '' }${ (+selectedValue.price).toFixed(1) }`;
+          } else {
+            price = '0';
+          }
+
+          this.data.features.push({
+            ...selectedValue,
+            price
+          });
+        }
+
+        if (typeof featureValue === 'string') {
+          const idStartIndex = featureValue.lastIndexOf('_');
+          let price: string;
+
+          if (selectedValue.price) {
+            price = `${ selectedValue.sign === '-' ? '-' : '' }${ (+selectedValue.price).toFixed(1) }`;
+          } else {
+            price = '0';
+          }
+
+          this.data.feature_custom_values.push({
+            feature: featureTemplate.pk,
+            value: featureValue.slice(0, idStartIndex),
+            price
+          });
+        }
+      });
+    });
+
+    this.customTemplates.forEach(customTemplate => {
+      customTemplate.items.forEach(item => {
+        if (!item.value) return;
+
+        let price: string;
+
+        if (item.price) {
+          price = `${ item.sign === '-' ? '-' : '' }${ (+item.price).toFixed(1) }`;
+        } else {
+          price = '0';
+        }
+
+        this.data.custom_features.push({
+          ...item,
+          price
+        });
+      });
+    });
+
+    this.onFormStateChanged.emit({
+      form: {
+        invalid: false,
+        valid: true,
+        ...this.data
+      },
+      step: 2
+    });
   }
 
   removeFeatureItem(selected: SelectedValue[], i: number) {
     selected.splice(i, 1);
+    this.transformDataAndEmit();
   }
 
   addNewFeature(selected: SelectedValue[]): void {
@@ -113,78 +191,10 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
           });
 
           selectValue.feature_value = pk;
+
+          this.transformDataAndEmit();
         }
       });
-  }
-
-  generateFeatures(): void {
-    const data = {
-      features: [],
-      feature_custom_values: [],
-      custom_features: []
-    }
-    this.featureTemplates.forEach(featureTemplate => {
-      featureTemplate.selected.forEach(selectedValue => {
-        const featureValue = selectedValue.feature_value;
-
-        if (!featureValue) {
-          return;
-        }
-
-        if (typeof featureValue === 'number') {
-          let price: string;
-
-          if (selectedValue.price) {
-            price = `${ selectedValue.sign === '-' ? '-' : '' }${ (+selectedValue.price).toFixed(1) }`;
-          } else {
-            price = '0';
-          }
-
-          data.features.push({
-            ...selectedValue,
-            price
-          });
-        }
-
-        if (typeof featureValue === 'string') {
-          const idStartIndex = featureValue.lastIndexOf('_');
-          let price: string;
-
-          if (selectedValue.price) {
-            price = `${ selectedValue.sign === '-' ? '-' : '' }${ (+selectedValue.price).toFixed(1) }`;
-          } else {
-            price = '0';
-          }
-
-          data.feature_custom_values.push({
-            feature: featureTemplate.pk,
-            value: featureValue.slice(0, idStartIndex),
-            price
-          });
-        }
-      });
-    });
-
-    this.customTemplates.forEach(customTemplate => {
-      customTemplate.items.forEach(item => {
-        if (!item.value) return;
-
-        let price: string;
-
-        if (item.price) {
-          price = `${ item.sign === '-' ? '-' : '' }${ (+item.price).toFixed(1) }`;
-        } else {
-          price = '0';
-        }
-
-        data.custom_features.push({
-          ...item,
-          price
-        })
-      })
-    })
-
-    console.log(data);
   }
 
   addNewTemplate(): void {
@@ -217,6 +227,7 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
 
   removeCustomTemplateItem(items: CustomTemplateItem[], index: number): void {
     items.splice(index, 1);
+    this.transformDataAndEmit();
   }
 
   addCustomTemplateItem(items: CustomTemplateItem[]): void {
@@ -225,5 +236,13 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
       price: '',
       sign: '-'
     });
+  }
+
+  goToThirdStep(): void {
+    this.onStepChanged.emit(3);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.data);
   }
 }
