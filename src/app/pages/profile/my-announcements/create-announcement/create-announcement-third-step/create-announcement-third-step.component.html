@@ -38,9 +38,10 @@
           [hideSingleSelectionIndicator]="true"
           [placeholder]="'select.discount.type'| translate"
         >
-          <mat-option [value]="1">Обычная скидка</mat-option>
-          <mat-option [value]="2">Добавить бесплатно</mat-option>
-          <mat-option [value]="3">Скидка на услугу</mat-option>
+          <mat-option [value]="1">{{ 'regular.discount'| translate }}</mat-option>
+          <mat-option [value]="2">{{ 'add.for.free'| translate }}</mat-option>
+          <mat-option [value]="3">{{ 'quantity.discount'| translate }}</mat-option>
+          <mat-option [value]="4">{{ 'service.discount'| translate }}</mat-option>
         </mat-select>
       </label>
 

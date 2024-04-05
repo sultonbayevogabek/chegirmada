@@ -19,7 +19,7 @@ import { OverlayComponent } from '../../../../../core/components/overlay-panel/o
 import { YoutubePlayer } from '../../../../../core/components/youtube-player/youtube-player.component';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { youtubeVideoURL } from '../../../../../core/validators/youtube-video.validator';
-import { productImages } from '../../../../../core/validators/product-images.validator';
+import { arrayMinLength } from '../../../../../core/validators/array-min-length.validator';
 import { ToasterService } from '../../../../../core/services/toaster.service';
 
 @Component({
@@ -80,7 +80,7 @@ export class CreateAnnouncementFirstStepComponent implements OnInit {
     title_uz: new FormControl('Polat Alandar erkaklar ich kiyimlari', [ Validators.required, Validators.maxLength(255) ]),
     title_ru: new FormControl('Нижное беле Полат Алендар', [ Validators.required, Validators.maxLength(255) ]),
     video_link: new FormControl('', [ Validators.maxLength(200), youtubeVideoURL ]),
-    images: new FormControl([], [ productImages ])
+    images: new FormControl([], [ arrayMinLength(1) ])
   });
 
   private _generalService = inject(GeneralService);
