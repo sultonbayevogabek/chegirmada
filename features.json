@@ -20,3 +20,26 @@
     }
   ]
 }
+
+[
+  {
+    "feature": 1,
+    "price": 2000,
+    "value": '8ajklsdas'
+  },
+  {
+    "feature": 1,
+    "price": 2000,
+    "value": '8ajklsdas'
+  },
+  {
+    "feature": 1,
+    "price": 2000,
+    "value": '8ajklsdas'
+  },
+  {
+    "feature": 2,
+    "price": 2000,
+    "value": '8ajklsdas'
+  }
+]

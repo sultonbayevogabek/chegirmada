@@ -1,8 +1,8 @@
 <mat-dialog-content class="new-feature-modal-content">
-  <form class="new-feature-modal-form" [formGroup]="newFeatureForm">
+  <form class="new-feature-modal-form" [formGroup]="newFeatureForm" (ngSubmit)="save()">
     <label class="form-label">
       <span class="form-label-text">{{ (data.dialogType === 'value' ? 'new.value' : 'new.feature')| translate }}</span>
-      <input class="form-input" type="text" [formControlName]="'control'">
+      <input trim class="form-input" type="text" [formControlName]="'control'" [maxlength]="255">
     </label>
 
     <div class="new-feature-modal-submit">
@@ -16,7 +16,6 @@
         [disabled]="newFeatureForm.invalid"
         [actionType]="'submit'"
         [text]="'save'"
-        (click)="save()"
       />
     </div>
   </form>

@@ -7,12 +7,23 @@ export interface FeatureTemplate {
 }
 
 export interface Value {
-  pk: number;
+  pk: number | string;
   value: string;
 }
 
 export interface SelectedValue {
-  feature_value: number;
+  feature_value: number | string;
+  price: string;
+  sign?: string;
+}
+
+export interface CustomTemplate {
+  name: string;
+  items: CustomTemplateItem[];
+}
+
+export interface CustomTemplateItem {
+  value: string;
   price: string;
   sign: string;
 }

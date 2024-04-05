@@ -15,38 +15,40 @@
                 <mat-option [value]="item.pk">{{ item.value }} {{ featureTemplate.value_extra_type }}</mat-option>
               }
 
-              <mat-option (click)="addNewOption()" [value]="null">{{ 'other'| translate }}</mat-option>
+              <mat-option (click)="addNewValue(featureTemplate.values, featureItem)"
+                          [value]="null">{{ 'other'| translate }}
+              </mat-option>
             </mat-select>
 
-              <div class="create-announcement-features-price-difference">
-                <input
-                  class="form-input"
-                  type="number"
-                  [placeholder]="'price'| translate"
-                  [(ngModel)]="featureItem.price"
-                >
+            <div class="create-announcement-features-price-difference">
+              <input
+                class="form-input"
+                type="number"
+                [placeholder]="'price'| translate"
+                [(ngModel)]="featureItem.price"
+              >
 
-                <div class="create-announcement-features-price-difference-toggle">
-                  <div
-                    class="create-announcement-features-price-difference-toggle-item"
-                    [class.active]="featureItem.sign === '-'"
-                    (click)="featureItem.sign = '-'"
-                  >-
-                  </div>
-                  <div
-                    class="create-announcement-features-price-difference-toggle-item"
-                    [class.active]="featureItem.sign === '+'"
-                    (click)="featureItem.sign = '+'"
-                  >+
-                  </div>
+              <div class="create-announcement-features-price-difference-toggle">
+                <div
+                  class="create-announcement-features-price-difference-toggle-item"
+                  [class.active]="featureItem.sign === '-'"
+                  (click)="featureItem.sign = '-'"
+                >-
+                </div>
+                <div
+                  class="create-announcement-features-price-difference-toggle-item"
+                  [class.active]="featureItem.sign === '+'"
+                  (click)="featureItem.sign = '+'"
+                >+
                 </div>
               </div>
+            </div>
 
-              <icon-button
-                [buttonType]="'red'"
-                [icon]="'icon:trash'"
-                (click)="removeFeatureItem(featureTemplate.selected, i)"
-              />
+            <icon-button
+              [buttonType]="'red'"
+              [icon]="'icon:trash'"
+              (click)="removeFeatureItem(featureTemplate.selected, i)"
+            />
           </div>
         }
 
@@ -61,6 +63,63 @@
         }
       </fieldset>
     }
+    @for (customTemplate of customTemplates; track customTemplate) {
+      <fieldset class="create-announcement-features-fieldset">
+        <legend class="create-announcement-features-legend">{{ customTemplate?.name }}</legend>
+
+        @for (item of customTemplate.items; track item; let i = $index) {
+          <div class="create-announcement-features-item">
+            <input
+              class="create-announcement-features-custom-value form-input"
+              maxlength="255"
+              type="text"
+              trim
+              [(ngModel)]="item.value"
+            >
+
+            <div class="create-announcement-features-price-difference">
+              <input
+                class="form-input"
+                type="number"
+                [placeholder]="'price'| translate"
+                [(ngModel)]="item.price"
+              >
+
+              <div class="create-announcement-features-price-difference-toggle">
+                <div
+                  class="create-announcement-features-price-difference-toggle-item"
+                  [class.active]="item.sign === '-'"
+                  (click)="item.sign = '-'"
+                >-
+                </div>
+                <div
+                  class="create-announcement-features-price-difference-toggle-item"
+                  [class.active]="item.sign === '+'"
+                  (click)="item.sign = '+'"
+                >+
+                </div>
+              </div>
+            </div>
+
+            <icon-button
+              [buttonType]="'red'"
+              [icon]="'icon:trash'"
+              (click)="removeCustomTemplateItem(customTemplate.items, i)"
+            />
+          </div>
+        }
+
+        @if (customTemplate.items.length < 5) {
+          <ui-button
+            [actionType]="'button'"
+            [type]="'gray-outline'"
+            [icon]="'icon:outline-plus'"
+            [text]="'add'"
+            (click)="addCustomTemplateItem(customTemplate.items)"
+          />
+        }
+      </fieldset>
+    }
   </div>
 
   <div class="create-announcement-features-footer">
@@ -68,10 +127,11 @@
       [type]="'gray-outline'"
       [icon]="'icon:outline-plus'"
       [text]="'add.new.feature'"
-      (click)="cons()"
+      (click)="addNewTemplate()"
     />
     <ui-button
       [text]="'next'"
+      (click)="generateFeatures()"
     />
   </div>
 </div>
