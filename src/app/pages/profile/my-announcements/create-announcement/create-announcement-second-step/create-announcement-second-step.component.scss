@@ -70,3 +70,8 @@
 .create-announcement-features-footer {
   @include flex-center-between;
 }
+
+.create-announcement-features-new {
+  width: max-content;
+}
+

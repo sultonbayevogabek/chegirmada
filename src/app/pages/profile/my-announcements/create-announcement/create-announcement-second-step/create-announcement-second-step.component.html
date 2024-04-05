@@ -21,32 +21,10 @@
               </mat-option>
             </mat-select>
 
-            @if (i !== 0) {
-              <div class="create-announcement-features-price-difference">
-                <input
-                  class="form-input"
-                  type="number"
-                  [placeholder]="'price.difference'| translate"
-                  [(ngModel)]="featureItem.price"
-                  (blur)="transformDataAndEmit()"
-                >
+            <ng-container
+              *ngTemplateOutlet="priceDifferenceTemplate; context: { $implicit: featureItem, i }"
+            ></ng-container>
 
-                <div class="create-announcement-features-price-difference-toggle">
-                  <div
-                    class="create-announcement-features-price-difference-toggle-item"
-                    [class.active]="featureItem.sign === '-'"
-                    (click)="featureItem.sign = '-'; transformDataAndEmit()"
-                  >-
-                  </div>
-                  <div
-                    class="create-announcement-features-price-difference-toggle-item"
-                    [class.active]="featureItem.sign === '+'"
-                    (click)="featureItem.sign = '+'; transformDataAndEmit()"
-                  >+
-                  </div>
-                </div>
-              </div>
-            }
             <icon-button
               [buttonType]="'red'"
               [icon]="'icon:trash'"
@@ -57,6 +35,7 @@
 
         @if (featureTemplate.selected.length < 5) {
           <ui-button
+            class="create-announcement-features-new"
             [actionType]="'button'"
             [type]="'gray-outline'"
             [icon]="'icon:outline-plus'"
@@ -81,32 +60,9 @@
               (blur)="transformDataAndEmit()"
             >
 
-            @if (i !== 0) {
-              <div class="create-announcement-features-price-difference">
-                <input
-                  class="form-input"
-                  type="number"
-                  [placeholder]="'price.difference'| translate"
-                  [(ngModel)]="item.price"
-                  (blur)="transformDataAndEmit()"
-                >
-
-                <div class="create-announcement-features-price-difference-toggle">
-                  <div
-                    class="create-announcement-features-price-difference-toggle-item"
-                    [class.active]="item.sign === '-'"
-                    (click)="item.sign = '-'; transformDataAndEmit()"
-                  >-
-                  </div>
-                  <div
-                    class="create-announcement-features-price-difference-toggle-item"
-                    [class.active]="item.sign === '+'"
-                    (click)="item.sign = '+'; transformDataAndEmit()"
-                  >+
-                  </div>
-                </div>
-              </div>
-            }
+            <ng-container
+              *ngTemplateOutlet="priceDifferenceTemplate; context: { $implicit: item, i }"
+            ></ng-container>
 
             <icon-button
               [buttonType]="'red'"
@@ -118,6 +74,7 @@
 
         @if (customTemplate.items.length < 5) {
           <ui-button
+            class="create-announcement-features-new"
             [actionType]="'button'"
             [type]="'gray-outline'"
             [icon]="'icon:outline-plus'"
@@ -143,8 +100,31 @@
   </div>
 </div>
 
-<ng-template #requiredErrors let-controlName>
-  @if (secondStepForm.get(controlName).invalid && secondStepForm.get(controlName).touched) {
-    <span class="form-error">{{ 'required.field'| translate }}</span>
+<ng-template #priceDifferenceTemplate let-item let-i="i">
+  @if (i !== 0) {
+    <div class="create-announcement-features-price-difference">
+      <input
+        class="form-input"
+        type="number"
+        [placeholder]="'price.difference'| translate"
+        [(ngModel)]="item.price"
+        (blur)="transformDataAndEmit()"
+      >
+
+      <div class="create-announcement-features-price-difference-toggle">
+        <div
+          class="create-announcement-features-price-difference-toggle-item"
+          [class.active]="item.sign === '-'"
+          (click)="item.sign = '-'; transformDataAndEmit()"
+        >-
+        </div>
+        <div
+          class="create-announcement-features-price-difference-toggle-item"
+          [class.active]="item.sign === '+'"
+          (click)="item.sign = '+'; transformDataAndEmit()"
+        >+
+        </div>
+      </div>
+    </div>
   }
 </ng-template>
