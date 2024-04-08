@@ -25,7 +25,7 @@ import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.
 
 export class ProductHorizontalCardComponent {
   @Input({ required: true }) product: {
-    productCardImageUrl: string;
+    productCardImageUrls: string[];
     productCardBrandLogo: string;
     productCardBrandName: string;
     productCardBrandViews: number;
@@ -35,6 +35,7 @@ export class ProductHorizontalCardComponent {
     productCardLocation: string;
     productCardDate: string;
   }
+  activeIndex = 0;
 
   private _dialog = inject(MatDialog);
 

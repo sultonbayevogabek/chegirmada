@@ -40,10 +40,24 @@
   }
 }
 
+.product-card-hover-blocks {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+}
+
+.product-card-hover-block {
+  flex-grow: 1;
+}
+
 .product-top-indicator {
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
+  z-index: 2;
   padding: 0.3rem 0.5rem;
   border-radius: 0.25rem;
   background-color: $primary-red-color;
@@ -56,6 +70,7 @@
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
+  z-index: 2;
   @include flex-center-center;
   width: 2rem;
   height: 2rem;
@@ -68,6 +83,7 @@
   position: absolute;
   bottom: 0.5rem;
   right: 0.5rem;
+  z-index: 2;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;

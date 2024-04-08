@@ -2,16 +2,25 @@
   <div class="product-horizontal-card-body">
     <div class="product-horizontal-card-images">
       <div class="product-horizontal-card-gallery">
-        <img [ngSrc]="product.productCardImageUrl" [fill]="true" [alt]="product.productCardTitle">
+        <img [ngSrc]="product.productCardImageUrls[activeIndex]" [fill]="true" [alt]="product.productCardTitle">
 
-        <div class="product-horizontal-card-dots">
-          <div class="product-horizontal-card-dot"></div>
-          <div class="product-horizontal-card-dot active"></div>
-          <div class="product-horizontal-card-dot"></div>
-          <div class="product-horizontal-card-dot"></div>
-          <div class="product-horizontal-card-dot"></div>
+        <div class="product-card-dots">
+          @for (item of product.productCardImageUrls; track item; let i = $index) {
+            <div
+              class="product-card-dot"
+              [class.active]="activeIndex === i"
+            ></div>
+          }
         </div>
 
+        <div class="product-card-hover-blocks">
+          @for (item of product.productCardImageUrls; track item; let i = $index) {
+            <div
+              class="product-card-hover-block"
+              (mouseenter)="activeIndex = i"
+            ></div>
+          }
+        </div>
       </div>
 
       <div class="product-top-indicator">
@@ -93,7 +102,7 @@
           </div>
         </div>
 
-        @if (product.productCardImageUrl.includes('1')) {
+        @if (product.productCardImageUrls[activeIndex].includes('1')) {
           <div class="product-horizontal-card-status success">
             <mat-icon [svgIcon]="'icon:success'"/>
             <span>Актив</span>

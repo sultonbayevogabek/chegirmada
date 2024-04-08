@@ -20,7 +20,12 @@ import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.
 export class CompanyProfileProductsComponent {
   products = [
     {
-      productCardImageUrl: '/assets/products/1.jpg',
+      productCardImageUrls: [
+        '/assets/products/1.jpg',
+        '/assets/products/2.jpg',
+        '/assets/products/3.jpg',
+        '/assets/products/4.jpg',
+      ],
       productCardBrandLogo: '/assets/logos/mac-bro.svg',
       productCardBrandName: 'MacBro',
       productCardBrandViews: 124,
@@ -31,7 +36,12 @@ export class CompanyProfileProductsComponent {
       productCardDate: '14 но. – 21 дек.',
     },
     {
-      productCardImageUrl: '/assets/products/2.jpg',
+      productCardImageUrls: [
+        '/assets/products/2.jpg',
+        '/assets/products/1.jpg',
+        '/assets/products/2.jpg',
+        '/assets/products/3.jpg',
+      ],
       productCardBrandLogo: '/assets/logos/mac-bro.svg',
       productCardBrandName: 'MacBro',
       productCardBrandViews: 214,
@@ -42,7 +52,12 @@ export class CompanyProfileProductsComponent {
       productCardDate: '14 но. – 21 дек.',
     },
     {
-      productCardImageUrl: '/assets/products/3.jpg',
+      productCardImageUrls: [
+        '/assets/products/3.jpg',
+        '/assets/products/1.jpg',
+        '/assets/products/2.jpg',
+        '/assets/products/4.jpg',
+      ],
       productCardBrandLogo: '/assets/logos/mac-bro.svg',
       productCardBrandName: 'MacBro',
       productCardBrandViews: 356,
@@ -53,7 +68,12 @@ export class CompanyProfileProductsComponent {
       productCardDate: '14 но. – 21 дек.',
     },
     {
-      productCardImageUrl: '/assets/products/4.jpg',
+      productCardImageUrls: [
+        '/assets/products/4.jpg',
+        '/assets/products/1.jpg',
+        '/assets/products/2.jpg',
+        '/assets/products/3.jpg',
+      ],
       productCardBrandLogo: '/assets/logos/mac-bro.svg',
       productCardBrandName: 'MacBro',
       productCardBrandViews: 433,

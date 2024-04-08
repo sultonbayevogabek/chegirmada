@@ -1,14 +1,24 @@
 <div class="product-card" [routerLink]="['product-details']">
   <div class="product-card-top">
     <div class="product-card-gallery">
-      <img [ngSrc]="product.productCardImageUrl" [fill]="true" [alt]="product.productCardTitle">
+      <img [ngSrc]="product.productCardImageUrls[activeIndex]" [fill]="true" [alt]="product.productCardTitle">
 
       <div class="product-card-dots">
-        <div class="product-card-dot"></div>
-        <div class="product-card-dot active"></div>
-        <div class="product-card-dot"></div>
-        <div class="product-card-dot"></div>
-        <div class="product-card-dot"></div>
+        @for (item of product.productCardImageUrls; track item; let i = $index) {
+          <div
+            class="product-card-dot"
+            [class.active]="activeIndex === i"
+          ></div>
+        }
+      </div>
+
+      <div class="product-card-hover-blocks">
+        @for (item of product.productCardImageUrls; track item; let i = $index) {
+          <div
+            class="product-card-hover-block"
+            (mouseenter)="activeIndex = i"
+          ></div>
+        }
       </div>
 
     </div>

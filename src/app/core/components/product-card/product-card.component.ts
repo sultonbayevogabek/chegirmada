@@ -17,7 +17,7 @@ import { RouterLink } from '@angular/router';
 
 export class ProductCardComponent {
   @Input({ required: true }) product: {
-    productCardImageUrl: string;
+    productCardImageUrls: string[];
     productCardBrandLogo: string;
     productCardBrandName: string;
     productCardBrandViews: number;
@@ -28,8 +28,16 @@ export class ProductCardComponent {
     productCardDate: string;
   }
 
-  productImages = [
-    'https://picsum.photos/id/1/500/500',
-    'https://picsum.photos/id/2/500/500'
-  ]
+  activeIndex = 0;
+
+  // productImages = [
+  //   'https://picsum.photos/id/1/500/500',
+  //   'https://picsum.photos/id/2/500/500',
+  //   'https://picsum.photos/id/3/500/500',
+  //   'https://picsum.photos/id/4/500/500',
+  //   'https://picsum.photos/id/5/500/500',
+  //   'https://picsum.photos/id/6/500/500',
+  //   'https://picsum.photos/id/7/500/500',
+  //   'https://picsum.photos/id/8/500/500',
+  // ]
 }
