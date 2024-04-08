@@ -32,14 +32,14 @@
         }
       </label>
 
-      <label class="my-information-label form-label">
+      <label class="my-information-label form-label" (click)="birthDatePicker.open()">
         <span class="my-information-label-text form-label-text">{{ 'date.of.birth'| translate }}</span>
         <input
           class="my-information-input form-input"
           type="text"
           [readOnly]="true"
           [placeholder]="'dd.mm.yyyy'| translate"
-          [matDatepicker]="fromDatePicker"
+          [matDatepicker]="birthDatePicker"
           [formControlName]="'birthday'"
           [max]="maxBirthday"
         >
@@ -47,9 +47,8 @@
         <mat-icon
           class="my-information-calendar-icon"
           [svgIcon]="'icon:calendar'"
-          (click)="fromDatePicker.open()"
         ></mat-icon>
-        <mat-datepicker #fromDatePicker />
+        <mat-datepicker #birthDatePicker />
       </label>
 
       <label class="my-information-label form-label">

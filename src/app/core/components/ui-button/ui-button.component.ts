@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatRipple } from '@angular/material/core';
 import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
@@ -21,6 +21,7 @@ import { UiButtonTypeModel } from '../../models/ui-button-type.model';
 })
 
 export class UiButtonComponent {
+  @ViewChild('uiButton', { static: true }) uiButton: HTMLButtonElement;
   @Input() text = 'save'
   @Input() textSizeClass = ''
   @Input() full = false;

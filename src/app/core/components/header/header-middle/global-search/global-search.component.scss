@@ -46,8 +46,6 @@
 div.global-search-result.mat-mdc-autocomplete-panel {
   max-height: 400px;
   margin-top: 0.5rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
   border-radius: 0.5rem !important;
   box-shadow: 0 0.25rem 1.5rem 0 rgba(51, 51, 51, 0.12) !important;
 }
@@ -177,4 +175,22 @@ div.global-search-result.mat-mdc-autocomplete-panel {
   color: $dialog-title-black;
   font-size: 1rem;
   font-weight: 600;
+}
+
+.create-announcement-information-tags-list {
+  @include flex-center(0.5rem);
+  padding-top: 1rem;
+}
+
+.create-announcement-information-tags-item {
+  @include flex-center(0.875rem);
+  height: 2.75rem;
+  padding: 0 0.75rem;
+  border-radius: 0.5rem;
+  background-color: $input-background;
+
+  .mat-icon {
+    width: 0.75rem;
+    cursor: pointer;
+  }
 }

@@ -55,7 +55,6 @@ export class CreateAnnouncementSecondStepComponent implements OnInit, OnChanges 
 
   data = {
     features: [],
-    feature_custom_values: [],
     custom_features: []
   };
 
@@ -83,7 +82,6 @@ export class CreateAnnouncementSecondStepComponent implements OnInit, OnChanges 
   transformDataAndEmit(): void {
     this.data = {
       features: [],
-      feature_custom_values: [],
       custom_features: []
     };
 
@@ -120,8 +118,9 @@ export class CreateAnnouncementSecondStepComponent implements OnInit, OnChanges 
             price = '0';
           }
 
-          this.data.feature_custom_values.push({
+          this.data.custom_features.push({
             feature: featureTemplate.pk,
+            name: '',
             value: featureValue.slice(0, idStartIndex),
             price
           });
@@ -142,8 +141,10 @@ export class CreateAnnouncementSecondStepComponent implements OnInit, OnChanges 
         }
 
         this.data.custom_features.push({
-          ...item,
-          price
+          feature: null,
+          value: item.value,
+          price,
+          name: customTemplate.name
         });
       });
     });

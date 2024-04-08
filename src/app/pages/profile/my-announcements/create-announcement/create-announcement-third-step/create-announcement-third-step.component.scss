@@ -12,6 +12,10 @@
   @include grid(repeat(2, 1fr), 1.25rem)
 }
 
+.create-announcement-information-submit {
+  @include flex-center-end()
+}
+
 .create-announcement-new-price-label {
   position: relative;
 }
@@ -19,7 +23,7 @@
 .create-announcement-currency-toggle {
   position: absolute;
   right: 3px;
-  bottom: 3px;
+  top: 22px;
   @include flex-center;
   height: calc(2.75rem - 6px);
   padding: 0.25rem;
@@ -36,6 +40,7 @@
   font-size: 0.75rem;
   color: $dialog-title-black;
   cursor: pointer;
+  user-select: none;
 
   &.active {
     background-color: $primary-blue-color;
@@ -60,22 +65,8 @@
   border-radius: 0.5rem;
 }
 
-.create-announcement-percent-or-price-label {
-  position: relative;
-}
-
 .create-announcement-percent-or-price-input {
   padding-right: 4.5rem;
-  border-radius: 0.5rem 0 0 0.5rem;
-  border-right: 1px solid $border-grey-color;
-}
-
-.create-announcement-percent-or-price-unit {
-  position: absolute;
-  top: 50%;
-  right: 0.875rem;
-  transform: translateY(-50%);
-  color: $secondary-black-color;
 }
 
 .create-announcement-add-free {
@@ -139,8 +130,25 @@
 
 .date-interval-calendar-icon {
   position: absolute;
-  bottom: 1.375rem;
-  right: 1rem;
+  top: 1.15rem;
+  right: 0.75rem;
   transform: translateY(50%);
-  cursor: pointer;
+}
+
+.create-announcement-information-tags-search {
+  @include flex-end-between(1.25rem);
+
+  .form-label {
+    flex-grow: 1;
+  }
+}
+
+.create-announcement-information-tags-add {
+  @include flex-column(0.75rem);
+  align-items: end;
+  width: 20rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: $white-color;
+  box-shadow: 0 4px 24px 0 rgba(176, 176, 176, 0.16), 0 4px 24px 0 rgba(176, 176, 176, 0.16);
 }

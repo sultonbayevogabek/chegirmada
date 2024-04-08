@@ -34,12 +34,12 @@ import {
 })
 
 export class CreateAnnouncementComponent implements OnInit {
-  @HostListener('window:beforeunload', ['$event'])
+  /*@HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
     $event.returnValue = false;
-  }
+  }*/
 
-  currentTab = 3;
+  currentTab = 2;
   readonly Array = Array;
   data = {
     '1': null,
