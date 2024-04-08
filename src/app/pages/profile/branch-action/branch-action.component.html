@@ -67,14 +67,6 @@
                 <mat-option [value]="weekday.id">{{ weekday.name | translate }}</mat-option>
               }
             </mat-select>
-            <input
-              class="branch-action-times-input form-input"
-              [class.invalid]="manageBranchForm.get('working_time_start').invalid && manageBranchForm.get('working_time_start').touched"
-              type="text"
-              placeholder="00:00"
-              [mask]="'Hh:m0'"
-              [formControlName]="'working_time_start'"
-            >
             <mat-select
               class="solid-select"
               [hideSingleSelectionIndicator]="true"
@@ -84,6 +76,14 @@
                 <mat-option [value]="weekday.id">{{ weekday.name | translate }}</mat-option>
               }
             </mat-select>
+            <input
+              class="branch-action-times-input form-input"
+              [class.invalid]="manageBranchForm.get('working_time_start').invalid && manageBranchForm.get('working_time_start').touched"
+              type="text"
+              placeholder="00:00"
+              [mask]="'Hh:m0'"
+              [formControlName]="'working_time_start'"
+            >
             <input
               class="branch-action-times-input form-input"
               [class.invalid]="manageBranchForm.get('working_time_end').invalid && manageBranchForm.get('working_time_end').touched"

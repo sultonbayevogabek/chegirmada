@@ -89,9 +89,9 @@ export class RegisterStoreComponent implements OnInit {
   logoBuffer: string | ArrayBuffer;
   districts: DistrictModel[] = [];
   registerStoreForm = new FormGroup({
-    owner_firstname: new FormControl('', [ Validators.required ]),
-    owner_lastname: new FormControl('', [ Validators.required ]),
-    owner_fathername: new FormControl('', [ Validators.required ]),
+    owner_firstname: new FormControl('', [ Validators.required, Validators.maxLength(32) ]),
+    owner_lastname: new FormControl('', [ Validators.required, Validators.maxLength(32) ]),
+    owner_fathername: new FormControl('', [ Validators.required, Validators.maxLength(32) ]),
     name_uz: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
     shortname: new FormControl('', [ Validators.required, Validators.minLength(3), Validators.maxLength(20), shortname ]),
     is_shortname_free: new FormControl(true, [ Validators.required ]),

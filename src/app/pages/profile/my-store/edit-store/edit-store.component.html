@@ -18,6 +18,7 @@
           [placeholder]="'enter.your.surname'| translate"
           [formControlName]="'owner_lastname'"
           trim
+          [maxlength]="32"
         >
 
         <ng-container
@@ -34,6 +35,7 @@
           [placeholder]="'enter.your.name'| translate"
           [formControlName]="'owner_firstname'"
           trim
+          [maxlength]="32"
         >
         <ng-container
           *ngTemplateOutlet="requiredErrors; context: { $implicit: 'owner_firstname' }"
@@ -49,6 +51,7 @@
           [placeholder]="'enter.your.middlename'| translate"
           [formControlName]="'owner_fathername'"
           trim
+          [maxlength]="32"
         >
         <ng-container
           *ngTemplateOutlet="requiredErrors; context: { $implicit: 'owner_fathername' }"

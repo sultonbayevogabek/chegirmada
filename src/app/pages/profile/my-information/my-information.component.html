@@ -24,6 +24,7 @@
           [class.invalid]="myInfoForm.get('fullname').invalid && myInfoForm.get('fullname').touched"
           trim
           type="text"
+          [maxlength]="32"
           [placeholder]="'name'| translate"
           [formControlName]="'fullname'"
         >

@@ -153,6 +153,11 @@ export class YandexMapsService {
           });
         });
 
+        // Click event
+        this._map.events.add('click',e => {
+          this.setCoordinatesAndEmit(placeMark, e.get('coords'), this._map);
+        });
+
         this._map.controls.add(searchControl);
       });
   }

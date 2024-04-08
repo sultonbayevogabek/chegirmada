@@ -62,7 +62,7 @@ export class MyInformationComponent implements OnInit {
   myInfoForm = new FormGroup({
     phone_number: new FormControl({ value: null, disabled: true }, [ Validators.required ]),
     email: new FormControl(null),
-    fullname: new FormControl(null, [ Validators.required ]),
+    fullname: new FormControl(null, [ Validators.required, Validators.maxLength(32) ]),
     gender: new FormControl(null),
     region: new FormControl(null),
     district: new FormControl(null),
