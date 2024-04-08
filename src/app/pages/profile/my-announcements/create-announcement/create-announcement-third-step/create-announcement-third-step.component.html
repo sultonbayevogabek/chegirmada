@@ -1,6 +1,26 @@
 <div class="create-announcement-third-step">
-  <form class="create-announcement-third-step-inner" [formGroup]="thirdStepForm">
+  <form class="create-announcement-third-step-inner" [formGroup]="thirdStepForm" (ngSubmit)="createAnnouncement()">
     <div class="grid-2">
+      <label class="create-announcement-new-price-label form-label">
+        <span class="form-label-text">{{ 'branches'| translate }} *</span>
+
+        <mat-select
+          class="solid-select"
+          [class.invalid]="thirdStepForm.get('store_branches').invalid && thirdStepForm.get('store_branches').touched"
+          multiple
+          [placeholder]="'branches'| translate"
+          [formControlName]="'store_branches'"
+        >
+          @for(branch of branches; track branch) {
+            <mat-option [value]="branch.pk">{{ branch.name }}</mat-option>
+          }
+        </mat-select>
+
+        <ng-container
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'store_branches' }"
+        />
+      </label>
+
       <label class="create-announcement-new-price-label form-label">
         <span class="form-label-text">{{ 'new.price'| translate }} *</span>
         <input
@@ -229,15 +249,17 @@
     <div class="create-announcement-information-tags">
       <div class="create-announcement-information-tags-search">
         <label class="form-label" matAutocompleteOrigin #globalSearchWrapper="matAutocompleteOrigin">
-          <span class="form-label-text">{{ 'tags'| translate }}</span>
+          <span class="form-label-text">{{ 'tags'| translate }} *</span>
           <input
             class="form-input"
+            [class.invalid]="thirdStepForm.get('tags').invalid && thirdStepForm.get('tags').touched"
             type="search"
             #tagSearchInput
             [placeholder]="'search'| translate"
             [matAutocomplete]="globalSearchInput"
             [matAutocompleteConnectedTo]="globalSearchWrapper"
             (input)="searchTags(tagSearchInput.value)"
+            (blur)="thirdStepForm.get('tags').markAsTouched()"
           >
 
           <mat-autocomplete
@@ -307,8 +329,10 @@
 
     <div class="create-announcement-information-submit">
       <ui-button
+        [text]="'create'"
         [actionType]="'submit'"
         [disabled]="thirdStepForm.invalid"
+        [loading]="thirdStepForm.disabled"
       />
     </div>
   </form>

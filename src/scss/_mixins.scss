@@ -47,6 +47,12 @@
   gap: $gap;
 }
 
+@mixin flex-end($gap: 0) {
+  display: flex;
+  align-items: flex-end;
+  gap: $gap;
+}
+
 @mixin flex-start-between($gap: 0) {
   display: flex;
   align-items: flex-start;

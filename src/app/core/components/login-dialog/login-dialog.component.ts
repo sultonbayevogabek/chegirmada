@@ -17,11 +17,11 @@ import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatPrefix } from '@angular/material/form-field';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { ToasterService } from '../../../core/services/toaster.service';
-import { AuthService } from '../../../core/services/auth.service';
+import { ToasterService } from '../../services/toaster.service';
+import { AuthService } from '../../services/auth.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DecimalPipe } from '@angular/common';
-import { PhoneNumberPipe } from '../../../core/pipes/phone-number.pipe';
+import { PhoneNumberPipe } from '../../pipes/phone-number.pipe';
 import { interval, Subscription } from 'rxjs';
 import { ScrollbarDirective } from '../../directives/scrollbar.directive';
 

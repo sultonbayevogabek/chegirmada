@@ -136,10 +136,10 @@
 }
 
 .create-announcement-information-tags-search {
-  @include flex-end-between(1.25rem);
+  @include flex-end(1.25rem);
 
   .form-label {
-    flex-grow: 1;
+    flex-grow: 0.75;
   }
 }
 

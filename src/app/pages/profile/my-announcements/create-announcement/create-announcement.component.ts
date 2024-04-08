@@ -1,6 +1,6 @@
-import { Component, HostListener, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, HostListener, inject, OnInit } from '@angular/core';
 import { MatRipple } from '@angular/material/core';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { formatDate, NgClass, NgTemplateOutlet } from '@angular/common';
 import { ToasterService } from '../../../../core/services/toaster.service';
 import {
   CreateAnnouncementFirstStepComponent
@@ -14,6 +14,8 @@ import { RouterLink } from '@angular/router';
 import {
   CreateAnnouncementSecondStepComponent
 } from './create-announcement-second-step/create-announcement-second-step.component';
+import { MyAnnouncementsService } from '../../../../core/services/my-announcements.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'create-announcement',
@@ -30,6 +32,9 @@ import {
     RouterLink,
     NgClass,
     CreateAnnouncementSecondStepComponent
+  ],
+  providers: [
+    MyAnnouncementsService
   ]
 })
 
@@ -39,22 +44,19 @@ export class CreateAnnouncementComponent implements OnInit {
     $event.returnValue = false;
   }*/
 
-  currentTab = 2;
+  currentTab = 1;
   readonly Array = Array;
   data = {
     '1': null,
     '2': null,
     '3': null
-  }
+  };
   private _toaster = inject(ToasterService);
+  private _myAnnouncementService = inject(MyAnnouncementsService);
+  private _destroyRef = inject(DestroyRef);
 
 
   ngOnInit(): void {
-  }
-
-  onFormStateChanged({ form, step }: { form: Partial<any>; step: number }): void {
-    console.log(form);
-    this.data[step] = form;
   }
 
   changeTab(tab: number): void {
@@ -75,5 +77,52 @@ export class CreateAnnouncementComponent implements OnInit {
         this.currentTab = tab;
         break;
     }
+  }
+
+  onFormStateChanged({ form, step }: { form: Partial<any>; step: number }): void {
+    this.data[step] = form;
+
+    if (step === 3) {
+      this.createAnnouncement();
+    }
+  }
+
+  createAnnouncement(): void {
+    let data = {
+      ...this.data['1'].getRawValue(),
+      ...this.data['2'],
+      ...this.data['3'].getRawValue()
+    };
+    const formData = new FormData();
+
+    for (const key in data) {
+      const value = data[key];
+
+      if ([ 'start_date', 'end_date' ].includes(key)) {
+        formData.append(key, formatDate(value, 'yyyy-MM-dd', 'ru'));
+      }
+
+      else if (['images',  'store_branches'].includes(key)) {
+        value.forEach((item: any) => {
+          formData.append(key, item);
+        });
+      }
+
+      else if (['custom_features', 'features'].includes(key)) {
+        value.forEach((item: any) => {
+          formData.append(key, JSON.stringify(item));
+        });
+      }
+
+      else {
+        formData.append(key, value);
+      }
+    }
+
+    console.log(1);
+
+    this._myAnnouncementService.createStandardDiscount(formData)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe();
   }
 }

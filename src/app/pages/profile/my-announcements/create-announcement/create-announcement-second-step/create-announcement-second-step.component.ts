@@ -118,11 +118,23 @@ export class CreateAnnouncementSecondStepComponent implements OnInit, OnChanges 
             price = '0';
           }
 
+          const index = this.data.custom_features.findIndex(item => item.feature === featureTemplate.pk);
+
+          if (index > -1) {
+            this.data.custom_features[index].values.push({
+              value: featureValue.slice(0, idStartIndex),
+              price
+            })
+            return;
+          }
+
           this.data.custom_features.push({
             feature: featureTemplate.pk,
             name: '',
-            value: featureValue.slice(0, idStartIndex),
-            price
+            values: [{
+              value: featureValue.slice(0, idStartIndex),
+              price
+            }],
           });
         }
       });
@@ -140,11 +152,23 @@ export class CreateAnnouncementSecondStepComponent implements OnInit, OnChanges 
           price = '0';
         }
 
+        const index = this.data.custom_features.findIndex(item => item.name === customTemplate.name);
+
+        if (index > -1) {
+          this.data.custom_features[index].values.push({
+            value: item.value,
+            price
+          })
+          return;
+        }
+
         this.data.custom_features.push({
           feature: null,
-          value: item.value,
-          price,
-          name: customTemplate.name
+          name: customTemplate.name,
+          values: [{
+            value: item.value,
+            price
+          }],
         });
       });
     });

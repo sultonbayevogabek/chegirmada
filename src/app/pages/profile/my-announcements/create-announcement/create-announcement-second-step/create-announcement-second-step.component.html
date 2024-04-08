@@ -25,11 +25,13 @@
               *ngTemplateOutlet="priceDifferenceTemplate; context: { $implicit: featureItem, i }"
             ></ng-container>
 
-            <icon-button
-              [buttonType]="'red'"
-              [icon]="'icon:trash'"
-              (click)="removeFeatureItem(featureTemplate.selected, i)"
-            />
+            @if (!(i === 0 && featureTemplate.selected.length > 1)) {
+              <icon-button
+                [buttonType]="'red'"
+                [icon]="'icon:trash'"
+                (click)="removeFeatureItem(featureTemplate.selected, i)"
+              />
+            }
           </div>
         }
 
@@ -56,6 +58,7 @@
               maxlength="255"
               type="text"
               trim
+              [placeholder]="'new.feature'| translate"
               [(ngModel)]="item.value"
               (blur)="transformDataAndEmit()"
             >
@@ -64,11 +67,13 @@
               *ngTemplateOutlet="priceDifferenceTemplate; context: { $implicit: item, i }"
             ></ng-container>
 
+            @if (!(i === 0 && customTemplate.items.length > 1)) {
             <icon-button
               [buttonType]="'red'"
               [icon]="'icon:trash'"
               (click)="removeCustomTemplateItem(customTemplate.items, i)"
             />
+            }
           </div>
         }
 

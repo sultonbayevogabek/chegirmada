@@ -22,6 +22,11 @@ import { TagModel } from '../../../../../core/models/tag.model';
 import { OverlayComponent } from '../../../../../core/components/overlay-panel/overlay-panel.component';
 import { ScrollbarDirective } from '../../../../../core/directives/scrollbar.directive';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { MyStoreService } from '../../../../../core/services/my-store.service';
+import { UserModel } from '../../../../../core/models/user.model';
+import { AuthService } from '../../../../../core/services/auth.service';
+import { BranchModel } from '../../../../../core/models/branch.model';
+import { ToasterService } from '../../../../../core/services/toaster.service';
 
 @Component({
   selector: 'create-announcement-third-step',
@@ -53,7 +58,9 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
   ],
   providers: [
     MyAnnouncementsService,
-    provideNgxMask()
+    MyStoreService,
+    provideNgxMask(),
+    ToasterService
   ],
   templateUrl: './create-announcement-third-step.component.html',
   styleUrl: './create-announcement-third-step.component.scss'
@@ -65,6 +72,8 @@ export class CreateAnnouncementThirdStepComponent implements OnInit {
     step: number
   }>();
 
+  @Output() onCreateButtonClicked: EventEmitter<void> = new EventEmitter<void>();
+
   tags: {
     searchedTags: TagModel[];
     selectedTags: TagModel[];
@@ -72,34 +81,46 @@ export class CreateAnnouncementThirdStepComponent implements OnInit {
     searchedTags: [],
     selectedTags: []
   }
-
   customPatterns = {
     B: { pattern: new RegExp('[a-zA-Z_]') }
   };
+  branches: BranchModel[] = [];
 
   private _destroyRef = inject(DestroyRef);
   private _myAnnouncementsService = inject(MyAnnouncementsService);
+  private _myStoreService = inject(MyStoreService);
+  private _authService = inject(AuthService);
+  private _toasterService = inject(ToasterService);
 
   thirdStepForm = new FormGroup({
-    price: new FormControl(null, [ Validators.required ]),
+    price: new FormControl(100000, [ Validators.required ]),
     currency: new FormControl<1 | 2>(1),
-    discount_type: new FormControl('regular'),
-    product_counts: new FormControl(null, [ Validators.required, Validators.max(2147483647), Validators.min(1) ]),
-    remainder: new FormControl(null, [ Validators.required, Validators.max(2147483647) ]),
-    start_date: new FormControl(null, [ Validators.required ]),
-    end_date: new FormControl(null, [ Validators.required ]),
-    tags: new FormControl([], [ arrayMinLength(1) ]),
-    new_tags: new FormControl([]),
+    product_counts: new FormControl<number>(100, [ Validators.required, Validators.max(2147483647), Validators.min(1) ]),
+    remainder: new FormControl<number>(76, [ Validators.required, Validators.max(2147483647) ]),
+    start_date: new FormControl<Date>(new Date(), [ Validators.required ]),
+    end_date: new FormControl<Date>(new Date(), [ Validators.required ]),
+    tags: new FormControl<number[]>([10115], [ arrayMinLength(1) ]),
+    new_tags: new FormControl<string[]>(['telefonlar', 'elektronika'], [ arrayMinLength(1) ]),
+    store_branches: new FormControl<number[]>([], [ arrayMinLength(1) ]),
 
     // regular
-    discount_amount: new FormControl(null, [ Validators.required ]),
+    discount_amount: new FormControl(45, [ Validators.required ]),
     discount_amount_is_percent: new FormControl(true),
 
     // helper fields
+    discount_type: new FormControl<string>('regular'),
     regular_discount_type: new FormControl('percent')
   });
 
   ngOnInit(): void {
+    this._authService.currentUser$
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: user => {
+          this.getBranches(user.store_id);
+        }
+      })
+
     // watch regular_discount_type change
     this.thirdStepForm.get('regular_discount_type').valueChanges
       .pipe(takeUntilDestroyed(this._destroyRef))
@@ -107,15 +128,6 @@ export class CreateAnnouncementThirdStepComponent implements OnInit {
         this.thirdStepForm.get('discount_amount_is_percent')
           .setValue(value === 'percent');
       });
-
-    this.thirdStepForm.valueChanges
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(() => {
-        if (this.thirdStepForm.invalid) {
-          return;
-        }
-        this.onFormStateChanged.emit({ form: this.thirdStepForm, step: 3 });
-      })
   }
 
   changeCurrency(currency: 1 | 2): void {
@@ -130,6 +142,7 @@ export class CreateAnnouncementThirdStepComponent implements OnInit {
     if (search.trim().length < 2) {
       return;
     }
+
     this._myAnnouncementsService.getTags(search)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(res => {
@@ -173,5 +186,33 @@ export class CreateAnnouncementThirdStepComponent implements OnInit {
       this.thirdStepForm.get('new_tags').setValue(newTags);
       newTagInput.value = '';
     }
+  }
+
+  getBranches(storeId: number): void {
+    this._myStoreService.getBranches(storeId)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(res => {
+        this.branches = res;
+      });
+  }
+
+  createAnnouncement(): void {
+    this.thirdStepForm.markAllAsTouched();
+
+    if (this.thirdStepForm.invalid) {
+      this._toasterService.open({
+        message: 'fill.in.the.required.fields',
+        title: 'dear.user',
+        type: 'warning'
+      })
+      return;
+    }
+
+    if (this.thirdStepForm.disabled) {
+      return;
+    }
+
+    this.thirdStepForm.disable();
+    this.onFormStateChanged.emit({ form: this.thirdStepForm, step: 3 });
   }
 }
