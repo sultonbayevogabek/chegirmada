@@ -10,7 +10,7 @@
     [placeholder]="'search'| translate"
   >
   <button class="global-search-location" #locationButton (click)="overlayPanel.openPanel()">
-    <span>{{ selectedRegion| translate }}</span>
+    <span>{{ regions[selectedRegionIndex].name | translate }}</span>
     <mat-icon [svgIcon]="'icon:arrow-down'"></mat-icon>
   </button>
   <button class="global-search-submit">
@@ -52,41 +52,39 @@
   <div
     class="global-search-location-panel"
     overlay-content
-    scrollbar
   >
-    <mat-tab-group [(selectedIndex)]="tabIndex">
-      <mat-tab>
-        <ul class="global-search-location-list">
-          @for (region of regions; track region) {
-            <li class="global-search-location-item" mat-ripple (click)="selectRegion(region)">
-              <div>
-                <span>{{ region | translate }}</span>
+    @if (tab === 'regions') {
+      <ul class="global-search-location-list" scrollbar>
+        @for (region of regions; track region; let i = $index) {
+          <li class="global-search-location-item" mat-ripple (click)="selectRegion(i)">
+            <div>
+              <span>{{ region.name | translate }}</span>
 
-                <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
-              </div>
-            </li>
-          }
-        </ul>
-      </mat-tab>
-      <mat-tab>
-        <div class="global-search-location-region">
-          <button class="global-search-location-back" mat-ripple (click)="backToRegions()">
-            <mat-icon [svgIcon]="'icon:arrow-back'"></mat-icon>
-          </button>
+              <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
+            </div>
+          </li>
+        }
+      </ul>
+    } @else {
+      <div class="global-search-location-region">
+        <icon-button
+          [buttonType]="'gray'"
+          [icon]="'icon:arrow-back'"
+          (click)="backToRegions()"
+        />
 
-          <h2 class="global-search-location-region-name">
-            {{ selectedRegion | translate }}
-          </h2>
-        </div>
-        <ul class="global-search-location-list districts">
-          @for (district of districts; track district) {
-            <li class="global-search-location-item" mat-ripple>
-              <div>{{ district }}</div>
-            </li>
-          }
-        </ul>
-      </mat-tab>
-    </mat-tab-group>
+        <h2 class="global-search-location-region-name">
+          {{ regions[selectedRegionIndex].name | translate }}
+        </h2>
+      </div>
+      <ul class="global-search-location-list districts" scrollbar>
+        @for (district of regions[selectedRegionIndex].districts; track district) {
+          <li class="global-search-location-item" mat-ripple>
+            <div>{{ district.name }}</div>
+          </li>
+        }
+      </ul>
+    }
   </div>
 </overlay-panel>
 

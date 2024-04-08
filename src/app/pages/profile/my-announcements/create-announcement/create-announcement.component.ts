@@ -88,7 +88,7 @@ export class CreateAnnouncementComponent implements OnInit {
   }
 
   createAnnouncement(): void {
-    let data = {
+    const data = {
       ...this.data['1'].getRawValue(),
       ...this.data['2'],
       ...this.data['3'].getRawValue()

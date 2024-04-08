@@ -1,59 +1,79 @@
-export const REGIONS = [
+import { DistrictModel } from '../models/district.model';
+
+export const REGIONS: {
+  id: number;
+  name: string;
+  districts: DistrictModel[];
+}[] = [
   {
     id: 1,
-    name: 'karakalpakstan'
+    name: 'karakalpakstan',
+    districts: []
   },
   {
     id: 2,
-    name: 'andijan'
+    name: 'andijan',
+    districts: []
   },
   {
     id: 3,
-    name: 'bukhara'
+    name: 'bukhara',
+    districts: []
   },
   {
     id: 4,
-    name: 'jizzakh'
+    name: 'jizzakh',
+    districts: []
   },
   {
     id: 5,
-    name: 'kashkadarya'
+    name: 'kashkadarya',
+    districts: []
   },
   {
     id: 6,
-    name: 'navoiy'
+    name: 'navoiy',
+    districts: []
   },
   {
     id: 7,
-    name: 'namangan'
+    name: 'namangan',
+    districts: []
   },
   {
     id: 8,
-    name: 'samarkand'
+    name: 'samarkand',
+    districts: []
   },
   {
     id: 9,
-    name: 'surkhandarya'
+    name: 'surkhandarya',
+    districts: []
   },
   {
     id: 10,
-    name: 'sirdarya'
+    name: 'sirdarya',
+    districts: []
   },
   {
     id: 11,
-    name: 'tashkent.region'
+    name: 'tashkent.region',
+    districts: []
   },
   {
     id: 12,
-    name: 'fergana'
+    name: 'fergana',
+    districts: []
   },
   {
     id: 13,
-    name: 'khorezm'
+    name: 'khorezm',
+    districts: []
   },
   {
     id: 14,
-    name: 'tashkent'
+    name: 'tashkent',
+    districts: []
   }
 ];
 

@@ -1,12 +1,15 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, DestroyRef, inject, ViewEncapsulation } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
-import { MatTabsModule } from '@angular/material/tabs';
 import { MatRippleModule } from '@angular/material/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { OverlayComponent } from '../../../overlay-panel/overlay-panel.component';
 import { ScrollbarDirective } from '../../../../directives/scrollbar.directive';
+import { REGIONS } from '../../../../constants/regions';
+import { GeneralService } from '../../../../services/general.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { IconButtonComponent } from '../../../icon-button/icon-button.component';
 
 @Component({
   selector: 'global-search',
@@ -17,13 +20,16 @@ import { ScrollbarDirective } from '../../../../directives/scrollbar.directive';
     MatAutocompleteModule,
     NgOptimizedImage,
     OverlayComponent,
-    MatTabsModule,
     MatRippleModule,
     NgTemplateOutlet,
     ScrollbarDirective,
-    TranslateModule
+    TranslateModule,
+    IconButtonComponent
   ],
   standalone: true,
+  providers: [
+    GeneralService
+  ],
   encapsulation: ViewEncapsulation.None
 })
 
@@ -32,30 +38,31 @@ export class GlobalSearchComponent {
     'Fifth Avenue', 'Champs-Élysées', 'Lombard Street', 'Abbey Road',
     'Fifth Avenue' ];
 
-  tabIndex = 0;
-  selectedRegion = 'whole.country';
-  regions = [
-    'all.regions',
-    'karakalpakstan',
-    'andijan', 'bukhara', 'jizzakh', 'kashkadarya', 'namangan', 'samarkand',
-    'surkhandarya', 'sirdarya', 'tashkent.region', 'fergana',
-    'khorezm', 'tashkent'
-  ];
+  tab: 'regions' | 'districts' = 'regions';
+  selectedRegionIndex = 0;
+  regions = REGIONS;
 
-  districts = [
-    'Тупроккалъа',
-    'Шовот',
-    'Хонка', 'Урганч', 'Гурлан',
-    'Богот', 'Хазарасп', 'Янгибозор', 'Янгиарик',
-    'Кушкупир', 'Хива',
-  ];
+  private _generalService = inject(GeneralService);
+  private _destroyRef = inject(DestroyRef);
 
-  selectRegion(region: string): void {
-    this.selectedRegion = region;
-    this.tabIndex = 1;
+  selectRegion(index: number): void {
+    this.selectedRegionIndex = index;
+
+    if (!this.regions[index].districts.length) {
+      this._generalService.getDistrictsByRegionId(this.regions[index].id)
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe({
+          next: districts => {
+            this.regions[index].districts = districts;
+            this.tab = 'districts';
+          }
+        })
+      return
+    }
+    this.tab = 'districts';
   }
 
   backToRegions(): void {
-    this.tabIndex = 0;
+    this.tab = 'regions';
   }
 }

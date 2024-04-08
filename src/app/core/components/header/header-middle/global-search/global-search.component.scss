@@ -109,6 +109,7 @@ div.global-search-result.mat-mdc-autocomplete-panel {
 }
 
 .global-search-location-panel {
+  @include flex-column;
   width: 16.5rem;
   height: 25rem;
   margin-top: 0.5rem;
@@ -123,6 +124,7 @@ div.global-search-result.mat-mdc-autocomplete-panel {
 }
 
 .global-search-location-list {
+  flex-grow: 1;
   padding: 0.5rem 0;
 
   &.districts {
@@ -136,7 +138,7 @@ div.global-search-result.mat-mdc-autocomplete-panel {
 
   div {
     @include flex-center-between;
-    padding: 0.75rem 0;
+    padding: 1rem 0;
     color: $dialog-title-black;
     font-size: 0.875rem;
     font-weight: 500;
@@ -156,19 +158,9 @@ div.global-search-result.mat-mdc-autocomplete-panel {
 }
 
 .global-search-location-region {
-  @include flex-center;
+  @include flex-center(0.75rem);
   padding: 0.75rem 1rem;
   border-bottom: 1px solid $border-grey-color;
-}
-
-.global-search-location-back {
-  @include flex-center-center;
-  width: 2rem;
-  height: 2rem;
-  margin-right: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 50%;
-  background-color: $input-background;
 }
 
 .global-search-location-region-name {
