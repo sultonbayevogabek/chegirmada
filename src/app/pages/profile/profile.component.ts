@@ -72,12 +72,12 @@ export class ProfileComponent implements OnInit {
       name: 'liked.announcements',
       isStoreRequired: false
     },
-    {
-      icon: 'icon:settings',
-      link: 'settings',
-      name: 'settings',
-      isStoreRequired: false
-    }
+    // {
+    //   icon: 'icon:settings',
+    //   link: 'settings',
+    //   name: 'settings',
+    //   isStoreRequired: false
+    // }
   ];
 
   ngOnInit(): void {

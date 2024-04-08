@@ -5,6 +5,7 @@
 >
   <mat-icon class="notifications-icon" [svgIcon]="'icon:bell'"></mat-icon>
 </button>
+
 <overlay-panel [originElement]="notificationButton" #overlayPanel>
   <div
     overlay-content
@@ -28,7 +29,7 @@
 </overlay-panel>
 
 <ng-template #notificationsList>
-  <ul class="notifications-list">
+  <ul class="notifications-list" scrollbar>
     @for (index of [ 1, 2, 3, 4, 5, 6, 7, 8 ]; track index) {
       <ng-container
         *ngTemplateOutlet="notificationsItem; context: { $implicit: index }"

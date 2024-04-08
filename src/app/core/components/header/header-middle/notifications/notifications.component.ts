@@ -3,6 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatRipple } from '@angular/material/core';
 import { OverlayComponent } from '../../../overlay-panel/overlay-panel.component';
+import { ScrollbarDirective } from '../../../../directives/scrollbar.directive';
 
 @Component({
   selector: 'notifications',
@@ -13,13 +14,15 @@ import { OverlayComponent } from '../../../overlay-panel/overlay-panel.component
     OverlayComponent,
     NgOptimizedImage,
     MatRipple,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    ScrollbarDirective
   ],
   standalone: true
 })
 
 export class NotificationsComponent implements OnInit{
   @ViewChild('overlayPanel', { static: true }) overlayPanel: OverlayComponent;
+
   ngOnInit() {
   }
 }
