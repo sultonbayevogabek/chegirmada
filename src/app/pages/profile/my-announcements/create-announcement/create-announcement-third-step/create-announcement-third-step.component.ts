@@ -212,7 +212,6 @@ export class CreateAnnouncementThirdStepComponent implements OnInit {
       return;
     }
 
-    this.thirdStepForm.disable();
     this.onFormStateChanged.emit({ form: this.thirdStepForm, step: 3 });
   }
 }

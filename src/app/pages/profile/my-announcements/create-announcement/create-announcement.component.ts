@@ -93,6 +93,7 @@ export class CreateAnnouncementComponent implements OnInit {
       ...this.data['2'],
       ...this.data['3'].getRawValue()
     };
+    console.log(data);
     const formData = new FormData();
 
     for (const key in data) {
@@ -118,8 +119,6 @@ export class CreateAnnouncementComponent implements OnInit {
         formData.append(key, value);
       }
     }
-
-    console.log(1);
 
     this._myAnnouncementService.createStandardDiscount(formData)
       .pipe(takeUntilDestroyed(this._destroyRef))

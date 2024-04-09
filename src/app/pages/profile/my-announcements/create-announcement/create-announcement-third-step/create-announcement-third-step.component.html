@@ -202,7 +202,7 @@
 
     <div class="create-announcement-information-field date-interval">
       <label class="form-label date-interval-label" (click)="startDatePicker.open()">
-        <span class="create-announcement-information-field-title form-label-text">{{ 'start.date'| translate }}</span>
+        <span class="create-announcement-information-field-title form-label-text">{{ 'start.date'| translate }} *</span>
         <input
           class="create-announcement-information-input form-input"
           [class.invalid]="thirdStepForm.get('start_date').invalid && thirdStepForm.get('start_date').touched"
@@ -224,7 +224,7 @@
       </label>
 
       <label class="form-label date-interval-label" (click)="endDatePicker.open()">
-        <span class="create-announcement-information-field-title form-label-text">{{ 'end.date'| translate }}</span>
+        <span class="create-announcement-information-field-title form-label-text">{{ 'end.date'| translate }} *</span>
         <input
           class="create-announcement-information-input form-input"
           [class.invalid]="thirdStepForm.get('end_date').invalid && thirdStepForm.get('end_date').touched"

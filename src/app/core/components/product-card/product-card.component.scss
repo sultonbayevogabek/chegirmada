@@ -57,7 +57,7 @@
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
-  z-index: 2;
+  z-index: 1;
   padding: 0.3rem 0.5rem;
   border-radius: 0.25rem;
   background-color: $primary-red-color;
@@ -70,7 +70,7 @@
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  z-index: 2;
+  z-index: 1;
   @include flex-center-center;
   width: 2rem;
   height: 2rem;
