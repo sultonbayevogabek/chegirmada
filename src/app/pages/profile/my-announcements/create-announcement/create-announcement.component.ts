@@ -93,8 +93,12 @@ export class CreateAnnouncementComponent implements OnInit {
       ...this.data['2'],
       ...this.data['3'].getRawValue()
     };
-    console.log(data);
+    delete data.images;
+    console.log('DATA', data);
     const formData = new FormData();
+
+    // data.start_date = formatDate(data.start_date, 'yyyy-MM-dd', 'ru')
+    // data.end_date = formatDate(data.end_date, 'yyyy-MM-dd', 'ru')
 
     for (const key in data) {
       const value = data[key];
@@ -110,9 +114,7 @@ export class CreateAnnouncementComponent implements OnInit {
       }
 
       else if (['custom_features', 'features'].includes(key)) {
-        value.forEach((item: any) => {
-          formData.append(key, JSON.stringify(item));
-        });
+        formData.append(key, JSON.stringify(value));
       }
 
       else {

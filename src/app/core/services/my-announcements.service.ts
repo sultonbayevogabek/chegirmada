@@ -17,7 +17,7 @@ export class MyAnnouncementsService {
     }>(this._host + 'tags/search/', { search });
   }
 
-  createStandardDiscount(payload: FormData): Observable<any> {
+  createStandardDiscount(payload: any): Observable<any> {
     return this._httpClient.post<Observable<any>>(this._host + 'discounts/create/standard/', payload);
   }
 }
