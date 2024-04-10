@@ -1,0 +1,45 @@
+@import "variables";
+@import "mixins";
+
+.rate-brand {
+  @include flex-center(0.75rem);
+  padding: 1.5rem;
+}
+
+.rate-brand-logo {
+  position: relative;
+  width: 3rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: $input-background;
+  overflow: hidden;
+}
+
+.rate-brand-name {
+  margin-bottom: 0.125rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $dialog-title-black;
+}
+
+.rate-brand-shortname {
+  font-size: 0.875rem;
+  color: $secondary-text-color;
+}
+
+.rate-stars {
+  @include flex-center-center(1rem);
+
+  svg {
+    cursor: pointer;
+  }
+}
+
+.rate-form {
+  @include flex-column(1.5rem);
+  padding: 0 1.5rem 1.5rem;
+}
+
+.rate-submit {
+  @include flex-center-end;
+}

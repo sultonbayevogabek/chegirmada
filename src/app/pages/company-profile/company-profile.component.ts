@@ -7,6 +7,8 @@ import { MatRipple } from '@angular/material/core';
 import { UiButtonComponent } from '../../core/components/ui-button/ui-button.component';
 import { YoutubePlayer } from '../../core/components/youtube-player/youtube-player.component';
 import { TabsComponent } from '../../core/components/tabs/tabs.component';
+import { CompanyProfileRateComponent } from './company-profile-rate/company-profile-rate.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'company-profile',
@@ -18,7 +20,7 @@ import { TabsComponent } from '../../core/components/tabs/tabs.component';
     UiButtonComponent,
     YoutubePlayer,
     TabsComponent,
-    MatRipple
+    MatRipple,
   ],
   standalone: true
 })
@@ -46,6 +48,7 @@ export class CompanyProfileComponent implements OnInit {
 
   private _activatedRoute = inject(ActivatedRoute);
   private _destroyRef = inject(DestroyRef);
+  private _dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this._activatedRoute.queryParams
@@ -55,5 +58,20 @@ export class CompanyProfileComponent implements OnInit {
           this.mode = queryParams['mode'];
         }
       })
+
+
+  }
+
+  openRateModal(): void {
+    this._dialog.open(CompanyProfileRateComponent, {
+      width: '25rem',
+      maxWidth: '100%',
+      data: {
+        name: '"Korzinka" MChJ',
+        shortname: '@korzinka',
+        logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDUWN4Hx9ybuBWqJkuiE1luauJRdmZqtPsJlAIzTv5ng&s',
+        storeId: 3
+      }
+    })
   }
 }

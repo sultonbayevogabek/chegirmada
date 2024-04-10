@@ -1,0 +1,47 @@
+<div class="rate-brand">
+  <div class="rate-brand-logo">
+    <img-wrapper [src]="data.logo"/>
+  </div>
+
+  <div>
+    <div class="rate-brand-name">{{ data.name }}</div>
+    <div class="rate-brand-shortname">{{ data.shortname }}</div>
+  </div>
+</div>
+
+<mat-dialog-content class="complaint-modal-content">
+  <form class="rate-form" [formGroup]="rateForm" (ngSubmit)="rateCompany()">
+    <div class="rate-stars">
+      @for (i of [ 1, 2, 3, 4, 5 ]; track i) {
+        <svg
+          (click)="rateForm.get('value').setValue(i)"
+          width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M9.20124 47.6404C10.0149 48.2617 10.9981 48.0664 12.2017 47.1434L24 38.0911L35.7983 47.1434C37.0019 48.0664 38.002 48.2617 38.7988 47.6404C39.5785 47.0192 39.765 45.9897 39.2904 44.4987L34.6626 29.9794L46.5457 21.0335C47.7492 20.1283 48.2239 19.1875 47.9018 18.1935C47.5967 17.2351 46.7152 16.7203 45.1895 16.7381L30.6111 16.8268L26.1529 2.25422C25.6952 0.745491 24.9832 0 24 0C23.0168 0 22.3048 0.745491 21.8471 2.25422L17.3889 16.8268L2.81048 16.7381C1.30178 16.7203 0.403349 17.2351 0.0982194 18.1935C-0.223861 19.1875 0.250784 20.1283 1.45435 21.0335L13.3374 29.9794L8.72659 44.4987C8.235 45.9897 8.42146 47.0192 9.20124 47.6404Z"
+            [attr.fill]="rateForm.get('value').value >= i ? '#FFBD00' : '#D9DBE8'"
+          />
+        </svg>
+      }
+    </div>
+    <label class="form-label">
+      <span class="form-label-text">{{ 'comment'| translate }}</span>
+
+      <textarea
+        [formControlName]="'comment'"
+        trim
+        class="form-textarea"
+        [placeholder]="'enter.your.comment'| translate"
+        [maxlength]="255"
+      ></textarea>
+    </label>
+
+    <div class="rate-submit">
+      <ui-button
+        [actionType]="'submit'"
+        [text]="'send'"
+        [disabled]="rateForm.invalid"
+        [loading]="rateForm.disabled"
+      />
+    </div>
+  </form>
+</mat-dialog-content>

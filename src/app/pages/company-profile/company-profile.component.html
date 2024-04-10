@@ -195,7 +195,10 @@
                 использующим сервис.</p>
             </div>
 
-            <ui-button [text]="'rate'"/>
+            <ui-button
+              [text]="'rate'"
+              (click)="openRateModal()"
+            />
           </div>
 
           <div class="company-profile-rate-body">
