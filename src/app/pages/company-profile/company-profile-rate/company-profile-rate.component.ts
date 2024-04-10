@@ -53,7 +53,7 @@ export class CompanyProfileRateComponent implements OnInit {
 
   rateForm = new FormGroup({
     comment: new FormControl<string>('', [ Validators.maxLength(255) ]),
-    value: new FormControl<number>(0),
+    value: new FormControl<number>(0, [Validators.min(1)]),
     store: new FormControl<number>(null, [ Validators.required ])
   })
 
