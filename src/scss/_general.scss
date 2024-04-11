@@ -301,3 +301,73 @@ div.mat-mdc-select-panel {
   background-color: $primary-blue-color !important;
   border-color: $primary-blue-color !important;
 }
+
+/*
+  MAT-TAB
+*/
+.mat-mdc-tab-header-pagination {
+  aspect-ratio: 1;
+}
+
+.mat-mdc-tab-header-pagination-chevron {
+  display: none;
+}
+
+.mat-mdc-tab-header-pagination-before, .mat-mdc-tab-header-pagination-after {
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 0.5rem !important;
+  border-radius: 0.25rem !important;
+  background-color: $input-background !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.mat-mdc-tab-header-pagination-before {
+  background-image: url("/assets/icons/arrow-left.svg") !important;
+}
+
+.mat-mdc-tab-header-pagination-after {
+  background-image: url("/assets/icons/arrow-right.svg") !important;
+}
+
+/*
+  MEDIA
+*/
+@include media(1536px) {
+  .container {
+    max-width: 85rem;
+  }
+}
+
+@include media(1440px) {
+  .container {
+    max-width: 80rem;
+  }
+}
+
+@include media(1366px) {
+  .container {
+    max-width: 75rem;
+  }
+}
+
+@include media(1280px) {
+  .container {
+    max-width: 70rem;
+  }
+}
+
+@include media(1180px) {
+  .container {
+    max-width: 65rem;
+  }
+}
+
+@include media(1060px) {
+  .container {
+    max-width: 60rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}

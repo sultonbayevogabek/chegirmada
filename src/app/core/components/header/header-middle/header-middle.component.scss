@@ -118,3 +118,34 @@
   width: 0;
   left: 50%;
 }
+
+@include media(1536px) {
+
+}
+
+@include media(1440px) {
+
+}
+
+@include media(1366px) {
+
+}
+
+@include media(1280px) {
+
+}
+
+@include media(1180px) {
+  .header-middle-search {
+    width: 100%;
+    order: 1;
+  }
+
+  .header-middle-notifications {
+    margin-left: auto;
+  }
+}
+
+@include media(1060px) {
+
+}
