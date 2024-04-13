@@ -1,9 +1,9 @@
 <nav class="header-bottom-nav">
   <div class="container">
-    <ul class="header-bottom-ul">
+    <ul class="header-bottom-ul" mat-tab-nav-bar color="primary">
       @for (navItem of navs; track navItem) {
-        <li class="header-bottom-li">
-          <a class="header-bottom-link" [routerLink]="['/category/list-view']">
+        <li class="header-bottom-li" disableRipple mat-tab-link [routerLink]="['/category/list-view']">
+          <a class="header-bottom-link">
             {{ navItem| translate }}
           </a>
         </li>

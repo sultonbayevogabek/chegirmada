@@ -1,13 +1,19 @@
 @import "variables";
 @import "mixins";
 
-.header-bottom-ul {
-  @include flex-center-between;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+::ng-deep {
+  .mat-mdc-tab-link:hover .mdc-tab__ripple::before {
+    display: none;
+  }
+}
+
+.header-bottom-li {
+  height: 2rem !important;
 }
 
 .header-bottom-link {
+  font-family: "Inter", Arial, sans-serif;
+  letter-spacing: 0;
   color: $secondary-black-color;
   font-size: 0.875rem;
 

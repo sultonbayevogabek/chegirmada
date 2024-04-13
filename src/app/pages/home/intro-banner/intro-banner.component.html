@@ -14,9 +14,11 @@
           </button>
         </div>
       </div>
+
       <div class="banner-right banner-right-top">
         <img src="/assets/banner/top.jpg" alt="">
       </div>
+
       <div class="banner-right banner-right-bottom">
         <img src="/assets/banner/bottom.jpg" alt="">
       </div>
@@ -29,7 +31,7 @@
     @for (imgUrl of carouselImages; track imgUrl) {
       <ng-template carouselSlide>
         <div class="banner-slide">
-          <img [src]="imgUrl" [alt]="imgUrl" [height]="952">
+          <img [src]="imgUrl" [alt]="imgUrl">
         </div>
       </ng-template>
     }

@@ -29,9 +29,35 @@ export class CategoriesCarouselComponent {
     items: 7,
     nav: false,
     navText: [ '', '' ],
-    autoplay: false,
+    autoplay: true,
     lazyLoad: true,
-    margin: 16
+    margin: 20,
+    responsive: {
+      1536: {
+        items: 7,
+        margin: 20
+      },
+      1440: {
+        items: 6,
+        margin: 20
+      },
+      1366: {
+        items: 5,
+        margin: 16
+      },
+      992: {
+        items: 4,
+        margin: 16
+      },
+      576: {
+        items: 3,
+        margin: 14
+      },
+      0: {
+        items: 2,
+        margin: 14
+      }
+    }
   };
 
   categories = [

@@ -26,6 +26,7 @@
   "change.branch.information": "Изменить информацию о филиале",
   "changes.successfully.changed": "Изменения успешно сохранены",
   "child": "Ребенок",
+  "comment": "Комментарий",
   "complaining": "Жалоба",
   "complaint.text": "Текст жалобы",
   "complaint.type": "Тип жалобы",
@@ -65,6 +66,7 @@
   "enter.store.name": "Введите название магазина",
   "enter.title": "Введите заголовок",
   "enter.valid.email": "Введите, пожалуйста, действительный адрес электронной почты",
+  "enter.your.comment": "Введите свой комментарий",
   "enter.your.email": "Введите адрес электронной почты",
   "enter.your.middlename": "Введите свой отчество",
   "enter.your.name": "Введите ваше имя",
@@ -179,6 +181,7 @@
   "tags": "Теги",
   "tashkent": "Ташкент",
   "tashkent.region": "Ташкентская область",
+  "thanks.for.leaving.comment": "Спасибо за комментарий",
   "the.best.announcements": "Лучшие объявления",
   "thu": "Чет",
   "title": "Заголовок",
@@ -201,5 +204,6 @@
   "you.changed.location.in.address.field.address.given.by.map.is.written": "Вы изменили точку местоположения на карте. В поле адреса пишется адрес, указанный на карте.",
   "you.do.not.have.registered.store": "У вас нет зарегистрированного магазина",
   "you.have.timed.out.to.enter.your.verification.code": "У вас истекло время для ввода кода подтверждения",
+  "you.must.be.authorized.leave.comment": "Вы должны быть авторизованы для публикации комментария",
   "your.complaint.has.been.successfully.submitted": "Ваша жалоба успешно отправлена"
 }

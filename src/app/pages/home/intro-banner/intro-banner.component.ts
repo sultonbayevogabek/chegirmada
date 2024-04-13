@@ -30,7 +30,7 @@ export class IntroBannerComponent {
     items: 1,
     nav: false,
     navText: ['', ''],
-    autoplay: true
+    autoplay: false
   };
 
   carouselImages = [
@@ -39,7 +39,7 @@ export class IntroBannerComponent {
     '/assets/banner/banner.jpg',
     '/assets/banner/banner.jpg',
     '/assets/banner/banner.jpg',
-    '/assets/banner/banner.jpg',
+    '/assets/banner/banner.jpg'
   ]
 
   navigateCarousel(direction: 'next' | 'prev'): void {

@@ -80,7 +80,7 @@ export class CreateAnnouncementFirstStepComponent implements OnInit {
     title_uz: new FormControl('Polat Alandar erkaklar ich kiyimlari', [ Validators.required, Validators.maxLength(255) ]),
     title_ru: new FormControl('Нижное беле Полат Алендар', [ Validators.required, Validators.maxLength(255) ]),
     video_link: new FormControl('', [ Validators.maxLength(200), youtubeVideoURL ]),
-    images: new FormControl([])
+    images: new FormControl([], [arrayMinLength(1)])
   });
 
   private _generalService = inject(GeneralService);

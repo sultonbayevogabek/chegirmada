@@ -1,5 +1,15 @@
 @import "mixins";
 
 .products-grid {
-  @include grid(repeat(4, 1fr), 1.5rem)
+  @include grid(repeat(4, 1fr), 1.25rem)
+}
+
+@include media(1280px) {
+  .products-grid {
+    @include grid(repeat(3, 1fr), 1rem);
+
+    & > *:nth-child(n+4) {
+      display: none;
+    }
+  }
 }
