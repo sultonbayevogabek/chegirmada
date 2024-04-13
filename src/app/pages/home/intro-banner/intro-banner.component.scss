@@ -2,6 +2,7 @@
 @import "../../../../scss/mixins";
 
 .banner-wrapper {
+  aspect-ratio: 2.9;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -66,6 +67,7 @@
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 1rem;
     grid-row-gap: 1rem;
+    aspect-ratio: 1.5;
   }
 
   .banner-carousel {
