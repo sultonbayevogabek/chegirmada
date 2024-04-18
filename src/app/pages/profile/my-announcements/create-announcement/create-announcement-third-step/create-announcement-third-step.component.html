@@ -1,345 +1,135 @@
-<div class="create-announcement-third-step">
-  <form class="create-announcement-third-step-inner" [formGroup]="thirdStepForm" (ngSubmit)="createAnnouncement()">
-    <div class="grid-2">
-      <label class="create-announcement-new-price-label form-label">
-        <span class="form-label-text">{{ 'branches'| translate }} *</span>
+<div class="create-announcement-features">
+  <div class="create-announcement-features-form">
+    @for (featureTemplate of featureTemplates; track featureTemplate) {
+      <fieldset class="create-announcement-features-fieldset">
+        <legend class="create-announcement-features-legend">{{ featureTemplate?.name }}</legend>
 
-        <mat-select
-          class="solid-select"
-          [class.invalid]="thirdStepForm.get('store_branches').invalid && thirdStepForm.get('store_branches').touched"
-          multiple
-          [placeholder]="'branches'| translate"
-          [formControlName]="'store_branches'"
-        >
-          @for(branch of branches; track branch) {
-            <mat-option [value]="branch.pk">{{ branch.name }}</mat-option>
-          }
-        </mat-select>
-
-        <ng-container
-          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'store_branches' }"
-        />
-      </label>
-
-      <label class="create-announcement-new-price-label form-label">
-        <span class="form-label-text">{{ 'new.price'| translate }} *</span>
-        <input
-          class="form-input"
-          [class.invalid]="thirdStepForm.get('price').invalid && thirdStepForm.get('price').touched"
-          type="number"
-          [placeholder]="'enter.new.price'| translate"
-          [formControlName]="'price'"
-        >
-
-        <div class="create-announcement-currency-toggle">
-          <div
-            class="create-announcement-currency-toggle-item"
-            [class.active]="thirdStepForm.get('currency').value === 1"
-            (click)="changeCurrency(1)">UZS
-          </div>
-          <div
-            class="create-announcement-currency-toggle-item"
-            [class.active]="thirdStepForm.get('currency').value === 2"
-            (click)="changeCurrency(2)">USD
-          </div>
-        </div>
-
-        <ng-container
-          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'price' }"
-        />
-      </label>
-    </div>
-
-    <div
-      class="create-announcement-discount-combinations"
-      [ngClass]="{
-          'grid-2': ['regular', 'for-free'].includes(thirdStepForm.get('discount_type').value),
-          'grid-4': ['quantity', 'service'].includes(thirdStepForm.get('discount_type').value),
-        }"
-    >
-      <label class="form-label">
-        <span class="form-label-text">{{ 'discount.type'| translate }}</span>
-
-        <mat-select
-          class="solid-select"
-          [formControlName]="'discount_type'"
-          [hideSingleSelectionIndicator]="true"
-          [placeholder]="'select.discount.type'| translate"
-        >
-          <mat-option [value]="'regular'">{{ 'regular.discount'| translate }}</mat-option>
-          <mat-option [value]="'for-free'">{{ 'add.for.free'| translate }}</mat-option>
-          <mat-option [value]="'quantity'">{{ 'quantity.discount'| translate }}</mat-option>
-          <mat-option [value]="'service'">{{ 'service.discount'| translate }}</mat-option>
-        </mat-select>
-      </label>
-
-      @if (thirdStepForm.get('discount_type').value === 'regular') {
-        <div class="create-announcement-percent-or-price">
-          <span class="form-label-text">{{ 'price.or.percent'| translate }} *</span>
-          <div class="create-announcement-percent-or-price-inner">
-            <label class="create-announcement-percent-or-price-label">
-              <input
-                class="create-announcement-percent-or-price-input form-input"
-                [class.invalid]="thirdStepForm.get('discount_amount').invalid && thirdStepForm.get('discount_amount').touched"
-                type="number"
-                [placeholder]="'price.or.percent'| translate"
-                [formControlName]="'discount_amount'"
-              >
-            </label>
-
+        @for (featureItem of featureTemplate.selected; track featureItem; let i = $index) {
+          <div class="create-announcement-features-item">
             <mat-select
-              class="solid-select"
-              [hideSingleSelectionIndicator]="true"
-              [formControlName]="'regular_discount_type'"
+              class="create-announcement-features-select solid-select"
+              [placeholder]="featureTemplate?.name"
+              [(ngModel)]="featureItem.feature_value"
+              (ngModelChange)="transformDataAndEmit()"
             >
-              <mat-option [value]="'percent'">{{ 'percent'| translate }} (%)</mat-option>
+              @for (item of featureTemplate.values; track item) {
+                <mat-option [value]="item.pk">{{ item.value }} {{ featureTemplate.value_extra_type }}</mat-option>
+              }
 
-              @if (thirdStepForm.get('currency').value === 1) {
-                <mat-option [value]="'uzs'">UZS ({{ 'sum'| translate }})</mat-option>
-              }
-              @if (thirdStepForm.get('currency').value === 2) {
-                <mat-option [value]="'usd'">USD ({{ 'dollar'| translate }})</mat-option>
-              }
+              <mat-option (click)="addNewValue(featureTemplate.values, featureItem)"
+                          [value]="null">{{ 'other'| translate }}
+              </mat-option>
             </mat-select>
-          </div>
 
-          <ng-container
-            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'discount_amount' }"
-          />
-        </div>
-      }
+            <ng-container
+              *ngTemplateOutlet="priceDifferenceTemplate; context: { $implicit: featureItem, i }"
+            ></ng-container>
 
-      @if (thirdStepForm.get('discount_type').value === 'for-free') {
-        <label class="form-label">
-          <span class="form-label-text">Сколько продуктов</span>
-          <input class="form-input" type="text" placeholder="Сколько">
-        </label>
-
-        <div class="create-announcement-add-free">
-          <span class="form-label-text">Сколько бесплатных (максимум 5)</span>
-          <div class="create-announcement-add-free-inner">
-            <label class="create-announcement-add-free-label">
-              <input class="create-announcement-add-free-input form-input" type="text" placeholder="Сколько бесплатных">
-            </label>
-
-            <div class="create-announcement-add-free-checkboxes">
-              <mat-radio-button class="form-radio" [color]="'primary'">Этот продукт</mat-radio-button>
-              <mat-radio-button class="form-radio" [color]="'primary'">Другой продукт</mat-radio-button>
-            </div>
-          </div>
-        </div>
-      }
-
-      @if (thirdStepForm.get('discount_type').value === 'service') {
-        <div class="create-announcement-service-discount">
-          <span class="form-label-text">Введите бесплатной услуги</span>
-
-          <div class="create-announcement-service-discount-inner">
-            <div class="create-announcement-service-list">
-              <div class="create-announcement-service-item active" mat-ripple>
-                <mat-icon
-                  [svgIcon]="'icon:tick'"
-                />
-                <span>Доставка бесплатна</span>
-              </div>
-              <div class="create-announcement-service-item" mat-ripple>
-                <span>Установка бесплатна</span>
-              </div>
-              <div class="create-announcement-service-item" mat-ripple>
-                <span>Услуга бесплатна</span>
-              </div>
-              <div class="create-announcement-service-item" mat-ripple>
-                <span>Услуга бесплатна</span>
-              </div>
-              <div class="create-announcement-service-item" mat-ripple>
-                <span>Установка бесплатна</span>
-              </div>
-              <div class="create-announcement-service-item active" mat-ripple>
-                <mat-icon
-                  [svgIcon]="'icon:tick'"
-                />
-                <span>Доставка бесплатна</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      }
-    </div>
-
-    <div class="create-announcement-information-field date-interval">
-      <label class="form-label date-interval-label">
-        <span
-          class="create-announcement-information-field-title form-label-text">{{ 'total.number.of.products'| translate }}
-          *</span>
-        <input
-          class="create-announcement-information-input form-input"
-          [class.invalid]="thirdStepForm.get('product_counts').invalid && thirdStepForm.get('product_counts').touched"
-          type="number"
-          [placeholder]="'total.number.of.products'| translate"
-          [formControlName]="'product_counts'"
-        >
-        <ng-container
-          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'product_counts' }"
-        />
-      </label>
-
-      <label class="form-label date-interval-label">
-        <span
-          class="create-announcement-information-field-title form-label-text">{{ 'number.of.remaining.products'| translate }}
-          *</span>
-        <input
-          class="create-announcement-information-input form-input"
-          [class.invalid]="thirdStepForm.get('remainder').invalid && thirdStepForm.get('remainder').touched"
-          type="number"
-          [placeholder]="'number.of.remaining.products'| translate"
-          [formControlName]="'remainder'"
-        >
-        <ng-container
-          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'remainder' }"
-        />
-      </label>
-    </div>
-
-    <div class="create-announcement-information-field date-interval">
-      <label class="form-label date-interval-label" (click)="startDatePicker.open()">
-        <span class="create-announcement-information-field-title form-label-text">{{ 'start.date'| translate }} *</span>
-        <input
-          class="create-announcement-information-input form-input"
-          [class.invalid]="thirdStepForm.get('start_date').invalid && thirdStepForm.get('start_date').touched"
-          [readOnly]="true"
-          [placeholder]="'dd.mm.yyyy'| translate"
-          [matDatepicker]="startDatePicker"
-          [formControlName]="'start_date'"
-          [max]="thirdStepForm.get('end_date').value"
-        >
-        <mat-icon
-          class="date-interval-calendar-icon"
-          [svgIcon]="'icon:calendar'"
-        ></mat-icon>
-        <mat-datepicker #startDatePicker/>
-
-        <ng-container
-          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'start_date' }"
-        />
-      </label>
-
-      <label class="form-label date-interval-label" (click)="endDatePicker.open()">
-        <span class="create-announcement-information-field-title form-label-text">{{ 'end.date'| translate }} *</span>
-        <input
-          class="create-announcement-information-input form-input"
-          [class.invalid]="thirdStepForm.get('end_date').invalid && thirdStepForm.get('end_date').touched"
-          [readOnly]="true"
-          [placeholder]="'dd.mm.yyyy'| translate"
-          [matDatepicker]="endDatePicker"
-          [formControlName]="'end_date'"
-          [min]="thirdStepForm.get('start_date').value"
-        >
-        <mat-icon
-          class="date-interval-calendar-icon"
-          [svgIcon]="'icon:calendar'"
-        ></mat-icon>
-        <mat-datepicker #endDatePicker/>
-
-        <ng-container
-          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'end_date' }"
-        />
-      </label>
-    </div>
-
-    <div class="create-announcement-information-tags">
-      <div class="create-announcement-information-tags-search">
-        <label class="form-label" matAutocompleteOrigin #globalSearchWrapper="matAutocompleteOrigin">
-          <span class="form-label-text">{{ 'tags'| translate }} *</span>
-          <input
-            class="form-input"
-            [class.invalid]="thirdStepForm.get('tags').invalid && thirdStepForm.get('tags').touched"
-            type="search"
-            #tagSearchInput
-            [placeholder]="'search'| translate"
-            [matAutocomplete]="globalSearchInput"
-            [matAutocompleteConnectedTo]="globalSearchWrapper"
-            (input)="searchTags(tagSearchInput.value)"
-            (blur)="thirdStepForm.get('tags').markAsTouched()"
-          >
-
-          <mat-autocomplete
-            [class]="'global-search-result'"
-            [hideSingleSelectionIndicator]="true"
-            [requireSelection]="false"
-            [displayWith]="displayFn.bind(this)"
-            #globalSearchInput="matAutocomplete"
-            (optionSelected)="selectTag($event)"
-          >
-            @for (tag of tags.searchedTags; track tag) {
-              <mat-option [value]="tag">{{ tag.name }}</mat-option>
+            @if (!(i === 0 && featureTemplate.selected.length > 1)) {
+              <icon-button
+                [buttonType]="'red'"
+                [icon]="'icon:trash'"
+                (click)="removeFeatureItem(featureTemplate.selected, i)"
+              />
             }
-          </mat-autocomplete>
-        </label>
+          </div>
+        }
 
-        <ui-button
-          [type]="'gray-outline'"
-          #addTagButton
-          [text]="'add'"
-          [icon]="'icon:outline-plus'"
-          (click)="overlayPanel.openPanel()"
-        />
+        @if (featureTemplate.selected.length < 5) {
+          <ui-button
+            class="create-announcement-features-new"
+            [actionType]="'button'"
+            [type]="'gray-outline'"
+            [icon]="'icon:outline-plus'"
+            [text]="'add'"
+            (click)="addNewFeature(featureTemplate.selected)"
+          />
+        }
+      </fieldset>
+    }
+    @for (customTemplate of customTemplates; track customTemplate) {
+      <fieldset class="create-announcement-features-fieldset">
+        <legend class="create-announcement-features-legend">{{ customTemplate?.name }}</legend>
 
-        <overlay-panel [originElement]="addTagButton.uiButton" #overlayPanel>
-          <div
-            class="create-announcement-information-tags-add"
-            overlay-content
-          >
+        @for (item of customTemplate.items; track item; let i = $index) {
+          <div class="create-announcement-features-item">
             <input
-              class="form-input"
-              [placeholder]="'new.tag'| translate"
+              class="create-announcement-features-custom-value form-input"
+              maxlength="255"
               type="text"
-              [patterns]="customPatterns"
-              [mask]="'BBBBBBBBBBBBBBBBBBBBBBBBBBBB'"
-              #newTagInput
-              (keydown.enter)="addNewTag(newTagInput)"
+              trim
+              [placeholder]="'new.feature'| translate"
+              [(ngModel)]="item.value"
+              (blur)="transformDataAndEmit()"
             >
 
-            <ui-button
-              [disabled]="!newTagInput.value.length"
-              [type]="'gray-outline'"
-              [text]="'save'"
-              (click)="addNewTag(newTagInput)"
+            <ng-container
+              *ngTemplateOutlet="priceDifferenceTemplate; context: { $implicit: item, i }"
+            ></ng-container>
+
+            @if (!(i === 0 && customTemplate.items.length > 1)) {
+            <icon-button
+              [buttonType]="'red'"
+              [icon]="'icon:trash'"
+              (click)="removeCustomTemplateItem(customTemplate.items, i)"
             />
-          </div>
-        </overlay-panel>
-      </div>
-
-      <div class="create-announcement-information-tags-list">
-        @for (tag of tags.selectedTags; track tag; let i = $index) {
-          <div class="create-announcement-information-tags-item">
-            <span>{{ tag.name }}</span>
-
-            <mat-icon (click)="removeTag(i, 'selected')" [svgIcon]="'icon:x'"/>
+            }
           </div>
         }
-        @for (newTag of thirdStepForm.get('new_tags').value; track newTag; let i = $index) {
-          <div class="create-announcement-information-tags-item">
-            <span>{{ newTag }}</span>
 
-            <mat-icon (click)="removeTag(i, 'new')" [svgIcon]="'icon:x'"/>
-          </div>
+        @if (customTemplate.items.length < 5) {
+          <ui-button
+            class="create-announcement-features-new"
+            [actionType]="'button'"
+            [type]="'gray-outline'"
+            [icon]="'icon:outline-plus'"
+            [text]="'add'"
+            (click)="addCustomTemplateItem(customTemplate.items)"
+          />
         }
-      </div>
-    </div>
+      </fieldset>
+    }
+  </div>
 
-    <div class="create-announcement-information-submit">
-      <ui-button
-        [text]="'create'"
-        [actionType]="'submit'"
-        [disabled]="thirdStepForm.invalid"
-        [loading]="thirdStepForm.disabled"
-      />
-    </div>
-  </form>
+  <div class="create-announcement-features-footer">
+    <ui-button
+      [type]="'gray-outline'"
+      [icon]="'icon:outline-plus'"
+      [text]="'add.new.feature'"
+      (click)="addNewTemplate()"
+    />
+    <ui-button
+      [text]="'next'"
+      (click)="goToThirdStep()"
+    />
+  </div>
 </div>
 
-<ng-template #requiredErrors let-controlName>
-  @if (thirdStepForm.get(controlName).invalid && thirdStepForm.get(controlName).touched) {
-    <span class="form-error">{{ 'required.field'| translate }}</span>
+<ng-template #priceDifferenceTemplate let-item let-i="i">
+  @if (i !== 0) {
+    <div class="create-announcement-features-price-difference">
+      <input
+        class="form-input"
+        type="number"
+        [placeholder]="'price.difference'| translate"
+        [(ngModel)]="item.price"
+        (blur)="transformDataAndEmit()"
+      >
+
+      <div class="create-announcement-features-price-difference-toggle">
+        <div
+          class="create-announcement-features-price-difference-toggle-item"
+          [class.active]="item.sign === '-'"
+          (click)="item.sign = '-'; transformDataAndEmit()"
+        >-
+        </div>
+        <div
+          class="create-announcement-features-price-difference-toggle-item"
+          [class.active]="item.sign === '+'"
+          (click)="item.sign = '+'; transformDataAndEmit()"
+        >+
+        </div>
+      </div>
+    </div>
   }
 </ng-template>

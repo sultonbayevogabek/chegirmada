@@ -107,8 +107,19 @@ export class CreateAnnouncementComponent implements OnInit {
           formData.append(key, item);
         });
       }
-      else if ([ 'custom_features', 'features' ].includes(key)) {
-        formData.append(key, JSON.stringify(value));
+      else if (key === 'custom_features') {
+        value.forEach((item: { value: string; price: string; feature: number; name: string }, index: number) => {
+          formData.append(`custom_features[${index}]value`, item.value);
+          formData.append(`custom_features[${index}]name`, item.name ? item.name : '');
+          formData.append(`custom_features[${index}]feature`, item.feature ? item.feature.toString() : '');
+          formData.append(`custom_features[${index}]price`, item.price);
+        })
+      }
+      else if (key === 'features') {
+        value.forEach((item: { feature_value: string; price: string }, index: number) => {
+          formData.append(`features[${index}]feature_value`, item.feature_value);
+          formData.append(`features[${index}]price`, item.price);
+        })
       }
       else {
         formData.append(key, value);
