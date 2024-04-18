@@ -1,4 +1,4 @@
-import { Component, DestroyRef, HostListener, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { MatRipple } from '@angular/material/core';
 import { formatDate, NgClass, NgTemplateOutlet } from '@angular/common';
 import { ToasterService } from '../../../../core/services/toaster.service';

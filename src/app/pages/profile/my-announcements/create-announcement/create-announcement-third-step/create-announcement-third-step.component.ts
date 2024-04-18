@@ -239,8 +239,8 @@ export class CreateAnnouncementThirdStepComponent implements OnInit, OnChanges {
     });
   }
 
-  goToThirdStep(): void {
-    this.onStepChanged.emit(3);
+  create(): void {
+    this.onCreateButtonClicked.emit();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -44,7 +44,7 @@
       2
     </div>
 
-    <div class="create-announcement-tabs-title">{{ 'product.features'| translate }}</div>
+    <div class="create-announcement-tabs-title">{{ 'discount.details'| translate }}</div>
   </button>
 
   <div class="create-announcement-tabs-decoration">
@@ -69,7 +69,7 @@
       3
     </div>
 
-    <div class="create-announcement-tabs-title">{{ 'discount.details'| translate }}</div>
+    <div class="create-announcement-tabs-title">{{ 'product.features'| translate }}</div>
   </button>
 </div>
 
@@ -85,7 +85,7 @@
 />
 <create-announcement-third-step
   [hidden]="currentTab !== 3"
-  (onFormStateChanged)="onFormStateChanged($event)"
+  (onCreateButtonClicked)="createAnnouncement()"
 />
 
 <ng-template #decorationItems>

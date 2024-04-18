@@ -127,6 +127,15 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
         this.thirdStepForm.get('discount_amount_is_percent')
           .setValue(value === 'percent');
       });
+
+    this.thirdStepForm.valueChanges
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(_ => {
+        if (this.thirdStepForm.invalid) {
+          return;
+        }
+        this.onFormStateChanged.emit({ form: this.thirdStepForm, step: 2 });
+      });
   }
 
   changeCurrency(currency: 1 | 2): void {
