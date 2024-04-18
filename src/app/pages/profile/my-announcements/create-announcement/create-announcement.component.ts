@@ -90,8 +90,8 @@ export class CreateAnnouncementComponent implements OnInit {
   createAnnouncement(): void {
     const data = {
       ...this.data['1'].getRawValue(),
-      ...this.data['2'],
-      ...this.data['3'].getRawValue()
+      ...this.data['2'].getRawValue(),
+      ...this.data['3']
     };
     console.log('DATA', data);
     const formData = new FormData();

@@ -220,6 +220,6 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
       return;
     }
 
-    this.onStepChanged.emit(2);
+    this.onStepChanged.emit(3);
   }
 }
