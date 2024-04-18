@@ -102,8 +102,6 @@ export class RegisterStoreComponent implements OnInit {
     categories: new FormControl([]),
     delivery: new FormControl(true),
     main_phone_number: new FormControl('+998 ', [ Validators.required, Validators.minLength(9) ]),
-    slogan_uz: new FormControl('', [ Validators.maxLength(255) ]),
-    slogan_ru: new FormControl('', [ Validators.maxLength(255) ]),
     region: new FormControl(null, [ Validators.required ]),
     address: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
     district: new FormControl(null, [ Validators.required ]),
@@ -232,7 +230,16 @@ export class RegisterStoreComponent implements OnInit {
     const form = this.registerStoreForm;
     form.markAllAsTouched();
 
-    if (form.invalid || form.disabled) {
+    if (form.invalid) {
+      this._toasterService.open({
+        message: 'fill.in.the.required.fields',
+        title: 'attention',
+        type: 'warning'
+      })
+      return;
+    }
+
+    if (form.disabled) {
       return;
     }
 

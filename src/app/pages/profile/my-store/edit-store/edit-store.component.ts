@@ -15,7 +15,7 @@ import { ComplaintModalComponent } from '../../complaint-modal/complaint-modal.c
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MyInformationService } from '../../../../core/services/my-information.service';
 import { TranslateModule } from '@ngx-translate/core';
-import { NgTemplateOutlet } from '@angular/common';
+import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { TrimDirective } from '../../../../core/directives/trim.directive';
 import { MatIcon } from '@angular/material/icon';
 import { MatOption, MatSelect } from '@angular/material/select';
@@ -24,6 +24,7 @@ import { ConfirmationService } from '../../../../core/services/confirmation.serv
 import { OverlayComponent } from '../../../../core/components/overlay-panel/overlay-panel.component';
 import { UiButtonComponent } from '../../../../core/components/ui-button/ui-button.component';
 import { IconButtonComponent } from '../../../../core/components/icon-button/icon-button.component';
+import { MatRipple } from '@angular/material/core';
 
 @Component({
   selector: 'edit-store',
@@ -51,7 +52,9 @@ import { IconButtonComponent } from '../../../../core/components/icon-button/ico
     MatOption,
     MatRadioGroup,
     MatRadioButton,
-    IconButtonComponent
+    IconButtonComponent,
+    MatRipple,
+    NgOptimizedImage
   ]
 })
 
@@ -90,8 +93,6 @@ export class EditStoreComponent implements OnInit, AfterViewInit {
     categories: new FormControl([]),
     delivery: new FormControl(true),
     main_phone_number: new FormControl('+998 ', [ Validators.required, Validators.minLength(9) ]),
-    slogan_uz: new FormControl('', [ Validators.maxLength(255) ]),
-    slogan_ru: new FormControl('', [ Validators.maxLength(255) ]),
     region: new FormControl(null, [ Validators.required ]),
     address: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
     district: new FormControl(null, [ Validators.required ]),
@@ -222,9 +223,17 @@ export class EditStoreComponent implements OnInit, AfterViewInit {
   editStore(): void {
     const form = this.editStoreForm;
     form.markAllAsTouched();
-    console.log(form.getRawValue());
 
-    if (form.invalid || form.disabled) {
+    if (form.invalid) {
+      this._toasterService.open({
+        message: 'fill.in.the.required.fields',
+        title: 'attention',
+        type: 'warning'
+      })
+      return;
+    }
+
+    if (form.disabled) {
       return;
     }
 

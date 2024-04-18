@@ -28,7 +28,6 @@ import { ToasterService } from '../../core/services/toaster.service';
 })
 
 export class CompanyProfileComponent implements OnInit {
-  mode: 'static' | 'edit' = 'static';
   tabs = [
     {
       routerLink: [ 'discounts' ],
@@ -55,13 +54,6 @@ export class CompanyProfileComponent implements OnInit {
   private _toaster = inject(ToasterService);
 
   ngOnInit(): void {
-    this._activatedRoute.queryParams
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((queryParams: Params) => {
-        if ('mode' in queryParams) {
-          this.mode = queryParams['mode'];
-        }
-      });
   }
 
   openRateModal(): void {

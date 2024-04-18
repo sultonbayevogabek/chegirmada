@@ -239,38 +239,6 @@
               *ngTemplateOutlet="requiredErrors; context: { $implicit: 'main_phone_number' }"
             />
           </label>
-
-          <label class="form-label">
-            <span class="form-label-text">{{ 'slogan'| translate }} (uz)</span>
-            <input
-              class="form-input"
-              [class.invalid]="registerStoreForm.get('slogan_uz').hasError('maxlength')"
-              type="text"
-              trim
-              [placeholder]="'enter.slogan'| translate"
-              [maxlength]="255"
-              [formControlName]="'slogan_uz'"
-            >
-            @if (registerStoreForm.get('slogan_uz').hasError('maxlength')) {
-              <span class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 255 } }}</span>
-            }
-          </label>
-
-          <label class="form-label">
-            <span class="form-label-text">{{ 'slogan'| translate }} (ru)</span>
-            <input
-              class="form-input"
-              [class.invalid]="registerStoreForm.get('slogan_ru').hasError('maxlength')"
-              type="text"
-              trim
-              [placeholder]="'enter.slogan'| translate"
-              [maxlength]="255"
-              [formControlName]="'slogan_ru'"
-            >
-            @if (registerStoreForm.get('slogan_ru').hasError('maxlength')) {
-              <span class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 255 } }}</span>
-            }
-          </label>
         </div>
 
         <div class="register-company-upload-logo" (click)="logoFileInput.click()">

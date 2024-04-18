@@ -237,38 +237,6 @@
               *ngTemplateOutlet="requiredErrors; context: { $implicit: 'main_phone_number' }"
             />
           </label>
-
-          <label class="form-label">
-            <span class="form-label-text">{{ 'slogan'| translate }} (uz)</span>
-            <input
-              class="form-input"
-              [class.invalid]="editStoreForm.get('slogan_uz').hasError('maxlength')"
-              type="text"
-              trim
-              [placeholder]="'enter.slogan'| translate"
-              [maxlength]="255"
-              [formControlName]="'slogan_uz'"
-            >
-            @if (editStoreForm.get('slogan_uz').hasError('maxlength')) {
-              <span class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 255 } }}</span>
-            }
-          </label>
-
-          <label class="form-label">
-            <span class="form-label-text">{{ 'slogan'| translate }} (ru)</span>
-            <input
-              class="form-input"
-              [class.invalid]="editStoreForm.get('slogan_ru').hasError('maxlength')"
-              type="text"
-              trim
-              [placeholder]="'enter.slogan'| translate"
-              [maxlength]="255"
-              [formControlName]="'slogan_ru'"
-            >
-            @if (editStoreForm.get('slogan_ru').hasError('maxlength')) {
-              <span class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 255 } }}</span>
-            }
-          </label>
         </div>
 
         <div class="register-company-upload-logo">
@@ -424,6 +392,33 @@
       [loading]="editStoreForm.disabled"
       [text]="'change'"
     />
+  </div>
+
+  <div class="store-banner-wrapper">
+    <span class="form-label-text">{{ 'banner.for.store.profile'| translate }}</span>
+
+    <div class="store-banner">
+      <div class="store-banner-requirements">
+        <div class="store-banner-requirements-icon">
+          <img [ngSrc]="'/assets/icons/img.svg'" [fill]="true" [alt]="">
+        </div>
+
+        <p class="store-banner-requirements-text">Загрузить изображение до 5 МБ (1440 x 330px)</p>
+      </div>
+
+      <img src="https://picsum.photos/1440/330" alt="">
+
+      <div class="store-banner-actions">
+        <button class="store-banner-button camera" mat-ripple type="button">
+          <span>{{ 'upload'| translate }}</span>
+          <mat-icon [svgIcon]="'icon:solid-camera'"/>
+        </button>
+
+        <button class="store-banner-button trash" mat-ripple type="button">
+          <mat-icon [svgIcon]="'icon:solid-trash'"/>
+        </button>
+      </div>
+    </div>
   </div>
 </form>
 <ng-template #requiredErrors let-controlName>

@@ -171,3 +171,70 @@
   @include flex-center-end();
   padding-top: 1rem;
 }
+
+.store-banner-wrapper {
+  padding-top: 1rem;
+}
+
+.store-banner {
+  position: relative;
+  aspect-ratio: 4.38;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px dashed $border-grey-color;
+}
+
+.store-banner-img {
+  position: relative;
+  z-index: 1;
+}
+
+.store-banner-requirements {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  @include flex-column(1rem);
+  align-items: center;
+}
+
+.store-banner-requirements-icon {
+  position: relative;
+  width: 4rem;
+  aspect-ratio: 19/12;
+}
+
+.store-banner-requirements-text {
+  color: $secondary-text-color;
+}
+
+.store-banner-actions {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 2;
+  @include flex-center(0.5rem);
+}
+
+.store-banner-button {
+  @include flex-center-center(0.5rem);
+  height: 2.75rem;
+  background-color: $white-color;
+  border: 1px solid $border-grey-color;
+  border-radius: 0.25rem;
+  color: $dialog-title-black;
+
+  &.camera {
+    padding: 0 0.75rem;
+  }
+
+  &.trash {
+    aspect-ratio: 1;
+  }
+
+  .mat-icon {
+    height: 1.25rem;
+    color: $secondary-text-color;
+  }
+}
+
