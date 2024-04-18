@@ -7,6 +7,58 @@
   </h2>
 
   <fieldset class="register-fieldset">
+    <span class="form-label-text">{{ 'banner.for.store.profile'| translate }}</span>
+
+    <div class="store-banner">
+      <div class="store-banner-requirements">
+        <div class="store-banner-requirements-icon">
+          <img [ngSrc]="'/assets/icons/img.svg'" [fill]="true" [alt]="">
+        </div>
+
+        <p class="store-banner-requirements-text">{{ 'store.banner.requirements'| translate }}</p>
+      </div>
+
+      <div class="store-banner-actions">
+        @if (!bannerBuffer) {
+          <button
+            class="store-banner-button camera"
+            mat-ripple
+            type="button"
+            (click)="bannerFileInput.click()"
+          >
+            <span>{{ (currentBanner ? 'change' : 'upload')| translate }}</span>
+            <mat-icon [svgIcon]="'icon:solid-camera'"/>
+          </button>
+        }
+
+        @if (bannerBuffer) {
+          <button class="store-banner-button trash" mat-ripple type="button" (click)="removeImg('banner')">
+            <mat-icon [svgIcon]="'icon:solid-trash'"/>
+          </button>
+        }
+      </div>
+
+      @if (bannerBuffer) {
+        <img
+          class="store-banner-img"
+          [src]="bannerBuffer" [alt]="">
+      } @else if (currentBanner) {
+        <img
+          class="store-banner-img"
+          [src]="currentBanner" [alt]="">
+      }
+
+      <input
+        class="store-banner-file-input"
+        #bannerFileInput
+        type="file"
+        (change)="onImgSelected($event, 'banner')"
+        [accept]="'.jpg, .jpeg, .png'"
+      >
+    </div>
+  </fieldset>
+
+  <fieldset class="register-fieldset">
     <div class="register-legend">{{ 'store.owner.information'| translate }}</div>
     <div class="register-main-fields">
       <label class="form-label">
@@ -250,7 +302,7 @@
                 class="register-company-logo-delete"
                 [buttonType]="'red'"
                 [icon]="'icon:trash'"
-                (click)="removeLogo()"
+                (click)="removeImg('logo')"
               />
             } @else {
               <img [src]="currentLogo" [alt]="">
@@ -268,7 +320,7 @@
             class="register-company-logo-file-input"
             #logoFileInput
             type="file"
-            (change)="onLogoSelected($event)"
+            (change)="onImgSelected($event, 'logo')"
             [accept]="'.jpg, .jpeg, .png, .svg'"
           >
         </div>
@@ -393,32 +445,8 @@
       [text]="'change'"
     />
   </div>
-
-  <div class="store-banner-wrapper">
-    <span class="form-label-text">{{ 'banner.for.store.profile'| translate }}</span>
-
-    <div class="store-banner">
-      <div class="store-banner-requirements">
-        <div class="store-banner-requirements-icon">
-          <img [ngSrc]="'/assets/icons/img.svg'" [fill]="true" [alt]="">
-        </div>
-
-        <p class="store-banner-requirements-text">Загрузить изображение до 5 МБ (1440 x 330px)</p>
-      </div>
-
-      <div class="store-banner-actions">
-        <button class="store-banner-button camera" mat-ripple type="button">
-          <span>{{ 'upload'| translate }}</span>
-          <mat-icon [svgIcon]="'icon:solid-camera'"/>
-        </button>
-
-        <button class="store-banner-button trash" mat-ripple type="button">
-          <mat-icon [svgIcon]="'icon:solid-trash'"/>
-        </button>
-      </div>
-    </div>
-  </div>
 </form>
+
 <ng-template #requiredErrors let-controlName>
   @if (editStoreForm.get(controlName).invalid && editStoreForm.get(controlName).touched) {
     <span class="form-error">{{ 'required.field'| translate }}</span>

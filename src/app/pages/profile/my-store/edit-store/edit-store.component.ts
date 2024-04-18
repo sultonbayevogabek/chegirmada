@@ -60,6 +60,7 @@ import { MatRipple } from '@angular/material/core';
 
 export class EditStoreComponent implements OnInit, AfterViewInit {
   @ViewChild('logoFileInput') logoFileInput: ElementRef<HTMLInputElement>;
+  @ViewChild('bannerFileInput') bannerFileInput: ElementRef<HTMLInputElement>;
 
   private _dialog = inject(MatDialog);
   private _yandexMapService = inject(YandexMapsService);
@@ -76,7 +77,9 @@ export class EditStoreComponent implements OnInit, AfterViewInit {
   categories = CATEGORIES;
   regions = REGIONS;
   logoBuffer: string | ArrayBuffer;
+  bannerBuffer: string | ArrayBuffer;
   currentLogo: string;
+  currentBanner: string;
   currentShortName: string;
   districts: DistrictModel[] = [];
   editStoreForm = new FormGroup({
@@ -100,7 +103,8 @@ export class EditStoreComponent implements OnInit, AfterViewInit {
     desc_ru: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
     longitude: new FormControl(null, [ Validators.required ]),
     latitude: new FormControl(null, [ Validators.required ]),
-    logo: new FormControl(null)
+    logo: new FormControl(null),
+    banner: new FormControl(null)
   });
 
   ngOnInit(): void {
@@ -159,7 +163,7 @@ export class EditStoreComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onLogoSelected($event: Event): void {
+  onImgSelected($event: Event, type: 'logo' | 'banner'): void {
     const file = ($event.target as HTMLInputElement).files[0];
 
     if (!file) {
@@ -181,11 +185,23 @@ export class EditStoreComponent implements OnInit, AfterViewInit {
 
     const reader = new FileReader();
     reader.onload = event => {
-      this.logoBuffer = event.target.result;
+      if (type === 'logo') {
+        this.logoBuffer = event.target.result;
+      }
+      if (type === 'banner') {
+        this.bannerBuffer = event.target.result;
+      }
     };
     reader.readAsDataURL(file);
-    this.editStoreForm.get('logo').setValue(file);
-    this.logoFileInput.nativeElement.value = null;
+
+    if (type === 'logo') {
+      this.editStoreForm.get('logo').setValue(file);
+      this.logoFileInput.nativeElement.value = null;
+    }
+    if (type === 'banner') {
+      this.editStoreForm.get('banner').setValue(file);
+      this.bannerFileInput.nativeElement.value = null;
+    }
   }
 
   onRegionSelected(): void {
@@ -275,6 +291,8 @@ export class EditStoreComponent implements OnInit, AfterViewInit {
           });
           this.logoBuffer = null;
           this.currentLogo = res.logo;
+          this.bannerBuffer = null;
+          this.currentBanner = res.banner;
           this.editStoreForm.get('logo').setValue(null);
           this.editStoreForm.enable();
         },
@@ -296,14 +314,21 @@ export class EditStoreComponent implements OnInit, AfterViewInit {
         this.editStoreForm.patchValue(res);
         this._yandexMapService.setSingleLocationPoint('map', [ res.longitude, res.latitude ]);
         this.currentLogo = res.logo;
+        this.currentBanner = res.banner;
         this.currentShortName = res.shortname;
         this.getDistrictsList();
       });
   }
 
-  removeLogo(): void {
-    this.editStoreForm.get('logo').setValue(null);
-    this.logoBuffer = null;
+  removeImg(type: 'logo' | 'banner'): void {
+    if (type === 'logo') {
+      this.editStoreForm.get('logo').setValue(null);
+      this.logoBuffer = null;
+    }
+    if (type === 'banner') {
+      this.editStoreForm.get('banner').setValue(null);
+      this.bannerBuffer = null;
+    }
   }
 
   updateAddress(address: string): void {
