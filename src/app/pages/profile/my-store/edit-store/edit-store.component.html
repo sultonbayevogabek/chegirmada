@@ -9,7 +9,10 @@
   <fieldset class="register-fieldset">
     <span class="form-label-text">{{ 'banner.for.store.profile'| translate }}</span>
 
-    <div class="store-banner">
+    <div
+      class="store-banner"
+      [class.no-border]="currentBanner || bannerBuffer"
+    >
       <div class="store-banner-requirements">
         <div class="store-banner-requirements-icon">
           <img [ngSrc]="'/assets/icons/img.svg'" [fill]="true" [alt]="">

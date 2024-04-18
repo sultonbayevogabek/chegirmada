@@ -174,10 +174,14 @@
 
 .store-banner {
   position: relative;
-  aspect-ratio: 4.38;
+  aspect-ratio: 4.36;
   border-radius: 0.5rem;
   overflow: hidden;
   border: 1px dashed $border-grey-color;
+
+  &.no-border {
+    border: none;
+  }
 }
 
 .store-banner-requirements {
