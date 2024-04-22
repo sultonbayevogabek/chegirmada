@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
+import { ProductDetails } from '../../../core/models/product-details.model';
 
 @Component({
   selector: 'product-details-info-block',
@@ -13,4 +14,8 @@ import { MatIconButton } from '@angular/material/button';
   standalone: true
 })
 
-export class ProductDetailsInfoBlockComponent {}
+export class ProductDetailsInfoBlockComponent {
+  @Input({
+    required: true
+  }) details: ProductDetails;
+}

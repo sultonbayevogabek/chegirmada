@@ -198,13 +198,13 @@
         <p class="create-announcement-drop-or-text">{{ 'or'| translate }}</p>
 
         <label class="create-announcement-show-images" mat-ripple>
-          <p>{{ 'provide.images'| translate }} (.jpg, .png, .webp)</p>
+          <p>{{ 'provide.images'| translate }} (.jpg, .png)</p>
           <input
             #fileInput
             type="file"
             multiple
             (change)="onImagesSelectedByFileInput($event)"
-            [accept]="'.jpg, .png, .webp'"
+            [accept]="'.jpg, .png'"
           >
         </label>
       </div>

@@ -14,6 +14,7 @@ import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { IconButtonComponent } from '../../../core/components/icon-button/icon-button.component';
 import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
+import { YoutubePlayer } from '../../../core/components/youtube-player/youtube-player.component';
 
 @Component({
   selector: 'product-details-gallery-modal',
@@ -27,7 +28,8 @@ import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.
     NgOptimizedImage,
     NgTemplateOutlet,
     UiButtonComponent,
-    MatIcon
+    MatIcon,
+    YoutubePlayer
   ],
   standalone: true
 })

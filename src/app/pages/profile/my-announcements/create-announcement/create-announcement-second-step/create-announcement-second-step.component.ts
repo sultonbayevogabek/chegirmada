@@ -92,15 +92,15 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
   private _toasterService = inject(ToasterService);
 
   thirdStepForm = new FormGroup({
-    price: new FormControl(100000, [ Validators.required ]),
+    price: new FormControl(null, [ Validators.required ]),
     currency: new FormControl<1 | 2>(1),
-    product_counts: new FormControl<number>(100, [ Validators.required, Validators.max(2147483647), Validators.min(1) ]),
-    remainder: new FormControl<number>(76, [ Validators.required, Validators.max(2147483647) ]),
+    product_counts: new FormControl<number>(100, [ Validators.max(2147483647) ]),
+    remainder: new FormControl<number>(76, [ Validators.max(2147483647) ]),
     start_date: new FormControl<Date>(new Date(), [ Validators.required ]),
     end_date: new FormControl<Date>(new Date(), [ Validators.required ]),
-    tags: new FormControl<number[]>([10115], [ arrayMinLength(1) ]),
-    new_tags: new FormControl<string[]>(['telefonlar', 'elektronika'], [ arrayMinLength(1) ]),
-    store_branches: new FormControl<number[]>([], [ arrayMinLength(1) ]),
+    tags: new FormControl<number[]>([]),
+    new_tags: new FormControl<string[]>([]),
+    store_branches: new FormControl<number[]>([]),
 
     // regular
     discount_amount: new FormControl(45, [ Validators.required ]),

@@ -85,7 +85,7 @@
 />
 <create-announcement-third-step
   [hidden]="currentTab !== 3"
-  (onCreateButtonClicked)="createAnnouncement()"
+  (onFormStateChanged)="onFormStateChanged($event)"
 />
 
 <ng-template #decorationItems>

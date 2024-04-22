@@ -4,8 +4,12 @@
 
     <div class="product-details-main">
       <div class="product-details-main-info">
-        <product-details-gallery />
-        <product-details-info-block />
+        <product-details-gallery
+          [details]="details"
+        />
+        <product-details-info-block
+          [details]="details"
+        />
       </div>
 
       <product-details-seller-info />

@@ -2,19 +2,19 @@
   <div class="product-details-info-header">
     <div class="product-details-date-view">
       <div class="product-details-date-view-item">
-        ID: 120334
+        ID: {{ details.pk }}
       </div>
 
       <div class="product-details-date-view-item">
         <mat-icon [svgIcon]="'icon:calendar'"></mat-icon>
 
-        <span>Осталось 12 дней</span>
+        <span>{{ details.end_date }}</span>
       </div>
 
       <div class="product-details-date-view-item views">
         <mat-icon [svgIcon]="'icon:eye'"></mat-icon>
 
-        <span>122</span>
+        <span>{{ details.views }}</span>
       </div>
     </div>
 
@@ -23,7 +23,7 @@
     </button>
   </div>
 
-  <h2 class="product-details-product-title">Смартфон Apple iPhone 13 256 ГБ, Dual: nano SIM + eSIM</h2>
+  <h2 class="product-details-product-title">{{ details.title }}</h2>
 
   <div class="product-details-price-change">
     <div class="product-details-price-old">

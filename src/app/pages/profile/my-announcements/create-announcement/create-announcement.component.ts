@@ -91,7 +91,8 @@ export class CreateAnnouncementComponent implements OnInit {
     const data = {
       ...this.data['1'].getRawValue(),
       ...this.data['2'].getRawValue(),
-      ...this.data['3']
+      ...this.data['3'],
+      is_active: true
     };
     console.log('DATA', data);
     const formData = new FormData();

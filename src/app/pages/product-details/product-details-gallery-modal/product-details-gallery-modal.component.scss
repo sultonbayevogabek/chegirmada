@@ -51,6 +51,12 @@
 .gallery-modal-img {
   position: relative;
   aspect-ratio: 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .gallery-modal-navigations {

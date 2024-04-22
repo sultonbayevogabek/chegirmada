@@ -1,6 +1,6 @@
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
-import { catchError, Observable, of, tap, throwError } from 'rxjs';
-import { inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { UserModel } from '../models/user.model';
 

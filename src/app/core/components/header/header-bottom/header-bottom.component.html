@@ -1,6 +1,6 @@
 <nav class="header-bottom-nav">
   <div class="container">
-    <ul class="header-bottom-ul" mat-tab-nav-bar color="primary">
+    <ul class="header-bottom-ul" mat-tab-nav-bar [tabPanel]="tabPanel" color="primary">
       @for (navItem of navs; track navItem) {
         <li class="header-bottom-li" disableRipple mat-tab-link [routerLink]="['/category/list-view']">
           <a class="header-bottom-link">
@@ -9,5 +9,6 @@
         </li>
       }
     </ul>
+    <div #tabPanel></div>
   </div>
 </nav>

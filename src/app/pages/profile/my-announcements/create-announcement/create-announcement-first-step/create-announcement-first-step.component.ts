@@ -108,7 +108,7 @@ export class CreateAnnouncementFirstStepComponent implements OnInit {
       return;
     }
     for (const file of Array.from($event)) {
-      if (![ 'image/jpeg', 'image/png', 'image/webp' ].includes(file.type)) {
+      if (![ 'image/jpeg', 'image/png' ].includes(file.type)) {
         continue;
       }
 

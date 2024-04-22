@@ -1,26 +1,27 @@
 <div class="product-details-photo-gallery">
   <div class="product-details-photo-display">
-    <img
-      [ngSrc]="selectedImageUrl"
-      [fill]="true"
-      [alt]="">
+    @if (selectedItemUrl.startsWith('https://api.aksiyamix.uz')) {
+      <img
+        [ngSrc]="selectedItemUrl"
+        [fill]="true"
+        [alt]="">
+    } @else {
+      <video-player
+        [videoURL]="selectedItemUrl"
+        [aspectRatio]="1"
+      />
+    }
 
-    <div class="product-details-photo-navs">
-      <button class="carousel-navigation-button" (click)="navigateCarousel('prev')">
-        <mat-icon [svgIcon]="'icon:arrow-left'"></mat-icon>
-      </button>
+    <button class="carousel-navigation-button prev" (click)="navigateCarousel('prev')">
+      <mat-icon [svgIcon]="'icon:arrow-left'"></mat-icon>
+    </button>
 
-      <button class="carousel-navigation-button" (click)="navigateCarousel('next')">
-        <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
-      </button>
-    </div>
+    <button class="carousel-navigation-button next" (click)="navigateCarousel('next')">
+      <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
+    </button>
 
     <div class="product-details-scale-actions">
-      <button class="product-details-scale-button video">
-        <mat-icon [svgIcon]="'icon:play'"/>
-        <span>Видео</span>
-      </button>
-      <button class="product-details-scale-button scale" (click)="openGalleryModal()">
+      <button class="product-details-scale-button" (click)="openGalleryModal()">
         <mat-icon [svgIcon]="'icon:full-screen'"/>
       </button>
     </div>
@@ -36,7 +37,13 @@
             [id]="i"
             (click)="selectThumb(i)"
           >
-            <img [ngSrc]="imgUrl" [fill]="true" [alt]="imgUrl">
+            @if (imgUrl.startsWith('https://api.aksiyamix.uz')) {
+              <img [ngSrc]="imgUrl" [fill]="true" [alt]="imgUrl">
+            } @else {
+              <div class="product-details-video-thumb">
+                <mat-icon [svgIcon]="'icon:play'"/>
+              </div>
+            }
           </div>
         </ng-template>
       }

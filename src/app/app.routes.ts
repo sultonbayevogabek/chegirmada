@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { initialDataResolver } from './core/resolvers/initial-data.resolver';
 import { authGuard } from './core/guards/auth.guard';
+import { productDetailsResolver } from './core/resolvers/product-details.resolver';
 
 export const routes: Routes = [
   {
@@ -17,8 +18,11 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/category/category-list-view/category-list-view.component').then(c => c.CategoryListViewComponent)
       },
       {
-        path: 'product-details',
-        loadComponent: () => import('./pages/product-details/product-details.component').then(c => c.ProductDetailsComponent)
+        path: 'product-details/:id',
+        loadComponent: () => import('./pages/product-details/product-details.component').then(c => c.ProductDetailsComponent),
+        resolve: {
+          productDetails: productDetailsResolver
+        }
       },
       {
         path: 'wish-list',
@@ -31,7 +35,7 @@ export const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () => import('./pages/profile/profile.routes').then(r => r.profileRoutes),
-        canActivate: [authGuard]
+        canActivate: [ authGuard ]
       },
       {
         path: 'category',
@@ -46,5 +50,5 @@ export const routes: Routes = [
         redirectTo: 'not-found-404'
       }
     ]
-  },
+  }
 ];

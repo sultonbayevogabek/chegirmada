@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { MatIcon } from '@angular/material/icon';
 import { NgOptimizedImage } from '@angular/common';
@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import {
   ProductDetailsGalleryModalComponent
 } from '../product-details-gallery-modal/product-details-gallery-modal.component';
+import { ProductDetails } from '../../../core/models/product-details.model';
+import { YoutubePlayer } from '../../../core/components/youtube-player/youtube-player.component';
 
 @Component({
   selector: 'product-details-gallery',
@@ -14,15 +16,20 @@ import {
   imports: [
     CarouselModule,
     MatIcon,
-    NgOptimizedImage
+    NgOptimizedImage,
+    YoutubePlayer
   ],
   standalone: true
 })
 
-export class ProductDetailsGalleryComponent {
+export class ProductDetailsGalleryComponent implements OnChanges {
+  @Input({
+    required: true
+  }) details: ProductDetails;
+
   @ViewChild('thumbsCarousel') thumbsCarousel: CarouselComponent;
   selectedImageIndex = 0;
-  selectedImageUrl = 'https://picsum.photos/id/1/1000/1000';
+  selectedItemUrl: string;
 
   private _dialog = inject(MatDialog);
 
@@ -36,16 +43,12 @@ export class ProductDetailsGalleryComponent {
     items: 4,
     margin: 16,
     nav: false,
-    navText: [ '', '' ]
+    navText: [ '', '' ],
+    autoWidth: false
   };
 
-  productImages = [
-    'https://picsum.photos/id/1/1000/1000',
-    'https://picsum.photos/id/2/1000/1000',
-    'https://picsum.photos/id/3/1000/1000',
-    'https://picsum.photos/id/4/1000/1000',
-    'https://picsum.photos/id/5/1000/1000',
-  ];
+  productImages = [];
+
   navigateCarousel(direction: 'next' | 'prev'): void {
     const productImages = this.productImages;
     const productImagesLength = productImages.length;
@@ -53,31 +56,30 @@ export class ProductDetailsGalleryComponent {
     if (direction === 'next') {
       if (productImagesLength - 1 > this.selectedImageIndex) {
         this.selectedImageIndex++;
-        this.selectedImageUrl = productImages[this.selectedImageIndex];
+        this.selectedItemUrl = productImages[this.selectedImageIndex];
       } else {
         this.selectedImageIndex = 0;
-        this.selectedImageUrl = productImages[0];
+        this.selectedItemUrl = productImages[0];
       }
     }
 
     if (direction === 'prev') {
       if (this.selectedImageIndex > 0) {
         this.selectedImageIndex--;
-        this.selectedImageUrl = productImages[this.selectedImageIndex];
+        this.selectedItemUrl = productImages[this.selectedImageIndex];
       } else {
         this.selectedImageIndex = productImagesLength - 1;
-        this.selectedImageUrl = productImages[this.selectedImageIndex];
+        this.selectedItemUrl = productImages[this.selectedImageIndex];
       }
     }
 
-    this.thumbsCarousel.to(this.selectedImageUrl);
+    this.thumbsCarousel.to(this.selectedItemUrl);
   }
 
   selectThumb(i: number): void {
     const previousSelectedImageIndex = this.selectedImageIndex;
     this.selectedImageIndex = i;
-    this.selectedImageUrl = this.productImages[i];
-    console.log(this.selectedImageUrl);
+    this.selectedItemUrl = this.productImages[i];
 
     if (this.selectedImageIndex > previousSelectedImageIndex) {
       this.thumbsCarousel.next()
@@ -96,10 +98,20 @@ export class ProductDetailsGalleryComponent {
       maxWidth: '100vw',
       maxHeight: '100vh',
       data: {
-        selectedImageUrl: this.selectedImageUrl,
+        selectedImageUrl: this.selectedItemUrl,
         selectedImageIndex: this.selectedImageIndex,
         productImages: this.productImages
       }
     })
+  }
+
+  ngOnChanges(): void {
+    this.productImages = this.details.images;
+
+    if (this.details.video_link) {
+      this.productImages.unshift(this.details.video_link);
+    }
+
+    this.selectedItemUrl = this.productImages[0];
   }
 }

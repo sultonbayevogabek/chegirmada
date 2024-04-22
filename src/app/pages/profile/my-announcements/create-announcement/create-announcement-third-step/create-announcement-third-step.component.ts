@@ -47,9 +47,7 @@ export class CreateAnnouncementThirdStepComponent implements OnInit, OnChanges {
     form: any,
     step: number
   }>();
-  @Output() onCreateButtonClicked: EventEmitter<void> = new EventEmitter<void>();
 
-  secondStepForm: UntypedFormGroup = new FormGroup({});
   featureTemplates: FeatureTemplate[] = [];
   customTemplates: CustomTemplate[] = [];
 
@@ -74,8 +72,6 @@ export class CreateAnnouncementThirdStepComponent implements OnInit, OnChanges {
             selected: [ { feature_value: null, price: '', sign: '-' } ]
           };
         });
-
-        this.transformDataAndEmit();
       });
   }
 
@@ -155,13 +151,12 @@ export class CreateAnnouncementThirdStepComponent implements OnInit, OnChanges {
         valid: true,
         ...this.data
       },
-      step: 2
+      step: 3
     });
   }
 
   removeFeatureItem(selected: SelectedValue[], i: number) {
     selected.splice(i, 1);
-    this.transformDataAndEmit();
   }
 
   addNewFeature(selected: SelectedValue[]): void {
@@ -192,8 +187,6 @@ export class CreateAnnouncementThirdStepComponent implements OnInit, OnChanges {
           });
 
           selectValue.feature_value = pk;
-
-          this.transformDataAndEmit();
         }
       });
   }
@@ -228,7 +221,6 @@ export class CreateAnnouncementThirdStepComponent implements OnInit, OnChanges {
 
   removeCustomTemplateItem(items: CustomTemplateItem[], index: number): void {
     items.splice(index, 1);
-    this.transformDataAndEmit();
   }
 
   addCustomTemplateItem(items: CustomTemplateItem[]): void {
@@ -239,11 +231,6 @@ export class CreateAnnouncementThirdStepComponent implements OnInit, OnChanges {
     });
   }
 
-  create(): void {
-    this.onCreateButtonClicked.emit();
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.data);
   }
 }

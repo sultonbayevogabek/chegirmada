@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { ProductDetailsSellerInfoComponent } from './product-details-seller-info/product-details-seller-info.component';
 import { ProductDetailsTabsComponent } from './product-details-tabs/product-details-tabs.component';
 import { ProductDetailsMapComponent } from './product-details-map/product-details-map.component';
@@ -10,6 +10,10 @@ import { ProductDetailsGalleryComponent } from './product-details-gallery/produc
 import { ProductDetailsInfoBlockComponent } from './product-details-info-block/product-details-info-block.component';
 import { RatingStarsComponent } from '../../core/components/rating-stars/rating-stars.component';
 import { BreadCrumbsComponent } from '../../core/components/bread-crumbs/bread-crumbs.component';
+import { ActivatedRoute } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Category, ProductDetails } from '../../core/models/product-details.model';
+import { BreadcrumbModel } from '../../core/models/breadcrumb.model';
 
 @Component({
   selector: 'product-details',
@@ -29,24 +33,31 @@ import { BreadCrumbsComponent } from '../../core/components/bread-crumbs/bread-c
   standalone: true
 })
 
-export class ProductDetailsComponent {
-  breadCrumbs = [
-    {
-      text: 'Главная',
-      url: '#',
-    },
-    {
-      text: 'Смартфоны',
-      url: '#',
-    },
-    {
-      text: 'Apple',
-      url: '#',
-    },
-    {
-      text: 'Смартфон iPhone 15 Pro 256GB Синий Титан',
-      url: ''
-    }
-  ]
+export class ProductDetailsComponent implements OnInit {
+  breadCrumbs: BreadcrumbModel[] = [];
+  details: ProductDetails;
 
+  private _activatedRoute = inject(ActivatedRoute);
+  private _destroyRef = inject(DestroyRef);
+
+  ngOnInit(): void {
+    this._activatedRoute.data
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: (data: { productDetails: ProductDetails }): void => {
+          this.details = data.productDetails;
+
+          this.generateBreadCrumbs()
+        }
+      })
+  }
+
+  generateBreadCrumbs(): void {
+    this.details.categories.forEach(category => {
+      this.breadCrumbs.push({
+        text: category.name,
+        url: '#'
+      })
+    })
+  }
 }

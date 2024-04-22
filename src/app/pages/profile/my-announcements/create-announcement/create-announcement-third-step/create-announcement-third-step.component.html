@@ -10,7 +10,6 @@
               class="create-announcement-features-select solid-select"
               [placeholder]="featureTemplate?.name"
               [(ngModel)]="featureItem.feature_value"
-              (ngModelChange)="transformDataAndEmit()"
             >
               @for (item of featureTemplate.values; track item) {
                 <mat-option [value]="item.pk">{{ item.value }} {{ featureTemplate.value_extra_type }}</mat-option>
@@ -60,7 +59,6 @@
               trim
               [placeholder]="'new.feature'| translate"
               [(ngModel)]="item.value"
-              (blur)="transformDataAndEmit()"
             >
 
             <ng-container
@@ -100,7 +98,7 @@
     />
     <ui-button
       [text]="'create'"
-      (click)="create()"
+      (click)="transformDataAndEmit()"
     />
   </div>
 </div>
@@ -113,20 +111,17 @@
         type="number"
         [placeholder]="'price.difference'| translate"
         [(ngModel)]="item.price"
-        (blur)="transformDataAndEmit()"
       >
 
       <div class="create-announcement-features-price-difference-toggle">
         <div
           class="create-announcement-features-price-difference-toggle-item"
           [class.active]="item.sign === '-'"
-          (click)="item.sign = '-'; transformDataAndEmit()"
         >-
         </div>
         <div
           class="create-announcement-features-price-difference-toggle-item"
           [class.active]="item.sign === '+'"
-          (click)="item.sign = '+'; transformDataAndEmit()"
         >+
         </div>
       </div>

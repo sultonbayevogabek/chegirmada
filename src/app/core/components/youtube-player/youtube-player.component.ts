@@ -34,6 +34,7 @@ export class YoutubePlayer implements OnInit, AfterViewInit {
       return ''
     }
   }) videoID: string;
+  @Input() aspectRatio?: number = 9 / 16;
 
   videoHeight: number | undefined;
   videoWidth: number | undefined;
@@ -56,7 +57,7 @@ export class YoutubePlayer implements OnInit, AfterViewInit {
       1200
     );
 
-    this.videoHeight = this.videoWidth * 9 / 16;
+    this.videoHeight = this.videoWidth * this.aspectRatio
   }
 }
 

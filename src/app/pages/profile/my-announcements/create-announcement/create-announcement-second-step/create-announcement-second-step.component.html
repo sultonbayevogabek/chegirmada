@@ -2,11 +2,10 @@
   <form class="create-announcement-third-step-inner" [formGroup]="thirdStepForm" (ngSubmit)="goToThirdStep()">
     <div class="grid-2">
       <label class="create-announcement-new-price-label form-label">
-        <span class="form-label-text">{{ 'branches'| translate }} *</span>
+        <span class="form-label-text">{{ 'branches'| translate }}</span>
 
         <mat-select
           class="solid-select"
-          [class.invalid]="thirdStepForm.get('store_branches').invalid && thirdStepForm.get('store_branches').touched"
           multiple
           [placeholder]="'branches'| translate"
           [formControlName]="'store_branches'"
@@ -15,10 +14,6 @@
             <mat-option [value]="branch.pk">{{ branch.name }}</mat-option>
           }
         </mat-select>
-
-        <ng-container
-          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'store_branches' }"
-        />
       </label>
 
       <label class="create-announcement-new-price-label form-label">
@@ -66,10 +61,10 @@
           [hideSingleSelectionIndicator]="true"
           [placeholder]="'select.discount.type'| translate"
         >
-          <mat-option [value]="'regular'">{{ 'regular.discount'| translate }}</mat-option>
-          <mat-option [value]="'for-free'">{{ 'add.for.free'| translate }}</mat-option>
-          <mat-option [value]="'quantity'">{{ 'quantity.discount'| translate }}</mat-option>
-          <mat-option [value]="'service'">{{ 'service.discount'| translate }}</mat-option>
+          <mat-option [value]="'regular'" disabled>{{ 'regular.discount'| translate }}</mat-option>
+          <mat-option [value]="'for-free'" disabled>{{ 'add.for.free'| translate }}</mat-option>
+          <mat-option [value]="'quantity'" disabled>{{ 'quantity.discount'| translate }}</mat-option>
+          <mat-option [value]="'service'" disabled>{{ 'service.discount'| translate }}</mat-option>
         </mat-select>
       </label>
 
@@ -169,34 +164,26 @@
     <div class="create-announcement-information-field date-interval">
       <label class="form-label date-interval-label">
         <span
-          class="create-announcement-information-field-title form-label-text">{{ 'total.number.of.products'| translate }}
-          *</span>
+          class="create-announcement-information-field-title form-label-text">{{ 'total.number.of.products'| translate }}</span>
         <input
           class="create-announcement-information-input form-input"
-          [class.invalid]="thirdStepForm.get('product_counts').invalid && thirdStepForm.get('product_counts').touched"
           type="number"
           [placeholder]="'total.number.of.products'| translate"
           [formControlName]="'product_counts'"
+          [max]="2147483647"
         >
-        <ng-container
-          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'product_counts' }"
-        />
       </label>
 
       <label class="form-label date-interval-label">
         <span
-          class="create-announcement-information-field-title form-label-text">{{ 'number.of.remaining.products'| translate }}
-          *</span>
+          class="create-announcement-information-field-title form-label-text">{{ 'number.of.remaining.products'| translate }}</span>
         <input
           class="create-announcement-information-input form-input"
-          [class.invalid]="thirdStepForm.get('remainder').invalid && thirdStepForm.get('remainder').touched"
           type="number"
           [placeholder]="'number.of.remaining.products'| translate"
           [formControlName]="'remainder'"
+          [max]="2147483647"
         >
-        <ng-container
-          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'remainder' }"
-        />
       </label>
     </div>
 

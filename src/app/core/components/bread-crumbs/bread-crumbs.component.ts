@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { BreadcrumbModel } from '../../models/breadcrumb.model';
 
 @Component({
   selector: 'bread-crumbs',
@@ -16,8 +17,5 @@ import { RouterLink } from '@angular/router';
 export class BreadCrumbsComponent {
   @Input({
     required: true
-  }) breadCrumbs: {
-    text: string;
-    url?: string;
-  }[] = [];
+  }) breadCrumbs: BreadcrumbModel[] = [];
 }
