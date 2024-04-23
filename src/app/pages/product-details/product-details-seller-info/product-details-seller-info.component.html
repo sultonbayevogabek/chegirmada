@@ -4,33 +4,33 @@
       <div class="product-details-seller-brand">
         <div class="product-details-seller-logo">
           <img-wrapper
-            [src]="store.logo"
+            [src]="details.store.logo"
           />
         </div>
 
         <div class="product-details-seller-name">
-          <h3>{{ store.shortname| titlecase }}</h3>
-          <p>{{ store.name }}</p>
+          <h3>{{ details.store.shortname| titlecase }}</h3>
+          <p>{{ details.store.name }}</p>
         </div>
       </div>
 
       <div class="product-details-seller-followers">
         <div class="product-details-seller-followers-item" [matTooltip]="'subscribers'| translate">
           <mat-icon [svgIcon]="'icon:gradient-man'"></mat-icon>
-          <span>{{ store.followers }}</span>
+          <span>{{ details.store.followers }}</span>
         </div>
         <div class="product-details-seller-followers-item" [matTooltip]="'likes'| translate">
           <mat-icon [svgIcon]="'icon:gradient-heart'"></mat-icon>
-          <span>{{ store.likes }}</span>
+          <span>{{ details.store.likes }}</span>
         </div>
       </div>
     </div>
 
     <div class="product-details-seller-body">
-      <rating-stars class="product-details-seller-rating" [rate]="store| averageRate"/>
+      <rating-stars class="product-details-seller-rating" [rate]="details.store| averageRate"/>
 
-      <a class="product-details-seller-phone" [href]="'tel:' + store.main_phone_number">
-        {{ store.main_phone_number| phoneNumber }}
+      <a class="product-details-seller-phone" [href]="'tel:' + details.store.main_phone_number">
+        {{ details.store.main_phone_number| phoneNumber }}
       </a>
 
       <div class="product-details-seller-description-text">
@@ -49,21 +49,28 @@
 
   <ul class="product-details-quantity">
     <li class="product-details-quantity-item">
-      <div class="product-details-quantity-name">Скидочные товары</div>
+      <div class="product-details-quantity-name">{{ 'available.at.discount'| translate }}</div>
       <div class="product-details-quantity-dashes"></div>
-      <div class="product-details-quantity-value">149/200 шт.</div>
+      <div class="product-details-quantity-value">
+        {{ details.product_counts ? () : (''| translate)}}
+        {{ 'pcs'| translate }}
+      </div>
     </li>
 
     <li class="product-details-quantity-item">
-      <div class="product-details-quantity-name">Доставкаы</div>
+      <div class="product-details-quantity-name">{{ 'delivery'| translate }}</div>
       <div class="product-details-quantity-dashes"></div>
-      <div class="product-details-quantity-value">Нет</div>
+      <div class="product-details-quantity-value">
+        {{ (details.store.delivery ? 'available' : 'no')| translate }}
+      </div>
     </li>
 
     <li class="product-details-quantity-item">
-      <div class="product-details-quantity-name">Рассрочка</div>
+      <div class="product-details-quantity-name">{{ 'installment.plan'| translate }}</div>
       <div class="product-details-quantity-dashes"></div>
-      <div class="product-details-quantity-value green">Есть</div>
+      <div class="product-details-quantity-value green">
+        {{ (details.store.term_payment ? 'available' : 'no')| translate }}
+      </div>
     </li>
   </ul>
 </div>

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RatingStarsComponent } from '../../../core/components/rating-stars/rating-stars.component';
 import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
-import { Store } from '../../../core/models/product-details.model';
+import { ProductDetails, Store } from '../../../core/models/product-details.model';
 import { TitleCasePipe } from '@angular/common';
 import { ImgWrapperComponent } from '../../../core/components/img-wrapper/img-wrapper.component';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -31,5 +31,5 @@ import { PhoneNumberPipe } from '../../../core/pipes/phone-number.pipe';
 export class ProductDetailsSellerInfoComponent {
   @Input({
     required: true
-  }) store: Store;
+  }) details: ProductDetails;
 }

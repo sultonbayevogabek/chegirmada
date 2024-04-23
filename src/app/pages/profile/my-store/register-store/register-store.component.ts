@@ -117,7 +117,7 @@ export class RegisterStoreComponent implements OnInit {
     this._authService.currentUser$
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(user => {
-        this.registerStoreForm.get('main_phone_number').setValue(user.phone_number);
+        this.registerStoreForm.get('main_phone_number').setValue(user?.phone_number);
       });
 
     this._yandexMapService.setSingleLocationPoint('map');
