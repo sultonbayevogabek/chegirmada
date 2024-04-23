@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { ProductDetails } from '../../../core/models/product-details.model';
+import { TranslateModule } from '@ngx-translate/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'product-details-info-block',
@@ -9,7 +11,9 @@ import { ProductDetails } from '../../../core/models/product-details.model';
   styleUrl: 'product-details-info-block.component.scss',
   imports: [
     MatIcon,
-    MatIconButton
+    MatIconButton,
+    TranslateModule,
+    DatePipe
   ],
   standalone: true
 })

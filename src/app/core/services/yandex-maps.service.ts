@@ -13,23 +13,34 @@ export class YandexMapsService {
 
   public coordinatesAndAddress$ = new BehaviorSubject<{ coordinates: number[]; address: string }>({ coordinates: this._tashkent, address: '' });
 
-  setMultipleLocationPoints(mapContainerId: string, points: number[][]): void {
+  setMultipleLocationPoints(
+    mapContainerId: string,
+    points: {
+      coordinates: number[],
+      title: string;
+      workingDayStart: number;
+      workingDayEnd: number;
+      workingTimeStart: string;
+      workingTimeEnd: string;
+    }[]
+  ): void {
+    console.log(points);
     this._yandexApiLoaderService.load()
       .subscribe(_ => {
         this._map = new ymaps.Map(mapContainerId, {
-          center: points[0],
+          center: points[0].coordinates,
           zoom: 10,
           controls: [ 'geolocationControl' ]
         });
 
-        points.forEach(async point => {
+        points.forEach(point => {
           const placeMark = new ymaps.Placemark(
-            point,
+            point.coordinates,
             {
               balloonContent: `
                 <div class="balloon">
-                  <div class="balloon-brand">BroStore Мирабад</div>
-                  <div class="balloon-work-time">Du - Yak | 09:00 - 18:00</div>
+                  <div class="balloon-brand">${ point.title }</div>
+                  <div class="balloon-work-time">${ point.workingDayStart } - ${ point.workingDayEnd } | ${ point.workingTimeStart } - ${ point.workingTimeEnd }</div>
                 </div>
               `
             },

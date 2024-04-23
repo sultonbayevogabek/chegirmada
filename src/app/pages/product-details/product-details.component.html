@@ -12,13 +12,17 @@
         />
       </div>
 
-      <product-details-seller-info />
+      <product-details-seller-info
+        [store]="details.store"
+      />
     </div>
 
     <div class="product-details-additional-info">
       <product-details-tabs />
 
-      <product-details-map />
+      <product-details-map
+        [branches]="details.store_branches"
+      />
     </div>
 
     <div class="product-details-other-products">

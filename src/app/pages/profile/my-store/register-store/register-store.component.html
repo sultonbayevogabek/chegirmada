@@ -226,6 +226,26 @@
           </label>
 
           <label class="form-label">
+            <span class="form-label-text">{{ 'installment.plan'| translate }}</span>
+
+            <mat-radio-group class="register-delivery-type" [formControlName]="'term_payment'">
+              <mat-radio-button
+                class="form-radio"
+                [color]="'primary'"
+                [value]="true"
+              >
+                {{ 'available'| translate }}
+              </mat-radio-button>
+              <mat-radio-button
+                class="form-radio"
+                [color]="'primary'"
+                [value]="false"
+              >{{ 'no'| translate }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </label>
+
+          <label class="form-label">
             <span class="form-label-text">{{ 'phone.number'| translate }} *</span>
             <input
               class="form-input"
@@ -237,6 +257,26 @@
             >
             <ng-container
               *ngTemplateOutlet="requiredErrors; context: { $implicit: 'main_phone_number' }"
+            />
+          </label>
+
+          <label class="my-information-label form-label">
+            <span class="my-information-label-text form-label-text">{{ 'region'| translate }} *</span>
+
+            <mat-select
+              class="solid-select"
+              [class.invalid]="registerStoreForm.get('region').invalid && registerStoreForm.get('region').touched"
+              [formControlName]="'region'"
+              [placeholder]="'region'| translate"
+              (selectionChange)="onRegionSelected()"
+            >
+              @for (region of regions; track region) {
+                <mat-option [value]="region.id">{{ region.name| translate }}</mat-option>
+              }
+            </mat-select>
+
+            <ng-container
+              *ngTemplateOutlet="requiredErrors; context: { $implicit: 'region' }"
             />
           </label>
         </div>
@@ -276,26 +316,6 @@
       <div class="register-company-address">
         <div class="register-company-info-fields">
           <label class="my-information-label form-label">
-            <span class="my-information-label-text form-label-text">{{ 'region'| translate }} *</span>
-
-            <mat-select
-              class="solid-select"
-              [class.invalid]="registerStoreForm.get('region').invalid && registerStoreForm.get('region').touched"
-              [formControlName]="'region'"
-              [placeholder]="'region'| translate"
-              (selectionChange)="onRegionSelected()"
-            >
-              @for (region of regions; track region) {
-                <mat-option [value]="region.id">{{ region.name| translate }}</mat-option>
-              }
-            </mat-select>
-
-            <ng-container
-              *ngTemplateOutlet="requiredErrors; context: { $implicit: 'region' }"
-            />
-          </label>
-
-          <label class="my-information-label form-label">
             <span class="my-information-label-text form-label-text">{{ 'district'| translate }} *</span>
 
             <mat-select
@@ -314,23 +334,23 @@
               *ngTemplateOutlet="requiredErrors; context: { $implicit: 'district' }"
             />
           </label>
-        </div>
 
-        <label class="form-label">
-          <span class="form-label-text">{{ 'address'| translate }} *</span>
-          <input
-            class="form-input"
-            type="text"
-            trim
-            [maxlength]="255"
-            [placeholder]="'enter.address'| translate"
-            [class.invalid]="registerStoreForm.get('address').invalid && registerStoreForm.get('address').touched"
-            [formControlName]="'address'"
-          >
-          <ng-container
-            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'address' }"
-          />
-        </label>
+          <label class="form-label">
+            <span class="form-label-text">{{ 'address'| translate }} *</span>
+            <input
+              class="form-input"
+              type="text"
+              trim
+              [maxlength]="255"
+              [placeholder]="'enter.address'| translate"
+              [class.invalid]="registerStoreForm.get('address').invalid && registerStoreForm.get('address').touched"
+              [formControlName]="'address'"
+            >
+            <ng-container
+              *ngTemplateOutlet="requiredErrors; context: { $implicit: 'address' }"
+            />
+          </label>
+        </div>
       </div>
 
       <div class="register-company-descriptions">

@@ -8,7 +8,7 @@
       <div class="product-details-date-view-item">
         <mat-icon [svgIcon]="'icon:calendar'"></mat-icon>
 
-        <span>{{ details.end_date }}</span>
+        <span>{{ details.end_date| date: 'dd.MM.YYYY' }}</span>
       </div>
 
       <div class="product-details-date-view-item views">
@@ -71,10 +71,10 @@
 
   <div class="product-details-dates-like-report">
     <div class="product-details-dates">
-      <div class="product-details-dates-title">Дата начала и окончания скидки</div>
+      <div class="product-details-dates-title">{{ 'start.and.end.date'| translate }}</div>
 
       <div class="product-details-dates-interval">
-        <span>с 20.10.2023</span> - <strong>до 20.10.2023</strong>
+        <span>{{ details.start_date| date: 'dd.MM.YYYY' }}</span> - <strong>{{ details.end_date| date: 'dd.MM.YYYY' }}</strong>
       </div>
     </div>
 

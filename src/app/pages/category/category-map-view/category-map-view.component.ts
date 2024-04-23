@@ -61,6 +61,6 @@ export class CategoryMapViewComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this._yandexMapService.setMultipleLocationPoints('map', this._points);
+    //this._yandexMapService.setMultipleLocationPoints('map', this._points);
   }
 }

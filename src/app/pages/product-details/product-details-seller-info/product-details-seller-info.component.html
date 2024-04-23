@@ -3,34 +3,35 @@
     <div class="product-details-seller-header">
       <div class="product-details-seller-brand">
         <div class="product-details-seller-logo">
-          <img src="/assets/logos/mac-bro.svg" alt="MacBro logo">
+          <img-wrapper
+            [src]="store.logo"
+          />
         </div>
 
         <div class="product-details-seller-name">
-          <h3>MacBro</h3>
-          <p>Mc Bro онлайн</p>
+          <h3>{{ store.shortname| titlecase }}</h3>
+          <p>{{ store.name }}</p>
         </div>
       </div>
 
       <div class="product-details-seller-followers">
-        <div class="product-details-seller-followers-item">
+        <div class="product-details-seller-followers-item" [matTooltip]="'subscribers'| translate">
           <mat-icon [svgIcon]="'icon:gradient-man'"></mat-icon>
-          <span>11.2 тыс</span>
+          <span>{{ store.followers }}</span>
         </div>
-        <div class="product-details-seller-followers-item">
+        <div class="product-details-seller-followers-item" [matTooltip]="'likes'| translate">
           <mat-icon [svgIcon]="'icon:gradient-heart'"></mat-icon>
-          <span>11.2 тыс</span>
+          <span>{{ store.likes }}</span>
         </div>
       </div>
     </div>
 
     <div class="product-details-seller-body">
-      <rating-stars class="product-details-seller-rating" [rate]="4.4"/>
+      <rating-stars class="product-details-seller-rating" [rate]="store| averageRate"/>
 
-      <div class="product-details-seller-phone">
-        <span class="product-details-seller-phone-code">+998 33</span>
-        <u class="product-details-seller-phone-hidden">Показать телефон</u>
-      </div>
+      <a class="product-details-seller-phone" [href]="'tel:' + store.main_phone_number">
+        {{ store.main_phone_number| phoneNumber }}
+      </a>
 
       <div class="product-details-seller-description-text">
         По своей сути рыбатекст является альтернативой традиционному,
