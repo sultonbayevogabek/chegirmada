@@ -81,6 +81,7 @@
     <div class="product-details-like-report">
       <div class="product-details-like-dislike">
         <button
+          #likeButton
           class="product-details-like-button"
           [class.active]="details.user_like"
           (click)="like()">
@@ -94,6 +95,7 @@
         <div class="product-details-like-dislike-divider"></div>
 
         <button
+          #dislikeButton
           class="product-details-dislike-button"
           [class.active]="details.user_dislike"
           (click)="dislike()"

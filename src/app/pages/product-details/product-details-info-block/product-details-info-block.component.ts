@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { ProductDetails } from '../../../core/models/product-details.model';
@@ -27,6 +27,8 @@ import { ProductDetailsService } from '../../../core/services/product-details.se
 })
 
 export class ProductDetailsInfoBlockComponent implements OnInit {
+  @ViewChild('likeButton') likeButton: HTMLButtonElement;
+  @ViewChild('dislikeButton') dislikeButton: HTMLButtonElement;
   @Input({
     required: true
   }) details: ProductDetails;
@@ -58,6 +60,7 @@ export class ProductDetailsInfoBlockComponent implements OnInit {
       return;
     }
 
+    this.likeButton.disabled = true;
     this._productDetailsService.likeProduct(this.details.pk)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
