@@ -34,9 +34,7 @@
       </a>
 
       <div class="product-details-seller-description-text">
-        По своей сути рыбатекст является альтернативой традиционному,
-        который вызывает у некторых людей недоумение при попытках прочитать рыбу текст.
-        В отличии от.
+        {{ details.store.desc }}
       </div>
 
       <ui-button
@@ -52,8 +50,7 @@
       <div class="product-details-quantity-name">{{ 'available.at.discount'| translate }}</div>
       <div class="product-details-quantity-dashes"></div>
       <div class="product-details-quantity-value">
-        {{ details.product_counts ? () : (''| translate)}}
-        {{ 'pcs'| translate }}
+        {{ details.product_counts ? details.remainder + ' ' + ('pcs'| translate) : ('no.entered'| translate)}}
       </div>
     </li>
 

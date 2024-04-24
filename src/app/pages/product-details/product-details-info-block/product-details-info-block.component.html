@@ -80,15 +80,24 @@
 
     <div class="product-details-like-report">
       <div class="product-details-like-dislike">
-        <button class="product-details-like-button">
+        <button
+          class="product-details-like-button"
+          [class.active]="details.user_like"
+          (click)="like()">
           <mat-icon [svgIcon]="'icon:like'"></mat-icon>
 
-          <span>1 200</span>
+          @if (+details.likes) {
+            <span>{{ details.likes }}</span>
+          }
         </button>
 
         <div class="product-details-like-dislike-divider"></div>
 
-        <button class="product-details-dislike-button">
+        <button
+          class="product-details-dislike-button"
+          [class.active]="details.user_dislike"
+          (click)="dislike()"
+        >
           <mat-icon [svgIcon]="'icon:dislike'"></mat-icon>
         </button>
       </div>

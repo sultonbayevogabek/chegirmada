@@ -13,4 +13,16 @@ export class ProductDetailsService {
   getProductDetails(id: string): Observable<ProductDetails> {
     return this._httpClient.get<ProductDetails>(this._host + 'discounts/' + id);
   }
+
+  likeProduct(id: number): Observable<{ discount: number }> {
+    return this._httpClient.post<{ discount: number }>(this._host + 'discounts/like/', {
+      discount: id,
+    });
+  }
+
+  dislikeProduct(id: number): Observable<{ discount: number }> {
+    return this._httpClient.post<{ discount: number }>(this._host + 'discounts/dislike/', {
+      discount: id,
+    });
+  }
 }
