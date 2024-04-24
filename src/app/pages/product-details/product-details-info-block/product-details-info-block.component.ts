@@ -27,17 +27,15 @@ import { ProductDetailsService } from '../../../core/services/product-details.se
 })
 
 export class ProductDetailsInfoBlockComponent implements OnInit {
-  @ViewChild('likeButton') likeButton: HTMLButtonElement;
-  @ViewChild('dislikeButton') dislikeButton: HTMLButtonElement;
   @Input({
     required: true
   }) details: ProductDetails;
+  loading = false;
 
   private _authService = inject(AuthService);
   private _loginProfileComponent = inject(LoginProfileComponent);
   private _productDetailsService = inject(ProductDetailsService);
   private _destroyRef = inject(DestroyRef);
-
   private _currentUser: UserModel;
 
   ngOnInit(): void {
@@ -60,14 +58,18 @@ export class ProductDetailsInfoBlockComponent implements OnInit {
       return;
     }
 
-    this.likeButton.disabled = true;
+    this.loading = true;
     this._productDetailsService.likeProduct(this.details.pk)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
-        next: res => {
+        next: () => {
+          this.loading = false;
           this.details.likes = (+this.details.likes + 1).toString();
           this.details.user_like = true;
           this.details.user_dislike = false;
+        },
+        error: () => {
+          this.loading = false;
         }
       });
   }
@@ -82,16 +84,21 @@ export class ProductDetailsInfoBlockComponent implements OnInit {
       return;
     }
 
+    this.loading = true;
     this._productDetailsService.dislikeProduct(this.details.pk)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
-        next: res => {
+        next: () => {
           this.details.user_dislike = true;
+          this.loading = false;
 
           if (this.details.user_like) {
             this.details.user_like = false;
             this.details.likes = (+this.details.likes - 1).toString();
           }
+        },
+        error: () => {
+          this.loading = false;
         }
       });
   }

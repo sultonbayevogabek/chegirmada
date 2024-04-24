@@ -94,7 +94,7 @@
 }
 
 .product-details-tabs-leave-comment {
-  @include blue-button;;
+  @include blue-button;
   background-color: $primary-red-color;
   box-shadow: 0 4px 24px 0 rgba(255, 3, 76, 0.16);
 }
@@ -113,10 +113,13 @@
 
 .product-details-tabs-comment-owner-img {
   position: relative;
+  @include flex-center-center;
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 50%;
   overflow: hidden;
+  background-color: $background-grey-color;
+  font-weight: 500;
 }
 
 .product-details-tabs-comment-owner-time {
@@ -165,6 +168,11 @@
 .product-details-tabs-comment-reply {
   padding: 0.25rem 0 0.5rem;
   border-bottom: 1px solid $dashed-border-color;
+  text-align: right;
+}
+
+.product-details-tabs-leave-comment-btn {
+  padding: 0.25rem 0 0.5rem;
   text-align: right;
 }
 

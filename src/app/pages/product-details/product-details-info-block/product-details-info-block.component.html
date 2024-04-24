@@ -81,9 +81,9 @@
     <div class="product-details-like-report">
       <div class="product-details-like-dislike">
         <button
-          #likeButton
           class="product-details-like-button"
           [class.active]="details.user_like"
+          [disabled]="loading"
           (click)="like()">
           <mat-icon [svgIcon]="'icon:like'"></mat-icon>
 
@@ -95,9 +95,9 @@
         <div class="product-details-like-dislike-divider"></div>
 
         <button
-          #dislikeButton
           class="product-details-dislike-button"
           [class.active]="details.user_dislike"
+          [disabled]="loading"
           (click)="dislike()"
         >
           <mat-icon [svgIcon]="'icon:dislike'"></mat-icon>

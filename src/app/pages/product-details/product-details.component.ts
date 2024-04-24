@@ -12,7 +12,7 @@ import { RatingStarsComponent } from '../../core/components/rating-stars/rating-
 import { BreadCrumbsComponent } from '../../core/components/bread-crumbs/bread-crumbs.component';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Category, ProductDetails } from '../../core/models/product-details.model';
+import { ProductDetails } from '../../core/models/product-details.model';
 import { BreadcrumbModel } from '../../core/models/breadcrumb.model';
 
 @Component({

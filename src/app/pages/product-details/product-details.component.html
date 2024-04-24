@@ -18,7 +18,9 @@
     </div>
 
     <div class="product-details-additional-info">
-      <product-details-tabs />
+      <product-details-tabs
+        [details]="details"
+      />
 
       <product-details-map
         [branches]="details.store_branches"
