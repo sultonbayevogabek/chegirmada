@@ -6,9 +6,13 @@ import { inject } from '@angular/core';
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   const authService = inject(AuthService);
 
-  const requestWithToken = req.clone({
-    headers: req.headers.append('Authorization', 'Bearer ' + authService.token)
-  });
+  let requestWithToken = req.clone();
+
+  if (authService.token) {
+    requestWithToken = requestWithToken.clone({
+      headers: req.headers.append('Authorization', 'Bearer ' + authService.token)
+    })
+  }
 
   return next(requestWithToken);
 }
