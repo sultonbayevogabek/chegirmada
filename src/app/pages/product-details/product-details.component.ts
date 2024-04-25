@@ -14,6 +14,9 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductDetails } from '../../core/models/product-details.model';
 import { BreadcrumbModel } from '../../core/models/breadcrumb.model';
+import { AuthService } from '../../core/services/auth.service';
+import { UserModel } from '../../core/models/user.model';
+import { ProductDetailsService } from '../../core/services/product-details.service';
 
 @Component({
   selector: 'product-details',
@@ -36,20 +39,31 @@ import { BreadcrumbModel } from '../../core/models/breadcrumb.model';
 export class ProductDetailsComponent implements OnInit {
   breadCrumbs: BreadcrumbModel[] = [];
   details: ProductDetails;
+  currentUser: UserModel;
+  count = 0;
 
   private _activatedRoute = inject(ActivatedRoute);
+  private _authService = inject(AuthService);
+  private _productDetailsService = inject(ProductDetailsService);
   private _destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this._activatedRoute.data
+    this._productDetailsService.productDetails$
+      .subscribe(productDetails => {
+        this.details = productDetails;
+        this.generateBreadCrumbs();
+      });
+
+
+    this._authService.currentUser$
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
-        next: (data: { productDetails: ProductDetails }): void => {
-          this.details = data.productDetails;
-
-          this.generateBreadCrumbs()
+        next: (user): void => {
+          this.currentUser = user;
+          this.refreshDetails();
+          this.count++;
         }
-      })
+      });
   }
 
   generateBreadCrumbs(): void {
@@ -57,7 +71,16 @@ export class ProductDetailsComponent implements OnInit {
       this.breadCrumbs.push({
         text: category.name,
         url: '#'
-      })
-    })
+      });
+    });
+  }
+
+  refreshDetails(): void {
+    if (this.count) {
+      this._productDetailsService
+        .getProductDetails(this.details.pk)
+        .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe();
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { ProductDetails } from '../../../core/models/product-details.model';
@@ -26,35 +26,35 @@ import { ProductDetailsService } from '../../../core/services/product-details.se
   providers: [ LoginProfileComponent, ProductDetailsService ]
 })
 
-export class ProductDetailsInfoBlockComponent implements OnInit {
+export class ProductDetailsInfoBlockComponent implements OnInit, OnChanges {
   @Input({
     required: true
   }) details: ProductDetails;
+  @Input({
+    required: true
+  }) currentUser: UserModel;
   loading = false;
 
   private _authService = inject(AuthService);
   private _loginProfileComponent = inject(LoginProfileComponent);
   private _productDetailsService = inject(ProductDetailsService);
   private _destroyRef = inject(DestroyRef);
-  private _currentUser: UserModel;
 
   ngOnInit(): void {
-    this._authService.currentUser$
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe({
-        next: user => {
-          this._currentUser = user;
-        }
-      });
+
+  }
+
+  ngOnChanges(): void {
+    console.log('Changes', this.details);
   }
 
   like(): void {
-    if (!this._currentUser) {
+    if (!this.currentUser) {
       this._loginProfileComponent.openLoginDialog();
       return;
     }
 
-    if (this.details.user_like) {
+    if (this.loading) {
       return;
     }
 
@@ -64,6 +64,13 @@ export class ProductDetailsInfoBlockComponent implements OnInit {
       .subscribe({
         next: () => {
           this.loading = false;
+
+          if (this.details.user_like) {
+            this.details.likes = (+this.details.likes - 1).toString();
+            this.details.user_like = false;
+            return
+          }
+
           this.details.likes = (+this.details.likes + 1).toString();
           this.details.user_like = true;
           this.details.user_dislike = false;
@@ -75,12 +82,12 @@ export class ProductDetailsInfoBlockComponent implements OnInit {
   }
 
   dislike(): void {
-    if (!this._currentUser) {
+    if (!this.currentUser) {
       this._loginProfileComponent.openLoginDialog();
       return;
     }
 
-    if (this.details.user_dislike) {
+    if (this.loading) {
       return;
     }
 
@@ -89,13 +96,21 @@ export class ProductDetailsInfoBlockComponent implements OnInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: () => {
-          this.details.user_dislike = true;
           this.loading = false;
 
-          if (this.details.user_like) {
-            this.details.user_like = false;
-            this.details.likes = (+this.details.likes - 1).toString();
+          if (this.details.user_dislike) {
+            this.details.user_dislike = false;
+            return
           }
+
+          if (this.details.user_like) {
+            this.details.likes = (+this.details.likes - 1).toString();
+            this.details.user_like = false;
+            this.details.user_dislike = true;
+            return
+          }
+
+          this.details.user_dislike = true;
         },
         error: () => {
           this.loading = false;

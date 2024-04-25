@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { initialDataResolver } from './core/resolvers/initial-data.resolver';
 import { authGuard } from './core/guards/auth.guard';
 import { productDetailsResolver } from './core/resolvers/product-details.resolver';
+import { ProductDetailsService } from './core/services/product-details.service';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,9 @@ export const routes: Routes = [
       {
         path: 'product-details/:id',
         loadComponent: () => import('./pages/product-details/product-details.component').then(c => c.ProductDetailsComponent),
+        providers: [
+          ProductDetailsService
+        ],
         resolve: {
           productDetails: productDetailsResolver
         }

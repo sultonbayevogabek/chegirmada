@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
 import { ProductDetails } from '../models/product-details.model';
 import { CommentModel } from '../models/comment.model';
 
@@ -11,8 +11,16 @@ export class ProductDetailsService {
   private _host = environment.host;
   private _httpClient = inject(HttpClient);
 
-  getProductDetails(id: string): Observable<ProductDetails> {
-    return this._httpClient.get<ProductDetails>(this._host + 'discounts/' + id);
+  productDetails$: BehaviorSubject<ProductDetails> = new BehaviorSubject<ProductDetails>(null);
+
+  getProductDetails(id: number): Observable<ProductDetails> {
+    return this._httpClient.get<ProductDetails>(this._host + 'discounts/' + id)
+      .pipe(
+        tap(productDetails => {
+          this.productDetails$.next(productDetails);
+        }),
+        switchMap(productDetails => of(productDetails))
+      )
   }
 
   likeProduct(id: number): Observable<{ discount: number }> {
