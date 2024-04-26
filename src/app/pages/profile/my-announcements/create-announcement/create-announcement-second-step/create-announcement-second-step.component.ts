@@ -8,7 +8,7 @@ import {
 import { MatRadioButton } from '@angular/material/radio';
 import { MatSelect } from '@angular/material/select';
 import { LowerCasePipe, NgClass, NgTemplateOutlet } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Form, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatNativeDateModule, MatRipple } from '@angular/material/core';
 import { MatDatepicker, MatDatepickerInput, MatDatepickerModule } from '@angular/material/datepicker';
@@ -26,6 +26,7 @@ import { MyStoreService } from '../../../../../core/services/my-store.service';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { BranchModel } from '../../../../../core/models/branch.model';
 import { ToasterService } from '../../../../../core/services/toaster.service';
+import { newPrice } from '../../../../../core/validators/new-price.validator';
 
 @Component({
   selector: 'create-announcement-second-step',
@@ -80,7 +81,7 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
   } = {
     searchedTags: [],
     selectedTags: []
-  }
+  };
   customPatterns = {
     B: { pattern: new RegExp('[a-zA-Z_]') }
   };
@@ -92,8 +93,8 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
   private _authService = inject(AuthService);
   private _toasterService = inject(ToasterService);
 
-  thirdStepForm = new FormGroup({
-    price: new FormControl(null, [ Validators.required ]),
+  secondStepForm = new FormGroup({
+    price: new FormControl<number>(null, [ Validators.required ]),
     currency: new FormControl<1 | 2>(1),
     product_counts: new FormControl<number>(100, [ Validators.max(2147483647) ]),
     remainder: new FormControl<number>(76, [ Validators.max(2147483647) ]),
@@ -104,7 +105,10 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
     store_branches: new FormControl<number[]>([]),
 
     // regular
-    discount_amount: new FormControl(45, [ Validators.required ]),
+    discount_amount: new FormControl(45, [ Validators.required,
+      // Validators.min(1), Validators.max(100)
+      newPrice('price')
+    ]),
     discount_amount_is_percent: new FormControl(true),
 
     // helper fields
@@ -119,29 +123,30 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
         next: user => {
           this.getBranches(user.store_id);
         }
-      })
+      });
 
     // watch regular_discount_type change
-    this.thirdStepForm.get('regular_discount_type').valueChanges
+    this.secondStepForm.get('regular_discount_type').valueChanges
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(value => {
-        this.thirdStepForm.get('discount_amount_is_percent')
+        this.secondStepForm.get('discount_amount_is_percent')
           .setValue(value === 'percent');
       });
 
-    this.thirdStepForm.valueChanges
+    this.secondStepForm.valueChanges
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(_ => {
-        if (this.thirdStepForm.invalid) {
+        console.log('FormGroup', this.secondStepForm);
+        if (this.secondStepForm.invalid) {
           return;
         }
-        this.onFormStateChanged.emit({ form: this.thirdStepForm, step: 2 });
+        this.onFormStateChanged.emit({ form: this.secondStepForm, step: 2 });
       });
   }
 
   changeCurrency(currency: 1 | 2): void {
-    this.thirdStepForm.get('currency').setValue(currency);
-    const regularDiscountType = this.thirdStepForm.get('regular_discount_type');
+    this.secondStepForm.get('currency').setValue(currency);
+    const regularDiscountType = this.secondStepForm.get('regular_discount_type');
     if (regularDiscountType.value !== 'percent') {
       regularDiscountType.setValue(currency === 1 ? 'uzs' : 'usd');
     }
@@ -165,34 +170,34 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
 
   selectTag($event: MatAutocompleteSelectedEvent): void {
     const id = $event.option.value.pk;
-    const ids: number[] = this.thirdStepForm.get('tags').value;
+    const ids: number[] = this.secondStepForm.get('tags').value;
     if (!ids.includes(id)) {
       ids.push(id);
-      this.thirdStepForm.get('tags').setValue(ids);
+      this.secondStepForm.get('tags').setValue(ids);
       this.tags.selectedTags.push($event.option.value);
     }
   }
 
   removeTag(i: number, tagType: 'selected' | 'new') {
     if (tagType === 'selected') {
-      const ids: number[] = this.thirdStepForm.get('tags').value;
+      const ids: number[] = this.secondStepForm.get('tags').value;
       ids.splice(i, 1);
-      this.thirdStepForm.get('tags').setValue(ids);
+      this.secondStepForm.get('tags').setValue(ids);
       this.tags.selectedTags.splice(i, 1);
     }
     if (tagType === 'new') {
-      const newTags: string[] = this.thirdStepForm.get('new_tags').value;
+      const newTags: string[] = this.secondStepForm.get('new_tags').value;
       newTags.splice(i, 1);
-      this.thirdStepForm.get('new_tags').setValue(newTags);
+      this.secondStepForm.get('new_tags').setValue(newTags);
     }
   }
 
   addNewTag(newTagInput: HTMLInputElement): void {
     const newTag = newTagInput.value;
-    const newTags: string[] = this.thirdStepForm.get('new_tags').value;
+    const newTags: string[] = this.secondStepForm.get('new_tags').value;
     if (!newTags.includes(newTag)) {
       newTags.push(newTag);
-      this.thirdStepForm.get('new_tags').setValue(newTags);
+      this.secondStepForm.get('new_tags').setValue(newTags);
       newTagInput.value = '';
     }
   }
@@ -206,18 +211,18 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
   }
 
   goToThirdStep(): void {
-    this.thirdStepForm.markAllAsTouched();
+    this.secondStepForm.markAllAsTouched();
 
-    if (this.thirdStepForm.invalid) {
+    if (this.secondStepForm.invalid) {
       this._toasterService.open({
         message: 'fill.in.the.required.fields',
         title: 'dear.user',
         type: 'warning'
-      })
+      });
       return;
     }
 
-    if (this.thirdStepForm.disabled) {
+    if (this.secondStepForm.disabled) {
       return;
     }
 

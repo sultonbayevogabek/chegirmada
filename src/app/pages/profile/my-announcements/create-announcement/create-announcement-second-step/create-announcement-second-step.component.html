@@ -1,5 +1,5 @@
 <div class="create-announcement-third-step">
-  <form class="create-announcement-third-step-inner" [formGroup]="thirdStepForm" (ngSubmit)="goToThirdStep()">
+  <form class="create-announcement-third-step-inner" [formGroup]="secondStepForm" (ngSubmit)="goToThirdStep()">
     <div class="grid-2">
       <label class="create-announcement-new-price-label form-label">
         <span class="form-label-text">{{ 'branches'| translate }}</span>
@@ -10,7 +10,7 @@
           [placeholder]="'branches'| translate"
           [formControlName]="'store_branches'"
         >
-          @for(branch of branches; track branch) {
+          @for (branch of branches; track branch) {
             <mat-option [value]="branch.pk">{{ branch.name }}</mat-option>
           }
         </mat-select>
@@ -20,22 +20,21 @@
         <span class="form-label-text">{{ 'original.price'| translate }} *</span>
         <input
           class="form-input"
-          [class.invalid]="thirdStepForm.get('price').invalid && thirdStepForm.get('price').touched"
+          [class.invalid]="secondStepForm.get('price').invalid && secondStepForm.get('price').touched"
           type="number"
           [placeholder]="'enter.original.price'| translate"
           [formControlName]="'price'"
-          [max]="100"
         >
 
         <div class="create-announcement-currency-toggle">
           <div
             class="create-announcement-currency-toggle-item"
-            [class.active]="thirdStepForm.get('currency').value === 1"
+            [class.active]="secondStepForm.get('currency').value === 1"
             (click)="changeCurrency(1)">UZS
           </div>
           <div
             class="create-announcement-currency-toggle-item"
-            [class.active]="thirdStepForm.get('currency').value === 2"
+            [class.active]="secondStepForm.get('currency').value === 2"
             (click)="changeCurrency(2)">USD
           </div>
         </div>
@@ -49,13 +48,12 @@
     <div
       class="create-announcement-discount-combinations"
       [ngClass]="{
-          'grid-2': ['regular', 'for-free'].includes(thirdStepForm.get('discount_type').value),
-          'grid-4': ['quantity', 'service'].includes(thirdStepForm.get('discount_type').value),
+          'grid-2': ['regular', 'for-free'].includes(secondStepForm.get('discount_type').value),
+          'grid-4': ['quantity', 'service'].includes(secondStepForm.get('discount_type').value),
         }"
     >
       <label class="form-label">
         <span class="form-label-text">{{ 'discount.type'| translate }}</span>
-
         <mat-select
           class="solid-select"
           [formControlName]="'discount_type'"
@@ -63,49 +61,67 @@
           [placeholder]="'select.discount.type'| translate"
         >
           <mat-option [value]="'regular'">{{ 'regular.discount'| translate }}</mat-option>
-          <mat-option [value]="'for-free'" disabled>{{ 'add.for.free'| translate }} ({{ 'coming.soon'| translate| lowercase }})</mat-option>
-          <mat-option [value]="'quantity'" disabled>{{ 'quantity.discount'| translate }} ({{ 'coming.soon'| translate| lowercase }})</mat-option>
-          <mat-option [value]="'service'" disabled>{{ 'service.discount'| translate }} ({{ 'coming.soon'| translate| lowercase }})</mat-option>
+          <mat-option [value]="'for-free'" disabled>{{ 'add.for.free'| translate }}
+            ({{ 'coming.soon'| translate| lowercase }})
+          </mat-option>
+          <mat-option [value]="'quantity'" disabled>{{ 'quantity.discount'| translate }}
+            ({{ 'coming.soon'| translate| lowercase }})
+          </mat-option>
+          <mat-option [value]="'service'" disabled>{{ 'service.discount'| translate }}
+            ({{ 'coming.soon'| translate| lowercase }})
+          </mat-option>
         </mat-select>
       </label>
 
-      @if (thirdStepForm.get('discount_type').value === 'regular') {
-        <div class="create-announcement-percent-or-price">
-          <span class="form-label-text">{{ 'discount.price.or.discount.percentage'| translate }} *</span>
-          <div class="create-announcement-percent-or-price-inner">
-            <label class="create-announcement-percent-or-price-label">
-              <input
-                class="create-announcement-percent-or-price-input form-input"
-                [class.invalid]="thirdStepForm.get('discount_amount').invalid && thirdStepForm.get('discount_amount').touched"
-                type="number"
-                [placeholder]="'discount.price.or.discount.percentage'| translate"
-                [formControlName]="'discount_amount'"
-              >
-            </label>
-
-            <mat-select
-              class="solid-select"
-              [hideSingleSelectionIndicator]="true"
-              [formControlName]="'regular_discount_type'"
+      <div class="create-announcement-percent-or-price">
+        <span class="form-label-text">{{ 'discount.price.or.discount.percentage'| translate }} *</span>
+        <div class="create-announcement-percent-or-price-inner">
+          <label class="create-announcement-percent-or-price-label">
+            <input
+              class="create-announcement-percent-or-price-input form-input"
+              [class.invalid]="secondStepForm.get('discount_amount').invalid && secondStepForm.get('discount_amount').touched"
+              [ngClass]="{
+                  'invalid': secondStepForm.get('discount_amount').touched &&
+                  (
+                    secondStepForm.get('discount_amount').hasError('required') ||
+                    (!secondStepForm.get('discount_amount').hasError('required') && (secondStepForm.get('discount_amount').hasError('min') || secondStepForm.get('discount_amount').hasError('max')))
+                  )
+                }"
+              type="number"
+              [placeholder]="'discount.price.or.discount.percentage'| translate"
+              [formControlName]="'discount_amount'"
             >
-              <mat-option [value]="'percent'">{{ 'percent'| translate }} (%)</mat-option>
+          </label>
 
-              @if (thirdStepForm.get('currency').value === 1) {
-                <mat-option [value]="'uzs'">UZS ({{ 'sum'| translate }})</mat-option>
-              }
-              @if (thirdStepForm.get('currency').value === 2) {
-                <mat-option [value]="'usd'">USD ({{ 'dollar'| translate }})</mat-option>
-              }
-            </mat-select>
-          </div>
+          <mat-select
+            class="solid-select"
+            [hideSingleSelectionIndicator]="true"
+            [formControlName]="'regular_discount_type'"
+          >
+            <mat-option [value]="'percent'">{{ 'percent'| translate }} (%)</mat-option>
 
-          <ng-container
-            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'discount_amount' }"
-          />
+            @if (secondStepForm.get('currency').value === 1) {
+              <mat-option [value]="'uzs'">UZS ({{ 'sum'| translate }})</mat-option>
+            }
+            @if (secondStepForm.get('currency').value === 2) {
+              <mat-option [value]="'usd'">USD ({{ 'dollar'| translate }})</mat-option>
+            }
+          </mat-select>
         </div>
-      }
 
-      @if (thirdStepForm.get('discount_type').value === 'for-free') {
+        @if (secondStepForm.get('discount_amount').touched) {
+          @if (secondStepForm.get('discount_amount').hasError('required')) {
+            <span class="form-error">{{ 'required.field'| translate }}</span>
+          }
+
+          @if (!secondStepForm.get('discount_amount').hasError('required') &&
+          (secondStepForm.get('discount_amount').hasError('min') || secondStepForm.get('discount_amount').hasError('max'))) {
+            <span class="form-error">{{ 'enter.number.from.one.to.hundred'| translate }}</span>
+          }
+        }
+      </div>
+
+      <!--@if (secondStepForm.get('discount_type').value === 'for-free') {
         <label class="form-label">
           <span class="form-label-text">Сколько продуктов</span>
           <input class="form-input" type="text" placeholder="Сколько">
@@ -126,7 +142,7 @@
         </div>
       }
 
-      @if (thirdStepForm.get('discount_type').value === 'service') {
+      @if (secondStepForm.get('discount_type').value === 'service') {
         <div class="create-announcement-service-discount">
           <span class="form-label-text">Введите бесплатной услуги</span>
 
@@ -159,7 +175,7 @@
             </div>
           </div>
         </div>
-      }
+      }-->
     </div>
 
     <div class="create-announcement-information-field date-interval">
@@ -193,12 +209,12 @@
         <span class="create-announcement-information-field-title form-label-text">{{ 'start.date'| translate }} *</span>
         <input
           class="create-announcement-information-input form-input"
-          [class.invalid]="thirdStepForm.get('start_date').invalid && thirdStepForm.get('start_date').touched"
+          [class.invalid]="secondStepForm.get('start_date').invalid && secondStepForm.get('start_date').touched"
           [readOnly]="true"
           [placeholder]="'dd.mm.yyyy'| translate"
           [matDatepicker]="startDatePicker"
           [formControlName]="'start_date'"
-          [max]="thirdStepForm.get('end_date').value"
+          [max]="secondStepForm.get('end_date').value"
         >
         <mat-icon
           class="date-interval-calendar-icon"
@@ -215,12 +231,12 @@
         <span class="create-announcement-information-field-title form-label-text">{{ 'end.date'| translate }} *</span>
         <input
           class="create-announcement-information-input form-input"
-          [class.invalid]="thirdStepForm.get('end_date').invalid && thirdStepForm.get('end_date').touched"
+          [class.invalid]="secondStepForm.get('end_date').invalid && secondStepForm.get('end_date').touched"
           [readOnly]="true"
           [placeholder]="'dd.mm.yyyy'| translate"
           [matDatepicker]="endDatePicker"
           [formControlName]="'end_date'"
-          [min]="thirdStepForm.get('start_date').value"
+          [min]="secondStepForm.get('start_date').value"
         >
         <mat-icon
           class="date-interval-calendar-icon"
@@ -240,14 +256,14 @@
           <span class="form-label-text">{{ 'tags'| translate }} *</span>
           <input
             class="form-input"
-            [class.invalid]="thirdStepForm.get('tags').invalid && thirdStepForm.get('tags').touched"
+            [class.invalid]="secondStepForm.get('tags').invalid && secondStepForm.get('tags').touched"
             type="search"
             #tagSearchInput
             [placeholder]="'search'| translate"
             [matAutocomplete]="globalSearchInput"
             [matAutocompleteConnectedTo]="globalSearchWrapper"
             (input)="searchTags(tagSearchInput.value)"
-            (blur)="thirdStepForm.get('tags').markAsTouched()"
+            (blur)="secondStepForm.get('tags').markAsTouched()"
           >
 
           <mat-autocomplete
@@ -305,7 +321,7 @@
             <mat-icon (click)="removeTag(i, 'selected')" [svgIcon]="'icon:x'"/>
           </div>
         }
-        @for (newTag of thirdStepForm.get('new_tags').value; track newTag; let i = $index) {
+        @for (newTag of secondStepForm.get('new_tags').value; track newTag; let i = $index) {
           <div class="create-announcement-information-tags-item">
             <span>{{ newTag }}</span>
 
@@ -325,15 +341,15 @@
       <ui-button
         [text]="'next'"
         [actionType]="'submit'"
-        [disabled]="thirdStepForm.invalid"
-        [loading]="thirdStepForm.disabled"
+        [disabled]="secondStepForm.invalid"
+        [loading]="secondStepForm.disabled"
       />
     </div>
   </form>
 </div>
 
 <ng-template #requiredErrors let-controlName>
-  @if (thirdStepForm.get(controlName).invalid && thirdStepForm.get(controlName).touched) {
+  @if (secondStepForm.get(controlName).invalid && secondStepForm.get(controlName).touched) {
     <span class="form-error">{{ 'required.field'| translate }}</span>
   }
 </ng-template>
