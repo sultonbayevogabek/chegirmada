@@ -48,6 +48,9 @@ export class ProductDetailsTabsComponent implements OnInit {
   @Input({
     required: true
   }) details: ProductDetails;
+  @Input({
+    required: true
+  }) currentUser: UserModel;
 
   currentLang = 'uz';
   loading = true;
@@ -148,13 +151,6 @@ export class ProductDetailsTabsComponent implements OnInit {
   private _translateService = inject(TranslateService);
 
   ngOnInit(): void {
-    this._authService.currentUser$
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe({
-        next: user => {
-          this._currentUser = user;
-        }
-      })
     this.currentLang  = this._translateService.defaultLang;
   }
 
@@ -167,7 +163,7 @@ export class ProductDetailsTabsComponent implements OnInit {
   }
 
   leaveComment(): void {
-    if (!this._currentUser) {
+    if (!this.currentUser) {
       this._loginProfileComponent.openLoginDialog();
       return;
     }

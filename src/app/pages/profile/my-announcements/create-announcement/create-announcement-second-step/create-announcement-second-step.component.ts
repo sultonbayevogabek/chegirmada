@@ -7,7 +7,7 @@ import {
 } from '@angular/material/autocomplete';
 import { MatRadioButton } from '@angular/material/radio';
 import { MatSelect } from '@angular/material/select';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { LowerCasePipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatNativeDateModule, MatRipple } from '@angular/material/core';
@@ -53,7 +53,8 @@ import { ToasterService } from '../../../../../core/services/toaster.service';
     MatAutocompleteOrigin,
     OverlayComponent,
     ScrollbarDirective,
-    NgxMaskDirective
+    NgxMaskDirective,
+    LowerCasePipe
   ],
   providers: [
     MyAnnouncementsService,
@@ -221,5 +222,9 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
     }
 
     this.onStepChanged.emit(3);
+  }
+
+  back(): void {
+    this.onStepChanged.emit(1);
   }
 }

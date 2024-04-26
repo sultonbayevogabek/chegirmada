@@ -17,13 +17,14 @@
       </label>
 
       <label class="create-announcement-new-price-label form-label">
-        <span class="form-label-text">{{ 'new.price'| translate }} *</span>
+        <span class="form-label-text">{{ 'original.price'| translate }} *</span>
         <input
           class="form-input"
           [class.invalid]="thirdStepForm.get('price').invalid && thirdStepForm.get('price').touched"
           type="number"
-          [placeholder]="'enter.new.price'| translate"
+          [placeholder]="'enter.original.price'| translate"
           [formControlName]="'price'"
+          [max]="100"
         >
 
         <div class="create-announcement-currency-toggle">
@@ -61,23 +62,23 @@
           [hideSingleSelectionIndicator]="true"
           [placeholder]="'select.discount.type'| translate"
         >
-          <mat-option [value]="'regular'" disabled>{{ 'regular.discount'| translate }}</mat-option>
-          <mat-option [value]="'for-free'" disabled>{{ 'add.for.free'| translate }}</mat-option>
-          <mat-option [value]="'quantity'" disabled>{{ 'quantity.discount'| translate }}</mat-option>
-          <mat-option [value]="'service'" disabled>{{ 'service.discount'| translate }}</mat-option>
+          <mat-option [value]="'regular'">{{ 'regular.discount'| translate }}</mat-option>
+          <mat-option [value]="'for-free'" disabled>{{ 'add.for.free'| translate }} ({{ 'coming.soon'| translate| lowercase }})</mat-option>
+          <mat-option [value]="'quantity'" disabled>{{ 'quantity.discount'| translate }} ({{ 'coming.soon'| translate| lowercase }})</mat-option>
+          <mat-option [value]="'service'" disabled>{{ 'service.discount'| translate }} ({{ 'coming.soon'| translate| lowercase }})</mat-option>
         </mat-select>
       </label>
 
       @if (thirdStepForm.get('discount_type').value === 'regular') {
         <div class="create-announcement-percent-or-price">
-          <span class="form-label-text">{{ 'price.or.percent'| translate }} *</span>
+          <span class="form-label-text">{{ 'discount.price.or.discount.percentage'| translate }} *</span>
           <div class="create-announcement-percent-or-price-inner">
             <label class="create-announcement-percent-or-price-label">
               <input
                 class="create-announcement-percent-or-price-input form-input"
                 [class.invalid]="thirdStepForm.get('discount_amount').invalid && thirdStepForm.get('discount_amount').touched"
                 type="number"
-                [placeholder]="'price.or.percent'| translate"
+                [placeholder]="'discount.price.or.discount.percentage'| translate"
                 [formControlName]="'discount_amount'"
               >
             </label>
@@ -315,6 +316,12 @@
     </div>
 
     <div class="create-announcement-information-submit">
+      <ui-button
+        [text]="'back'"
+        [actionType]="'button'"
+        [type]="'gray-outline'"
+        (click)="back()"
+      />
       <ui-button
         [text]="'next'"
         [actionType]="'submit'"

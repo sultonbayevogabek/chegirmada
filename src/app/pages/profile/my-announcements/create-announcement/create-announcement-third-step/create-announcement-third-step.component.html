@@ -20,9 +20,9 @@
               </mat-option>
             </mat-select>
 
-            <ng-container
-              *ngTemplateOutlet="priceDifferenceTemplate; context: { $implicit: featureItem, i }"
-            ></ng-container>
+<!--            <ng-container-->
+<!--              *ngTemplateOutlet="priceDifferenceTemplate; context: { $implicit: featureItem, i }"-->
+<!--            ></ng-container>-->
 
             @if (!(i === 0 && featureTemplate.selected.length > 1)) {
               <icon-button
@@ -61,9 +61,9 @@
               [(ngModel)]="item.value"
             >
 
-            <ng-container
-              *ngTemplateOutlet="priceDifferenceTemplate; context: { $implicit: item, i }"
-            ></ng-container>
+<!--            <ng-container-->
+<!--              *ngTemplateOutlet="priceDifferenceTemplate; context: { $implicit: item, i }"-->
+<!--            ></ng-container>-->
 
             @if (!(i === 0 && customTemplate.items.length > 1)) {
             <icon-button
@@ -96,10 +96,18 @@
       [text]="'add.new.feature'"
       (click)="addNewTemplate()"
     />
-    <ui-button
-      [text]="'create'"
-      (click)="transformDataAndEmit()"
-    />
+
+    <div class="create-announcement-features-footer-right">
+      <ui-button
+        [text]="'back'"
+        [type]="'gray-outline'"
+        (click)="back()"
+      />
+      <ui-button
+        [text]="'create'"
+        (click)="transformDataAndEmit()"
+      />
+    </div>
   </div>
 </div>
 

@@ -13,7 +13,7 @@
 }
 
 .create-announcement-information-submit {
-  @include flex-center-end()
+  @include flex-center-end(1rem)
 }
 
 .create-announcement-new-price-label {

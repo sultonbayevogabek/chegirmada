@@ -35,7 +35,7 @@
 
 .create-announcement-features-select, .create-announcement-features-price-difference, .create-announcement-features-custom-value {
   position: relative;
-  width: 40%;
+  width: 60%;
 }
 
 .create-announcement-features-price-difference-toggle {
@@ -69,6 +69,10 @@
 
 .create-announcement-features-footer {
   @include flex-center-between;
+}
+
+.create-announcement-features-footer-right {
+  @include flex-center(1rem);
 }
 
 .create-announcement-features-new {

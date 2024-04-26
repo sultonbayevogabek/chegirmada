@@ -47,6 +47,7 @@ export class CreateAnnouncementThirdStepComponent implements OnInit, OnChanges {
     form: any,
     step: number
   }>();
+  @Output() onStepChanged: EventEmitter<number> = new EventEmitter<number>();
 
   featureTemplates: FeatureTemplate[] = [];
   customTemplates: CustomTemplate[] = [];
@@ -232,5 +233,9 @@ export class CreateAnnouncementThirdStepComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+  }
+
+  back(): void {
+    this.onStepChanged.emit(2);
   }
 }
