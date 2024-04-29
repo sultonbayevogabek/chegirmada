@@ -97,22 +97,6 @@
           }
         </div>
       }
-      @for (feature of details.features; track feature) {
-        <div class="product-details-characteristics-item">
-          {{ feature.name }}:
-          @for(item of feature.values; track item; let i = $last) {
-            {{ item.value }}{{ feature.type ? ' ' + feature.type : '' }}{{ !i ? ',' : '' }}
-          }
-        </div>
-      }
-      @for (feature of details.features; track feature) {
-        <div class="product-details-characteristics-item">
-          {{ feature.name }}:
-          @for(item of feature.values; track item; let i = $last) {
-            {{ item.value }}{{ feature.type ? ' ' + feature.type : '' }}{{ !i ? ',' : '' }}
-          }
-        </div>
-      }
     </div>
   </div>
 </div>

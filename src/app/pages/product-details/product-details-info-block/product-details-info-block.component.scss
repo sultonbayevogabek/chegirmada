@@ -71,7 +71,7 @@
   @include flex-column(0.75rem);
   flex-grow: 1;
   flex-shrink: 0;
-  min-height: 100px;
+  min-height: 0;
   padding-top: 1.5rem;
 }
 
@@ -84,8 +84,6 @@
 .product-details-characteristics-list {
   @include flex-center(0.5rem);
   flex-grow: 1;
-  flex-shrink: 0;
-  min-height: 100px;
 }
 
 .product-details-characteristics-item {

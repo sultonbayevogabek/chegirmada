@@ -62,65 +62,11 @@ export class ProductDetailsTabsComponent implements OnInit {
       title: 'about.product'
     },
     {
-      id: 'characteristics',
-      title: 'product.features'
-    },
-    {
       id: 'comments',
       title: 'comments'
     }
   ];
   comments: CommentModel[] = [];
-  characteristics = [
-    {
-      name: 'ISBN',
-      value: '9789943521087'
-    },
-    {
-      name: 'Автор',
-      value: 'Жюль Верн'
-    },
-    {
-      name: 'Язык',
-      value: 'На узбекском'
-    },
-    {
-      name: 'Надпись',
-      value: 'Латиница'
-    },
-    {
-      name: 'Количество',
-      value: '368'
-    },
-    {
-      name: 'Издательство',
-      value: 'Гафур Гулом'
-    },
-    {
-      name: 'Тип обложки',
-      value: 'Твердая'
-    },
-    {
-      name: 'Формат бумаги',
-      value: 'A5'
-    },
-    {
-      name: 'Год издания',
-      value: '2023'
-    },
-    {
-      name: 'Издательство',
-      value: 'Гафур Гулом'
-    },
-    {
-      name: 'Тип обложки',
-      value: 'Твердая'
-    },
-    {
-      name: 'Формат бумаги',
-      value: 'A5'
-    }
-  ];
   commentForm = new FormGroup({
     text: new FormControl('', [
       Validators.required,
@@ -143,10 +89,8 @@ export class ProductDetailsTabsComponent implements OnInit {
     }
   ]
 
-  private _currentUser: UserModel;
   private _destroyRef = inject(DestroyRef);
   private _productDetailsService = inject(ProductDetailsService);
-  private _authService = inject(AuthService);
   private _loginProfileComponent = inject(LoginProfileComponent);
   private _translateService = inject(TranslateService);
 

@@ -6,7 +6,7 @@
 }
 
 .product-details-tabs-header {
-  @include grid(repeat(3, 1fr));
+  @include grid(repeat(2, 1fr));
   padding: 0.325rem;
   border-radius: 0.5rem;
   background-color: $input-background;
@@ -49,33 +49,6 @@
   height: 100%;
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-
-.product-details-tabs-characteristics {
-  @include flex-column(0.75rem);
-  height: 100%;
-  border-radius: 0.5rem;
-  background-color: $white-color;
-}
-
-.product-details-tabs-characteristics-item {
-  @include flex-center(0.35rem);
-  font-size: 0.875rem;
-}
-
-.product-details-tabs-characteristics-name {
-  color: $secondary-black-color;
-}
-
-.product-details-tabs-characteristics-dashes {
-  flex-grow: 1;
-  align-self: flex-end;
-  border-bottom: 1px dashed rgba($dashed-border-color, 0.9);
-}
-
-.product-details-tabs-characteristics-value {
-  font-weight: 500;
-  color: $logo-black-color;
 }
 
 .product-details-tabs-no-comments {

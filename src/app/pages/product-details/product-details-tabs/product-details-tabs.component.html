@@ -22,11 +22,6 @@
             *ngTemplateOutlet="productDetailsTabsAbout"
           />
         }
-        @case ('characteristics') {
-          <ng-container
-            *ngTemplateOutlet="productDetailsTabsCharacteristics"
-          />
-        }
         @case ('comments') {
           <ng-container
             *ngTemplateOutlet="productDetailsTabsComments"
@@ -42,18 +37,6 @@
   <div class="product-details-tabs-about">
     {{ details.desc }}
   </div>
-</ng-template>
-
-<ng-template #productDetailsTabsCharacteristics>
-  <ul class="product-details-tabs-characteristics">
-    @for (character of characteristics; track character) {
-      <li class="product-details-tabs-characteristics-item">
-        <div class="product-details-tabs-characteristics-name">{{ character.name }}</div>
-        <div class="product-details-tabs-characteristics-dashes"></div>
-        <div class="product-details-tabs-characteristics-value">{{ character.value }}</div>
-      </li>
-    }
-  </ul>
 </ng-template>
 
 <ng-template #productDetailsTabsComments>
