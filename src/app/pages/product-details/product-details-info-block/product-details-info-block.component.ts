@@ -3,7 +3,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { ProductDetails } from '../../../core/models/product-details.model';
 import { TranslateModule } from '@ngx-translate/core';
-import { DatePipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import {
   LoginProfileComponent
@@ -11,6 +11,7 @@ import {
 import { UserModel } from '../../../core/models/user.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductDetailsService } from '../../../core/services/product-details.service';
+import { ScrollbarDirective } from '../../../core/directives/scrollbar.directive';
 
 @Component({
   selector: 'product-details-info-block',
@@ -20,7 +21,9 @@ import { ProductDetailsService } from '../../../core/services/product-details.se
     MatIcon,
     MatIconButton,
     TranslateModule,
-    DatePipe
+    DatePipe,
+    DecimalPipe,
+    ScrollbarDirective
   ],
   standalone: true,
   providers: [ LoginProfileComponent, ProductDetailsService ]

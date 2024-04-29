@@ -44,7 +44,7 @@ export class CreateAnnouncementComponent implements OnInit {
     $event.returnValue = false;
   }*/
 
-  currentTab = 2;
+  currentTab = 1;
   readonly Array = Array;
   data = {
     '1': null,

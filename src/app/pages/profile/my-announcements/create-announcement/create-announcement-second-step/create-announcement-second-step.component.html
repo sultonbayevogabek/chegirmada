@@ -84,8 +84,8 @@
                   'invalid': secondStepForm.get('discount_amount').touched &&
                   (
                     secondStepForm.get('discount_amount').hasError('required') ||
-                    (!secondStepForm.get('discount_amount').hasError('required') && (secondStepForm.get('discount_amount').hasError('min') || secondStepForm.get('discount_amount').hasError('max')))
-                  )
+                    (!secondStepForm.get('discount_amount').hasError('required') &&
+                      (secondStepForm.get('discount_amount').hasError('min') || secondStepForm.get('discount_amount').hasError('max') || secondStepForm.hasError('invalidNewPrice'))))
                 }"
               type="number"
               [placeholder]="'discount.price.or.discount.percentage'| translate"
@@ -117,6 +117,10 @@
           @if (!secondStepForm.get('discount_amount').hasError('required') &&
           (secondStepForm.get('discount_amount').hasError('min') || secondStepForm.get('discount_amount').hasError('max'))) {
             <span class="form-error">{{ 'enter.number.from.one.to.hundred'| translate }}</span>
+          }
+
+          @if (secondStepForm.hasError('invalidNewPrice')) {
+            <span class="form-error">{{ 'the.amount.of.the.discount.cannot.be.greater.than.the.current.price.of.the.goods'| translate }}</span>
           }
         }
       </div>

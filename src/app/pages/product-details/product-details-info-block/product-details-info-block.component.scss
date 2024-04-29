@@ -28,7 +28,6 @@
 }
 
 .product-details-product-title {
-  padding-top: 0.5rem;
   font-size: 1.25rem;
   line-height: 2rem;
   font-weight: 600;
@@ -69,61 +68,32 @@
 }
 
 .product-details-characteristics {
+  @include flex-column(0.75rem);
+  flex-grow: 1;
+  flex-shrink: 0;
+  min-height: 100px;
   padding-top: 1.5rem;
 }
 
-.product-details-characteristics-item {
-  margin-bottom: 1rem;
-}
-
-.product-details-characteristics-label {
-  margin-bottom: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.25rem;
+.product-details-characteristics-heading {
+  font-size: 1rem;
+  font-weight: 500;
   color: $dialog-title-black;
 }
 
-.product-details-characteristics-options {
-  @include flex-center(0.5rem)
+.product-details-characteristics-list {
+  @include flex-center(0.5rem);
+  flex-grow: 1;
+  flex-shrink: 0;
+  min-height: 100px;
 }
 
-.product-details-characteristics-option {
-  padding: 0.5rem 0.75rem;
+.product-details-characteristics-item {
+  padding: 0.75rem;
   border-radius: 0.25rem;
   border: 1px solid $border-grey-color;
   font-size: 0.875rem;
   color: $dialog-title-black;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba($primary-blue-color, 0.05);
-    border-color: $primary-blue-color;
-    color: $primary-blue-color;
-  }
-}
-
-.product-details-characteristics-color {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  cursor: pointer;
-
-  &:nth-child(1) {
-    background-color: #000000;
-  }
-
-  &:nth-child(2) {
-    background-color: #D7DADA;
-  }
-
-  &:nth-child(3) {
-    background-color: #1C6ECF;
-  }
-
-  &:nth-child(4) {
-    background-color: #E737E0;
-  }
 }
 
 .product-details-dates-like-report {
@@ -131,9 +101,12 @@
   flex-grow: 1;
   justify-content: flex-end;
   width: max-content;
+  padding-top: 1.5rem;
 }
 
 .product-details-dates {
+  @include flex-center(0.5rem);
+  min-height: 2.75rem;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   background-color: $input-background;
@@ -143,7 +116,6 @@
 .product-details-dates-title {
   font-size: 0.875rem;
   color: $secondary-black-color;
-  margin-bottom: 0.5rem;
 }
 
 .product-details-dates-interval {
@@ -165,7 +137,7 @@
   @include flex-center;
   height: 2.75rem;
   border-radius: 0.5rem;
-  background-color: $background-grey-color;
+  background-color: $input-background;
 }
 
 .product-details-like-button {
@@ -214,7 +186,7 @@
   height: 2.75rem;
   padding: 0 1.25rem;
   border-radius: 0.5rem;
-  background-color: $background-grey-color;
+  background-color: $input-background;
   font-size: 0.875rem;
   color: $logo-black-color;
 

@@ -27,51 +27,25 @@
 
   <div class="product-details-price-change">
     <div class="product-details-price-old">
-      <del class="">15 000 000 сум</del>
+      <del>{{ details.price| number }} {{ (details.currency === 1 ? 'sum': 'dollar')| translate }}</del>
 
-      <div class="product-details-price-discount">10%</div>
+      @if (details.discount_amount_is_percent) {
+        <div class="product-details-price-discount">{{ details.discount_amount| number }}%</div>
+      }
     </div>
 
-    <strong class="product-details-price-new">13 499 000 сум</strong>
-  </div>
-
-  <div class="product-details-characteristics">
-    <div class="product-details-characteristics-item">
-      <div class="product-details-characteristics-label">Встроенная память (ROM)</div>
-      <div class="product-details-characteristics-options">
-        <div class="product-details-characteristics-option">64 ГБ</div>
-        <div class="product-details-characteristics-option">128 ГБ</div>
-        <div class="product-details-characteristics-option">256 ГБ</div>
-        <div class="product-details-characteristics-option">512 ГБ</div>
-        <div class="product-details-characteristics-option">1024 ГБ</div>
-      </div>
-    </div>
-
-    <div class="product-details-characteristics-item">
-      <div class="product-details-characteristics-label">Цвет товара: Черный</div>
-      <div class="product-details-characteristics-options">
-        <div class="product-details-characteristics-color"></div>
-        <div class="product-details-characteristics-color"></div>
-        <div class="product-details-characteristics-color"></div>
-        <div class="product-details-characteristics-color"></div>
-      </div>
-    </div>
-
-    <div class="product-details-characteristics-item">
-      <div class="product-details-characteristics-label">Слот для SIM:</div>
-      <div class="product-details-characteristics-options">
-        <div class="product-details-characteristics-option">1 SIM</div>
-        <div class="product-details-characteristics-option">2 SIM</div>
-        <div class="product-details-characteristics-option">3 SIM</div>
-        <div class="product-details-characteristics-option">4 SIM</div>
-        <div class="product-details-characteristics-option">eSIM</div>
-      </div>
-    </div>
+    <strong class="product-details-price-new">
+      @if (details.discount_amount_is_percent) {
+        {{ (+details.price * (100 - +details.discount_amount) / 100)| number }}
+      } @else {
+        {{ (+details.price - +details.discount_amount)| number }}
+      } {{ (details.currency === 1 ? 'sum': 'dollar')| translate }}
+    </strong>
   </div>
 
   <div class="product-details-dates-like-report">
     <div class="product-details-dates">
-      <div class="product-details-dates-title">{{ 'start.and.end.date'| translate }}</div>
+      <div class="product-details-dates-title">{{ 'start.and.end.date'| translate }}:</div>
 
       <div class="product-details-dates-interval">
         <span>{{ details.start_date| date: 'dd.MM.YYYY' }}</span> - <strong>{{ details.end_date| date: 'dd.MM.YYYY' }}</strong>
@@ -105,10 +79,40 @@
       </div>
 
       <button class="product-details-report-button">
-        <span>Жалоба</span>
+        <span>{{ 'complaining'| translate }}</span>
 
         <mat-icon [svgIcon]="'icon:exclamation'"></mat-icon>
       </button>
+    </div>
+  </div>
+
+  <div class="product-details-characteristics">
+    <h3 class="product-details-characteristics-heading">{{ 'product.features'| translate }}</h3>
+    <div class="product-details-characteristics-list" scrollbar>
+      @for (feature of details.features; track feature) {
+        <div class="product-details-characteristics-item">
+          {{ feature.name }}:
+          @for(item of feature.values; track item; let i = $last) {
+            {{ item.value }}{{ feature.type ? ' ' + feature.type : '' }}{{ !i ? ',' : '' }}
+          }
+        </div>
+      }
+      @for (feature of details.features; track feature) {
+        <div class="product-details-characteristics-item">
+          {{ feature.name }}:
+          @for(item of feature.values; track item; let i = $last) {
+            {{ item.value }}{{ feature.type ? ' ' + feature.type : '' }}{{ !i ? ',' : '' }}
+          }
+        </div>
+      }
+      @for (feature of details.features; track feature) {
+        <div class="product-details-characteristics-item">
+          {{ feature.name }}:
+          @for(item of feature.values; track item; let i = $last) {
+            {{ item.value }}{{ feature.type ? ' ' + feature.type : '' }}{{ !i ? ',' : '' }}
+          }
+        </div>
+      }
     </div>
   </div>
 </div>

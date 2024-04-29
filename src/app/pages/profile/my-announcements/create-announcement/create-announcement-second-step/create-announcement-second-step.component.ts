@@ -7,7 +7,7 @@ import {
 } from '@angular/material/autocomplete';
 import { MatRadioButton } from '@angular/material/radio';
 import { MatSelect } from '@angular/material/select';
-import { LowerCasePipe, NgClass, NgTemplateOutlet } from '@angular/common';
+import { JsonPipe, LowerCasePipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import { Form, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatNativeDateModule, MatRipple } from '@angular/material/core';
@@ -55,7 +55,8 @@ import { newPrice } from '../../../../../core/validators/new-price.validator';
     OverlayComponent,
     ScrollbarDirective,
     NgxMaskDirective,
-    LowerCasePipe
+    LowerCasePipe,
+    JsonPipe
   ],
   providers: [
     MyAnnouncementsService,
@@ -105,9 +106,9 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
     store_branches: new FormControl<number[]>([]),
 
     // regular
-    discount_amount: new FormControl(45, [ Validators.required,
-      // Validators.min(1), Validators.max(100)
-      newPrice('price')
+    discount_amount: new FormControl(45, [
+      Validators.required,
+      Validators.min(1), Validators.max(100)
     ]),
     discount_amount_is_percent: new FormControl(true),
 
@@ -129,8 +130,23 @@ export class CreateAnnouncementSecondStepComponent implements OnInit {
     this.secondStepForm.get('regular_discount_type').valueChanges
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(value => {
+        const discountAmountControl = this.secondStepForm.get('discount_amount');
+        discountAmountControl.markAsTouched();
         this.secondStepForm.get('discount_amount_is_percent')
           .setValue(value === 'percent');
+
+        if (value === 'percent') {
+          discountAmountControl.setValidators([
+            Validators.min(1),
+            Validators.max(100)
+          ]);
+          this.secondStepForm.removeValidators([ newPrice ]);
+        } else {
+          discountAmountControl.clearValidators();
+          discountAmountControl.setValidators([ Validators.required ]);
+          this.secondStepForm.addValidators([ newPrice ]);
+        }
+        discountAmountControl.updateValueAndValidity();
       });
 
     this.secondStepForm.valueChanges
