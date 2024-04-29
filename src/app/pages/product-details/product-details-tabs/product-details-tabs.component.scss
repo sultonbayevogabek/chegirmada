@@ -73,11 +73,9 @@
 }
 
 .product-details-tabs-comment {
-  @include flex-column(0.75rem);
-
-  &:not(:last-child) {
-    margin-bottom: 1rem;
-  }
+  @include flex-column(1.25rem);
+  padding: 1rem 0;
+  border-bottom: 1px solid $border-grey-color;
 }
 
 .product-details-tabs-comment-header {
@@ -128,39 +126,15 @@
   }
 }
 
-.product-details-tabs-comment-body {
-  padding-left: 1rem;
-}
-
 .product-details-tabs-comment-text {
   font-size: 1rem;
   line-height: 1.25rem;
   color: $seller-description-color;
 }
 
-.product-details-tabs-comment-reply {
-  padding: 0.25rem 0 0.5rem;
-  border-bottom: 1px solid $dashed-border-color;
-  text-align: right;
-}
-
 .product-details-tabs-leave-comment-btn {
   padding: 0.25rem 0 0.5rem;
   text-align: right;
-}
-
-.product-details-tabs-comment-reply-button {
-  height: 2.25rem;
-  padding: 0 0.75rem;
-  background-color: $background-grey-color;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-
-  &:hover {
-    background-color: rgba($primary-blue-color, 0.10);
-    color: $primary-blue-color;
-  }
 }
 
 .product-details-tabs-comment-form {
