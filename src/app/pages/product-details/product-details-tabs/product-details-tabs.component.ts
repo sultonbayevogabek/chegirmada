@@ -156,13 +156,7 @@ export class ProductDetailsTabsComponent implements OnInit {
         next: () => {
           this.getComments();
         },
-        error: _ => {
-          this._toasterService.open({
-            message: 'error.occurred',
-            type: 'error',
-            title: 'attention'
-          });
-        }
+        error: () => {}
       });
   }
 
