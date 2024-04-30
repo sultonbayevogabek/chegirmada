@@ -12,5 +12,5 @@
 
 .product-details-additional-info, .product-details-other-products {
   @include grid(repeat(2, 1fr), 1.5rem);
-  padding-top: 3rem;
+  padding-top: 2rem;
 }

@@ -5,7 +5,7 @@ import { RatingStarsComponent } from '../../../core/components/rating-stars/rati
 import { SectionHeaderComponent } from '../../../core/components/section-header/section-header.component';
 import { Store, StoreBranch } from '../../../core/models/product-details.model';
 import { WEEKDAYS } from '../../../core/constants/weekdays';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -15,7 +15,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   imports: [
     MatIconModule,
     RatingStarsComponent,
-    SectionHeaderComponent
+    SectionHeaderComponent,
+    TranslateModule
   ],
   providers: [ YandexMapsService ],
   standalone: true
