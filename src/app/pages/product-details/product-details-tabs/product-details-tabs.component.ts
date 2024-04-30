@@ -146,6 +146,9 @@ export class ProductDetailsTabsComponent implements OnInit {
       .pipe(
         takeUntilDestroyed(this._destroyRef),
         switchMap(res => {
+          if (!res) {
+            return null
+          }
           return this._productDetailsService.deleteComment(commentAuthorId);
         })
       )
