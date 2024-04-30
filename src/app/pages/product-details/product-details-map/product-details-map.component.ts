@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { YandexMapsService } from '../../../core/services/yandex-maps.service';
 import { RatingStarsComponent } from '../../../core/components/rating-stars/rating-stars.component';
 import { SectionHeaderComponent } from '../../../core/components/section-header/section-header.component';
-import { StoreBranch } from '../../../core/models/product-details.model';
+import { Store, StoreBranch } from '../../../core/models/product-details.model';
 import { WEEKDAYS } from '../../../core/constants/weekdays';
 import { TranslateService } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

@@ -17,22 +17,24 @@ import { BreadcrumbModel } from '../../core/models/breadcrumb.model';
 import { AuthService } from '../../core/services/auth.service';
 import { UserModel } from '../../core/models/user.model';
 import { ProductDetailsService } from '../../core/services/product-details.service';
+import { TabsComponent } from '../../core/components/tabs/tabs.component';
 
 @Component({
   selector: 'product-details',
   templateUrl: 'product-details.component.html',
   styleUrl: 'product-details.component.scss',
-  imports: [
-    RatingStarsComponent,
-    ProductDetailsSellerInfoComponent,
-    ProductDetailsTabsComponent,
-    ProductDetailsMapComponent,
-    ProductDetailsOtherShopsComponent,
-    ProductDetailsSimilarProductsComponent,
-    BreadCrumbsComponent,
-    ProductDetailsGalleryComponent,
-    ProductDetailsInfoBlockComponent
-  ],
+    imports: [
+        RatingStarsComponent,
+        ProductDetailsSellerInfoComponent,
+        ProductDetailsTabsComponent,
+        ProductDetailsMapComponent,
+        ProductDetailsOtherShopsComponent,
+        ProductDetailsSimilarProductsComponent,
+        BreadCrumbsComponent,
+        ProductDetailsGalleryComponent,
+        ProductDetailsInfoBlockComponent,
+        TabsComponent
+    ],
   standalone: true
 })
 

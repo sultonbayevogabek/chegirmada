@@ -18,22 +18,27 @@
       />
     </div>
 
-    <div class="product-details-additional-info">
-      <product-details-tabs
-        [details]="details"
-        [currentUser]="currentUser"
-      />
+    @defer (on viewport) {
+      <div class="product-details-additional-info">
+        <product-details-tabs
+          [details]="details"
+          [currentUser]="currentUser"
+        />
 
-      <product-details-map
-        [branches]="details.store_branches"
-      />
-    </div>
+        <product-details-map
+          [branches]="details.store_branches"
+        />
+      </div>
+    } @placeholder {
+      <div></div>
+    }
 
-    <div class="product-details-other-products">
+
+    <!--<div class="product-details-other-products">
       <product-details-other-shops />
 
       <product-details-similar-products />
-    </div>
+    </div>-->
   </div>
 </section>
 

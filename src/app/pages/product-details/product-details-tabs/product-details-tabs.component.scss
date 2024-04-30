@@ -34,15 +34,13 @@
 .product-details-tabs-body {
   position: relative;
   height: 25rem;
-  border-radius: 0.5rem;
-  border: 1px solid $border-grey-color;
+  padding: 0.5rem;
   overflow: hidden;
 }
 
 .product-details-tabs-inner {
   width: 100%;
   height: 100%;
-  padding: 1rem;
 }
 
 .product-details-tabs-about {
@@ -66,56 +64,53 @@
   font-weight: 500;
 }
 
-.product-details-tabs-leave-comment {
-  @include blue-button;
-  background-color: $primary-red-color;
-  box-shadow: 0 4px 24px 0 rgba(255, 3, 76, 0.16);
+.product-details-tabs-comments {
+  @include flex-column(1rem);
 }
 
 .product-details-tabs-comment {
-  @include flex-column(1.25rem);
-  padding: 1rem 0;
-  border-bottom: 1px solid $border-grey-color;
-}
-
-.product-details-tabs-comment-header {
-  @include flex-start-between;
+  @include flex-start(0.75rem);
 }
 
 .product-details-tabs-comment-owner-img {
   position: relative;
   @include flex-center-center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   overflow: hidden;
   background-color: $background-grey-color;
   font-weight: 500;
+  flex-shrink: 0;
 }
 
-.product-details-tabs-comment-owner-time {
-  @include flex-center(0.5rem);
+.product-details-tabs-comment-body {
+  flex-grow: 1;
+  padding-top: 0.5rem;
 }
 
 .product-details-tabs-comment-owner-name {
+  @include flex-center(0.75rem);
+
   div {
-    margin-bottom: 0.125rem;
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 500;
   }
 
   time {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     color: $secondary-text-color;
   }
 }
 
 .product-details-tabs-comment-dots {
   @include flex-center-center;
+  flex-shrink: 0;
   width: 2.5rem;
   height: 2.5rem;
   padding: 0;
   border-radius: 50%;
+  color: $secondary-text-color;
 
   &:hover {
     background-color: $background-grey-color;
@@ -126,8 +121,48 @@
   }
 }
 
+.product-details-tabs-comment-actions {
+  min-width: 200px;
+  background-color: $white-color;
+  box-shadow: 0 0.25rem 1.5rem 0 rgba(51, 51, 51, 0.12);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.product-details-tabs-comment-actions-item {
+  padding: 0 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $background-grey-color;
+  }
+
+  &:not(:last-child) &-inner {
+    border-bottom: 1px solid $border-grey-color
+  }
+}
+
+.product-details-tabs-comment-actions-item-inner {
+  @include flex-center(0.5rem);
+  padding: 0.75rem;
+
+  .mat-icon {
+    width: 1rem;
+  }
+
+  &.complaining {
+    color: $secondary-black-color
+  }
+
+  &.delete {
+    color: $primary-red-color;
+  }
+
+}
+
 .product-details-tabs-comment-text {
-  font-size: 1rem;
+  padding-top: 0.25rem;
+  font-size: 0.875rem;
   line-height: 1.25rem;
   color: $seller-description-color;
 }
@@ -138,26 +173,28 @@
 }
 
 .product-details-tabs-comment-form {
-  padding-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border: 1px solid $dashed-border-color;
+  border-radius: 0.5rem;
 }
 
 .product-details-tabs-comment-input {
   display: block;
   width: 100%;
   height: 2.5rem;
-  padding: 0 0.5rem;
-  font-size: 1rem;
+  font-size: 0.875rem;
   border: none;
+  resize: none;
 
   &::placeholder {
     color: $dashed-border-color;
   }
 }
 
-.product-details-tabs-comment-samples {
-  @include flex-center(0.25rem);
-  padding: 0.5rem 0;
-  border-bottom: 1px solid $dashed-border-color;
+.product-details-tabs-comment-submit {
+  @include flex-end-between;
+  padding-top: 0.5rem;
 }
 
 .product-details-tabs-comment-sample {
@@ -165,30 +202,17 @@
   padding: 0 1rem;
   border-radius: 0.875rem;
   background-color: $input-background;
-  font-size: 0.875rem;
-  line-height: 1.75rem;
-}
-
-.product-details-tabs-comment-form-actions {
-  @include flex-center-end(0.5rem);
-  padding-top: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.5rem;
 }
 
 .product-details-tabs-comment-form-button {
-  height: 2.5rem;
+  height: 2rem;
   padding: 0 1rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
   font-weight: 500;
-
-  &.cancel {
-    background-color: $background-grey-color;
-    color: $secondary-black-color;
-  }
-
-  &.save {
-    background-color: rgba($primary-blue-color, 0.1);
-    color: $primary-blue-color;
-  }
+  background-color: rgba($primary-blue-color, 0.1);
+  color: $primary-blue-color;
 }
 

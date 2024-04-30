@@ -7,8 +7,8 @@
         (click)="changeTab(tab.id)"
       >
         {{ tab.title| translate }}
-        @if (tab.id === 'comments') {
-          <span>25</span>
+        @if (tab.id === 'comments' && comments.length) {
+          <span>( {{ comments.length| number }} )</span>
         }
       </div>
     }
@@ -44,89 +44,20 @@
     <spinner-loader/>
   }
 
-  @if (this.comments.length && !loading) {
-    <ul class="product-details-tabs-comments">
-      @for (comment of comments; track comment) {
-        <li class="product-details-tabs-comment">
-          <div class="product-details-tabs-comment-header">
-            <div class="product-details-tabs-comment-owner-time">
-              <div class="product-details-tabs-comment-owner-img">
-                {{ comment.user_fullname.charAt(0) }}
-              </div>
-
-              <div class="product-details-tabs-comment-owner-name">
-                <div>{{ comment.user_fullname }}</div>
-                <time>{{ comment.created_at| date: 'dd.MM.YYYY HH:mm' }}</time>
-              </div>
-            </div>
-
-            <button class="product-details-tabs-comment-dots" mat-ripple>
-              <mat-icon [svgIcon]="'icon:dots'"></mat-icon>
-            </button>
-          </div>
-
-          <div class="product-details-tabs-comment-body">
-            <p class="product-details-tabs-comment-text">
-              {{ comment.text }}
-            </p>
-          </div>
-        </li>
-      }
-
-      @if (!showCommentForm) {
-        <div class="product-details-tabs-leave-comment-btn">
-          <button
-            (click)="showCommentForm = true"
-            class="product-details-tabs-leave-comment">
-            {{ 'leave.comment'| translate }}
-          </button>
-        </div>
-      }
-    </ul>
-  }
-
-  @if (!this.comments.length && !loading && !showCommentForm) {
-    <div class="product-details-tabs-no-comments">
-      <img class="product-details-tabs-no-comments-icon" [ngSrc]="'/assets/empty-list-icons/message.svg'" [width]="113"
-           [height]="104" [alt]="''">
-      <p class="product-details-tabs-no-comments-text">{{ 'there.are.no.comments'| translate }}</p>
-      <button
-        (click)="showCommentForm = true"
-        class="product-details-tabs-leave-comment">
-        {{ 'leave.comment'| translate }}
-      </button>
-    </div>
-  }
-
-  @if (showCommentForm) {
+  @if (showCommentForm && currentUser) {
     <form
       class="product-details-tabs-comment-form" [formGroup]="commentForm" (ngSubmit)="leaveComment()">
-      <input
+      <textarea
         class="product-details-tabs-comment-input"
         type="text"
         [placeholder]="'enter.your.comment'| translate"
         trim
-        maxlength="255"
+        maxlength="160"
         [formControlName]="'text'"
-      >
+      ></textarea>
 
-      <div class="product-details-tabs-comment-samples">
-        @for (commonComment of commonComments; track commonComment) {
-          <button
-            (click)="setCommonComment(commonComment[currentLang])"
-            class="product-details-tabs-comment-sample" type="button">
-            {{ commonComment[currentLang] }}
-          </button>
-        }
-      </div>
-
-      <div class="product-details-tabs-comment-form-actions">
-        <button
-          class="product-details-tabs-comment-form-button cancel"
-          type="button"
-          (click)="showCommentForm = false"
-        >{{ 'cancel'| translate }}
-        </button>
+      <div class="product-details-tabs-comment-submit">
+        <div>{{ commentForm.get('text').value.length }} / 160</div>
         <button
           class="product-details-tabs-comment-form-button save"
           type="submit"
@@ -134,5 +65,80 @@
         </button>
       </div>
     </form>
+  }
+
+  @if (this.comments?.length && !loading) {
+    <ul class="product-details-tabs-comments">
+      @for (comment of comments; track comment) {
+        <li class="product-details-tabs-comment">
+          <div class="product-details-tabs-comment-owner-img">
+            {{ comment.user_fullname.charAt(0) }}
+          </div>
+
+          <div class="product-details-tabs-comment-body">
+            <div class="product-details-tabs-comment-owner-name">
+              <div>{{ comment.user_fullname }}</div>
+              <time>{{ comment.created_at| date: 'dd.MM.YYYY HH:mm' }}</time>
+            </div>
+
+            <p class="product-details-tabs-comment-text">
+              {{ comment.text }}
+            </p>
+          </div>
+
+          <button
+            class="product-details-tabs-comment-dots"
+            mat-ripple
+            #commentActionButton
+            (click)="overlayPanel.openPanel()"
+          >
+            <mat-icon [svgIcon]="'icon:dots'"></mat-icon>
+          </button>
+
+          <overlay-panel [originElement]="commentActionButton" #overlayPanel>
+            <div
+              overlay-content
+              class="product-details-tabs-comment-actions"
+            >
+              <div class="product-details-tabs-comment-actions-item" mat-ripple>
+                <div class="product-details-tabs-comment-actions-item-inner complaining">
+                  <mat-icon [svgIcon]="'icon:flag'"/>
+
+                  <span>{{ 'complaining'| translate }}</span>
+                </div>
+              </div>
+
+              @if (comment.user === currentUser?.pk) {
+                <div
+                  class="product-details-tabs-comment-actions-item"
+                  mat-ripple
+                  (click)="deleteComment(comment.pk, overlayPanel)"
+                >
+                  <div class="product-details-tabs-comment-actions-item-inner delete">
+                    <mat-icon [svgIcon]="'icon:trash'"/>
+
+                    <span>{{ 'delete'| translate }}</span>
+                  </div>
+                </div>
+              }
+            </div>
+          </overlay-panel>
+        </li>
+      }
+    </ul>
+  }
+
+  @if (!this.comments?.length && !loading && !showCommentForm) {
+    <div class="product-details-tabs-no-comments">
+      <img class="product-details-tabs-no-comments-icon" [ngSrc]="'/assets/empty-list-icons/message.svg'" [width]="113"
+           [height]="104" [alt]="''">
+      <p class="product-details-tabs-no-comments-text">{{ 'there.are.no.comments'| translate }}</p>
+
+      <ui-button
+        (click)="openCommentForm()"
+        [type]="'red'"
+        [text]="'leave.comment'"
+      />
+    </div>
   }
 </ng-template>

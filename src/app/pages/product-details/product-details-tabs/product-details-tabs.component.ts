@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { DatePipe, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
+import { DatePipe, DecimalPipe, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatRippleModule } from '@angular/material/core';
 import { RatingStarsComponent } from '../../../core/components/rating-stars/rating-stars.component';
 import { ScrollbarDirective } from '../../../core/directives/scrollbar.directive';
@@ -17,6 +17,11 @@ import { CommentModel } from '../../../core/models/comment.model';
 import {
   LoginProfileComponent
 } from '../../../core/components/header/header-middle/login-button/login-profile.component';
+import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
+import { OverlayComponent } from '../../../core/components/overlay-panel/overlay-panel.component';
+import { ConfirmationService } from '../../../core/services/confirmation.service';
+import { switchMap } from 'rxjs';
+import { ToasterService } from '../../../core/services/toaster.service';
 
 type tabType = 'about' | 'characteristics' | 'comments'
 
@@ -35,11 +40,16 @@ type tabType = 'about' | 'characteristics' | 'comments'
     SpinnerLoaderComponent,
     ReactiveFormsModule,
     TrimDirective,
-    DatePipe
+    DatePipe,
+    DecimalPipe,
+    UiButtonComponent,
+    OverlayComponent
   ],
   providers: [
     ProductDetailsService,
-    LoginProfileComponent
+    LoginProfileComponent,
+    ConfirmationService,
+    ToasterService
   ],
   standalone: true
 })
@@ -71,47 +81,27 @@ export class ProductDetailsTabsComponent implements OnInit {
     text: new FormControl('', [
       Validators.required,
       Validators.minLength(1),
-      Validators.maxLength(255)
+      Validators.maxLength(160)
     ])
   });
-  commonComments = [
-    {
-      uz: 'Juda yaxshi',
-      ru: 'Очень хороший',
-    },
-    {
-      uz: 'Katta rahmat',
-      ru: 'Большое спасибо'
-    },
-    {
-      uz: 'Sifatli tovar',
-      ru: 'Качественный продукт'
-    }
-  ]
 
   private _destroyRef = inject(DestroyRef);
   private _productDetailsService = inject(ProductDetailsService);
   private _loginProfileComponent = inject(LoginProfileComponent);
   private _translateService = inject(TranslateService);
+  private _confirmationService = inject(ConfirmationService);
+  private _toasterService = inject(ToasterService);
 
   ngOnInit(): void {
-    this.currentLang  = this._translateService.defaultLang;
+    this.currentLang = this._translateService.defaultLang;
+    this.getComments();
   }
 
   changeTab(tab: tabType): void {
     this.selectedTab = tab;
-
-    if (this.selectedTab === 'comments' && !this.comments.length) {
-      this.getComments();
-    }
   }
 
   leaveComment(): void {
-    if (!this.currentUser) {
-      this._loginProfileComponent.openLoginDialog();
-      return;
-    }
-
     const form = this.commentForm;
 
     if (form.invalid || form.disabled) {
@@ -123,8 +113,8 @@ export class ProductDetailsTabsComponent implements OnInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: () => {
-          this.showCommentForm = false;
           form.enable();
+          form.get('text').setValue('');
           this.getComments();
         }
       });
@@ -136,7 +126,10 @@ export class ProductDetailsTabsComponent implements OnInit {
       .subscribe({
         next: res => {
           this.loading = false;
-          this.comments = res.results;
+          this.comments = res?.results;
+          if (this.comments?.length) {
+            this.showCommentForm = true;
+          }
         },
         error: () => {
           this.loading = false;
@@ -146,5 +139,36 @@ export class ProductDetailsTabsComponent implements OnInit {
 
   setCommonComment(commonComment: string): void {
     this.commentForm.get('text').setValue(commonComment);
+  }
+
+  deleteComment(commentAuthorId: number, overlayPanel: OverlayComponent): void {
+    this._confirmationService.confirmation()
+      .pipe(
+        takeUntilDestroyed(this._destroyRef),
+        switchMap(res => {
+          return this._productDetailsService.deleteComment(commentAuthorId);
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.getComments();
+        },
+        error: _ => {
+          this._toasterService.open({
+            message: 'error.occurred',
+            type: 'error',
+            title: 'attention'
+          });
+        }
+      });
+  }
+
+  openCommentForm(): void {
+    if (!this.currentUser) {
+      this._loginProfileComponent.openLoginDialog();
+      return;
+    }
+
+    this.showCommentForm = true;
   }
 }

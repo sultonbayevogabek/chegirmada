@@ -61,4 +61,8 @@ export class ProductDetailsService {
       children_exist: boolean
     }>(this._host + `discounts/${ id }/comments/`, { text });
   }
+
+  deleteComment(id: number): Observable<any> {
+    return this._httpClient.delete<any>(this._host + `discounts/comments/${id}/`)
+  }
 }
