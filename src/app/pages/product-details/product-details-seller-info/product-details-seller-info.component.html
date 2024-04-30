@@ -38,9 +38,10 @@
       </div>
 
       <ui-button
-        [type]="'gray-outline'"
-        [text]="'Отписаться'"
+        [type]="details.store.user_follow ? 'gray-outline' : 'blue'"
+        [text]="details.store.user_follow ? 'unsubscribe': 'subscribe'"
         [full]="true"
+        (click)="subscribeToStore()"
       />
     </div>
   </div>

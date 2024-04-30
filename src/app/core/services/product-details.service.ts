@@ -62,7 +62,11 @@ export class ProductDetailsService {
     }>(this._host + `discounts/${ id }/comments/`, { text });
   }
 
-  deleteComment(id: number): Observable<any> {
-    return this._httpClient.delete<any>(this._host + `discounts/comments/${id}/`)
+  deleteComment(id: number): Observable<void> {
+    return this._httpClient.delete<void>(this._host + `discounts/comments/${id}/`)
+  }
+
+  subscribeStore(store: number): Observable<any> {
+    return this._httpClient.post<any>(this._host + 'stores/following/', { store })
   }
 }
