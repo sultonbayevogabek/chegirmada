@@ -72,12 +72,12 @@
       @for (comment of comments; track comment) {
         <li class="product-details-tabs-comment">
           <div class="product-details-tabs-comment-owner-img">
-            {{ comment.user_fullname.charAt(0) }}
+            {{ comment.user_fullname ? comment.user_fullname.charAt(0) : 'A' }}
           </div>
 
           <div class="product-details-tabs-comment-body">
             <div class="product-details-tabs-comment-owner-name">
-              <div>{{ comment.user_fullname }}</div>
+              <div>{{ comment.user_fullname || ('user'| translate) }}</div>
               <time>{{ comment.created_at| date: 'dd.MM.YYYY HH:mm' }}</time>
             </div>
 

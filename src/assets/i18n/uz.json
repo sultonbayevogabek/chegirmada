@@ -207,6 +207,7 @@
   "up.to.n.characters.can.be.entered": "{{ maxlength }} tagacha belgi kiritish mumkin",
   "upload": "Yuklash",
   "url.entered.is.invalid": "Kiritilgan URL manzili noto'g'ri",
+  "user": "Foydalanuvchi",
   "violence": "Zo'ravonlik",
   "we.sent.five.digit.code.to": "{{ phone }} raqamiga 5 xonali tasdiqlash kodini yubordik",
   "we.will.send.sms.with.code": "Tasdiqlash uchun kodni SMS orqali yuboramiz",

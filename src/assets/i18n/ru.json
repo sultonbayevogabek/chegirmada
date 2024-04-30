@@ -207,6 +207,7 @@
   "up.to.n.characters.can.be.entered": "Можно ввести до {{ maxlength }} символов.",
   "upload": "Загрузить",
   "url.entered.is.invalid": "Введенный URL-адрес недействителен",
+  "user": "Пользователь",
   "violence": "Насилие",
   "we.sent.five.digit.code.to": "Для подтверждения телефона отправили 5-значный код на {{ phone }}",
   "we.will.send.sms.with.code": "Отправим смс с кодом подтверждения",
