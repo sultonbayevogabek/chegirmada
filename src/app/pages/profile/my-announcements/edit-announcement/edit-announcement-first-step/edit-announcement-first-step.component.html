@@ -1,0 +1,253 @@
+<div class="create-announcement-information">
+  <form class="create-announcement-information-inner" [formGroup]="firstStepForm">
+    <div class="create-announcement-information-fields">
+      <label class="create-announcement-information-field form-label">
+        <span class="create-announcement-information-field-title form-label-text">{{ 'main.category'| translate }} ( 1 ) *</span>
+
+        <mat-select
+          class="solid-select"
+          [placeholder]="'select.main.category'| translate"
+          (selectionChange)="onMainCategoryChanged()"
+          [formControlName]="'main_category'"
+          [class.invalid]="firstStepForm.get('main_category').invalid && firstStepForm.get('main_category').touched"
+        >
+          @for (category of categories; track category) {
+            <mat-option [value]="category.id">{{ category.name| translate }}</mat-option>
+          }
+        </mat-select>
+
+        <ng-container
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'main_category' }"
+        />
+      </label>
+
+      @if (firstStepForm.get('main_category').value != null && secondLevelCategories.length) {
+        <label class="create-announcement-information-field form-label">
+          <span class="create-announcement-information-field-title form-label-text">{{ 'subcategory'| translate }} ( 2 ) *</span>
+
+          <mat-select
+            class="solid-select"
+            [placeholder]="'select.subcategory'| translate"
+            (selectionChange)="onSubcategoryChanged()"
+            [formControlName]="'subcategory'"
+            [class.invalid]="firstStepForm.get('subcategory').invalid && firstStepForm.get('subcategory').touched"
+          >
+            @for (category of secondLevelCategories; track category) {
+              <mat-option [value]="category.pk">{{ category.name }}</mat-option>
+            }
+          </mat-select>
+
+          <ng-container
+            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'subcategory' }"
+          />
+        </label>
+      }
+
+      @if (firstStepForm.get('subcategory').value != null && thirdLevelCategories.length) {
+        <label class="create-announcement-information-field form-label">
+          <span class="create-announcement-information-field-title form-label-text">{{ 'subcategory'| translate }} ( 3 ) *</span>
+
+          <mat-select
+            class="solid-select"
+            [placeholder]="'select.subcategory'| translate"
+            [formControlName]="'category'"
+            [class.invalid]="firstStepForm.get('category').invalid && firstStepForm.get('category').touched"
+          >
+            @for (category of thirdLevelCategories; track category) {
+              <mat-option [value]="category.pk">{{ category.name }}</mat-option>
+            }
+          </mat-select>
+
+          <ng-container
+            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'category' }"
+          />
+        </label>
+      }
+    </div>
+
+    <div class="grid-2">
+      <label class="create-announcement-information-field form-label">
+        <span class="create-announcement-information-field-title form-label-text">{{ 'title'| translate }}
+          (o'zb) *</span>
+        <input
+          class="create-announcement-information-input form-input"
+          type="text"
+          trim
+          [placeholder]="'enter.title'| translate"
+          [maxlength]="255"
+          [formControlName]="'title_uz'"
+          [class.invalid]="firstStepForm.get('title_uz').invalid && firstStepForm.get('title_uz').touched"
+        >
+        <ng-container
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'title_uz' }"
+        />
+      </label>
+
+      <label class="create-announcement-information-field form-label">
+        <span class="create-announcement-information-field-title form-label-text">{{ 'title'| translate }}
+          (rus) *</span>
+        <input
+          class="create-announcement-information-input form-input"
+          type="text"
+          trim
+          [placeholder]="'enter.title'| translate"
+          [maxlength]="255"
+          [formControlName]="'title_ru'"
+          [class.invalid]="firstStepForm.get('title_ru').invalid && firstStepForm.get('title_ru').touched"
+        >
+        <ng-container
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'title_ru' }"
+        />
+      </label>
+    </div>
+
+    <div class="grid-2">
+      <label class="form-label">
+        <span class="form-label-text">{{ 'description'| translate }} (o'zb) *</span>
+        <textarea
+          class="form-textarea"
+          [class.invalid]="firstStepForm.get('desc_uz').touched && (firstStepForm.get('desc_uz').hasError('required') || firstStepForm.get('desc_uz').hasError('maxlength'))"
+          trim
+          [maxlength]="1500"
+          [placeholder]="'enter.description'| translate"
+          [formControlName]="'desc_uz'"
+        ></textarea>
+        @if (firstStepForm.get('desc_uz').touched) {
+          @if (firstStepForm.get('desc_uz').hasError('required') && !firstStepForm.get('desc_uz').hasError('maxlength')) {
+            <span class="form-error">{{ 'required.field'| translate }}</span>
+          }
+          @if (!firstStepForm.get('desc_uz').hasError('required') && firstStepForm.get('desc_uz').hasError('maxlength')) {
+            <span
+              class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 1500 } }}</span>
+          }
+        }
+      </label>
+
+      <label class="form-label">
+        <span class="form-label-text">{{ 'description'| translate }} (rus) *</span>
+        <textarea
+          class="form-textarea"
+          [class.invalid]="firstStepForm.get('desc_ru').touched && (firstStepForm.get('desc_ru').hasError('required') || firstStepForm.get('desc_ru').hasError('maxlength'))"
+          trim
+          [maxlength]="1500"
+          [placeholder]="'enter.description'| translate"
+          [formControlName]="'desc_ru'"
+        ></textarea>
+        @if (firstStepForm.get('desc_ru').touched) {
+          @if (firstStepForm.get('desc_ru').hasError('required') && !firstStepForm.get('desc_ru').hasError('maxlength')) {
+            <span class="form-error">{{ 'required.field'| translate }}</span>
+          }
+          @if (!firstStepForm.get('desc_ru').hasError('required') && firstStepForm.get('desc_ru').hasError('maxlength')) {
+            <span
+              class="form-error">{{ 'up.to.n.characters.can.be.entered'| translate: { maxlength: 1500 } }}</span>
+          }
+        }
+      </label>
+    </div>
+
+    <label class="create-announcement-information-field create-announcement-information-video form-label">
+      <span
+        class="create-announcement-information-field-title form-label-text">{{ 'link.to.youtube.video.not.required'| translate }}</span>
+      <input
+        class="create-announcement-information-input form-input"
+        type="url"
+        [class.invalid]="firstStepForm.get('video_link').invalid && firstStepForm.get('video_link').touched"
+        [placeholder]="'https://www.youtube.com/watch?v=...'"
+        [formControlName]="'video_link'"
+      >
+      @if (firstStepForm.get('video_link').value && firstStepForm.get('video_link').valid) {
+        <mat-icon
+          #videoPreviewIcon
+          (click)="openVideoPreview($event)"
+          class="create-announcement-information-video-icon" [svgIcon]="'icon:play'"
+        />
+        <overlay-panel [originElement]="videoPreviewIcon._elementRef.nativeElement" #videoPreviewPanel>
+          <div
+            overlay-content
+            class="create-announcement-information-video-preview">
+            <video-player
+              [videoURL]="firstStepForm.get('video_link').value"
+            />
+
+            <mat-spinner
+              class="create-announcement-information-video-loader"
+              [diameter]="24"
+              [strokeWidth]="1.5"
+            />
+          </div>
+        </overlay-panel>
+      }
+
+      @if (firstStepForm.get('video_link').invalid && firstStepForm.get('video_link').touched) {
+        <span class="form-error">{{ 'url.entered.is.invalid'| translate }}</span>
+      }
+    </label>
+
+    <div>
+      <span class="form-label-text">{{ 'product.images.up.to.8'| translate }} *</span>
+      <div
+        class="create-announcement-dropzone"
+        [class.invalid]="firstStepForm.get('images').invalid && firstStepForm.get('images').touched"
+        dragAndDrop
+        (fileDropped)="onImagesDropped($event)"
+      >
+        <mat-icon class="create-announcement-upload-icon" [svgIcon]="'icon:drag-drop-images'"/>
+
+        <h3 class="create-announcement-drop-title">{{ 'drag.and.drop.images.here'| translate }}</h3>
+
+        <p class="create-announcement-drop-or-text">{{ 'or'| translate }}</p>
+
+        <label class="create-announcement-show-images" mat-ripple>
+          <p>{{ 'provide.images'| translate }} (.jpg, .png)</p>
+          <input
+            #fileInput
+            type="file"
+            multiple
+            (change)="onImagesSelectedByFileInput($event)"
+            [accept]="'.jpg, .png'"
+          >
+        </label>
+      </div>
+    </div>
+
+    @if (imagesBuffers.length) {
+      <div
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        class="create-announcement-images"
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for (buffer of imagesBuffers; track buffer; let i = $index) {
+          <div class="create-announcement-image" cdkDrag>
+            <div class="create-announcement-image-placeholder" *cdkDragPlaceholder></div>
+
+            <img class="create-announcement-image-original" [src]="buffer" [alt]="">
+
+
+            <icon-button
+              class="create-announcement-image-remove"
+              [buttonType]="'red'"
+              [icon]="'icon:trash'"
+              (click)="removeImage(i)"
+            />
+          </div>
+        }
+      </div>
+    }
+
+    <div class="create-announcement-information-submit">
+      <ui-button
+        [text]="'next'"
+        [actionType]="'submit'"
+        [disabled]="firstStepForm.invalid"
+        (click)="goToSecondStep()"
+      />
+    </div>
+  </form>
+</div>
+
+<ng-template #requiredErrors let-controlName>
+  @if (firstStepForm.get(controlName).invalid && firstStepForm.get(controlName).touched) {
+    <span class="form-error">{{ 'required.field'| translate }}</span>
+  }
+</ng-template>

@@ -20,4 +20,8 @@ export class MyAnnouncementsService {
   createStandardDiscount(payload: any): Observable<any> {
     return this._httpClient.post<Observable<any>>(this._host + 'discounts/create/standard/', payload);
   }
+
+  getDiscountDataForEditing(id: number): Observable<any> {
+    return this._httpClient.post<Observable<any>>(this._host + 'discounts/create/standard/', payload);
+  }
 }

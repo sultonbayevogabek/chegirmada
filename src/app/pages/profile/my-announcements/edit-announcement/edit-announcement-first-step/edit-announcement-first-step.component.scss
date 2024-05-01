@@ -1,0 +1,132 @@
+@import "variables";
+@import "mixins";
+
+.create-announcement-information-inner {
+  @include flex-column(1.25rem);
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-grey-color;
+}
+
+.create-announcement-information-fields {
+  @include grid(1fr 1fr, 1.25rem)
+}
+
+.create-announcement-dropzone {
+  @include flex-column();
+  align-items: center;
+  padding: 3rem 2rem;
+  border: 1px dashed $border-grey-color;
+  border-radius: 0.5rem;
+
+  &.file-over {
+    background-color: $background-grey-color;
+    box-shadow: 0 0.25rem 1.5rem 0 rgba(51, 51, 51, 0.12);
+  }
+
+  &.invalid {
+    border: 1px dashed $primary-red-color;
+  }
+}
+
+.create-announcement-upload-icon {
+  width: 6rem;
+  height: calc(6rem * 0.8);
+  color: $border-grey-color;
+}
+
+.create-announcement-drop-title {
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: $secondary-black-color;
+}
+
+.create-announcement-drop-or-text, .create-announcement-acceptable-extensions {
+  margin-bottom: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: $secondary-text-color;
+}
+
+.create-announcement-show-images {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid $border-grey-color;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-align: center;
+
+  p {
+    margin-bottom: 0.125rem;
+    font-size: 0.875rem;
+    color: $secondary-black-color;
+  }
+
+  input {
+    @include visually-hidden;
+  }
+}
+
+.create-announcement-images {
+  @include grid(repeat(8, 1fr), 1rem);
+}
+
+.create-announcement-image {
+  position: relative;
+  aspect-ratio: 1;
+  @include flex-center-center();
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: grab;
+  box-shadow: 0 0.25rem 1.5rem 0 rgba(51, 51, 51, 0.12);
+}
+
+.create-announcement-image-original {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.create-announcement-image-remove {
+  position: absolute;
+  right: 0.125rem;
+  top: 0.125rem;
+  z-index: 1;
+}
+
+.grid-2 {
+  @include grid(repeat(2, 1fr), 1.25rem)
+}
+
+.create-announcement-information-submit {
+  @include flex-center-end()
+}
+
+.create-announcement-information-video {
+  position: relative;
+}
+
+.create-announcement-information-video-icon {
+  position: absolute;
+  cursor: pointer;
+  bottom: 1.375rem;
+  right: 1rem;
+  transform: translateY(50%);
+}
+
+.create-announcement-information-video-preview {
+  position: relative;
+  width: 20rem;
+  aspect-ratio: 16/9;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: $white-color;
+  box-shadow: 0 0.25rem 1.5rem 0 rgba(51, 51, 51, 0.12);
+}
+
+.create-announcement-information-video-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

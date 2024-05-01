@@ -1,0 +1,138 @@
+<div class="create-announcement-features">
+  <div class="create-announcement-features-form">
+    @for (featureTemplate of featureTemplates; track featureTemplate) {
+      <fieldset class="create-announcement-features-fieldset">
+        <legend class="create-announcement-features-legend">{{ featureTemplate?.name }}</legend>
+
+        @for (featureItem of featureTemplate.selected; track featureItem; let i = $index) {
+          <div class="create-announcement-features-item">
+            <mat-select
+              class="create-announcement-features-select solid-select"
+              [placeholder]="featureTemplate?.name"
+              [(ngModel)]="featureItem.feature_value"
+            >
+              @for (item of featureTemplate.values; track item) {
+                <mat-option [value]="item.pk">{{ item.value }} {{ featureTemplate.value_extra_type }}</mat-option>
+              }
+
+              <mat-option (click)="addNewValue(featureTemplate.values, featureItem)"
+                          [value]="null">{{ 'other'| translate }}
+              </mat-option>
+            </mat-select>
+
+<!--            <ng-container-->
+<!--              *ngTemplateOutlet="priceDifferenceTemplate; context: { $implicit: featureItem, i }"-->
+<!--            ></ng-container>-->
+
+            @if (!(i === 0 && featureTemplate.selected.length > 1)) {
+              <icon-button
+                [buttonType]="'red'"
+                [icon]="'icon:trash'"
+                (click)="removeFeatureItem(featureTemplate.selected, i)"
+              />
+            }
+          </div>
+        }
+
+        @if (featureTemplate.selected.length < 5) {
+          <ui-button
+            class="create-announcement-features-new"
+            [actionType]="'button'"
+            [type]="'gray-outline'"
+            [icon]="'icon:outline-plus'"
+            [text]="'add'"
+            (click)="addNewFeature(featureTemplate.selected)"
+          />
+        }
+      </fieldset>
+    }
+    @for (customTemplate of customTemplates; track customTemplate) {
+      <fieldset class="create-announcement-features-fieldset">
+        <legend class="create-announcement-features-legend">{{ customTemplate?.name }}</legend>
+
+        @for (item of customTemplate.items; track item; let i = $index) {
+          <div class="create-announcement-features-item">
+            <input
+              class="create-announcement-features-custom-value form-input"
+              maxlength="255"
+              type="text"
+              trim
+              [placeholder]="'new.feature'| translate"
+              [(ngModel)]="item.value"
+            >
+
+<!--            <ng-container-->
+<!--              *ngTemplateOutlet="priceDifferenceTemplate; context: { $implicit: item, i }"-->
+<!--            ></ng-container>-->
+
+            @if (!(i === 0 && customTemplate.items.length > 1)) {
+            <icon-button
+              [buttonType]="'red'"
+              [icon]="'icon:trash'"
+              (click)="removeCustomTemplateItem(customTemplate.items, i)"
+            />
+            }
+          </div>
+        }
+
+        @if (customTemplate.items.length < 5) {
+          <ui-button
+            class="create-announcement-features-new"
+            [actionType]="'button'"
+            [type]="'gray-outline'"
+            [icon]="'icon:outline-plus'"
+            [text]="'add'"
+            (click)="addCustomTemplateItem(customTemplate.items)"
+          />
+        }
+      </fieldset>
+    }
+  </div>
+
+  <div class="create-announcement-features-footer">
+    <ui-button
+      [type]="'gray-outline'"
+      [icon]="'icon:outline-plus'"
+      [text]="'add.new.feature'"
+      (click)="addNewTemplate()"
+    />
+
+    <div class="create-announcement-features-footer-right">
+      <ui-button
+        [text]="'back'"
+        [type]="'gray-outline'"
+        (click)="back()"
+      />
+      <ui-button
+        [text]="'create'"
+        (click)="transformDataAndEmit()"
+      />
+    </div>
+  </div>
+</div>
+
+<ng-template #priceDifferenceTemplate let-item let-i="i">
+  @if (i !== 0) {
+    <div class="create-announcement-features-price-difference">
+      <input
+        class="form-input"
+        type="number"
+        [placeholder]="'price.difference'| translate"
+        [(ngModel)]="item.price"
+      >
+
+      <div class="create-announcement-features-price-difference-toggle">
+        <div
+          class="create-announcement-features-price-difference-toggle-item"
+          [class.active]="item.sign === '-'"
+        >-
+        </div>
+        <div
+          class="create-announcement-features-price-difference-toggle-item"
+          [class.active]="item.sign === '+'"
+        >+
+        </div>
+      </div>
+    </div>
+  }
+</ng-template>

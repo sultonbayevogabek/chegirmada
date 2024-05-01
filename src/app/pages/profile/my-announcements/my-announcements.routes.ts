@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AnnouncementsListComponent } from './announcements-list/announcements-list.component';
 
 export const myAnnouncementsRoutes: Routes = [
   {
@@ -18,6 +17,10 @@ export const myAnnouncementsRoutes: Routes = [
       {
         path: 'create',
         loadComponent: () => import('./create-announcement/create-announcement.component').then(c => c.CreateAnnouncementComponent)
+      },
+      {
+        path: 'edit/:id',
+        loadComponent: () => import('./edit-announcement/edit-announcement.component').then(c => c.EditAnnouncementComponent)
       }
     ]
   }

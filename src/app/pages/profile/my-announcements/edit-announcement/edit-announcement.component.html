@@ -5,7 +5,7 @@
     (click)="back()"
   />
 
-  <h2 class="create-announcement-heading">{{ 'add.new.announcement'| translate }}</h2>
+  <h2 class="create-announcement-heading">{{ 'edit.announcement'| translate }}</h2>
 </div>
 
 <div class="create-announcement-tabs">
@@ -73,17 +73,17 @@
   </button>
 </div>
 
-<create-announcement-first-step
+<edit-announcement-first-step
   [hidden]="currentTab !== 1"
   (onFormStateChanged)="onFormStateChanged($event)"
   (onStepChanged)="changeTab($event)"
 />
-<create-announcement-second-step
+<edit-announcement-second-step
   [hidden]="currentTab !== 2"
   (onFormStateChanged)="onFormStateChanged($event)"
   (onStepChanged)="changeTab($event)"
 />
-<create-announcement-third-step
+<edit-announcement-third-step
   [hidden]="currentTab !== 3"
   (onFormStateChanged)="onFormStateChanged($event)"
   (onStepChanged)="changeTab($event)"

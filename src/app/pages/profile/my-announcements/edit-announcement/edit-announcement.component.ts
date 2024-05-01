@@ -1,49 +1,53 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { MatRipple } from '@angular/material/core';
-import { formatDate, NgClass, NgTemplateOutlet, Location } from '@angular/common';
+import { formatDate, Location, NgClass, NgTemplateOutlet } from '@angular/common';
 import { ToasterService } from '../../../../core/services/toaster.service';
 import {
-  CreateAnnouncementFirstStepComponent
-} from './create-announcement-first-step/create-announcement-first-step.component';
+  EditAnnouncementFirstStepComponent
+} from './edit-announcement-first-step/edit-announcement-first-step.component';
 import {
-  CreateAnnouncementThirdStepComponent
-} from './create-announcement-third-step/create-announcement-third-step.component';
+  EditAnnouncementThirdStepComponent
+} from './edit-announcement-third-step/edit-announcement-third-step.component';
 import { IconButtonComponent } from '../../../../core/components/icon-button/icon-button.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import {
-  CreateAnnouncementSecondStepComponent
-} from './create-announcement-second-step/create-announcement-second-step.component';
+  EditAnnouncementSecondStepComponent
+} from './edit-announcement-second-step/edit-announcement-second-step.component';
 import { MyAnnouncementsService } from '../../../../core/services/my-announcements.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'create-announcement',
-  templateUrl: 'create-announcement.component.html',
-  styleUrl: 'create-announcement.component.scss',
+  selector: 'edit-announcement',
+  templateUrl: 'edit-announcement.component.html',
+  styleUrls: [
+    'edit-announcement.component.scss',
+    '../create-announcement/create-announcement.component.scss'
+  ],
   standalone: true,
   imports: [
     IconButtonComponent,
     MatRipple,
-    CreateAnnouncementFirstStepComponent,
+    EditAnnouncementFirstStepComponent,
     NgTemplateOutlet,
-    CreateAnnouncementThirdStepComponent,
+    EditAnnouncementThirdStepComponent,
     TranslateModule,
     RouterLink,
     NgClass,
-    CreateAnnouncementSecondStepComponent
+    EditAnnouncementSecondStepComponent
   ],
   providers: [
     MyAnnouncementsService
   ]
 })
 
-export class CreateAnnouncementComponent implements OnInit {
+export class EditAnnouncementComponent implements OnInit {
   /*@HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
     $event.returnValue = false;
   }*/
 
+  loading = true;
   currentTab = 1;
   readonly Array = Array;
   data = {
@@ -52,7 +56,6 @@ export class CreateAnnouncementComponent implements OnInit {
     '3': null
   };
   private _toaster = inject(ToasterService);
-  private _router = inject(Router);
   private _myAnnouncementService = inject(MyAnnouncementsService);
   private _destroyRef = inject(DestroyRef);
   private _location = inject(Location);
@@ -96,7 +99,6 @@ export class CreateAnnouncementComponent implements OnInit {
       ...this.data['3'],
       is_active: true
     };
-    console.log('DATA', data);
     const formData = new FormData();
 
     for (const key in data) {
@@ -131,14 +133,7 @@ export class CreateAnnouncementComponent implements OnInit {
 
     this._myAnnouncementService.createStandardDiscount(formData)
       .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe({
-        next: res => {
-          this._toaster.open({
-            message: 'announcement.was.created.successfully'
-          })
-          this._router.navigate(['/profile', 'my-announcements', 'list'])
-        }
-      });
+      .subscribe();
   }
 
   back(): void {

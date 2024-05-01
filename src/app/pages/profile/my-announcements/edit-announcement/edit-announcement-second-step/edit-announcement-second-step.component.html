@@ -1,0 +1,359 @@
+<div class="create-announcement-third-step">
+  <form class="create-announcement-third-step-inner" [formGroup]="secondStepForm" (ngSubmit)="goToThirdStep()">
+    <div class="grid-2">
+      <label class="create-announcement-new-price-label form-label">
+        <span class="form-label-text">{{ 'branches'| translate }}</span>
+
+        <mat-select
+          class="solid-select"
+          multiple
+          [placeholder]="'branches'| translate"
+          [formControlName]="'store_branches'"
+        >
+          @for (branch of branches; track branch) {
+            <mat-option [value]="branch.pk">{{ branch.name }}</mat-option>
+          }
+        </mat-select>
+      </label>
+
+      <label class="create-announcement-new-price-label form-label">
+        <span class="form-label-text">{{ 'original.price'| translate }} *</span>
+        <input
+          class="form-input"
+          [class.invalid]="secondStepForm.get('price').invalid && secondStepForm.get('price').touched"
+          type="number"
+          [placeholder]="'enter.original.price'| translate"
+          [formControlName]="'price'"
+        >
+
+        <div class="create-announcement-currency-toggle">
+          <div
+            class="create-announcement-currency-toggle-item"
+            [class.active]="secondStepForm.get('currency').value === 1"
+            (click)="changeCurrency(1)">UZS
+          </div>
+          <div
+            class="create-announcement-currency-toggle-item"
+            [class.active]="secondStepForm.get('currency').value === 2"
+            (click)="changeCurrency(2)">USD
+          </div>
+        </div>
+
+        <ng-container
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'price' }"
+        />
+      </label>
+    </div>
+
+    <div
+      class="create-announcement-discount-combinations"
+      [ngClass]="{
+          'grid-2': ['regular', 'for-free'].includes(secondStepForm.get('discount_type').value),
+          'grid-4': ['quantity', 'service'].includes(secondStepForm.get('discount_type').value),
+        }"
+    >
+      <label class="form-label">
+        <span class="form-label-text">{{ 'discount.type'| translate }}</span>
+        <mat-select
+          class="solid-select"
+          [formControlName]="'discount_type'"
+          [hideSingleSelectionIndicator]="true"
+          [placeholder]="'select.discount.type'| translate"
+        >
+          <mat-option [value]="'regular'">{{ 'regular.discount'| translate }}</mat-option>
+          <mat-option [value]="'for-free'" disabled>{{ 'add.for.free'| translate }}
+            ({{ 'coming.soon'| translate| lowercase }})
+          </mat-option>
+          <mat-option [value]="'quantity'" disabled>{{ 'quantity.discount'| translate }}
+            ({{ 'coming.soon'| translate| lowercase }})
+          </mat-option>
+          <mat-option [value]="'service'" disabled>{{ 'service.discount'| translate }}
+            ({{ 'coming.soon'| translate| lowercase }})
+          </mat-option>
+        </mat-select>
+      </label>
+
+      <div class="create-announcement-percent-or-price">
+        <span class="form-label-text">{{ 'discount.price.or.discount.percentage'| translate }} *</span>
+        <div class="create-announcement-percent-or-price-inner">
+          <label class="create-announcement-percent-or-price-label">
+            <input
+              class="create-announcement-percent-or-price-input form-input"
+              [class.invalid]="secondStepForm.get('discount_amount').invalid && secondStepForm.get('discount_amount').touched"
+              [ngClass]="{
+                  'invalid': secondStepForm.get('discount_amount').touched &&
+                  (
+                    secondStepForm.get('discount_amount').hasError('required') ||
+                    (!secondStepForm.get('discount_amount').hasError('required') &&
+                      (secondStepForm.get('discount_amount').hasError('min') || secondStepForm.get('discount_amount').hasError('max') || secondStepForm.hasError('invalidNewPrice'))))
+                }"
+              type="number"
+              [placeholder]="'discount.price.or.discount.percentage'| translate"
+              [formControlName]="'discount_amount'"
+            >
+          </label>
+
+          <mat-select
+            class="solid-select"
+            [hideSingleSelectionIndicator]="true"
+            [formControlName]="'regular_discount_type'"
+          >
+            <mat-option [value]="'percent'">{{ 'percent'| translate }} (%)</mat-option>
+
+            @if (secondStepForm.get('currency').value === 1) {
+              <mat-option [value]="'uzs'">UZS ({{ 'sum'| translate }})</mat-option>
+            }
+            @if (secondStepForm.get('currency').value === 2) {
+              <mat-option [value]="'usd'">USD ({{ 'dollar'| translate }})</mat-option>
+            }
+          </mat-select>
+        </div>
+
+        @if (secondStepForm.get('discount_amount').touched) {
+          @if (secondStepForm.get('discount_amount').hasError('required')) {
+            <span class="form-error">{{ 'required.field'| translate }}</span>
+          }
+
+          @if (!secondStepForm.get('discount_amount').hasError('required') &&
+          (secondStepForm.get('discount_amount').hasError('min') || secondStepForm.get('discount_amount').hasError('max'))) {
+            <span class="form-error">{{ 'enter.number.from.one.to.hundred'| translate }}</span>
+          }
+
+          @if (secondStepForm.hasError('invalidNewPrice')) {
+            <span class="form-error">{{ 'the.amount.of.the.discount.cannot.be.greater.than.the.current.price.of.the.goods'| translate }}</span>
+          }
+        }
+      </div>
+
+      <!--@if (secondStepForm.get('discount_type').value === 'for-free') {
+        <label class="form-label">
+          <span class="form-label-text">Сколько продуктов</span>
+          <input class="form-input" type="text" placeholder="Сколько">
+        </label>
+
+        <div class="create-announcement-add-free">
+          <span class="form-label-text">Сколько бесплатных (максимум 5)</span>
+          <div class="create-announcement-add-free-inner">
+            <label class="create-announcement-add-free-label">
+              <input class="create-announcement-add-free-input form-input" type="text" placeholder="Сколько бесплатных">
+            </label>
+
+            <div class="create-announcement-add-free-checkboxes">
+              <mat-radio-button class="form-radio" [color]="'primary'">Этот продукт</mat-radio-button>
+              <mat-radio-button class="form-radio" [color]="'primary'">Другой продукт</mat-radio-button>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (secondStepForm.get('discount_type').value === 'service') {
+        <div class="create-announcement-service-discount">
+          <span class="form-label-text">Введите бесплатной услуги</span>
+
+          <div class="create-announcement-service-discount-inner">
+            <div class="create-announcement-service-list">
+              <div class="create-announcement-service-item active" mat-ripple>
+                <mat-icon
+                  [svgIcon]="'icon:tick'"
+                />
+                <span>Доставка бесплатна</span>
+              </div>
+              <div class="create-announcement-service-item" mat-ripple>
+                <span>Установка бесплатна</span>
+              </div>
+              <div class="create-announcement-service-item" mat-ripple>
+                <span>Услуга бесплатна</span>
+              </div>
+              <div class="create-announcement-service-item" mat-ripple>
+                <span>Услуга бесплатна</span>
+              </div>
+              <div class="create-announcement-service-item" mat-ripple>
+                <span>Установка бесплатна</span>
+              </div>
+              <div class="create-announcement-service-item active" mat-ripple>
+                <mat-icon
+                  [svgIcon]="'icon:tick'"
+                />
+                <span>Доставка бесплатна</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      }-->
+    </div>
+
+    <div class="create-announcement-information-field date-interval">
+      <label class="form-label date-interval-label">
+        <span
+          class="create-announcement-information-field-title form-label-text">{{ 'total.number.of.products'| translate }}</span>
+        <input
+          class="create-announcement-information-input form-input"
+          type="number"
+          [placeholder]="'total.number.of.products'| translate"
+          [formControlName]="'product_counts'"
+          [max]="2147483647"
+        >
+      </label>
+
+      <label class="form-label date-interval-label">
+        <span
+          class="create-announcement-information-field-title form-label-text">{{ 'number.of.remaining.products'| translate }}</span>
+        <input
+          class="create-announcement-information-input form-input"
+          type="number"
+          [placeholder]="'number.of.remaining.products'| translate"
+          [formControlName]="'remainder'"
+          [max]="2147483647"
+        >
+      </label>
+    </div>
+
+    <div class="create-announcement-information-field date-interval">
+      <label class="form-label date-interval-label" (click)="startDatePicker.open()">
+        <span class="create-announcement-information-field-title form-label-text">{{ 'start.date'| translate }} *</span>
+        <input
+          class="create-announcement-information-input form-input"
+          [class.invalid]="secondStepForm.get('start_date').invalid && secondStepForm.get('start_date').touched"
+          [readOnly]="true"
+          [placeholder]="'dd.mm.yyyy'| translate"
+          [matDatepicker]="startDatePicker"
+          [formControlName]="'start_date'"
+          [max]="secondStepForm.get('end_date').value"
+        >
+        <mat-icon
+          class="date-interval-calendar-icon"
+          [svgIcon]="'icon:calendar'"
+        ></mat-icon>
+        <mat-datepicker #startDatePicker/>
+
+        <ng-container
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'start_date' }"
+        />
+      </label>
+
+      <label class="form-label date-interval-label" (click)="endDatePicker.open()">
+        <span class="create-announcement-information-field-title form-label-text">{{ 'end.date'| translate }} *</span>
+        <input
+          class="create-announcement-information-input form-input"
+          [class.invalid]="secondStepForm.get('end_date').invalid && secondStepForm.get('end_date').touched"
+          [readOnly]="true"
+          [placeholder]="'dd.mm.yyyy'| translate"
+          [matDatepicker]="endDatePicker"
+          [formControlName]="'end_date'"
+          [min]="secondStepForm.get('start_date').value"
+        >
+        <mat-icon
+          class="date-interval-calendar-icon"
+          [svgIcon]="'icon:calendar'"
+        ></mat-icon>
+        <mat-datepicker #endDatePicker/>
+
+        <ng-container
+          *ngTemplateOutlet="requiredErrors; context: { $implicit: 'end_date' }"
+        />
+      </label>
+    </div>
+
+    <div class="create-announcement-information-tags">
+      <div class="create-announcement-information-tags-search">
+        <label class="form-label" matAutocompleteOrigin #globalSearchWrapper="matAutocompleteOrigin">
+          <span class="form-label-text">{{ 'tags'| translate }} *</span>
+          <input
+            class="form-input"
+            [class.invalid]="secondStepForm.get('tags').invalid && secondStepForm.get('tags').touched"
+            type="search"
+            #tagSearchInput
+            [placeholder]="'search'| translate"
+            [matAutocomplete]="globalSearchInput"
+            [matAutocompleteConnectedTo]="globalSearchWrapper"
+            (input)="searchTags(tagSearchInput.value)"
+            (blur)="secondStepForm.get('tags').markAsTouched()"
+          >
+
+          <mat-autocomplete
+            [class]="'global-search-result'"
+            [hideSingleSelectionIndicator]="true"
+            [requireSelection]="false"
+            [displayWith]="displayFn.bind(this)"
+            #globalSearchInput="matAutocomplete"
+            (optionSelected)="selectTag($event)"
+          >
+            @for (tag of tags.searchedTags; track tag) {
+              <mat-option [value]="tag">{{ tag.name }}</mat-option>
+            }
+          </mat-autocomplete>
+        </label>
+
+        <ui-button
+          [type]="'gray-outline'"
+          #addTagButton
+          [text]="'add'"
+          [icon]="'icon:outline-plus'"
+          (click)="overlayPanel.openPanel()"
+        />
+
+        <overlay-panel [originElement]="addTagButton.uiButton" #overlayPanel>
+          <div
+            class="create-announcement-information-tags-add"
+            overlay-content
+          >
+            <input
+              class="form-input"
+              [placeholder]="'new.tag'| translate"
+              type="text"
+              [patterns]="customPatterns"
+              [mask]="'BBBBBBBBBBBBBBBBBBBBBBBBBBBB'"
+              #newTagInput
+              (keydown.enter)="addNewTag(newTagInput)"
+            >
+
+            <ui-button
+              [disabled]="!newTagInput.value.length"
+              [type]="'gray-outline'"
+              [text]="'save'"
+              (click)="addNewTag(newTagInput)"
+            />
+          </div>
+        </overlay-panel>
+      </div>
+
+      <div class="create-announcement-information-tags-list">
+        @for (tag of tags.selectedTags; track tag; let i = $index) {
+          <div class="create-announcement-information-tags-item">
+            <span>{{ tag.name }}</span>
+
+            <mat-icon (click)="removeTag(i, 'selected')" [svgIcon]="'icon:x'"/>
+          </div>
+        }
+        @for (newTag of secondStepForm.get('new_tags').value; track newTag; let i = $index) {
+          <div class="create-announcement-information-tags-item">
+            <span>{{ newTag }}</span>
+
+            <mat-icon (click)="removeTag(i, 'new')" [svgIcon]="'icon:x'"/>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="create-announcement-information-submit">
+      <ui-button
+        [text]="'back'"
+        [actionType]="'button'"
+        [type]="'gray-outline'"
+        (click)="back()"
+      />
+      <ui-button
+        [text]="'next'"
+        [actionType]="'submit'"
+        [disabled]="secondStepForm.invalid"
+        [loading]="secondStepForm.disabled"
+      />
+    </div>
+  </form>
+</div>
+
+<ng-template #requiredErrors let-controlName>
+  @if (secondStepForm.get(controlName).invalid && secondStepForm.get(controlName).touched) {
+    <span class="form-error">{{ 'required.field'| translate }}</span>
+  }
+</ng-template>
