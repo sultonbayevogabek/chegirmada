@@ -70,11 +70,13 @@ export class ProductDetailsInfoBlockComponent implements OnInit, OnChanges {
 
           if (this.details.user_like) {
             this.details.likes = (+this.details.likes - 1).toString();
+            this.details.store.likes = (+this.details.store.likes - 1).toString();
             this.details.user_like = false;
-            return
+            return;
           }
 
           this.details.likes = (+this.details.likes + 1).toString();
+          this.details.store.likes = (+this.details.store.likes + 1).toString();
           this.details.user_like = true;
           this.details.user_dislike = false;
         },
@@ -103,14 +105,15 @@ export class ProductDetailsInfoBlockComponent implements OnInit, OnChanges {
 
           if (this.details.user_dislike) {
             this.details.user_dislike = false;
-            return
+            return;
           }
 
           if (this.details.user_like) {
             this.details.likes = (+this.details.likes - 1).toString();
+            this.details.store.likes = (+this.details.store.likes - 1).toString();
             this.details.user_like = false;
             this.details.user_dislike = true;
-            return
+            return;
           }
 
           this.details.user_dislike = true;

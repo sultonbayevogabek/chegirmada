@@ -62,7 +62,13 @@ export class ProductDetailsSellerInfoComponent {
       .subscribe({
         next: () => {
           this.details.store.user_follow = !this.details.store.user_follow;
+
+          if (this.details.store.user_follow) {
+            this.details.store.followers = (+this.details.store.followers + 1).toString();
+          } else {
+            this.details.store.followers = (+this.details.store.followers - 1).toString();
+          }
         }
-      })
+      });
   }
 }
