@@ -6,6 +6,10 @@ import { ProductDetailsService } from './core/services/product-details.service';
 
 export const routes: Routes = [
   {
+    path: 'webview-player',
+    loadComponent: () => import('./pages/webview-player/webview-player.component').then(c => c.WebviewPlayerComponent)
+  },
+  {
     path: '',
     loadComponent: () => import('./pages/pages.component').then(c => c.PagesComponent),
     resolve: { initialData: initialDataResolver },
@@ -54,5 +58,5 @@ export const routes: Routes = [
         redirectTo: 'not-found-404'
       }
     ]
-  }
+  },
 ];

@@ -2,7 +2,7 @@
 @import 'mixins';
 
 .product-details-tabs {
-  @include flex-column(0.75rem)
+  @include flex-column(0.5rem)
 }
 
 .product-details-tabs-header {
@@ -34,7 +34,6 @@
 .product-details-tabs-body {
   position: relative;
   height: 25rem;
-  padding: 0.5rem;
   overflow: hidden;
 }
 
