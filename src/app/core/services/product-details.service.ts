@@ -70,7 +70,11 @@ export class ProductDetailsService {
     return this._httpClient.post<any>(this._host + 'stores/following/', { store })
   }
 
-  toggleWishlist(discount: number): Observable<any> {
-    return this._httpClient.post<any>(this._host + 'discounts/wishlist/', { discount })
+  toggleWishlist(discount: number): Observable<{ discount: number }> {
+    return this._httpClient.post<{ discount: number }>(this._host + 'discounts/wishlist/', { discount })
+  }
+
+  getWishlist(): Observable<any> {
+    return this._httpClient.get<any>(this._host + 'wishlists/')
   }
 }

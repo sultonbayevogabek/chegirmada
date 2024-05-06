@@ -36,6 +36,11 @@ export const profileRoutes: Routes = [
         path: 'my-announcements',
         loadChildren: () => import('./my-announcements/my-announcements.routes').then(r => r.myAnnouncementsRoutes),
         canActivate: [hasStoreGuard]
+      },
+      {
+        path: 'balance',
+        loadComponent: () => import('./balance/balance.component').then(c => c.BalanceComponent),
+        canActivate: [hasStoreGuard]
       }
     ]
   }

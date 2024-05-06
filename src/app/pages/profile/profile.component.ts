@@ -61,6 +61,12 @@ export class ProfileComponent implements OnInit {
       isStoreRequired: true
     },
     {
+      icon: 'icon:my-information',
+      link: 'balance',
+      name: 'balance',
+      isStoreRequired: true
+    },
+    {
       icon: 'icon:favourite-companies',
       link: 'favourite-companies',
       name: 'favourite.stores',

@@ -2,7 +2,8 @@
 @import "mixins";
 
 .spinner-loader {
-  height: 20rem;
+  height: 100%;
+  min-height: 20rem;
   @include flex-center-center;
   color: $primary-blue-color;
 }

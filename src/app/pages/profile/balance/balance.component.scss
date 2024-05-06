@@ -1,0 +1,49 @@
+@import "variables";
+@import "mixins";
+
+.balance {
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-grey-color;
+}
+
+.balance-header {
+  @include flex-center-between;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.balance-heading {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.balance-table {
+  width: 100%;
+  border: none;
+  border-collapse: collapse;
+}
+
+.balance-th {
+  padding: 0.5rem 1rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: $secondary-black-color;
+}
+
+.balance-data {
+  height: 100%;
+  padding: 1.25rem 1rem;
+  background-color: $background-grey-color;
+}
+
+.balance-td {
+  &:first-child .balance-data {
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+
+  &:last-child .balance-data {
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+}

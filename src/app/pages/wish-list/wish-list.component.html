@@ -1,3 +1,8 @@
+@if (loading) {
+  <spinner-loader/>
+}
+
+@if (!loading && wishlist.length) {
 <section class="wish-list-section section">
   <!--    <products-section-->
   <!--      [heading]="'Избранное'"-->
@@ -6,14 +11,17 @@
     <section-header [heading]="'Избранное'"/>
   </div>
 </section>
+}
+@if (!loading && !wishlist.length) {
+  <div class="wish-list-empty">
+    <div class="wish-list-empty-img">
+      <img class="" [ngSrc]="'/assets/empty-list-icons/wishlist.svg'" [fill]="true" [alt]="">
+    </div>
 
-<div class="wish-list-empty">
-  <div class="wish-list-empty-img">
-    <img class="" [ngSrc]="'/assets/empty-list-icons/wishlist.svg'" [fill]="true" [alt]="">
+    <h2 class="wish-list-empty-heading">{{ 'there.is.nothing.here.for.now'| translate }}</h2>
+    <p class="wish-list-empty-text">{{ 'click.heart.icon.and.add.your.favorites.here'| translate }}</p>
+
+    <ui-button [text]="'Перейти в каталог товаров'"/>
   </div>
 
-  <h2 class="wish-list-empty-heading">Пока здесь ничего нет</h2>
-  <p class="wish-list-empty-text">Жмите ️❤️ на странице товара и добавляйте сюда то, что нравится.</p>
-
-  <ui-button [text]="'Перейти в каталог товаров'"/>
-</div>
+}
