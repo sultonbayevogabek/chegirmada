@@ -123,4 +123,19 @@ export class ProductDetailsInfoBlockComponent implements OnInit, OnChanges {
         }
       });
   }
+
+  wishlist(): void {
+    if (!this.currentUser) {
+      this._loginProfileComponent.openLoginDialog();
+      return;
+    }
+
+    this._productDetailsService.toggleWishlist(this.details.pk)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: () => {
+          this.details.user_wishlist = !this.details.user_wishlist;
+        }
+      });
+  }
 }

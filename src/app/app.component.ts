@@ -7,6 +7,7 @@ export interface ILanguageOption {
   value: string;
   label: string;
 }
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -18,32 +19,29 @@ export interface ILanguageOption {
 })
 
 export class AppComponent implements OnInit {
-  private _availableLanguages = ['uz', 'ru'];
+  private _availableLanguages = [ 'uz', 'ru' ];
   private _translateService = inject(TranslateService);
   languageOptions: ILanguageOption[] = [];
 
   ngOnInit(): void {
     this._translateService.addLangs(this._availableLanguages);
-    this._translateService.setDefaultLang(localStorage.getItem('lang') === 'ru' ? 'ru' : 'uz');
     this._buildLanguageOptions();
+
+    const lang = localStorage.getItem('lang');
+    this._translateService.setDefaultLang(this._availableLanguages.includes(lang) ? lang : 'uz');
   }
 
   private _buildLanguageOptions() {
-    const UZ =  this._translateService.get('UZ');
-    const RU = this._translateService.get('RU');
-
-    forkJoin([
-      UZ,
-      RU
-    ]).subscribe(
+    forkJoin(this._availableLanguages.map(lang => {
+      return this._translateService.get(lang.toUpperCase())
+    })).subscribe(
       _response => {
-        this.languageOptions = [{
-          value: this._availableLanguages[0],
-          label: _response[0],
-        }, {
-          value: this._availableLanguages[1],
-          label: _response[1],
-        }];
+        this._availableLanguages.forEach((lang, index) => {
+          this.languageOptions.push({
+            value: lang,
+            label: _response[index]
+          });
+        })
       }
     );
   }

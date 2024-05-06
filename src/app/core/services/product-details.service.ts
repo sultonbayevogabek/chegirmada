@@ -69,4 +69,8 @@ export class ProductDetailsService {
   subscribeStore(store: number): Observable<any> {
     return this._httpClient.post<any>(this._host + 'stores/following/', { store })
   }
+
+  toggleWishlist(discount: number): Observable<any> {
+    return this._httpClient.post<any>(this._host + 'discounts/wishlist/', { discount })
+  }
 }

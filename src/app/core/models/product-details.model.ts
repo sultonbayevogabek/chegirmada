@@ -23,6 +23,7 @@ export interface ProductDetails {
   discount_amount_is_percent: boolean;
   user_dislike: boolean;
   user_like: boolean;
+  user_wishlist: boolean;
 }
 
 export interface Feature {

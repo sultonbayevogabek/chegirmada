@@ -18,8 +18,16 @@
       </div>
     </div>
 
-    <button class="product-details-info-heart" mat-icon-button>
-      <mat-icon [svgIcon]="'icon:heart'"></mat-icon>
+    <button
+      class="product-details-info-heart"
+      mat-icon-button
+      (click)="wishlist()"
+    >
+      @if (details.user_wishlist) {
+        <mat-icon [svgIcon]="'icon:solid-heart'"></mat-icon>
+      } @else {
+        <mat-icon [svgIcon]="'icon:outlined-heart'"></mat-icon>
+      }
     </button>
   </div>
 
