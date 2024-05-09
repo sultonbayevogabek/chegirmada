@@ -13,9 +13,13 @@ import { loggingInterceptor } from './core/interceptors/logging.interceptor';
 import { languageInterceptor } from './core/interceptors/language.interceptor';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
 import localeRu from '@angular/common/locales/ru';
+import localeUz from '@angular/common/locales/uz-Latn';
 import { registerLocaleData } from '@angular/common';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomMatPaginatorIntl } from './core/services/paginator-config.service';
 
 registerLocaleData(localeRu);
+registerLocaleData(localeUz);
 
 // Yandex Map Config
 const mapConfig: YaConfig = {
@@ -55,7 +59,11 @@ export const appConfig: ApplicationConfig = {
         languageInterceptor,
         errorInterceptor
       ])
-    )
+    ),
+    {
+      provide: MatPaginatorIntl,
+      useClass: CustomMatPaginatorIntl
+    },
   ]
 };
 

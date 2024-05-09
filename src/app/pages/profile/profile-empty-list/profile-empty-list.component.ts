@@ -17,7 +17,7 @@ import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.
 
 export class ProfileEmptyListComponent {
   @Output() onEmptyListButtonClick: EventEmitter<void> = new EventEmitter<void>();
-  @Input({ required: true }) emptyListText = 'Список пустой';
+  @Input() emptyListText = 'no.data.found';
   @Input() emptyListImg = '/assets/empty-list-icons/favourite-companies.svg';
   @Input() emptyListButton: string;
 

@@ -7,81 +7,99 @@
       [text]="'topping.up.balance'"
     />
   </div>
-  <table class="balance-table">
-    <thead>
-    <tr>
-      <th class="balance-th">Номер карта</th>
-      <th class="balance-th">Дата создания</th>
-      <th class="balance-th">Сумма</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="balance-tr">
-      <td class="balance-td">
-        <div class="balance-data">8600 **** **** 9510</div>
-      </td>
-      <td class="balance-td">
-        <div class="balance-data">07.01.2024</div>
-      </td>
-      <td class="balance-td">
-        <div class="balance-data">120 000 сум</div>
-      </td>
-    </tr>
-    <tr class="balance-tr">
-      <td class="balance-td">
-        <div class="balance-data">8600 **** **** 9510</div>
-      </td>
-      <td class="balance-td">
-        <div class="balance-data">07.01.2024</div>
-      </td>
-      <td class="balance-td">
-        <div class="balance-data">120 000 сум</div>
-      </td>
-    </tr>
-    <tr class="balance-tr">
-      <td class="balance-td">
-        <div class="balance-data">8600 **** **** 9510</div>
-      </td>
-      <td class="balance-td">
-        <div class="balance-data">07.01.2024</div>
-      </td>
-      <td class="balance-td">
-        <div class="balance-data">120 000 сум</div>
-      </td>
-    </tr>
-    <tr class="balance-tr">
-      <td class="balance-td">
-        <div class="balance-data">8600 **** **** 9510</div>
-      </td>
-      <td class="balance-td">
-        <div class="balance-data">07.01.2024</div>
-      </td>
-      <td class="balance-td">
-        <div class="balance-data">120 000 сум</div>
-      </td>
-    </tr>
-    <tr class="balance-tr">
-      <td class="balance-td">
-        <div class="balance-data">8600 **** **** 9510</div>
-      </td>
-      <td class="balance-td">
-        <div class="balance-data">07.01.2024</div>
-      </td>
-      <td class="balance-td">
-        <div class="balance-data">120 000 сум</div>
-      </td>
-    </tr>
-    <tr class="balance-tr">
-      <td class="balance-td">
-        <div class="balance-data">8600 **** **** 9510</div>
-      </td>
-      <td class="balance-td">
-        <div class="balance-data">07.01.2024</div>
-      </td>
-      <td class="balance-td">
-        <div class="balance-data">120 000 сум</div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  @if (loading) {
+    <spinner-loader />
+  }
+
+  @if (!loading && !paymentHistory?.length) {
+    <profile-empty-list/>
+  }
+
+  @if (!loading && paymentHistory.length) {
+    <table class="balance-table">
+      <thead>
+      <tr>
+        <th class="balance-th">Номер карта</th>
+        <th class="balance-th">Дата создания</th>
+        <th class="balance-th">Сумма</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="balance-tr">
+        <td class="balance-td">
+          <div class="balance-data">8600 **** **** 9510</div>
+        </td>
+        <td class="balance-td">
+          <div class="balance-data">07.01.2024</div>
+        </td>
+        <td class="balance-td">
+          <div class="balance-data">120 000 сум</div>
+        </td>
+      </tr>
+      <tr class="balance-tr">
+        <td class="balance-td">
+          <div class="balance-data">8600 **** **** 9510</div>
+        </td>
+        <td class="balance-td">
+          <div class="balance-data">07.01.2024</div>
+        </td>
+        <td class="balance-td">
+          <div class="balance-data">120 000 сум</div>
+        </td>
+      </tr>
+      <tr class="balance-tr">
+        <td class="balance-td">
+          <div class="balance-data">8600 **** **** 9510</div>
+        </td>
+        <td class="balance-td">
+          <div class="balance-data">07.01.2024</div>
+        </td>
+        <td class="balance-td">
+          <div class="balance-data">120 000 сум</div>
+        </td>
+      </tr>
+      <tr class="balance-tr">
+        <td class="balance-td">
+          <div class="balance-data">8600 **** **** 9510</div>
+        </td>
+        <td class="balance-td">
+          <div class="balance-data">07.01.2024</div>
+        </td>
+        <td class="balance-td">
+          <div class="balance-data">120 000 сум</div>
+        </td>
+      </tr>
+      <tr class="balance-tr">
+        <td class="balance-td">
+          <div class="balance-data">8600 **** **** 9510</div>
+        </td>
+        <td class="balance-td">
+          <div class="balance-data">07.01.2024</div>
+        </td>
+        <td class="balance-td">
+          <div class="balance-data">120 000 сум</div>
+        </td>
+      </tr>
+      <tr class="balance-tr">
+        <td class="balance-td">
+          <div class="balance-data">8600 **** **** 9510</div>
+        </td>
+        <td class="balance-td">
+          <div class="balance-data">07.01.2024</div>
+        </td>
+        <td class="balance-td">
+          <div class="balance-data">120 000 сум</div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <mat-paginator
+      [pageIndex]="params.page"
+      [pageSize]="params.page_size"
+      [length]="params.total"
+      [showFirstLastButtons]="true"
+      (page)="changePage($event)"
+    />
+  }
 </div>
