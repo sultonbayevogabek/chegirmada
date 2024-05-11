@@ -7,6 +7,10 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { PaymentHistory } from '../../../core/models/payment-history.model';
 import { SpinnerLoaderComponent } from '../../../core/components/spinner-loader/spinner-loader.component';
 import { ProfileEmptyListComponent } from '../profile-empty-list/profile-empty-list.component';
+import { DatePipe, DecimalPipe, NgClass } from '@angular/common';
+import { MyStoreService } from '../../../core/services/my-store.service';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { OverlayComponent } from '../../../core/components/overlay-panel/overlay-panel.component';
 
 @Component({
   selector: 'balance',
@@ -17,10 +21,16 @@ import { ProfileEmptyListComponent } from '../profile-empty-list/profile-empty-l
     UiButtonComponent,
     MatPaginator,
     SpinnerLoaderComponent,
-    ProfileEmptyListComponent
+    ProfileEmptyListComponent,
+    DecimalPipe,
+    NgClass,
+    DatePipe,
+    OverlayComponent,
+    ReactiveFormsModule
   ],
   providers: [
-    BalanceService
+    BalanceService,
+    MyStoreService,
   ],
   standalone: true
 })
@@ -29,16 +39,33 @@ export class BalanceComponent implements OnInit {
   loading = true;
   params = {
     page: 0,
-    page_size: 3,
-    total: 0,
-  }
+    page_size: 5,
+    total: 0
+  };
   paymentHistory: PaymentHistory[] = [];
+  balance = 0;
+  paymentForm = new FormGroup({
+    amount: new FormControl<number>(null, [
+      Validators.required,
+      Validators.min(1000),
+      Validators.max(1000000)
+    ])
+  })
 
   private _destroyRef = inject(DestroyRef);
   private _balanceService = inject(BalanceService);
+  private _myStoreService = inject(MyStoreService);
 
   ngOnInit(): void {
-    this.getPaymentsHistory()
+    this.getPaymentsHistory();
+
+    this._myStoreService.getMyStoreData()
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: data => {
+          this.balance = +data.balance;
+        }
+      })
   }
 
   getPaymentsHistory(): void {
@@ -48,16 +75,40 @@ export class BalanceComponent implements OnInit {
         next: data => {
           this.loading = false;
           this.paymentHistory = data?.results;
-          this.params.total = data.count
+          this.params.total = data.count;
         },
         error: err => {
           this.loading = false;
         }
-      })
+      });
   }
 
   changePage($event: PageEvent): void {
     this.params.page = $event.pageIndex;
     this.getPaymentsHistory();
+  }
+
+  payment(): void {
+    const paymentForm = this.paymentForm;
+
+    if (paymentForm.invalid || paymentForm.disabled) {
+      return;
+    }
+
+    paymentForm.disable();
+
+    this._balanceService.payment(
+      paymentForm.get('amount').value,
+      window.location.href
+    )
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: res => {
+          window.location.href = res.payment_url;
+        },
+        error: err => {
+          paymentForm.enable();
+        }
+      });
   }
 }

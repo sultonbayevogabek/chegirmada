@@ -15,4 +15,10 @@ export class BalanceService {
     const options = new HttpParams().set('page', params.page + 1).set('page_size', params.page_size);
     return this._httpClient.get<PaymentHistoryResponse>(this._host + 'payments/history', { params: options });
   }
+
+  payment(amount: number, return_url: string): Observable<{ amount: number; payment_url: string; pk: number }> {
+    return this._httpClient.post<{ amount: number; payment_url: string; pk: number; }>(this._host + 'stores/my/replenishment/', {
+      amount, return_url
+    });
+  }
 }
