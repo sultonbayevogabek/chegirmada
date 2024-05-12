@@ -3,19 +3,22 @@
 }
 
 @if (!loading && wishlist.length) {
-<section class="wish-list-section section">
-  <!--    <products-section-->
-  <!--      [heading]="'Избранное'"-->
-  <!--    />-->
+  <products-section
+    [heading]="'wishlist'"
+    [products]="wishlist"
+  />
   <div class="container">
-    <section-header [heading]="'Избранное'"/>
+    <mat-paginator
+      [pageSize]="params.page_size"
+      [pageIndex]="params.page"
+    />
   </div>
-</section>
 }
+
 @if (!loading && !wishlist.length) {
   <div class="wish-list-empty">
     <div class="wish-list-empty-img">
-      <img class="" [ngSrc]="'/assets/empty-list-icons/wishlist.svg'" [fill]="true" [alt]="">
+      <img [ngSrc]="'/assets/empty-list-icons/wishlist.svg'" [fill]="true" [alt]="">
     </div>
 
     <h2 class="wish-list-empty-heading">{{ 'there.is.nothing.here.for.now'| translate }}</h2>

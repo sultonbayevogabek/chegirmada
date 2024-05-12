@@ -1,10 +1,10 @@
 <div class="product-card" [routerLink]="['product-details']">
   <div class="product-card-top">
     <div class="product-card-gallery">
-      <img [ngSrc]="product.productCardImageUrls[activeIndex]" [fill]="true" [alt]="product.productCardTitle">
+      <img [ngSrc]="product.images[activeIndex]" [fill]="true" [alt]="product.title">
 
       <div class="product-card-dots">
-        @for (item of product.productCardImageUrls; track item; let i = $index) {
+        @for (item of product.images; track item; let i = $index) {
           <div
             class="product-card-dot"
             [class.active]="activeIndex === i"
@@ -13,7 +13,7 @@
       </div>
 
       <div class="product-card-hover-blocks">
-        @for (item of product.productCardImageUrls; track item; let i = $index) {
+        @for (item of product.images; track item; let i = $index) {
           <div
             class="product-card-hover-block"
             (mouseenter)="activeIndex = i"
@@ -39,35 +39,41 @@
     <div class="product-card-brand-view">
       <div class="product-card-brand">
         <div class="product-card-brand-logo">
-          <img [src]="product.productCardBrandLogo" [alt]="product.productCardBrandName">
+          <img [src]="product.store.logo" [alt]="product.store.name">
         </div>
 
-        <div class="product-card-brand-name">{{ product.productCardBrandName }}</div>
+        <div class="product-card-brand-name">{{ product.store.name }}</div>
       </div>
 
       <div class="product-card-view">
         <mat-icon [svgIcon]="'icon:eye'"></mat-icon>
 
-        <span>{{ product.productCardBrandViews }}</span>
+        <span>{{ product.views }}</span>
       </div>
     </div>
 
-    <h3 class="product-card-title">{{ product.productCardTitle }}</h3>
+    <h3 class="product-card-title">{{ product.title }}</h3>
 
     <div class="product-card-price">
-      <del class="product-card-price-old">{{ product.productCardOldPrice }}</del>
-      <strong class="product-card-price-new">{{ product.productCardNewPrice }}</strong>
+      <del class="product-card-price-old">{{ product.price }}</del>
+      <strong class="product-card-price-new">
+        @if (product.discount_amount_is_percent) {
+          {{ (+product.price * (100 - +product.discount_amount) / 100)| number }}
+        } @else {
+          {{ (+product.price - +product.discount_amount)| number }}
+        } {{ (1 === 1 ? 'sum': 'dollar')| translate }}
+      </strong>
     </div>
 
     <div class="product-card-location-date">
       <div class="product-card-location-date-item">
         <mat-icon [svgIcon]="'icon:location'"></mat-icon>
 
-        <span>{{ product.productCardLocation }}</span>
+        <span>{{ product.store.full_address.district.label }}</span>
       </div>
 
       <div class="product-card-location-date-item">
-        {{ product.productCardDate }}
+        {{ product.start_date| date: 'dd.MM.YYYY' }} -  {{ product.end_date| date: 'dd.MM.YYYY' }}
       </div>
     </div>
   </div>

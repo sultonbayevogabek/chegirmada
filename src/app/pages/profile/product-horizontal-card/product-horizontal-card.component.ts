@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
+import { DatePipe, DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +8,8 @@ import {
 } from '../my-announcements/activate-announcement-modal/activate-announcement-modal.component';
 import { IconButtonComponent } from '../../../core/components/icon-button/icon-button.component';
 import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
+import { ProductCard } from '../../../core/models/wishlist.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'product-horizontal-card',
@@ -18,23 +20,16 @@ import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.
     MatIconModule,
     RouterLink,
     IconButtonComponent,
-    UiButtonComponent
+    UiButtonComponent,
+    DecimalPipe,
+    TranslateModule,
+    DatePipe
   ],
   standalone: true
 })
 
 export class ProductHorizontalCardComponent {
-  @Input({ required: true }) product: {
-    productCardImageUrls: string[];
-    productCardBrandLogo: string;
-    productCardBrandName: string;
-    productCardBrandViews: number;
-    productCardTitle: string;
-    productCardOldPrice: string;
-    productCardNewPrice: string;
-    productCardLocation: string;
-    productCardDate: string;
-  }
+  @Input({ required: true }) product: ProductCard;
   activeIndex = 0;
 
   private _dialog = inject(MatDialog);

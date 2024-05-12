@@ -1,9 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
 import { ProductDetails } from '../models/product-details.model';
 import { CommentModel } from '../models/comment.model';
+import { WishlistResponse } from '../models/wishlist.model';
+import { PaymentHistoryResponse } from '../models/payment-history.model';
 
 @Injectable()
 
@@ -20,7 +22,7 @@ export class ProductDetailsService {
           this.productDetails$.next(productDetails);
         }),
         switchMap(productDetails => of(productDetails))
-      )
+      );
   }
 
   likeProduct(id: number): Observable<{ discount: number }> {
@@ -63,18 +65,19 @@ export class ProductDetailsService {
   }
 
   deleteComment(id: number): Observable<void> {
-    return this._httpClient.delete<void>(this._host + `discounts/comments/${id}/`)
+    return this._httpClient.delete<void>(this._host + `discounts/comments/${ id }/`);
   }
 
   subscribeStore(store: number): Observable<any> {
-    return this._httpClient.post<any>(this._host + 'stores/following/', { store })
+    return this._httpClient.post<any>(this._host + 'stores/following/', { store });
   }
 
   toggleWishlist(discount: number): Observable<{ discount: number }> {
-    return this._httpClient.post<{ discount: number }>(this._host + 'discounts/wishlist/', { discount })
+    return this._httpClient.post<{ discount: number }>(this._host + 'discounts/wishlist/', { discount });
   }
 
-  getWishlist(): Observable<any> {
-    return this._httpClient.get<any>(this._host + 'wishlists/')
+  getWishlist(params: { page: number; page_size: number }): Observable<WishlistResponse> {
+    const options = new HttpParams().set('page', params.page + 1).set('page_size', params.page_size);
+    return this._httpClient.get<WishlistResponse>(this._host + 'wishlists/', { params: options });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SectionHeaderComponent } from '../section-header/section-header.component';
 import { ProductCardComponent } from '../product-card/product-card.component';
+import { ProductCard } from '../../models/wishlist.model';
 
 @Component({
   selector: 'products-section',
@@ -16,70 +17,5 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 export class ProductsSectionComponent {
   @Input({ required: true }) heading: string;
   @Input() url: string;
-  products = [
-    {
-      productCardImageUrls: [
-        '/assets/products/1.jpg',
-        '/assets/products/2.jpg',
-        '/assets/products/3.jpg',
-        '/assets/products/4.jpg',
-      ],
-      productCardBrandLogo: '/assets/logos/mac-bro.svg',
-      productCardBrandName: 'MacBro',
-      productCardBrandViews: 124,
-      productCardTitle: 'Фотоаппарат Canon EOS 2000D Kit EF-S 18-55mm III IS Wi-Fi',
-      productCardOldPrice: '4 700 000 сум',
-      productCardNewPrice: '3 900 000 сум',
-      productCardLocation: 'Ташкент',
-      productCardDate: '14 но. – 21 дек.',
-    },
-    {
-      productCardImageUrls: [
-        '/assets/products/2.jpg',
-        '/assets/products/1.jpg',
-        '/assets/products/2.jpg',
-        '/assets/products/3.jpg',
-      ],
-      productCardBrandLogo: '/assets/logos/mac-bro.svg',
-      productCardBrandName: 'MacBro',
-      productCardBrandViews: 214,
-      productCardTitle: 'Смартфон Apple iPhone 13 pro 256 ГБ, Dual: nano SIM + eSIM',
-      productCardOldPrice: '18 500 000 сум',
-      productCardNewPrice: '17 000 000 сум',
-      productCardLocation: 'Ташкент',
-      productCardDate: '14 но. – 21 дек.',
-    },
-    {
-      productCardImageUrls: [
-        '/assets/products/3.jpg',
-        '/assets/products/1.jpg',
-        '/assets/products/2.jpg',
-        '/assets/products/4.jpg',
-      ],
-      productCardBrandLogo: '/assets/logos/mac-bro.svg',
-      productCardBrandName: 'MacBro',
-      productCardBrandViews: 356,
-      productCardTitle: 'Наушники Apple AirPods Pro (2-го поколения, 2022), белый',
-      productCardOldPrice: '2 200 000 сум',
-      productCardNewPrice: '1 900 000 сум',
-      productCardLocation: 'Ташкент',
-      productCardDate: '14 но. – 21 дек.',
-    },
-    {
-      productCardImageUrls: [
-        '/assets/products/4.jpg',
-        '/assets/products/1.jpg',
-        '/assets/products/2.jpg',
-        '/assets/products/3.jpg',
-      ],
-      productCardBrandLogo: '/assets/logos/mac-bro.svg',
-      productCardBrandName: 'MacBro',
-      productCardBrandViews: 433,
-      productCardTitle: 'Смартфон Apple iPhone 13 pro 256 ГБ, Dual: nano SIM + eSIM',
-      productCardOldPrice: '1 050 $',
-      productCardNewPrice: '950 $',
-      productCardLocation: 'Ташкент',
-      productCardDate: '14 но. – 21 дек.',
-    }
-  ]
+  @Input() products: ProductCard[] = []
 }

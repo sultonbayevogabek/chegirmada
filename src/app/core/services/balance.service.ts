@@ -7,7 +7,6 @@ import { PaymentHistoryResponse } from '../models/payment-history.model';
 @Injectable()
 
 export class BalanceService {
-
   private _host = environment.host;
   private _httpClient = inject(HttpClient);
 

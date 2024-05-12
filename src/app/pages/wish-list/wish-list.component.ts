@@ -7,6 +7,9 @@ import { ProductDetailsService } from '../../core/services/product-details.servi
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SpinnerLoaderComponent } from '../../core/components/spinner-loader/spinner-loader.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProductCard } from '../../core/models/wishlist.model';
+import { MatPaginator } from '@angular/material/paginator';
+import { ProductCardComponent } from '../../core/components/product-card/product-card.component';
 
 @Component({
   selector: 'wish-list',
@@ -18,7 +21,9 @@ import { TranslateModule } from '@ngx-translate/core';
     NgOptimizedImage,
     SectionHeaderComponent,
     SpinnerLoaderComponent,
-    TranslateModule
+    TranslateModule,
+    MatPaginator,
+    ProductCardComponent
   ],
   standalone: true,
   providers: [
@@ -27,16 +32,28 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 
 export class WishListComponent implements OnInit {
+  params = {
+    page: 0,
+    page_size: 8
+  }
   loading = true;
-  wishlist = [];
+  wishlist: ProductCard[] = [];
   private _productDetailsService = inject(ProductDetailsService);
   private _destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this._productDetailsService.getWishlist()
+    this.getWishlist();
+  }
+
+  getWishlist(): void {
+    this._productDetailsService.getWishlist(this.params)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
-        next: (data: any) => {
+        next: res => {
+          this.loading = false;
+          this.wishlist = res?.results;
+        },
+        error: () => {
           this.loading = false;
         }
       })

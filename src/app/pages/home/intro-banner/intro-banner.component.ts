@@ -1,7 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, ViewChild } from '@angular/core';
 import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { NgForOf, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { GeneralService } from '../../../core/services/general.service';
+import { takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'intro-banner',
@@ -14,11 +17,15 @@ import { MatIconModule } from '@angular/material/icon';
     NgOptimizedImage,
     MatIconModule
   ],
-  standalone: true
+  standalone: true,
+  providers: [ GeneralService ]
 })
 
-export class IntroBannerComponent {
+export class IntroBannerComponent implements OnInit {
   @ViewChild('carouselComponent') carouselComponent: CarouselComponent;
+
+  private _generalService = inject(GeneralService);
+  private _destroyRef = inject(DestroyRef);
 
   carouselOptions: OwlOptions = {
     loop: true,
@@ -44,5 +51,15 @@ export class IntroBannerComponent {
 
   navigateCarousel(direction: 'next' | 'prev'): void {
       this.carouselComponent[direction]();
+  }
+
+  ngOnInit(): void {
+    this._generalService.getBanners()
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: res => {
+
+        }
+      })
   }
 }

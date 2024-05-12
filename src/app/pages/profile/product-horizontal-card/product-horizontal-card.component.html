@@ -2,10 +2,10 @@
   <div class="product-horizontal-card-body">
     <div class="product-horizontal-card-images">
       <div class="product-horizontal-card-gallery">
-        <img [ngSrc]="product.productCardImageUrls[activeIndex]" [fill]="true" [alt]="product.productCardTitle">
+        <img [ngSrc]="product.images[activeIndex]" [fill]="true" [alt]="product.title">
 
         <div class="product-card-dots">
-          @for (item of product.productCardImageUrls; track item; let i = $index) {
+          @for (item of product.images; track item; let i = $index) {
             <div
               class="product-card-dot"
               [class.active]="activeIndex === i"
@@ -14,7 +14,7 @@
         </div>
 
         <div class="product-card-hover-blocks">
-          @for (item of product.productCardImageUrls; track item; let i = $index) {
+          @for (item of product.images; track item; let i = $index) {
             <div
               class="product-card-hover-block"
               (mouseenter)="activeIndex = i"
@@ -35,19 +35,25 @@
     <div class="product-horizontal-card-right">
       <div class="product-horizontal-card-main">
         <div class="product-horizontal-card-main-info">
-          <h3 class="product-horizontal-card-title">{{ product.productCardTitle }}</h3>
+          <h3 class="product-horizontal-card-title">{{ product.title }}</h3>
 
           <div class="product-horizontal-card-price">
-            <del class="product-horizontal-card-price-old">{{ product.productCardOldPrice }}</del>
-            <strong class="product-horizontal-card-price-new">{{ product.productCardNewPrice }}</strong>
+            <del class="product-horizontal-card-price-old">{{ product.price }}</del>
+            <strong class="product-horizontal-card-price-new">
+              @if (product.discount_amount_is_percent) {
+                {{ (+product.price * (100 - +product.discount_amount) / 100)| number }}
+              } @else {
+                {{ (+product.price - +product.discount_amount)| number }}
+              } {{ (1 === 1 ? 'sum': 'dollar')| translate }}
+            </strong>
           </div>
 
           <div class="product-horizontal-card-brand">
             <div class="product-horizontal-card-brand-logo">
-              <img [ngSrc]="product.productCardBrandLogo" [fill]="true" [alt]="product.productCardBrandName">
+              <img [ngSrc]="product.store.logo" [fill]="true" [alt]="product.store.name">
             </div>
 
-            <div class="product-horizontal-card-brand-name">{{ product.productCardBrandName }}</div>
+            <div class="product-horizontal-card-brand-name">{{ product.store.name }}</div>
           </div>
 
           <div class="product-horizontal-card-breadcrumb">
@@ -59,7 +65,7 @@
           <div class="product-horizontal-card-address">
             <mat-icon [svgIcon]="'icon:location'"/>
 
-            <span>Ташкент Юнусобот-14, 75-дом</span>
+            <span>{{ product.store.full_address.address }}</span>
           </div>
         </div>
 
@@ -94,15 +100,15 @@
 
           <div class="product-horizontal-card-secondary-item">
             <mat-icon [svgIcon]="'icon:eye'"></mat-icon>
-            <span>{{ product.productCardBrandViews }}</span>
+            <span>{{ product.views }}</span>
           </div>
 
           <div class="product-horizontal-card-secondary-item">
-            14 но. – 21 дек.
+            {{ product.start_date| date: 'dd.MM.YYYY' }} -  {{ product.end_date| date: 'dd.MM.YYYY' }}
           </div>
         </div>
 
-        @if (product.productCardImageUrls[activeIndex].includes('1')) {
+        @if (product.images[activeIndex].includes('1')) {
           <div class="product-horizontal-card-status success">
             <mat-icon [svgIcon]="'icon:success'"/>
             <span>Актив</span>
@@ -129,7 +135,7 @@
     </div>
     <div class="product-horizontal-card-footer-item">
       <div class="product-horizontal-card-footer-label">Время начала и окончания:</div>
-      <div class="product-horizontal-card-footer-value">12.01.2024 - 20.01.2024</div>
+      <div class="product-horizontal-card-footer-value">{{ product.start_date| date: 'dd.MM.YYYY' }} -  {{ product.end_date| date: 'dd.MM.YYYY' }}</div>
     </div>
     <div class="product-horizontal-card-footer-item">
       <div class="product-horizontal-card-footer-label">Категория:</div>
