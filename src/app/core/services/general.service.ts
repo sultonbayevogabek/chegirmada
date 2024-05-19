@@ -5,6 +5,7 @@ import { map, Observable } from 'rxjs';
 import { DistrictModel } from '../models/district.model';
 import { SecondLevelCategory } from '../models/categories.model';
 import { FeatureTemplate } from '../models/feature-template.model';
+import { Banners } from '../models/banners.model';
 
 @Injectable()
 
@@ -25,7 +26,7 @@ export class GeneralService {
     return this._httpClient.get<FeatureTemplate[]>(this._host + `general/categories/${ thirdLevelCategoryId }/features/`);
   }
 
-  getBanners(): Observable<any> {
-    return this._httpClient.get<any>(this._host + 'general/banners/');
+  getBanners(): Observable<Banners> {
+    return this._httpClient.get<Banners>(this._host + 'general/banners/');
   }
 }

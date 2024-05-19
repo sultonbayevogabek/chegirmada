@@ -1,0 +1,71 @@
+<div class="packages">
+  <div class="packages-header">
+    <h2 class="packages-heading">{{ 'packages'| translate }}</h2>
+
+    <ui-button
+      [text]="'buy.package'"
+    />
+  </div>
+
+  @if (loading) {
+    <spinner-loader/>
+  }
+
+  @if (!loading && !packages?.length) {
+    <profile-empty-list/>
+  }
+
+  @if (!loading && packages.length) {
+    <table class="packages-table">
+      <thead>
+      <tr>
+        <th class="packages-th">{{ 'type'| translate }}</th>
+        <th class="packages-th">{{ 'amount'| translate }}</th>
+        <th class="packages-th">{{ 'date'| translate }}</th>
+      </tr>
+      </thead>
+
+      <tbody>
+        @for (history of packages; track history) {
+          <tr class="packages-tr">
+            <td class="packages-td">
+              <div class="packages-data">
+                @if (history.payment_type === 0) {
+                  {{ 'account.has.been.filled'| translate }}
+                }
+                @if (history.payment_type === 1) {
+                  {{ 'tariff'| translate }}
+                }
+                @if (history.payment_type === 2) {
+                  {{ 'advertising'| translate }}
+                }
+              </div>
+            </td>
+            <td class="packages-td">
+              <div
+                class="packages-data"
+                [ngClass]="{
+                'input': history.payment_type === 0,
+                'output': [1, 2].includes(history.payment_type)
+              }"
+              >
+                {{ [ 1, 2 ].includes(history.payment_type) ? '-' : '+' }} {{ history.amount| number }} {{ 'sum'| translate }}
+              </div>
+            </td>
+            <td class="packages-td">
+              <div class="packages-data">{{ history.created_at| date: 'dd.MM.YYYY' }}</div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <mat-paginator
+      [pageIndex]="params.page"
+      [pageSize]="params.page_size"
+      [length]="params.total"
+      [showFirstLastButtons]="true"
+      (page)="changePage($event)"
+    />
+  }
+</div>

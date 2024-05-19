@@ -41,6 +41,11 @@ export const profileRoutes: Routes = [
         path: 'balance',
         loadComponent: () => import('./balance/balance.component').then(c => c.BalanceComponent),
         canActivate: [hasStoreGuard]
+      },
+      {
+        path: 'packages',
+        loadComponent: () => import('./packages/packages.component').then(c => c.PackagesComponent),
+        canActivate: [hasStoreGuard]
       }
     ]
   }

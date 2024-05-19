@@ -3,14 +3,26 @@
 }
 
 @if (!loading && wishlist.length) {
-  <products-section
-    [heading]="'wishlist'"
-    [products]="wishlist"
-  />
-  <div class="container">
+  <div class="wish-list container">
+    <section-header
+      class="wish-list-header"
+      [heading]="'wishlist'"
+    />
+
+    <div class="wish-list-grid">
+      @for (product of wishlist; track product) {
+        <product-card
+          [product]="product"
+        />
+      }
+    </div>
+
     <mat-paginator
+      class="wish-list-paginator"
       [pageSize]="params.page_size"
       [pageIndex]="params.page"
+      [length]="params.total"
+      (page)="onPageChange($event)"
     />
   </div>
 }
@@ -24,7 +36,9 @@
     <h2 class="wish-list-empty-heading">{{ 'there.is.nothing.here.for.now'| translate }}</h2>
     <p class="wish-list-empty-text">{{ 'click.heart.icon.and.add.your.favorites.here'| translate }}</p>
 
-    <ui-button [text]="'Перейти в каталог товаров'"/>
+    <ui-button
+      [routerLink]="['/']"
+      [text]="'go.to.classifieds.directory'"/>
   </div>
 
 }

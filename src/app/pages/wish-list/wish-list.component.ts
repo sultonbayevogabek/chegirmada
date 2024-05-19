@@ -8,8 +8,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SpinnerLoaderComponent } from '../../core/components/spinner-loader/spinner-loader.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProductCard } from '../../core/models/wishlist.model';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ProductCardComponent } from '../../core/components/product-card/product-card.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'wish-list',
@@ -23,7 +24,8 @@ import { ProductCardComponent } from '../../core/components/product-card/product
     SpinnerLoaderComponent,
     TranslateModule,
     MatPaginator,
-    ProductCardComponent
+    ProductCardComponent,
+    RouterLink
   ],
   standalone: true,
   providers: [
@@ -34,8 +36,9 @@ import { ProductCardComponent } from '../../core/components/product-card/product
 export class WishListComponent implements OnInit {
   params = {
     page: 0,
-    page_size: 8
-  }
+    page_size: 8,
+    total: 0
+  };
   loading = true;
   wishlist: ProductCard[] = [];
   private _productDetailsService = inject(ProductDetailsService);
@@ -52,10 +55,16 @@ export class WishListComponent implements OnInit {
         next: res => {
           this.loading = false;
           this.wishlist = res?.results;
+          this.params.total = +res?.count;
         },
         error: () => {
           this.loading = false;
         }
-      })
+      });
+  }
+
+  onPageChange($event: PageEvent): void {
+    this.params.page = $event.pageIndex;
+    this.getWishlist();
   }
 }

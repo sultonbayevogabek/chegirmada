@@ -3,8 +3,8 @@ import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-
 import { NgForOf, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { GeneralService } from '../../../core/services/general.service';
-import { takeUntil } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Banners } from '../../../core/models/banners.model';
 
 @Component({
   selector: 'intro-banner',
@@ -36,30 +36,24 @@ export class IntroBannerComponent implements OnInit {
     navSpeed: 700,
     items: 1,
     nav: false,
-    navText: ['', ''],
+    navText: [ '', '' ],
     autoplay: false
   };
 
-  carouselImages = [
-    '/assets/banner/banner.jpg',
-    '/assets/banner/banner.jpg',
-    '/assets/banner/banner.jpg',
-    '/assets/banner/banner.jpg',
-    '/assets/banner/banner.jpg',
-    '/assets/banner/banner.jpg'
-  ]
+  banners: Banners;
 
   navigateCarousel(direction: 'next' | 'prev'): void {
-      this.carouselComponent[direction]();
+    this.carouselComponent[direction]();
   }
 
   ngOnInit(): void {
     this._generalService.getBanners()
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
-        next: res => {
-
+        next: data => {
+          this.banners = data;
+          console.log(this.banners);
         }
-      })
+      });
   }
 }

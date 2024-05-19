@@ -67,10 +67,10 @@ export class ProfileComponent implements OnInit {
       isStoreRequired: true
     },
     {
-      icon: 'icon:favourite-companies',
-      link: 'favourite-companies',
-      name: 'favourite.stores',
-      isStoreRequired: false
+      icon: 'icon:my-information',
+      link: 'packages',
+      name: 'packages',
+      isStoreRequired: true
     },
     {
       icon: 'icon:like-outline',

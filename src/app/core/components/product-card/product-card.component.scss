@@ -76,7 +76,7 @@
   height: 2rem;
   border-radius: 50%;
   background-color: rgba($background-heart-button, 0.4);
-  color: $white-color;
+  color: $primary-red-color;
 }
 
 .product-card-percent {
@@ -107,12 +107,18 @@
 }
 
 .product-card-brand-logo {
+  position: relative;
   @include flex-center-center;
   width: 2rem;
   height: 2rem;
   flex-shrink: 0;
   border-radius: 50%;
   background-color: $input-background;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+  }
 }
 
 .product-card-brand-name {

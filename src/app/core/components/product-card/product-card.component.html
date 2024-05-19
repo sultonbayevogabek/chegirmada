@@ -1,4 +1,4 @@
-<div class="product-card" [routerLink]="['product-details']">
+<div class="product-card" [routerLink]="['/product-details', product.pk]">
   <div class="product-card-top">
     <div class="product-card-gallery">
       <img [ngSrc]="product.images[activeIndex]" [fill]="true" [alt]="product.title">
@@ -23,23 +23,33 @@
 
     </div>
 
-    <div class="product-top-indicator">
-      Топ
-    </div>
+    @if (product.is_advertised) {
+      <div class="product-top-indicator">
+        {{ 'top'| translate }}
+      </div>
+    }
 
-    <button class="product-card-heart">
-      <mat-icon [svgIcon]="'icon:outlined-heart'"></mat-icon>
+    <button class="product-card-heart" (click)="wishlist($event)">
+      @if (product.user_wishlist) {
+        <mat-icon [svgIcon]="'icon:solid-heart'"></mat-icon>
+      } @else {
+        <mat-icon [svgIcon]="'icon:outlined-heart'"></mat-icon>
+      }
     </button>
 
     <div class="product-card-percent">
-      50%
+      @if (product.discount_amount_is_percent) {
+        {{ product.discount_amount| number }}
+      } @else {
+        {{ (+product.discount_amount / +product.price * 100)| number: '1.0-0' }}
+      }%
     </div>
   </div>
   <div class="product-card-bottom">
     <div class="product-card-brand-view">
       <div class="product-card-brand">
         <div class="product-card-brand-logo">
-          <img [src]="product.store.logo" [alt]="product.store.name">
+          <img [ngSrc]="product.store.logo" [fill]="true" [alt]="product.store.name">
         </div>
 
         <div class="product-card-brand-name">{{ product.store.name }}</div>

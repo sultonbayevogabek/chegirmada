@@ -1,0 +1,77 @@
+@import "variables";
+@import "mixins";
+
+.packages {
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid $border-grey-color;
+}
+
+.packages-header {
+  @include flex-center-between;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.packages-heading {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.packages-table {
+  width: 100%;
+  border: none;
+  border-collapse: collapse;
+}
+
+.packages-tr {
+  border-bottom: 0.25rem solid transparent;
+}
+
+.packages-th {
+  padding: 0.5rem 1rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: $secondary-black-color;
+}
+
+.packages-data {
+  height: 100%;
+  padding: 1.25rem 1rem;
+  background-color: $background-grey-color;
+
+  &.input {
+    color: $green-color;
+  }
+
+  &.output {
+    color: $primary-red-color;
+  }
+}
+
+.packages-td {
+  padding: 0;
+
+  &:first-child .packages-data {
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+
+  &:last-child .packages-data {
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+}
+
+.payment-form {
+  @include flex-column(0.75rem);
+  width: 20rem;
+  margin-top: 0.5rem;
+  padding: 1.25rem;
+  background-color: $white-color;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 1.5rem 0 rgba(51, 51, 51, 0.12);
+}
+
+.payment-form-submit {
+  margin-left: auto;
+}

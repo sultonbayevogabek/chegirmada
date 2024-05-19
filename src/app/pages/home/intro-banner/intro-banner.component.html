@@ -15,24 +15,24 @@
         </div>
       </div>
 
-      <div class="banner-right banner-right-top">
-        <img src="/assets/banner/top.jpg" alt="">
-      </div>
+      <a [href]="banners?.large_banners[0]?.url" class="banner-right banner-right-top">
+        <img [ngSrc]="banners?.large_banners[0]?.image" [fill]="true" alt="">
+      </a>
 
-      <div class="banner-right banner-right-bottom">
-        <img src="/assets/banner/bottom.jpg" alt="">
-      </div>
+      <a [href]="banners?.large_banners[0]?.url" class="banner-right banner-right-bottom">
+        <img [ngSrc]="banners?.large_banners[1]?.image" [fill]="true" alt="">
+      </a>
     </div>
   </div>
 </section>
 
 <ng-template #carousel>
   <owl-carousel-o [options]="carouselOptions" #carouselComponent>
-    @for (imgUrl of carouselImages; track imgUrl) {
+    @for (banner of banners?.banners; track banner) {
       <ng-template carouselSlide>
-        <div class="banner-slide">
-          <img [src]="imgUrl" [alt]="imgUrl">
-        </div>
+        <a class="banner-slide" [href]="banner.url">
+          <img [ngSrc]="banner?.image" [fill]="true" [alt]="banner.desc">
+        </a>
       </ng-template>
     }
   </owl-carousel-o>
