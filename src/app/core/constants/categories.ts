@@ -57,3 +57,20 @@ export const CATEGORIES: MainCategory[] = [
     name: 'food.products',
   }
 ];
+
+export const CATEGORIES_OBJECT = {
+  0: 'electronics',
+  1: 'men.clothes',
+  2: 'women.clothes',
+  3: 'services',
+  4: 'education',
+  5: 'transport',
+  6: 'furniture',
+  7: 'real.estate',
+  8: 'household.appliances',
+  9: 'for.kids',
+  10: 'books',
+  11: 'dishes',
+  12: 'construction.and.repair',
+  13: 'food.products'
+}

@@ -1,0 +1,69 @@
+<div class="buy-package-modal-header">
+  <h2 class="buy-package-modal-heading">{{ 'buy.package'| translate }}</h2>
+
+  <icon-button
+    mat-dialog-close
+    [icon]="'icon:x'"
+    [iconWidth]="0.875"
+  />
+</div>
+
+<mat-dialog-content class="buy-package-modal-content">
+  <div class="buy-package-modal-hint">
+    {{ 'buy.package.hint'| translate }}
+  </div>
+  <form class="buy-package-modal-form" [formGroup]="buyPackageForm" (ngSubmit)="buyPackage()">
+    <label class="form-label">
+      <span class="form-label-text">{{ 'category'| translate }}</span>
+      <mat-select
+        class="solid-select"
+        [placeholder]="'category'| translate"
+        [formControlName]="'tariff'"
+        [class.invalid]="buyPackageForm.get('tariff').invalid && buyPackageForm.get('tariff').touched"
+        (selectionChange)="calculatePrice()"
+      >
+        @for (packageType of packageTypes; track packageType) {
+          @if (CATEGORIES_OBJECT[packageType.category]) {
+            <mat-option [value]="packageType.id">{{ CATEGORIES_OBJECT[packageType.category]| translate }} - {{ packageType.price| number}} {{ 'sum'| translate }}</mat-option>
+          }
+        }
+      </mat-select>
+
+      @if (buyPackageForm.get('tariff').hasError('required') && buyPackageForm.get('tariff').touched) {
+        <span class="form-error">{{ 'required.field'| translate }}</span>
+      }
+    </label>
+
+    <label class="form-label">
+      <span class="form-label-text">{{ 'number'| translate }}</span>
+      <mat-select
+        class="solid-select"
+        [placeholder]="'number'| translate"
+        [formControlName]="'quantity'"
+        [class.invalid]="buyPackageForm.get('quantity').invalid && buyPackageForm.get('quantity').touched"
+        (selectionChange)="calculatePrice()"
+      >
+        @for (i of [3, 5, 15, 20, 30, 40, 50]; track i) {
+          <mat-option [value]="i">{{ i }}</mat-option>
+        }
+      </mat-select>
+
+      @if (buyPackageForm.get('quantity').hasError('required') && buyPackageForm.get('quantity').touched) {
+        <span class="form-error">{{ 'required.field'| translate }}</span>
+      }
+    </label>
+
+    <div class="buy-package-modal-price">
+      {{ 'price'| translate }}: {{ price }} {{ 'sum'| translate }}
+    </div>
+
+    <div class="buy-package-modal-submit">
+      <ui-button
+        [actionType]="'submit'"
+        [text]="'buy'"
+        [disabled]="buyPackageForm.invalid || buyPackageForm.disabled"
+        [loading]="buyPackageForm.disabled"
+      />
+    </div>
+  </form>
+</mat-dialog-content>

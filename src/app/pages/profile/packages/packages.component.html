@@ -2,9 +2,15 @@
   <div class="packages-header">
     <h2 class="packages-heading">{{ 'packages'| translate }}</h2>
 
-    <ui-button
-      [text]="'buy.package'"
-    />
+    <div class="packages-balance">
+      <div class="packages-heading">
+        {{ 'balance'| translate }}: {{ balance| number }} {{ 'sum'| translate }}
+      </div>
+      <ui-button
+        [text]="'buy.package'"
+        (click)="buyPackageModalOpen()"
+      />
+    </div>
   </div>
 
   @if (loading) {
@@ -19,41 +25,35 @@
     <table class="packages-table">
       <thead>
       <tr>
-        <th class="packages-th">{{ 'type'| translate }}</th>
-        <th class="packages-th">{{ 'amount'| translate }}</th>
-        <th class="packages-th">{{ 'date'| translate }}</th>
+        <th class="packages-th">{{ 'category'| translate }}</th>
+        <th class="packages-th">{{ 'number'| translate }}</th>
+        <th class="packages-th">{{ 'price'| translate }}</th>
+        <th class="packages-th">{{ 'term'| translate }}</th>
       </tr>
       </thead>
 
       <tbody>
-        @for (history of packages; track history) {
+        @for (pack of packages; track pack) {
           <tr class="packages-tr">
             <td class="packages-td">
               <div class="packages-data">
-                @if (history.payment_type === 0) {
-                  {{ 'account.has.been.filled'| translate }}
-                }
-                @if (history.payment_type === 1) {
-                  {{ 'tariff'| translate }}
-                }
-                @if (history.payment_type === 2) {
-                  {{ 'advertising'| translate }}
-                }
+                {{ CATEGORIES_OBJECT[pack.category.pk]| translate }}
               </div>
             </td>
             <td class="packages-td">
-              <div
-                class="packages-data"
-                [ngClass]="{
-                'input': history.payment_type === 0,
-                'output': [1, 2].includes(history.payment_type)
-              }"
-              >
-                {{ [ 1, 2 ].includes(history.payment_type) ? '-' : '+' }} {{ history.amount| number }} {{ 'sum'| translate }}
+              <div class="packages-data">
+                {{ pack.remainder || 0 }} / {{ pack.quantity || 0 }}
               </div>
             </td>
             <td class="packages-td">
-              <div class="packages-data">{{ history.created_at| date: 'dd.MM.YYYY' }}</div>
+              <div class="packages-data">
+                {{ (+(pack.quantity || 0) * pack.tariff_price)| number }} {{ 'sum'| translate }}
+              </div>
+            </td>
+            <td class="packages-td">
+              <div class="packages-data">
+                {{ pack.created_at| date: 'dd.MM.YYYY' }}
+              </div>
             </td>
           </tr>
         }

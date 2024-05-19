@@ -27,7 +27,9 @@
   "branch.name": "Название филиала",
   "branches": "Филиалы",
   "bukhara": "Бухара",
+  "buy": "Купить",
   "buy.package": "Купить пакет",
+  "buy.package.hint": "Пакет действителен в течение 30 дней. Чтобы разместить скидки, необходимо приобрести пакет. Купите пакет в зависимости от того, сколько объявлений вы хотите разместить и из какого раздела вы хотите публиковать сообщения. Пакеты действительны в течение 30 дней с момента покупки.",
   "cancel": "Отмена",
   "catalog": "Каталог",
   "categories": "Категории",
@@ -150,6 +152,7 @@
   "no": "Нет",
   "no.data.found": "Информация не найдена",
   "no.entered": "Не введено",
+  "number": "Количество",
   "number.of.remaining.products": "Количество оставшихся товаров",
   "or": "или",
   "original.price": "Изначальная цена",
@@ -216,6 +219,7 @@
   "tariffs": "Тарифы",
   "tashkent": "Ташкент",
   "tashkent.region": "Ташкентская область",
+  "term": "Срок",
   "thanks.for.leaving.comment": "Спасибо за комментарий",
   "the.amount.of.the.discount.cannot.be.greater.than.the.current.price.of.the.goods": "Размер скидки не может быть больше текущей цены товара",
   "the.best.announcements": "Лучшие объявления",
@@ -249,5 +253,6 @@
   "you.do.not.have.registered.store": "У вас нет зарегистрированного магазина",
   "you.have.timed.out.to.enter.your.verification.code": "У вас истекло время для ввода кода подтверждения",
   "you.must.be.authorized.leave.comment": "Вы должны быть авторизованы для публикации комментария",
+  "your.balance.insufficient": "Ваш баланс недостаточен",
   "your.complaint.has.been.successfully.submitted": "Ваша жалоба успешно отправлена"
 }

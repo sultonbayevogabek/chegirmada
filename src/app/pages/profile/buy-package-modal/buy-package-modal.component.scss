@@ -1,0 +1,35 @@
+@import "variables";
+@import "mixins";
+
+.buy-package-modal-header {
+  @include flex-center-between;
+  padding: 1.5rem 2rem 1rem;
+}
+
+.buy-package-modal-heading {
+  font-size: 1.5rem;
+  color: $dialog-title-black;
+}
+
+.buy-package-modal-hint {
+  color: $secondary-black-color;
+  padding: 0 2rem 1rem;
+  font-size: 0.75rem;
+}
+
+.buy-package-modal-form {
+  @include flex-column(1rem);
+  padding: 0 2rem 2rem;
+}
+
+.buy-package-modal-price {
+  padding: 0.5rem 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: $dialog-title-black;
+}
+
+.buy-package-modal-submit {
+  @include flex-center-end;
+  padding-top: 0.5rem;
+}

@@ -27,7 +27,9 @@
   "branch.name": "Filial nomi",
   "branches": "Filiallar",
   "bukhara": "Buxoro",
+  "buy": "Sotib olish",
   "buy.package": "Paket sotib olish",
+  "buy.package.hint": "Paket 30 kun amal qiladi. Siz chegirmalarni e'lon qilishingiz uchun paket sotib olishingiz kerak. Nechta e'lon joylashingiz va qaysi bo'limdan joylashingizga qarab to'plam sotib oling. Paketlar siz sotib olgan kundan boshlab 30 kun amal qiladi.",
   "cancel": "Bekor qilish",
   "catalog": "Katalog",
   "categories": "Kategoriyalar",
@@ -150,6 +152,7 @@
   "no": "Yo'q",
   "no.data.found": "Ma'lumot topilmadi",
   "no.entered": "Kiritilmagan",
+  "number": "Soni",
   "number.of.remaining.products": "Qolgan mahsulot soni",
   "or": "yoki",
   "original.price": "Asl narxi",
@@ -216,6 +219,7 @@
   "tariffs": "Tariflar",
   "tashkent": "Toshkent",
   "tashkent.region": "Toshkent viloyati",
+  "term": "Muddati",
   "thanks.for.leaving.comment": "Izoh qoldirganingiz uchun rahmat",
   "the.amount.of.the.discount.cannot.be.greater.than.the.current.price.of.the.goods": "Chegirma summasi tovarning hozirgi narxidan katta bo'lishi mumkin emas",
   "the.best.announcements": "Eng mashhur e'lonlar",
@@ -249,5 +253,6 @@
   "you.do.not.have.registered.store": "Sizda ro'yxatdan o'tgan do'kon mavjud emas",
   "you.have.timed.out.to.enter.your.verification.code": "Tasdiqlash kodini kiritish vaqti tugadi",
   "you.must.be.authorized.leave.comment": "Izoh qoldirish uchun avtorizatsiyadan o'tgan bo'lishingiz kerak",
+  "your.balance.insufficient": "Balansingizdagi mablag' yetarli emas",
   "your.complaint.has.been.successfully.submitted": "Shikoyatingiz muvaffaqiyatli yuborildi"
 }
