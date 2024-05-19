@@ -8,7 +8,13 @@
   />
 
   <label class="my-announcements-search">
-    <input class="form-input" type="text" [placeholder]="'search'| translate">
+    <input
+      class="form-input"
+      type="text"
+      [placeholder]="'search'| translate"
+      [(ngModel)]="params.search"
+      (keydown.enter)="searchAnnouncement()"
+    >
 
     <ui-button
       [type]="'gray-outline'"
@@ -18,14 +24,29 @@
   </label>
 </div>
 
-@for (product of products; track product) {
-  <product-horizontal-card
-    [product]="product"
+@if (loading) {
+  <spinner-loader/>
+}
+
+@if (!loading && announcements?.length) {
+  @for (product of announcements; track product) {
+    <product-horizontal-card
+      [product]="product"
+      (onProductDeleted)="searchAnnouncement()"
+    />
+  }
+  <mat-paginator
+    class="wish-list-paginator"
+    [pageSize]="params.page_size"
+    [pageIndex]="params.page"
+    [length]="params.total"
+    (page)="onPageChange($event)"
   />
 }
 
-<profile-empty-list
-  [emptyListText]="'no.data.found'"
-  [emptyListImg]="'/assets/empty-list-icons/announcements.svg'"
-  [emptyListButton]="'add'"
-/>
+@if (!loading && !announcements?.length) {
+  <profile-empty-list
+    [emptyListText]="'no.data.found'"
+    [emptyListImg]="'/assets/empty-list-icons/announcements.svg'"
+  />
+}

@@ -23,12 +23,19 @@
         </div>
       </div>
 
-      <div class="product-top-indicator">
-        Топ
-      </div>
+      @if (product.is_advertised) {
+        <div class="product-top-indicator">
+          {{ 'top'| translate }}
+        </div>
+      }
+
 
       <div class="product-horizontal-card-percent">
-        50%
+        @if (product.discount_amount_is_percent) {
+          {{ product.discount_amount| number }}
+        } @else {
+          {{ (+product.discount_amount / +product.price * 100)| number: '1.0-0' }}
+        }%
       </div>
     </div>
 
@@ -48,25 +55,25 @@
             </strong>
           </div>
 
-          <div class="product-horizontal-card-brand">
-            <div class="product-horizontal-card-brand-logo">
-              <img [ngSrc]="product.store.logo" [fill]="true" [alt]="product.store.name">
-            </div>
+<!--          <div class="product-horizontal-card-brand">-->
+<!--            <div class="product-horizontal-card-brand-logo">-->
+<!--              <img [ngSrc]="product.s.logo" [fill]="true" [alt]="product.store.name">-->
+<!--            </div>-->
 
-            <div class="product-horizontal-card-brand-name">{{ product.store.name }}</div>
-          </div>
+<!--            <div class="product-horizontal-card-brand-name">{{ product.store.name }}</div>-->
+<!--          </div>-->
 
           <div class="product-horizontal-card-breadcrumb">
-            <div class="product-horizontal-card-breadcrumb-item">Электроника</div>
-            <div class="product-horizontal-card-breadcrumb-item">Мобил телефонлар</div>
-            <div class="product-horizontal-card-breadcrumb-item">Смартфон</div>
+            @for (category of product.categories; track category) {
+              <div class="product-horizontal-card-breadcrumb-item">{{ category.name }}</div>
+            }
           </div>
 
-          <div class="product-horizontal-card-address">
-            <mat-icon [svgIcon]="'icon:location'"/>
+<!--          <div class="product-horizontal-card-address">-->
+<!--            <mat-icon [svgIcon]="'icon:location'"/>-->
 
-            <span>{{ product.store.full_address.address }}</span>
-          </div>
+<!--            <span>{{ product.store.full_address.address }}</span>-->
+<!--          </div>-->
         </div>
 
         <div class="product-horizontal-card-main-actions">
@@ -76,6 +83,7 @@
           />
 
           <icon-button
+            (click)="confirmationDelete()"
             [buttonType]="'red'"
             [icon]="'icon:trash'"
           />
@@ -87,14 +95,14 @@
           <div class="product-horizontal-card-secondary-item">
             <button class="product-horizontal-card-secondary-btn">
               <mat-icon [svgIcon]="'icon:like'"></mat-icon>
-              <span>1223</span>
+              <span>{{ product.likes }}</span>
             </button>
 
             <div class="product-horizontal-card-secondary-divider"></div>
 
             <button class="product-horizontal-card-secondary-btn">
               <mat-icon [svgIcon]="'icon:dislike'"></mat-icon>
-              <span>345</span>
+              <span>{{ product.dislikes }}</span>
             </button>
           </div>
 
@@ -127,19 +135,19 @@
   <div class="product-horizontal-card-footer">
     <div class="product-horizontal-card-footer-item">
       <div class="product-horizontal-card-footer-label">ID:</div>
-      <div class="product-horizontal-card-footer-value">131200</div>
+      <div class="product-horizontal-card-footer-value">{{ product._id }}</div>
     </div>
     <div class="product-horizontal-card-footer-item">
-      <div class="product-horizontal-card-footer-label">Создать дату:</div>
-      <div class="product-horizontal-card-footer-value">12.01.2024</div>
+      <div class="product-horizontal-card-footer-label">{{ 'created.date'| translate }}:</div>
+      <div class="product-horizontal-card-footer-value">{{ product.created_at| date: 'dd.MM.YYYY' }}</div>
     </div>
     <div class="product-horizontal-card-footer-item">
-      <div class="product-horizontal-card-footer-label">Время начала и окончания:</div>
+      <div class="product-horizontal-card-footer-label">{{ 'start.and.end.date'| translate }}:</div>
       <div class="product-horizontal-card-footer-value">{{ product.start_date| date: 'dd.MM.YYYY' }} -  {{ product.end_date| date: 'dd.MM.YYYY' }}</div>
     </div>
     <div class="product-horizontal-card-footer-item">
-      <div class="product-horizontal-card-footer-label">Категория:</div>
-      <div class="product-horizontal-card-footer-value">Техника</div>
+      <div class="product-horizontal-card-footer-label">{{ 'category'| translate }}:</div>
+      <div class="product-horizontal-card-footer-value">{{ product.categories[0].name }}</div>
     </div>
   </div>
 </div>

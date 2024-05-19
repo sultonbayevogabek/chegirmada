@@ -1,8 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { TagModel } from '../models/tag.model';
+import { PaymentHistoryResponse } from '../models/payment-history.model';
+import { AnnouncementResponse } from '../models/announcement.model';
 
 @Injectable()
 
@@ -23,5 +25,37 @@ export class MyAnnouncementsService {
 
   getDiscountDataForEditing(id: number): Observable<any> {
     return this._httpClient.post<Observable<any>>(this._host + 'discounts/create/standard/', { id });
+  }
+
+  getMyAnnouncements(params: {
+    page: number;
+    page_size: number;
+    search: string;
+    is_active?: boolean;
+    status?: number;
+  }): Observable<AnnouncementResponse> {
+    let options = new HttpParams()
+      .set('page', params.page + 1)
+      .set('page_size', params.page_size)
+      .set('search', params.search);
+
+    if ('is_active' in params) {
+      options.append('status', params.is_active);
+    }
+
+    if ('status' in params) {
+      options.append('status', params.status);
+    }
+
+    return this._httpClient.get<AnnouncementResponse>(this._host + 'discounts/my/', {
+      params: {
+        ...params,
+        page: params.page + 1
+      }
+    });
+  }
+
+  deleteAnnouncement(id: number): Observable<any> {
+    return this._httpClient.delete(this._host + `discounts/${id}/update/`)
   }
 }
