@@ -8,6 +8,7 @@ import { MainCategory } from '../../../../models/categories.model';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { GeneralService } from '../../../../services/general.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 
 export interface ICategory {
   parentCategoryName: string
@@ -38,7 +39,8 @@ export interface Category {
     MatIcon,
     MatRipple,
     TranslateModule,
-    MatProgressSpinner
+    MatProgressSpinner,
+    RouterLink
   ],
   standalone: true,
   providers: [
@@ -75,6 +77,7 @@ export class CategoriesPanelComponent implements OnInit {
       '2': [],
       '3': [],
     }
+
     this._generalService.getSubcategories(category.id)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(res => {

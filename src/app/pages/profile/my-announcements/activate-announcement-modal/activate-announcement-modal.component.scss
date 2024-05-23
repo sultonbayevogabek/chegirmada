@@ -3,7 +3,7 @@
 
 .activate-announcement-header {
   @include flex-center-between;
-  padding: 2rem;
+  padding: 2rem 2rem 1rem;
 }
 
 .activate-announcement-heading {
@@ -11,14 +11,42 @@
   color: $dialog-title-black;
 }
 
+.activate-announcement-info {
+  padding: 0 2rem;
+  font-size: 0.75rem;
+  color: $secondary-black-color;
+}
+
+.activate-announcement-info-li {
+  @include flex-center(0.5rem);
+  margin-bottom: 0.5rem;
+
+  .mat-icon {
+    width: 0.75rem;
+    height: 0.75rem;
+    color: $green-color;
+  }
+}
+
+.activate-announcement-info-text {
+  margin-bottom: 0.5rem;
+}
+
 .activate-announcement-form {
   @include flex-column(1rem);
-  padding: 0 2rem;
+  padding: 1rem 2rem;
 }
 
 .activate-announcement-submit {
-  padding: 1.5rem 2rem;
-  text-align: right;
+  @include flex-center-end;
+  padding: 0 2rem 2rem;
+}
+
+.activate-announcement-price {
+  padding: 0.25rem 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: $dialog-title-black;
 }
 
 .activate-announcement-range {

@@ -2,7 +2,9 @@
   <div class="product-horizontal-card-body">
     <div class="product-horizontal-card-images">
       <div class="product-horizontal-card-gallery">
-        <img [ngSrc]="product.images[activeIndex]" [fill]="true" [alt]="product.title">
+        @if (product && product?.images?.length) {
+          <img [ngSrc]="product.images[activeIndex]" [fill]="true" [alt]="product.title">
+        }
 
         <div class="product-card-dots">
           @for (item of product.images; track item; let i = $index) {
@@ -45,13 +47,13 @@
           <h3 class="product-horizontal-card-title">{{ product.title }}</h3>
 
           <div class="product-horizontal-card-price">
-            <del class="product-horizontal-card-price-old">{{ product.price }}</del>
+            <del class="product-horizontal-card-price-old">{{ product.price| number }} {{ (product.currency === 1 ? 'sum': 'dollar')| translate }}</del>
             <strong class="product-horizontal-card-price-new">
               @if (product.discount_amount_is_percent) {
                 {{ (+product.price * (100 - +product.discount_amount) / 100)| number }}
               } @else {
                 {{ (+product.price - +product.discount_amount)| number }}
-              } {{ (1 === 1 ? 'sum': 'dollar')| translate }}
+              } {{ (product.currency === 1 ? 'sum': 'dollar')| translate }}
             </strong>
           </div>
 
@@ -93,17 +95,17 @@
       <div class="product-horizontal-card-secondary">
         <div class="product-horizontal-card-secondary-left">
           <div class="product-horizontal-card-secondary-item">
-            <button class="product-horizontal-card-secondary-btn">
+            <div class="product-horizontal-card-secondary-btn">
               <mat-icon [svgIcon]="'icon:like'"></mat-icon>
               <span>{{ product.likes }}</span>
-            </button>
+            </div>
 
             <div class="product-horizontal-card-secondary-divider"></div>
 
-            <button class="product-horizontal-card-secondary-btn">
+            <div class="product-horizontal-card-secondary-btn">
               <mat-icon [svgIcon]="'icon:dislike'"></mat-icon>
               <span>{{ product.dislikes }}</span>
-            </button>
+            </div>
           </div>
 
           <div class="product-horizontal-card-secondary-item">
@@ -116,18 +118,19 @@
           </div>
         </div>
 
-        @if (product.images[activeIndex].includes('1')) {
+        @if (product?.is_advertised) {
           <div class="product-horizontal-card-status success">
             <mat-icon [svgIcon]="'icon:success'"/>
-            <span>Актив</span>
+            <span>{{ 'top'| translate }}</span>
           </div>
-        } @else {
+        }
+
+        @if (product?.is_active && product?.status === 1 && !product?.is_advertised) {
           <ui-button
-            [text]="'Активация рекламы'"
+            [text]="'promote.announcement.to.top'"
             (click)="openModal()"
           />
         }
-
       </div>
     </div>
   </div>

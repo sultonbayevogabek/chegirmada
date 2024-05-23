@@ -1,39 +1,62 @@
-<div class="activate-announcement-header">
-  <h2 class="activate-announcement-heading">Активация рекламы</h2>
-</div>
-
-<mat-dialog-content class="activate-announcement-content">
-  <div class="activate-announcement-form">
-    <label class="form-label">
-      <span class="form-label-text">Сколько дней</span>
-      <input class="form-input" type="text" placeholder="0" [(ngModel)]="count">
-
-      <mat-slider
-        class="activate-announcement-range"
-        [min]="0"
-        [max]="30"
-      >
-        <input matSliderThumb [(ngModel)]="count">
-      </mat-slider>
-    </label>
-
-    <label class="form-label">
-      <span class="form-label-text">Сколько раз поднимать</span>
-      <input class="form-input" type="text" placeholder="0" [(ngModel)]="count2">
-
-      <mat-slider
-        class="activate-announcement-range"
-        [min]="0"
-        [max]="30"
-      >
-        <input matSliderThumb [(ngModel)]="count2">
-      </mat-slider>
-    </label>
+<form [formGroup]="advertisingForm" (ngSubmit)="advertiseAnnouncement()">
+  <div class="activate-announcement-header">
+    <h2 class="activate-announcement-heading">
+      {{ 'promote.announcement.to.top'| translate }}
+    </h2>
   </div>
-</mat-dialog-content>
 
-<div class="activate-announcement-submit">
-  <ui-button
-    [text]="'Оплата'"
-  />
-</div>
+  <mat-dialog-content class="activate-announcement-content">
+    <div class="activate-announcement-info">
+      <ul class="activate-announcement-info-ul">
+        <li class="activate-announcement-info-li">
+          <mat-icon [svgIcon]="'icon:tick'"/>
+          <span>{{ '4x.more.views'| translate }}</span>
+        </li>
+
+        <li class="activate-announcement-info-li">
+          <mat-icon [svgIcon]="'icon:tick'"/>
+          <span>{{ 'placement.in.top.for.1.day'| translate }}</span>
+        </li>
+      </ul>
+
+      <p class="activate-announcement-info-text">
+        {{ 'through.this.service.we.will.place.your.ad.above.similar.and.unadvertised.ads'| translate }}
+      </p>
+
+      <p class="activate-announcement-info-text">
+        {{ 'the.position.of.each.promoted.ad.depends'| translate }}
+      </p>
+    </div>
+
+    <div class="activate-announcement-form">
+      <label class="form-label">
+        <span class="form-label-text">{{ 'how.many.days?'| translate }}</span>
+        <mat-select
+          class="solid-select"
+          [formControlName]="'advertisement'"
+          (selectionChange)="advertisingTypeChanged()"
+        >
+          @for (adv of advertisingTypesList; track adv) {
+            <mat-option [value]="adv.pk">{{ adv.days }}</mat-option>
+          }
+        </mat-select>
+      </label>
+
+      <div class="activate-announcement-price">
+        {{ 'price'| translate }}: {{ price }} {{ 'sum'| translate }}
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <div class="activate-announcement-submit">
+    <ui-button
+      [text]="'send'"
+      [actionType]="'submit'"
+      [loading]="advertisingForm.disabled"
+      [disabled]="advertisingForm.invalid || advertisingForm.disabled"
+    />
+  </div>
+</form>
+
+
+

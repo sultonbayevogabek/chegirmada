@@ -9,7 +9,15 @@
 
       @if (selectedCategory) {
         <div class="category-groups">
-          <h2 class="category-groups-parent">{{ selectedCategory.name| translate }}</h2>
+          <h2
+            class="category-groups-parent"
+            [routerLink]="['/category', 'list-view']"
+            [queryParams]="{
+              main_category: selectedCategory.id
+              page: 1,
+              page_size: 20
+            }"
+          >{{ selectedCategory.name| translate }}</h2>
 
           <div class="category-groups-grid">
             @for (i of [1, 2, 3]; track i) {
@@ -33,6 +41,12 @@
         mat-ripple
         [matRippleColor]="'#4755691a'"
         (mouseenter)="selectParentCategory(category)"
+        [routerLink]="['/category', 'list-view']"
+        [queryParams]="{
+          main_category: category.id
+          page: 1,
+          page_size: 20
+        }"
       >
         <span class="parent-categories-icon">
           <mat-icon class="" [svgIcon]="'icon:' + category.name"/>
@@ -50,11 +64,28 @@
   <div class="category-groups-column">
     @for (categoryGroup of selectedCategory?.children[i]; track categoryGroup) {
       <div class="category-groups-item">
-        <h3 class="category-groups-heading">{{ categoryGroup.name }}</h3>
+        <h3
+          class="category-groups-heading"
+          [routerLink]="['/category', 'list-view']"
+          [queryParams]="{
+            main_category: selectedCategory.id,
+
+            second_category: categoryGroup.pk,
+          }"
+        >{{ categoryGroup.name }}</h3>
 
         <ul class="category-groups-list">
           @for (category of categoryGroup.children; track category) {
-            <li class="category-groups-category-name">{{ category.name }}</li>
+            <li
+              class="category-groups-category-name"
+              [routerLink]="['/category', 'list-view']"
+              [queryParams]="{
+                main_category: selectedCategory.id,
+
+                second_category: categoryGroup.pk,
+                category: category.pk,
+              }"
+            >{{ category.name }}</li>
           }
         </ul>
       </div>

@@ -50,9 +50,21 @@ export class ProductHorizontalCardComponent implements OnInit {
   }
 
   openModal(): void {
-    this._dialog.open(ActivateAnnouncementModalComponent, {
-      width: '26rem'
+    const dialog = this._dialog.open(ActivateAnnouncementModalComponent, {
+      width: '26rem',
+      data: {
+        discount: this.product.pk
+      }
     })
+
+    dialog
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(data => {
+        if (data !== 'bought') return;
+
+        this.product.is_advertised = true;
+      })
   }
 
   confirmationDelete(): void {

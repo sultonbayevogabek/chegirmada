@@ -5,6 +5,7 @@ import { map, Observable } from 'rxjs';
 import { TagModel } from '../models/tag.model';
 import { PaymentHistoryResponse } from '../models/payment-history.model';
 import { AnnouncementResponse } from '../models/announcement.model';
+import { AdvertisingTypeModel } from '../models/advertising-type.model';
 
 @Injectable()
 
@@ -57,5 +58,13 @@ export class MyAnnouncementsService {
 
   deleteAnnouncement(id: number): Observable<any> {
     return this._httpClient.delete(this._host + `discounts/${id}/update/`)
+  }
+
+  getAdvertisingTypes(): Observable<AdvertisingTypeModel[]> {
+    return this._httpClient.get<AdvertisingTypeModel[]>(this._host + `discounts/advertising/`)
+  }
+
+  buyAdvertising(params: { discount: number; advertisement: number }): Observable<{ discount: number; advertisement: number }> {
+    return this._httpClient.post<{ discount: number; advertisement: number }>(this._host + 'discounts/advertising/buy/', params)
   }
 }
