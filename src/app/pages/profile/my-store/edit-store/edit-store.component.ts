@@ -113,8 +113,8 @@ export class EditStoreComponent implements OnInit, AfterViewInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: ({ coordinates, address }) => {
-          this.editStoreForm.get('longitude').setValue(coordinates[0]);
-          this.editStoreForm.get('latitude').setValue(coordinates[1]);
+          this.editStoreForm.get('longitude').setValue(coordinates[1]);
+          this.editStoreForm.get('latitude').setValue(coordinates[0]);
           this._zone.run(() => {
             this.updateAddress(address);
           })

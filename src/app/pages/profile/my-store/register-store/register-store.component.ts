@@ -126,8 +126,8 @@ export class RegisterStoreComponent implements OnInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: ({ coordinates, address }) => {
-          this.registerStoreForm.get('longitude').setValue(coordinates[0]);
-          this.registerStoreForm.get('latitude').setValue(coordinates[1]);
+          this.registerStoreForm.get('longitude').setValue(coordinates[1]);
+          this.registerStoreForm.get('latitude').setValue(coordinates[0]);
           this._zone.run(() => {
             this.updateAddress(address);
           })

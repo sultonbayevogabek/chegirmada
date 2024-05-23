@@ -90,8 +90,8 @@ export class BranchActionComponent implements OnInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: ({ coordinates, address }) => {
-          this.manageBranchForm.get('longitude').setValue(coordinates[0]);
-          this.manageBranchForm.get('latitude').setValue(coordinates[1]);
+          this.manageBranchForm.get('longitude').setValue(coordinates[1]);
+          this.manageBranchForm.get('latitude').setValue(coordinates[0]);
           this._zone.run(() => {
             this.updateAddress(address);
           });
