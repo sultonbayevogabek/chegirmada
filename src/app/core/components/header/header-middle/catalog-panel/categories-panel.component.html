@@ -13,7 +13,7 @@
             class="category-groups-parent"
             [routerLink]="['/category', 'list-view']"
             [queryParams]="{
-              main_category: selectedCategory.id
+              main_category: selectedCategory.id,
               page: 1,
               page_size: 20
             }"
@@ -43,7 +43,7 @@
         (mouseenter)="selectParentCategory(category)"
         [routerLink]="['/category', 'list-view']"
         [queryParams]="{
-          main_category: category.id
+          main_category: category.id,
           page: 1,
           page_size: 20
         }"
@@ -69,7 +69,8 @@
           [routerLink]="['/category', 'list-view']"
           [queryParams]="{
             main_category: selectedCategory.id,
-
+            page: 1,
+            page_size: 20,
             second_category: categoryGroup.pk,
           }"
         >{{ categoryGroup.name }}</h3>
@@ -81,7 +82,8 @@
               [routerLink]="['/category', 'list-view']"
               [queryParams]="{
                 main_category: selectedCategory.id,
-
+                page: 1,
+                page_size: 20,
                 second_category: categoryGroup.pk,
                 category: category.pk,
               }"

@@ -6,6 +6,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'category-filter',
@@ -18,7 +19,8 @@ import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.
     NgxMaskDirective,
     MatSliderModule,
     MatButtonModule,
-    UiButtonComponent
+    UiButtonComponent,
+    TranslateModule
   ],
   providers: [
     provideNgxMask()
@@ -95,7 +97,6 @@ export class CategoryFilterComponent implements OnInit {
     { name: '1280x720 (HD)', count: 18, selected: false },
     { name: '1440x720', count: 18, selected: false }
   ];
-
 
   ngOnInit() {
 

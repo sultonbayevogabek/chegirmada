@@ -14,8 +14,8 @@
     >
       <mat-expansion-panel-header>
         <div class="category-filter-header">
-          <h3 class="category-filter-heading">Цена</h3>
-          <span class="category-filter-heading-postfix">(сум)</span>
+          <h3 class="category-filter-heading">{{ 'price'| translate }}</h3>
+          <span class="category-filter-heading-postfix">({{ 'sum'| translate }})</span>
 
           <mat-icon
             class="category-filter-arrow"
@@ -29,12 +29,12 @@
         <div class="category-filter-inputs">
           <label class="category-filter-label">
             <input class="category-filter-input with-prefix" type="text" placeholder="100 000" [mask]="'00000000'">
-            <span class="category-filter-input-prefix">от</span>
+            <span class="category-filter-input-prefix">{{ 'from'| translate }}</span>
           </label>
 
           <label class="category-filter-label">
             <input class="category-filter-input with-prefix" type="text" placeholder="50 000 000" [mask]="'00000000'">
-            <span class="category-filter-input-prefix">до</span>
+            <span class="category-filter-input-prefix">{{ 'to'| translate }}</span>
           </label>
         </div>
 
@@ -93,7 +93,7 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <mat-accordion class="category-filter-accordion">
+  <!--<mat-accordion class="category-filter-accordion">
     <mat-expansion-panel
       class="category-filter-panel"
       #matExpansionPanel3
@@ -165,5 +165,5 @@
         </div>
       </div>
     </mat-expansion-panel>
-  </mat-accordion>
+  </mat-accordion>-->
 </aside>
