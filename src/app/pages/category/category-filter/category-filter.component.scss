@@ -127,14 +127,7 @@
 }
 
 .category-filter-input-prefix {
-  position: absolute;
-  top: 0;
-  left: 0;
-  @include flex-center-center;
-  width: 2rem;
-  height: 100%;
-  font-size: 0.875rem;
-  background-color: transparent;
+  font-size: 0.75rem;
 }
 
 .category-filter-range {

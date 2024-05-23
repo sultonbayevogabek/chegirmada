@@ -28,25 +28,25 @@
       <div class="category-filter-body no-pb">
         <div class="category-filter-inputs">
           <label class="category-filter-label">
-            <input class="category-filter-input with-prefix" type="text" placeholder="100 000" [mask]="'00000000'">
             <span class="category-filter-input-prefix">{{ 'from'| translate }}</span>
+            <input class="category-filter-input" type="text" placeholder="100 000" [mask]="'00000000'">
           </label>
 
           <label class="category-filter-label">
-            <input class="category-filter-input with-prefix" type="text" placeholder="50 000 000" [mask]="'00000000'">
             <span class="category-filter-input-prefix">{{ 'to'| translate }}</span>
+            <input class="category-filter-input" type="text" placeholder="50 000 000" [mask]="'00000000'">
           </label>
         </div>
 
-        <mat-slider
-          class="category-filter-range"
-          [min]="0"
-          [max]="50"
-          [color]="'primary'"
-        >
-          <input [value]="0" matSliderStartThumb>
-          <input [value]="25" matSliderEndThumb>
-        </mat-slider>
+<!--        <mat-slider-->
+<!--          class="category-filter-range"-->
+<!--          [min]="0"-->
+<!--          [max]="50"-->
+<!--          [color]="'primary'"-->
+<!--        >-->
+<!--          <input [value]="0" matSliderStartThumb>-->
+<!--          <input [value]="25" matSliderEndThumb>-->
+<!--        </mat-slider>-->
       </div>
     </mat-expansion-panel>
   </mat-accordion>
