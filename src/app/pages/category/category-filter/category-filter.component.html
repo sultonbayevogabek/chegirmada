@@ -25,16 +25,30 @@
         </div>
       </mat-expansion-panel-header>
 
-      <div class="category-filter-body no-pb">
+      <div class="category-filter-body">
         <div class="category-filter-inputs">
           <label class="category-filter-label">
             <span class="category-filter-input-prefix">{{ 'from'| translate }}</span>
-            <input class="category-filter-input" type="text" placeholder="100 000" [mask]="'00000000'">
+            <input
+              class="category-filter-input"
+              type="text"
+              [placeholder]="'100 000'"
+              [mask]="'00000000'"
+              [(ngModel)]="params.from"
+              (input)="setParamsToUrl()"
+            >
           </label>
 
           <label class="category-filter-label">
             <span class="category-filter-input-prefix">{{ 'to'| translate }}</span>
-            <input class="category-filter-input" type="text" placeholder="50 000 000" [mask]="'00000000'">
+            <input
+              class="category-filter-input"
+              type="text"
+              [placeholder]="'50 000 000'"
+              [mask]="'00000000'"
+              [(ngModel)]="params.to"
+              (input)="setParamsToUrl()"
+            >
           </label>
         </div>
 

@@ -69,9 +69,9 @@
           [routerLink]="['/category', 'list-view']"
           [queryParams]="{
             main_category: selectedCategory.id,
-            page: 1,
-            page_size: 20,
             second_category: categoryGroup.pk,
+            page: 1,
+            page_size: 20
           }"
         >{{ categoryGroup.name }}</h3>
 
@@ -82,10 +82,10 @@
               [routerLink]="['/category', 'list-view']"
               [queryParams]="{
                 main_category: selectedCategory.id,
-                page: 1,
-                page_size: 20,
                 second_category: categoryGroup.pk,
                 category: category.pk,
+                page: 1,
+                page_size: 20
               }"
             >{{ category.name }}</li>
           }

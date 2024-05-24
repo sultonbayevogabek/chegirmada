@@ -28,22 +28,30 @@
 
       </div>
 
-      <button
-        class="category-products-list-map"
-        mat-ripple
-        [matRippleColor]="'#0CA4FA10'"
-        [routerLink]="['/category', 'map-view']"
-      >
-        <mat-icon [svgIcon]="'icon:location'"></mat-icon>
-        <span>На карте</span>
-      </button>
+<!--      <button-->
+<!--        class="category-products-list-map"-->
+<!--        mat-ripple-->
+<!--        [matRippleColor]="'#0CA4FA10'"-->
+<!--        [routerLink]="['/category', 'map-view']"-->
+<!--      >-->
+<!--        <mat-icon [svgIcon]="'icon:location'"></mat-icon>-->
+<!--        <span>На карте</span>-->
+<!--      </button>-->
     </div>
 
     <div class="category-products-list-grid">
-<!--      @for (product of products; track product) {-->
-<!--        <product-card [product]="product"/>-->
-<!--      }-->
+      @for (product of products; track product) {
+        <product-card [product]="product"/>
+      }
     </div>
+
+    <mat-paginator
+      [pageIndex]="params.page - 1"
+      [pageSize]="params.page_size"
+      [length]="params.total"
+      [showFirstLastButtons]="true"
+      (page)="changePage($event)"
+    />
   </div>
 </main>
 
