@@ -15,6 +15,7 @@ import {
 } from '../../../core/components/header/header-middle/login-button/login-profile.component';
 import { ProductDetailsService } from '../../../core/services/product-details.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'product-details-seller-info',
@@ -29,7 +30,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatTooltip,
     TranslateModule,
     AverageRatePipe,
-    PhoneNumberPipe
+    PhoneNumberPipe,
+    RouterLink
   ],
   standalone: true,
   providers: [
