@@ -10,7 +10,7 @@ export class AnnouncementsService {
   private _host = environment.host;
   private _httpClient = inject(HttpClient);
 
-  getWishlist(params: DiscountParamsModel): Observable<any> {
+  getAnnouncementsList(params: DiscountParamsModel): Observable<any> {
     return this._httpClient.get<any>(this._host + 'discounts/', {
       params: {
         ...params

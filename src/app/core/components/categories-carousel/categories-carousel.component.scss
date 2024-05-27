@@ -26,31 +26,31 @@
   overflow: hidden;
   cursor: pointer;
 
-  &.gradient-1 {
+  &.gradient-0, &.gradient-13 {
     background: linear-gradient(90deg, rgba(151, 150, 240, 0.70) 0%, rgba(251, 199, 212, 0.70) 100%);
   }
 
-  &.gradient-2 {
+  &.gradient-1, &.gradient-12 {
     background: linear-gradient(90deg, rgba(230, 92, 0, 0.70) 0%, rgba(249, 212, 35, 0.70) 100%);
   }
 
-  &.gradient-3 {
+  &.gradient-2, &.gradient-11 {
     background: linear-gradient(90deg, rgba(172, 182, 229, 0.70) 0%, rgba(134, 253, 232, 0.70) 100%);
   }
 
-  &.gradient-4 {
+  &.gradient-3, &.gradient-10 {
     background: linear-gradient(90deg, rgba(229, 93, 135, 0.70) 0%, rgba(95, 195, 228, 0.70) 100%);
   }
 
-  &.gradient-5 {
+  &.gradient-4, &.gradient-9 {
     background: linear-gradient(90deg, rgba(29, 151, 108, 0.70) 0%, rgba(147, 249, 185, 0.70) 100%);
   }
 
-  &.gradient-6 {
+  &.gradient-5, &.gradient-8 {
     background: linear-gradient(90deg, rgba(71, 118, 230, 0.70) 0%, rgba(142, 84, 233, 0.70) 100%);
   }
 
-  &.gradient-7 {
+  &.gradient-6, &.gradient-7 {
     background: linear-gradient(90deg, #8E9EAB 0%, #EEF2F3 100%);
   }
 }

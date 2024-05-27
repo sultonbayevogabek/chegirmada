@@ -64,7 +64,7 @@ export class ProductDetailsMapComponent implements OnInit {
   ngOnInit() {
     const points = this.branches.map(branch => {
       return {
-        coordinates: [ branch.longitude, branch.latitude ],
+        coordinates: [ branch.latitude, branch.longitude ],
         title: branch.name,
         workingDayStart: this._weekdays[branch.working_day_start][this._translateService.defaultLang],
         workingDayEnd: this._weekdays[branch.working_day_end][this._translateService.defaultLang],

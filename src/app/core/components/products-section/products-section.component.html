@@ -1,9 +1,11 @@
 <section class="products-section section">
   <div class="container">
-    <section-header
-      [heading]="heading"
-      [url]="url"
-    />
+    @if (heading) {
+      <section-header
+        [heading]="heading"
+        [url]="url"
+      />
+    }
 
     <div class="products-grid">
       @for (product of products; track product) {

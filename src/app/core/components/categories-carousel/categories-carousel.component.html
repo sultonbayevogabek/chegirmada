@@ -1,15 +1,22 @@
 <section class="categories-carousel section">
   <div class="container">
     <section-header
-      [heading]="'Категории'"
+      [heading]="'categories'"
     />
     <div class="categories-carousel-wrapper">
       <owl-carousel-o [options]="carouselOptions" #categoriesCarousel>
         @for (category of categories; track category) {
           <ng-template carouselSlide>
-            <div [class]="'categories-slide gradient-' + category.id">
-              <h3 class="categories-slide-heading">{{ category.name.ru }}</h3>
-              <img class="categories-slide-img" [src]="category.img" [alt]="category.name.uz">
+            <div
+              [routerLink]="['/category', 'list-view']"
+              [queryParams]="{
+                main_category: category.id,
+                page: 1,
+                page_size: 12
+              }"
+              [class]="'categories-slide gradient-' + category.id">
+              <h3 class="categories-slide-heading">{{ category.name| translate }}</h3>
+              <img class="categories-slide-img" [src]="category.img" [alt]="category.name| translate">
             </div>
           </ng-template>
         }

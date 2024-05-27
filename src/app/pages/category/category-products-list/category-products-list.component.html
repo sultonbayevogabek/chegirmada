@@ -3,9 +3,21 @@
     <div class="category-products-list-filter">
       <div class="category-products-list-date-sort">
         <div class="category-products-list-date">
-          <mat-date-range-input [rangePicker]="picker">
-            <input matStartDate [(ngModel)]="startDate" [readonly]="true">
-            <input matEndDate [(ngModel)]="endDate" [readonly]="true">
+          <mat-date-range-input
+            [rangePicker]="picker">
+            <input
+              matStartDate
+              [(ngModel)]="filter.startDate"
+              [readonly]="true"
+              (ngModelChange)="dateRangeChange()"
+            >
+            <input
+              matEndDate
+              [(ngModel)]="filter.endDate"
+              [readonly]="true"
+              [placeholder]="'-'"
+              (ngModelChange)="dateRangeChange()"
+            >
           </mat-date-range-input>
 
           <mat-icon
@@ -16,16 +28,25 @@
         </div>
 
         <div class="category-products-list-common-sort">
-          <mat-select class="outlined-select" [value]="1" [hideSingleSelectionIndicator]="true">
-            <mat-option [value]="0" [title]="'Самые новые'">Самые новые</mat-option>
-            <mat-option [value]="1" [title]="'Самые дешевые'">Самые дешевые</mat-option>
-            <mat-option [value]="2" [title]="'Самые дорогие'">Самые дорогие</mat-option>
-            <mat-option [value]="3" [title]="'Близка'">Близка</mat-option>
-            <mat-option [value]="4" [title]="'Наиболее просматриваемые'">Наиболее просматриваемые</mat-option>
-            <mat-option [value]="5" [title]="'Больше всего лайков'">Больше всего лайков</mat-option>
+          <mat-select
+            class="outlined-select"
+            [hideSingleSelectionIndicator]="true"
+            [(ngModel)]="filter.ordering"
+            (ngModelChange)="order()"
+          >
+            @for (order of ordering; track order) {
+              <mat-option
+                [value]="order.value"
+                [title]="order.label| translate"
+              >{{ order.label| translate}}
+              </mat-option>
+            }
           </mat-select>
         </div>
+      </div>
 
+      <div class="category-products-list-count">
+        {{ 'n.announcements'| translate: { count: params?.total || 0 } }}
       </div>
 
 <!--      <button-->

@@ -2,6 +2,8 @@ import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { SectionHeaderComponent } from '../section-header/section-header.component';
 import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'categories-carousel',
@@ -10,7 +12,9 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     CarouselModule,
     SectionHeaderComponent,
-    MatIconModule
+    MatIconModule,
+    TranslateModule,
+    RouterLink
   ],
   standalone: true,
   encapsulation: ViewEncapsulation.None
@@ -62,67 +66,38 @@ export class CategoriesCarouselComponent {
 
   categories = [
     {
-      id: 1,
-      name: {
-        uz: 'Elektronika',
-        ru: 'Электроника'
-      },
+      id: 0,
+      name: 'electronics',
       img: '/assets/categories/electronics.png'
     },
     {
-      id: 2,
-      name: {
-        uz: 'Kitoblar',
-        ru: 'Книги'
-      },
-      img: '/assets/categories/books.png'
-    },
-    {
-      id: 3,
-      name: {
-        uz: 'Maishiy texnika',
-        ru: 'Бытовая техника'
-      },
-      img: '/assets/categories/appliances.png'
-    },
-    {
-      id: 4,
-      name: {
-        uz: 'Mebel',
-        ru: 'Мебель'
-      },
-      img: '/assets/categories/furniture.png'
-    },
-    {
-      id: 5,
-      name: {
-        uz: 'Uy va bog´',
-        ru: 'Дом и сад'
-      },
-      img: '/assets/categories/tools.png'
-    },
-    {
-      id: 6,
-      name: {
-        uz: 'Bolalar buyumlari',
-        ru: 'Детские товары'
-      },
-      img: '/assets/categories/kids-things.png'
-    },
-    {
-      id: 7,
-      name: {
-        uz: 'Kiyim-kechak',
-        ru: 'Одежда'
-      },
+      id: 1,
+      name: 'men.clothes',
       img: '/assets/categories/clothes.png'
     },
     {
-      id: 3,
-      name: {
-        uz: 'Uy va bog´',
-        ru: 'Дом и сад'
-      },
+      id: 6,
+      name: 'furniture',
+      img: '/assets/categories/furniture.png'
+    },
+    {
+      id: 8,
+      name: 'household.appliances',
+      img: '/assets/categories/appliances.png'
+    },
+    {
+      id: 9,
+      name: 'for.kids',
+      img: '/assets/categories/kids-things.png'
+    },
+    {
+      id: 10,
+      name: 'books',
+      img: '/assets/categories/books.png'
+    },
+    {
+      id: 12,
+      name: 'construction.and.repair',
       img: '/assets/categories/tools.png'
     }
   ];

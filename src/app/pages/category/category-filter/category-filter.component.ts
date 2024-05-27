@@ -130,9 +130,14 @@ export class CategoryFilterComponent implements OnInit {
   }
 
   setParamsToUrl(): void {
-    const queryParams = {
+    const queryParams: {
+      page: number;
+      price__range: string;
+    } = {
+      page: 1,
       price__range: (this.params.from || 0) + ',' + (this.params.to || 0)
     }
+
     this._router.navigate(
       [],
       {
@@ -141,5 +146,14 @@ export class CategoryFilterComponent implements OnInit {
         queryParamsHandling: 'merge'
       }
     )
+  }
+
+  resetFilter(): void {
+    this.params = {
+      from: 0,
+      to: 0,
+      price__range: '0,0'
+    }
+    this.setParamsToUrl();
   }
 }

@@ -2,7 +2,12 @@
 @import "mixins";
 
 .category-products-list-date-sort {
-  @include flex-center(1rem);
+  @include flex-start(1rem);
+}
+
+.category-products-list-count {
+  font-size: 0.875rem;
+  color: $secondary-black-color;
 }
 
 .category-products-list-filter {

@@ -96,7 +96,6 @@ export class CreateAnnouncementComponent implements OnInit {
       ...this.data['3'],
       is_active: true
     };
-    console.log('DATA', data);
     const formData = new FormData();
 
     for (const key in data) {
@@ -136,7 +135,7 @@ export class CreateAnnouncementComponent implements OnInit {
           this._toaster.open({
             message: 'announcement.was.created.successfully'
           })
-          this._router.navigate(['/profile', 'my-announcements', 'list'])
+          // this._router.navigate(['/profile', 'my-announcements', 'list', 'pending'])
         }
       });
   }

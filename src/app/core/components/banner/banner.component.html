@@ -1,15 +1,23 @@
-<section class="banner">
-  <div class="container">
-    <div class="banner-wrapper">
-      <div class="banner-left">
-        <img src="/assets/banner/banner-2-1.jpg" alt="">
-      </div>
-      <div class="banner-right banner-right-top">
-        <img src="/assets/banner/top-2-1.jpg" alt="">
-      </div>
-      <div class="banner-right banner-right-bottom">
-        <img src="/assets/banner/bottom-2-1.jpg" alt="">
-      </div>
+<section>
+  <div class="container banner">
+    <owl-carousel-o [options]="carouselOptions" #carouselComponent>
+      @for (banner of banners?.banners; track banner) {
+        <ng-template carouselSlide>
+          <a class="banner-slide" [href]="banner.url">
+            <img [ngSrc]="banner?.image" [fill]="true" [alt]="banner.desc">
+          </a>
+        </ng-template>
+      }
+    </owl-carousel-o>
+
+    <div class="banner-carousel-navs">
+      <button class="carousel-navigation-button" (click)="navigateCarousel('prev')">
+        <mat-icon [svgIcon]="'icon:arrow-left'"></mat-icon>
+      </button>
+
+      <button class="carousel-navigation-button" (click)="navigateCarousel('next')">
+        <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
+      </button>
     </div>
   </div>
 </section>

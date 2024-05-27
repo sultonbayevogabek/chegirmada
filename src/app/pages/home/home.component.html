@@ -1,40 +1,29 @@
 <main>
-  <intro-banner/>
-  <categories-carousel/>
-
-  <products-section
-    [heading]="'Лучшие объявления'"
-    [url]="'some-url'"
+  <intro-banner
+    [banners]="banners"
   />
 
-  <products-section
-    [heading]="'Объявления о начале скидки'"
-    [url]="'some-url'"
-  />
+  <categories-carousel />
 
   <products-section
-    [heading]="'Для тебя'"
-    [url]="'some-url'"
+    [heading]="'the.best.announcements'"
   />
 
-  <banner />
+  @defer (on viewport) {
+    <banner
+      [banners]="banners"
+    />
+    <products-section
+      [page]="2"
+    />
+  } @placeholder {
+    <spinner-loader />
+  }
 
-  <products-section
-    [heading]="'Скидки рядом'"
-    [url]="'some-url'"
-  />
-
-  <products-section
-    [heading]="'Последние просмотренные объявления'"
-    [url]="'some-url'"
-  />
-
-  <partners/>
-
-  <products-section
-    [heading]="'Остановленные объявления'"
-    [url]="'some-url'"
-  />
-
-  <download-app />
+  @defer (on viewport) {
+    <partners/>
+    <download-app />
+  } @placeholder {
+    <spinner-loader />
+  }
 </main>

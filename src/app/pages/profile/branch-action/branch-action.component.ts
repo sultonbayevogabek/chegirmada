@@ -90,8 +90,8 @@ export class BranchActionComponent implements OnInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: ({ coordinates, address }) => {
-          this.manageBranchForm.get('longitude').setValue(coordinates[1]);
           this.manageBranchForm.get('latitude').setValue(coordinates[0]);
+          this.manageBranchForm.get('longitude').setValue(coordinates[1]);
           this._zone.run(() => {
             this.updateAddress(address);
           });
@@ -157,7 +157,7 @@ export class BranchActionComponent implements OnInit {
       .subscribe({
         next: branch => {
           this._yandexMapsService
-            .setSingleLocationPoint('map', [ branch.longitude, branch.latitude ]);
+            .setSingleLocationPoint('map', [ branch.latitude, branch.longitude ]);
           this.manageBranchForm.patchValue(branch);
           this.manageBranchForm.get('name_uz').setValue(branch.name);
           this.getDistrictsList();

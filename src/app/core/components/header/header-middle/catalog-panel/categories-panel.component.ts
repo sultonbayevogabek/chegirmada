@@ -10,26 +10,6 @@ import { GeneralService } from '../../../../services/general.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 
-export interface ICategory {
-  parentCategoryName: string
-  parentCategoryIcon: string
-  active: boolean
-  categoryGroupsFirstColumn: CategoryGroupsColumn[]
-  categoryGroupsSecondColumn: CategoryGroupsColumn[]
-  categoryGroupsThirdColumn: CategoryGroupsColumn[]
-}
-
-export interface CategoryGroupsColumn {
-  categoryGroupName: string
-  categories: Category[]
-}
-
-export interface Category {
-  name: string
-  url: string
-}
-
-
 @Component({
   selector: 'categories-panel',
   templateUrl: 'categories-panel.component.html',

@@ -1,9 +1,8 @@
-import { Component, DestroyRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { NgForOf, NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { GeneralService } from '../../../core/services/general.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Banners } from '../../../core/models/banners.model';
 
 @Component({
@@ -23,9 +22,7 @@ import { Banners } from '../../../core/models/banners.model';
 
 export class IntroBannerComponent implements OnInit {
   @ViewChild('carouselComponent') carouselComponent: CarouselComponent;
-
-  private _generalService = inject(GeneralService);
-  private _destroyRef = inject(DestroyRef);
+  @Input() banners: Banners
 
   carouselOptions: OwlOptions = {
     loop: true,
@@ -40,20 +37,11 @@ export class IntroBannerComponent implements OnInit {
     autoplay: false
   };
 
-  banners: Banners;
-
   navigateCarousel(direction: 'next' | 'prev'): void {
     this.carouselComponent[direction]();
   }
 
   ngOnInit(): void {
-    this._generalService.getBanners()
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe({
-        next: data => {
-          this.banners = data;
-          console.log(this.banners);
-        }
-      });
+
   }
 }

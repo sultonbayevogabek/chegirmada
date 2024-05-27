@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'partners',
@@ -8,7 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: 'partners.component.scss',
   imports: [
     NgOptimizedImage,
-    MatIconModule
+    MatIconModule,
+    TranslateModule
   ],
   standalone: true
 })

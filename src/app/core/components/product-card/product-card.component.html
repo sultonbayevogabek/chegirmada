@@ -65,13 +65,13 @@
     <h3 class="product-card-title">{{ product.title }}</h3>
 
     <div class="product-card-price">
-      <del class="product-card-price-old">{{ product.price }}</del>
+      <del class="product-card-price-old">{{ product.price| number }} {{ (product.currency === 1 ? 'sum': 'dollar')| translate }}</del>
       <strong class="product-card-price-new">
         @if (product.discount_amount_is_percent) {
           {{ (+product.price * (100 - +product.discount_amount) / 100)| number }}
         } @else {
           {{ (+product.price - +product.discount_amount)| number }}
-        } {{ (1 === 1 ? 'sum': 'dollar')| translate }}
+        } {{ (product.currency === 1 ? 'sum': 'dollar')| translate }}
       </strong>
     </div>
 

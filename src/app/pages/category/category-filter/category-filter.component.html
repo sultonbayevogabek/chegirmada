@@ -1,8 +1,9 @@
 <aside class="category-filter" [class.border]="withBorder">
   <ui-button
     class="category-filter-reset"
-    [text]="'Сбросить фильтр'"
+    [text]="'reset.filter'| translate"
     [full]="true"
+    (click)="resetFilter()"
   />
 
   <mat-accordion class="category-filter-accordion">
@@ -33,7 +34,7 @@
               class="category-filter-input"
               type="text"
               [placeholder]="'100 000'"
-              [mask]="'00000000'"
+              [mask]="'0000000000'"
               [(ngModel)]="params.from"
               (input)="setParamsToUrl()"
             >
@@ -45,7 +46,7 @@
               class="category-filter-input"
               type="text"
               [placeholder]="'50 000 000'"
-              [mask]="'00000000'"
+              [mask]="'0000000000'"
               [(ngModel)]="params.to"
               (input)="setParamsToUrl()"
             >
@@ -65,7 +66,7 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <mat-accordion class="category-filter-accordion">
+  <!--<mat-accordion class="category-filter-accordion">
     <mat-expansion-panel
       class="category-filter-panel"
       #matExpansionPanel2
@@ -105,7 +106,7 @@
         </button>
       </div>
     </mat-expansion-panel>
-  </mat-accordion>
+  </mat-accordion>-->
 
   <!--<mat-accordion class="category-filter-accordion">
     <mat-expansion-panel

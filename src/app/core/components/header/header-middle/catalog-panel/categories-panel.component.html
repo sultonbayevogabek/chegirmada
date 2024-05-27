@@ -15,7 +15,7 @@
             [queryParams]="{
               main_category: selectedCategory.id,
               page: 1,
-              page_size: 20
+              page_size: 12
             }"
           >{{ selectedCategory.name| translate }}</h2>
 
@@ -45,7 +45,7 @@
         [queryParams]="{
           main_category: category.id,
           page: 1,
-          page_size: 20
+          page_size: 12
         }"
       >
         <span class="parent-categories-icon">
@@ -71,7 +71,7 @@
             main_category: selectedCategory.id,
             second_category: categoryGroup.pk,
             page: 1,
-            page_size: 20
+            page_size: 12
           }"
         >{{ categoryGroup.name }}</h3>
 
@@ -85,7 +85,7 @@
                 second_category: categoryGroup.pk,
                 category: category.pk,
                 page: 1,
-                page_size: 20
+                page_size: 12
               }"
             >{{ category.name }}</li>
           }
