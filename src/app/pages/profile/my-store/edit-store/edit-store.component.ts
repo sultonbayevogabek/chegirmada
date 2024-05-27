@@ -313,7 +313,7 @@ export class EditStoreComponent implements OnInit, AfterViewInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(res => {
         this.editStoreForm.patchValue(res);
-        this._yandexMapService.setSingleLocationPoint('map', [ res.longitude, res.latitude ]);
+        this._yandexMapService.setSingleLocationPoint('map', [ res.latitude, res.longitude ]);
         this.currentLogo = res.logo;
         this.currentBanner = res.banner;
         this.currentShortName = res.shortname;
