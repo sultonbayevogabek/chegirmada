@@ -1,26 +1,41 @@
-<ul class="company-profile-branches-list">
-  @for (i of [1, 2, 3]; track i) {
-    <li class="company-profile-branches-item">
-      <h3 class="company-branch-name">Чиланзарский филиал</h3>
+@if (loading) {
+  <spinner-loader/>
+}
 
-      <div class="company-branch-details">
-        <div class="company-branch-details-item">
-          <div class="company-branch-details-label">Рабочее время:</div>
-          <div class="company-branch-details-value">Пон. - Пят. 09:00 - 18:00</div>
+@if (!loading && branches?.length) {
+  <ul class="company-profile-branches-list">
+    @for (branch of branches; track branch) {
+      <li class="company-profile-branches-item">
+        <h3 class="company-branch-name">{{ branch?.name }}</h3>
+
+        <div class="company-branch-details">
+          <div class="company-branch-details-item">
+            <div class="company-branch-details-label">{{ 'working.time'| translate }}:</div>
+            <div class="company-branch-details-value">
+              {{ weekdays[+branch.working_day_start].name| translate }} - {{ weekdays[+branch.working_day_end].name| translate }},
+              {{ branch.working_time_start }} - {{ branch.working_time_end }}
+            </div>
+          </div>
+          <div class="company-branch-details-item">
+            <div class="company-branch-details-label">{{ 'delivery'| translate }}:</div>
+            <div class="company-branch-details-value">
+              {{ (branch?.delivery ? 'available' : 'no')| translate| lowercase }}
+            </div>
+          </div>
+          <div class="company-branch-details-item">
+            <div class="company-branch-details-label">{{ 'phone.number'| translate }}:</div>
+            <div class="company-branch-details-value">{{ branch?.main_phone_number| phoneNumber }}</div>
+          </div>
+          <div class="company-branch-details-item">
+            <div class="company-branch-details-label">{{ 'address'| translate }}:</div>
+            <div class="company-branch-details-value">{{ branch?.address }}</div>
+          </div>
         </div>
-        <div class="company-branch-details-item">
-          <div class="company-branch-details-label">Доставка:</div>
-          <div class="company-branch-details-value">есть</div>
-        </div>
-        <div class="company-branch-details-item">
-          <div class="company-branch-details-label">Номер телефона:</div>
-          <div class="company-branch-details-value">+998 33 695 95 50</div>
-        </div>
-        <div class="company-branch-details-item">
-          <div class="company-branch-details-label">Адрес:</div>
-          <div class="company-branch-details-value">улица Ислама Каримова, 51</div>
-        </div>
-      </div>
-    </li>
-  }
-</ul>
+      </li>
+    }
+  </ul>
+}
+
+@if (!loading && !branches?.length) {
+  <profile-empty-list/>
+}

@@ -25,6 +25,7 @@
 
 .company-branch-details-item {
   @include flex-center(0.25rem);
+  flex-wrap: nowrap;
   font-size: 0.875rem;
 }
 
@@ -35,4 +36,5 @@
 .company-branch-details-value {
   font-weight: 500;
   color: $dialog-title-black;
+  @include line-clamp(1)
 }

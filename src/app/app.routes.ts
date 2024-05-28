@@ -50,7 +50,7 @@ export const routes: Routes = [
         loadChildren: () => import('./pages/category/category.routes').then(r => r.categoryRoutes)
       },
       {
-        path: 'company-profile',
+        path: 'store/:storeId',
         loadChildren: () => import('./pages/company-profile/company-profile.routes').then(r => r.companyProfileRoutes)
       },
       {

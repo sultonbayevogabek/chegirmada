@@ -1,6 +1,8 @@
 export interface StoreModel {
   id: number;
+  pk: number;
   name_uz: string;
+  name: string;
   name_ru?: string;
   main_phone_number: string;
   delivery: boolean;
@@ -18,8 +20,7 @@ export interface StoreModel {
   username: string;
   shortname: string;
   balance: number;
-  desc_uz: string;
-  desc_ru: string;
+  desc: string;
   slogan_uz: string;
   slogan_ru: string;
   owner_firstname: string;
@@ -34,4 +35,15 @@ export interface StoreModel {
   banner: string;
   verified_at: string;
   owner: number;
+  followers: string;
+  likes: string;
+  comments: string;
+  avg_rating: number;
+  rating1: number;
+  rating2: number;
+  rating3: number;
+  rating4: number;
+  rating5: number;
+  total_ratings_count: number;
+  user_follow: boolean
 }

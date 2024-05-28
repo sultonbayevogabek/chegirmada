@@ -7,10 +7,16 @@
 
 .company-profile-banner {
   position: relative;
-  aspect-ratio: 4.38;
+  aspect-ratio: 6;
   border-radius: 0.5rem;
   overflow: hidden;
   background-color: $background-grey-color;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .company-profile-banner-img {
@@ -33,9 +39,12 @@
   aspect-ratio: 1;
   border-radius: 0.5rem;
   background-color: $background-grey-color;
+  overflow: hidden;
 
   img {
-    object-fit: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
@@ -93,8 +102,7 @@
 }
 
 .company-profile-additional {
-  @include flex-center-between;
-  gap: 1.5rem;
+  @include flex-center(2rem);
 }
 
 .company-profile-additional-item {
@@ -121,9 +129,15 @@
 
 .company-profile-contact-value {
   @include flex-center(0.25rem);
+  flex-wrap: nowrap;
 
   .mat-icon {
     width: 1rem;
+    flex-shrink: 0;
+  }
+
+  span {
+    @include line-clamp(1);
   }
 }
 
@@ -133,13 +147,13 @@
 }
 
 .company-profile-middle-heading {
-  margin-bottom: 0.75rem;
   font-size: 1.25rem;
   font-weight: 500;
   color: $dialog-title-black;
 }
 
 .company-profile-about-text {
+  padding-top: 0.75rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: $secondary-black-color
@@ -150,24 +164,27 @@
 }
 
 .company-profile-rate-title {
-  width: 60%;
+  flex-grow: 1;
 }
 
 .company-profile-rate-description {
+  padding-top: 0.75rem;
   font-size: 0.875rem;
   color: $secondary-black-color;
 }
 
 .company-profile-rate-body {
-  @include grid(1fr 5.76fr, 1.5fr);
+  @include flex-center(1.5rem);
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
 
 .company-profile-rate-number {
+  text-align: center;
+
   strong {
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 0.25rem;
     font-size: 3.5rem;
     font-weight: 500;
     color: $dialog-title-black;
@@ -182,6 +199,7 @@
 
 .company-profile-rate-diagram {
   @include flex-column(0.5rem);
+  flex-grow: 1;
 }
 
 .company-profile-rate-diagram-bar {

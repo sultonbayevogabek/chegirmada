@@ -1,13 +1,19 @@
 <div class="company-profile-discounts">
   <div class="company-profile-discounts-header">
     <div class="company-profile-discounts-total">
-      <span>Всего объявлений:</span>
-      <span>72</span>
+      <span>{{ 'all.announcements'| translate }}:</span>
+      <span>{{ params.total| number }}</span>
     </div>
 
     <div class="company-profile-discounts-filter">
       <label class="company-profile-discount-search">
-        <input class="form-input" type="text" placeholder="Искать">
+        <input
+          class="form-input"
+          type="text"
+          [placeholder]="'search'| translate"
+          [(ngModel)]="params.search"
+          (keydown.enter)="search()"
+        >
 
         <mat-icon [svgIcon]="'icon:search'"/>
       </label>
@@ -19,9 +25,28 @@
     </div>
   </div>
 
-  <div class="company-profile-discounts-cards">
-    @for (product of products; track product) {
-      <product-card [product]="product"/>
-    }
-  </div>
+  @if (loading) {
+    <spinner-loader/>
+  }
+
+  @if (announcements.length && !loading) {
+    <div class="company-profile-discounts-cards">
+      @for (product of announcements; track product) {
+        <product-card [product]="product"/>
+      }
+    </div>
+  }
+
+  @if (!announcements.length && !loading) {
+    <profile-empty-list/>
+  }
+
+
+  <mat-paginator
+    [pageIndex]="params.page"
+    [pageSize]="params.page_size"
+    [length]="params.total"
+    [showFirstLastButtons]="true"
+    (page)="pageChange($event)"
+  />
 </div>

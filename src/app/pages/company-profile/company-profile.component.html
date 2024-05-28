@@ -1,244 +1,213 @@
 <section class="company-profile section">
-  <div class="container">
-    <div class="company-profile-banner">
-      <img [ngSrc]="'/assets/banner/korzinka.jpg'" [fill]="true" [alt]="">
-    </div>
-
-    <div class="company-profile-top">
-      <div class="company-profile-main-left">
-        <div class="company-profile-logo">
-          <img [ngSrc]="'/assets/logos/korzinka.svg'" [fill]="true" [alt]="'Korzinka'">
-        </div>
-
-        <div class="company-profile-brand-stats">
-          <div class="company-profile-brand-details">
-            <h2 class="company-profile-brand-name">Korzinka MCHJ</h2>
-
-            <div class="company-profile-username-views">
-              <div class="company-profile-username-views-item">
-                {{ '@korzinka' }}
-              </div>
-
-              <div class="company-profile-username-views-item">
-                <mat-icon [svgIcon]="'icon:eye'"/>
-                <span>11.2 тыс.</span>
-              </div>
-
-              <div class="company-profile-username-views-item">
-                На платформе с март 2018 г.
-              </div>
-            </div>
-          </div>
-
-          <div class="company-profile-stats">
-            <div class="company-profile-stats-item">
-              <div class="company-profile-stats-value">11.2 тыс.</div>
-              <div class="company-profile-stats-label">Подписчиков</div>
-            </div>
-
-            <div class="company-profile-stats-item">
-              <div class="company-profile-stats-value">21.4 млн</div>
-              <div class="company-profile-stats-label">Нравится</div>
-            </div>
-
-            <div class="company-profile-stats-item">
-              <div class="company-profile-stats-value">850</div>
-              <div class="company-profile-stats-label">Комментарии</div>
-            </div>
-          </div>
-
-          <ui-button
-            [text]="'Подписаться'"
-          />
-        </div>
+  @if (store) {
+    <div class="container">
+      <div class="company-profile-banner">
+        <img [ngSrc]="store?.banner" [fill]="true" [alt]="">
       </div>
 
-      <div class="company-profile-main-right">
-        <div class="company-profile-additional">
-          <div class="company-profile-additional-item">
-            <mat-icon [svgIcon]="'icon:verified'"/>
-            <span class="company-profile-additional-label">Проверенная компания</span>
+      <div class="company-profile-top">
+        <div class="company-profile-main-left">
+          <div class="company-profile-logo">
+            <img [ngSrc]="store?.logo" [fill]="true" [alt]="store?.name">
           </div>
 
-          <div class="company-profile-additional-item">
-            <span class="company-profile-additional-label">Доставка:</span>
-            <span class="company-profile-additional-value">Есть</span>
-          </div>
+          <div class="company-profile-brand-stats">
+            <div class="company-profile-brand-details">
+              <h2 class="company-profile-brand-name">{{ store?.name }}</h2>
 
-          <div class="company-profile-additional-item">
-            <span class="company-profile-additional-label">Категория:</span>
-            <span class="company-profile-additional-value">Мобильные телефоны</span>
-          </div>
+              <div class="company-profile-username-views">
+                <div class="company-profile-username-views-item">
+                  {{ '@' + store?.shortname }}
+                </div>
 
-          <div class="company-profile-additional-item">
-            <span class="company-profile-additional-label">ID:</span>
-            <span class="company-profile-additional-value"> 131200</span>
-          </div>
-        </div>
-        <div class="company-profile-contact">
-          <div class="company-profile-contact-item">
-            <div class="company-profile-contact-label">Номер телефона</div>
-            <div class="company-profile-contact-value">
-              <mat-icon [svgIcon]="'icon:phone'"/>
-              <span>+998 90 043 77 47</span>
+                <div class="company-profile-username-views-item">
+                  <mat-icon [svgIcon]="'icon:eye'"/>
+                  <span>11</span>
+                </div>
+
+                <div class="company-profile-username-views-item">
+                  {{ 'since.registered.date'| translate: { registeredDate: store?.created_at| date: 'dd.MM.YYYY' } }}
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="company-profile-contact-item">
-            <div class="company-profile-contact-label">Рабочее время</div>
-            <div class="company-profile-contact-value">
-              <mat-icon [svgIcon]="'icon:clock'"/>
-              <span>Пон. - Пят. 09:00 - 18:00</span>
-            </div>
-          </div>
+            <div class="company-profile-stats">
+              <div class="company-profile-stats-item">
+                <div class="company-profile-stats-value">{{ store?.followers| number}}</div>
+                <div class="company-profile-stats-label">{{ 'subscribers'| translate }}</div>
+              </div>
 
-          <div class="company-profile-contact-item">
-            <div class="company-profile-contact-label">Адрес</div>
-            <div class="company-profile-contact-value">
-              <mat-icon [svgIcon]="'icon:location-outline'"/>
-              <span>Toshkent, Yunusobot-14 32-uy</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+              <div class="company-profile-stats-item">
+                <div class="company-profile-stats-value">{{ store?.likes| number }}</div>
+                <div class="company-profile-stats-label">{{ 'likes'| translate }}</div>
+              </div>
 
-    @defer (on viewport) {
-      <div class="company-profile-middle">
-        <div class="company-profile-about">
-          <h3 class="company-profile-middle-heading">Информация o “Korzinka MCHJ”</h3>
-          <p class="company-profile-about-text">
-            Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее
-            осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в
-            домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей. Текст
-            генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст
-            более привлекательным и живым для визуально-слухового восприятия.
-            По своей сути рыбатекст является альтернативой традиционному lorem ipsum, который вызывает у некторых людей
-            недоумение при попытках прочитать рыбу текст. В отличии от lorem ipsum, текст рыба на русском языке наполнит
-            любой макет непонятным смыслом и придаст неповторимый колорит советских времен.
-            По своей сути рыбатекст является альтернативой традиционному lorem ipsum, который вызывает у некторых людей
-            недоумение при попытках прочитать рыбу текст. В отличии от lorem ipsum, текст рыба на русском языке наполнит
-            любой макет непонятным смыслом и придаст неповторимый колорит советских времен.
-            По своей сути рыбатекст является альтернативой традиционному lorem ipsum, который вызывает у некторых людей
-            недоумение при попытках прочитать рыбу текст. В отличии от lorem ipsum, текст рыба на русском языке наполнит
-            любой макет непонятным смыслом и придаст неповторимый колорит советских времен.
-          </p>
-
-          <p class="company-profile-about-text">
-            Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее
-            осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в
-            домашних условиях. При создании генератора мы использовали небезизвестный универсальный код речей. Текст
-            генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст
-            более привлекательным и живым для визуально-слухового восприятия.
-            По своей сути рыбатекст является альтернативой традиционному lorem ipsum, который вызывает у некторых людей
-            недоумение при попытках прочитать рыбу текст. В отличии от lorem ipsum, текст рыба на русском языке наполнит
-            любой макет непонятным смыслом и придаст неповторимый колорит советских времен.
-            По своей сути рыбатекст является альтернативой традиционному lorem ipsum, который вызывает у некторых людей
-            недоумение при попытках прочитать рыбу текст. В отличии от lorem ipsum, текст рыба на русском языке наполнит
-            любой макет непонятным смыслом и придаст неповторимый колорит советских времен.
-          </p>
-        </div>
-
-        <div class="company-profile-rate">
-          <div class="company-profile-rate-header">
-            <div class="company-profile-rate-title">
-              <h3 class="company-profile-middle-heading">Оценить Корзинка</h3>
-              <p class="company-profile-rate-description">Рейтинг и отзывы проверены и принадлежат людям,
-                использующим сервис.</p>
+              <div class="company-profile-stats-item">
+                <div class="company-profile-stats-value">{{ store?.comments| translate }}</div>
+                <div class="company-profile-stats-label">{{ 'comments'| translate }}</div>
+              </div>
             </div>
 
             <ui-button
-              [text]="'rate'"
-              (click)="openRateModal()"
+              [type]="store?.user_follow ? 'gray-outline' : 'blue'"
+              [text]="store?.user_follow ? 'unsubscribe': 'subscribe'"
+              [full]="true"
+              (click)="subscribeToStore()"
             />
           </div>
+        </div>
 
-          <div class="company-profile-rate-body">
-            <div class="company-profile-rate-number">
-              <strong>4.5</strong>
-
-              <svg width="88" height="16" viewBox="0 0 88 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M8.00151 11.5133L10.7682 13.1867C11.2748 13.4933 11.8948 13.04 11.7615 12.4667L11.0282 9.31999L13.4748 7.19999C13.9215 6.81332 13.6815 6.07999 13.0948 6.03332L9.87485 5.75999L8.61485 2.78665C8.38818 2.24665 7.61485 2.24665 7.38818 2.78665L6.12818 5.75332L2.90818 6.02665C2.32151 6.07332 2.08151 6.80665 2.52818 7.19332L4.97485 9.31332L4.24151 12.46C4.10818 13.0333 4.72818 13.4867 5.23485 13.18L8.00151 11.5133Z"
-                  fill="#FF943E"/>
-                <path
-                  d="M26.0015 11.5133L28.7682 13.1867C29.2748 13.4933 29.8948 13.04 29.7615 12.4667L29.0282 9.31999L31.4748 7.19999C31.9215 6.81332 31.6815 6.07999 31.0948 6.03332L27.8748 5.75999L26.6148 2.78665C26.3882 2.24665 25.6148 2.24665 25.3882 2.78665L24.1282 5.75332L20.9082 6.02665C20.3215 6.07332 20.0815 6.80665 20.5282 7.19332L22.9748 9.31332L22.2415 12.46C22.1082 13.0333 22.7282 13.4867 23.2348 13.18L26.0015 11.5133Z"
-                  fill="#FF943E"/>
-                <path
-                  d="M44.0015 11.5133L46.7682 13.1867C47.2748 13.4933 47.8948 13.04 47.7615 12.4667L47.0282 9.31999L49.4748 7.19999C49.9215 6.81332 49.6815 6.07999 49.0948 6.03332L45.8748 5.75999L44.6148 2.78665C44.3882 2.24665 43.6148 2.24665 43.3882 2.78665L42.1282 5.75332L38.9082 6.02665C38.3215 6.07332 38.0815 6.80665 38.5282 7.19332L40.9748 9.31332L40.2415 12.46C40.1082 13.0333 40.7282 13.4867 41.2348 13.18L44.0015 11.5133Z"
-                  fill="#FF943E"/>
-                <path
-                  d="M62.0015 11.5133L64.7682 13.1867C65.2748 13.4933 65.8948 13.04 65.7615 12.4667L65.0282 9.31999L67.4748 7.19999C67.9215 6.81332 67.6815 6.07999 67.0948 6.03332L63.8748 5.75999L62.6148 2.78665C62.3882 2.24665 61.6148 2.24665 61.3882 2.78665L60.1282 5.75332L56.9082 6.02665C56.3215 6.07332 56.0815 6.80665 56.5282 7.19332L58.9748 9.31332L58.2415 12.46C58.1082 13.0333 58.7282 13.4867 59.2348 13.18L62.0015 11.5133Z"
-                  fill="#FF943E"/>
-                <g clip-path="url(#clip0_1622_71739)">
-                  <path
-                    d="M85.1015 6.02667L81.8748 5.74667L80.6148 2.78C80.3882 2.24 79.6148 2.24 79.3882 2.78L78.1282 5.75333L74.9082 6.02667C74.3215 6.07333 74.0815 6.80667 74.5282 7.19333L76.9748 9.31333L76.2415 12.46C76.1082 13.0333 76.7282 13.4867 77.2348 13.18L80.0015 11.5133L82.7682 13.1867C83.2748 13.4933 83.8948 13.04 83.7615 12.4667L83.0282 9.31333L85.4748 7.19333C85.9215 6.80667 85.6882 6.07333 85.1015 6.02667ZM80.0015 10.2667V4.06667L81.1415 6.76L84.0615 7.01333L81.8482 8.93333L82.5148 11.7867L80.0015 10.2667Z"
-                    fill="#FF943E"/>
-                </g>
-                <defs>
-                  <clipPath id="clip0_1622_71739">
-                    <rect width="16" height="16" fill="white" transform="translate(72)"/>
-                  </clipPath>
-                </defs>
-              </svg>
-
-              <span>46,9 тыс</span>
+        <div class="company-profile-main-right">
+          <div class="company-profile-additional">
+            <div class="company-profile-additional-item">
+              <span class="company-profile-additional-label">ID:</span>
+              <span class="company-profile-additional-value">{{ store?.pk }}</span>
             </div>
 
-            <div class="company-profile-rate-diagram">
-              <div class="company-profile-rate-diagram-bar">
-                <div class="company-profile-rate-diagram-number">5</div>
-                <div class="company-profile-rate-diagram-line">
-                  <div style="width: 45%"></div>
-                </div>
+            @if (store?.is_verified) {
+              <div class="company-profile-additional-item">
+                <mat-icon [svgIcon]="'icon:verified'"/>
+                <span class="company-profile-additional-label">{{ 'verified'| translate }}</span>
               </div>
-              <div class="company-profile-rate-diagram-bar">
-                <div class="company-profile-rate-diagram-number">4</div>
-                <div class="company-profile-rate-diagram-line">
-                  <div style="width: 25%"></div>
-                </div>
-              </div>
-              <div class="company-profile-rate-diagram-bar">
-                <div class="company-profile-rate-diagram-number">3</div>
-                <div class="company-profile-rate-diagram-line">
-                  <div style="width: 15%"></div>
-                </div>
-              </div>
-              <div class="company-profile-rate-diagram-bar">
-                <div class="company-profile-rate-diagram-number">2</div>
-                <div class="company-profile-rate-diagram-line">
-                  <div style="width: 5%"></div>
-                </div>
-              </div>
-              <div class="company-profile-rate-diagram-bar">
-                <div class="company-profile-rate-diagram-number">1</div>
-                <div class="company-profile-rate-diagram-line">
-                  <div style="width: 10%"></div>
-                </div>
-              </div>
+            }
+
+            <div class="company-profile-additional-item">
+              <span class="company-profile-additional-label">{{ 'delivery'| translate }}:</span>
+              <span class="company-profile-additional-value">{{ (store?.delivery ? 'available' : 'no')| translate| lowercase }}</span>
             </div>
+
+            <!--<div class="company-profile-additional-item">
+              <span class="company-profile-additional-label">{{ 'category'| translate }}:</span>
+              <span class="company-profile-additional-value">Мобильные телефоны</span>
+            </div>-->
           </div>
+          <div class="company-profile-contact">
+            <div class="company-profile-contact-item">
+              <div class="company-profile-contact-label">{{ 'phone.number'| translate }}</div>
+              <div class="company-profile-contact-value">
+                <mat-icon [svgIcon]="'icon:phone'"/>
+                <span>{{ store?.main_phone_number| phoneNumber }}</span>
+              </div>
+            </div>
 
-          <div class="company-profile-video">
-              <video-player
-                [videoURL]="'https://youtu.be/EUlne03tQHs?si=e6mctPNNJ3T_B9N3'"
-              />
+            <div class="company-profile-contact-item">
+              <div class="company-profile-contact-label">{{ 'working.time'| translate }}</div>
+              <div class="company-profile-contact-value">
+                <mat-icon [svgIcon]="'icon:clock'"/>
+                <span>{{ weekdays[+store?.working_day_start]?.name| translate }} - {{ weekdays[+store?.working_day_end]?.name| translate }},
+                  {{ store?.working_time_start }} - {{ store?.working_time_end }}</span>
+              </div>
+            </div>
+
+            <div class="company-profile-contact-item">
+              <div class="company-profile-contact-label">{{ 'address'| translate }}</div>
+              <div class="company-profile-contact-value" [title]="store?.address">
+                <mat-icon [svgIcon]="'icon:location-outline'"/>
+                <span>{{ store?.address }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    } @placeholder {
-      <div></div>
-    }
 
-    @defer (on viewport) {
-      <div class="company-profile-tabs">
-        <tabs
-          [tabs]="tabs"
-        />
-      </div>
-    } @placeholder {
-      <div></div>
-    }
+      @defer (on viewport) {
+        <div class="company-profile-middle">
+          <div class="company-profile-about">
+            <h3 class="company-profile-middle-heading">{{ 'store.information'| translate }}</h3>
+            <p class="company-profile-about-text">
+              {{ store?.desc }}
+            </p>
+          </div>
 
-  </div>
+          <div class="company-profile-rate">
+            <div class="company-profile-rate-header">
+              <div class="company-profile-rate-title">
+                <h3 class="company-profile-middle-heading">{{ 'rating'| translate }}</h3>
+                <p class="company-profile-rate-description">{{ 'the.rating.is.formed.as.a.result.of.votes.cast.by.system.users'| translate }}</p>
+              </div>
+
+              <ui-button
+                [text]="'rate'"
+                (click)="openRateModal()"
+              />
+            </div>
+
+            <div class="company-profile-rate-body">
+              <div class="company-profile-rate-diagram">
+                <div class="company-profile-rate-diagram-bar">
+                  <div class="company-profile-rate-diagram-number">5</div>
+                  <div class="company-profile-rate-diagram-line">
+                    <div [ngStyle]="{
+                    width: (store?.total_ratings_count > 0 ? +store?.rating5 / store?.total_ratings_count : 0) * 100 + '%'
+                  }"></div>
+                  </div>
+                </div>
+
+                <div class="company-profile-rate-diagram-bar">
+                  <div class="company-profile-rate-diagram-number">4</div>
+                  <div class="company-profile-rate-diagram-line">
+                    <div [ngStyle]="{
+                    width: (store?.total_ratings_count > 0 ? +store?.rating4 / store?.total_ratings_count : 0) * 100 + '%'
+                  }"></div>
+                  </div>
+                </div>
+
+                <div class="company-profile-rate-diagram-bar">
+                  <div class="company-profile-rate-diagram-number">3</div>
+                  <div class="company-profile-rate-diagram-line">
+                    <div [ngStyle]="{
+                    width: (store?.total_ratings_count > 0 ? +store?.rating3 / store?.total_ratings_count : 0) * 100 + '%'
+                  }"></div>
+                  </div>
+                </div>
+
+                <div class="company-profile-rate-diagram-bar">
+                  <div class="company-profile-rate-diagram-number">2</div>
+                  <div class="company-profile-rate-diagram-line">
+                    <div [ngStyle]="{
+                    width: (store?.total_ratings_count > 0 ? +store?.rating2 / store?.total_ratings_count : 0) * 100 + '%'
+                  }"></div>
+                  </div>
+                </div>
+
+                <div class="company-profile-rate-diagram-bar">
+                  <div class="company-profile-rate-diagram-number">1</div>
+                  <div class="company-profile-rate-diagram-line">
+                    <div [ngStyle]="{
+                    width: (store?.total_ratings_count > 0 ? +store?.rating1 / store?.total_ratings_count : 0) * 100 + '%'
+                  }"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="company-profile-rate-number">
+                <strong>{{ store?.avg_rating }}</strong>
+
+                <span>{{ 'n.ratings'| translate: { count: store?.total_ratings_count } }}</span>
+              </div>
+            </div>
+
+            @if (store?.video_link) {
+              <div class="company-profile-video">
+                <video-player
+                  [videoURL]="store?.video_link"
+                />
+              </div>
+            }
+          </div>
+        </div>
+      } @placeholder {
+        <spinner-loader/>
+      }
+
+      @defer (on viewport) {
+        <div class="company-profile-tabs">
+          <tabs [tabs]="tabs"/>
+        </div>
+      } @placeholder {
+        <spinner-loader/>
+      }
+
+    </div>
+  }
 </section>
