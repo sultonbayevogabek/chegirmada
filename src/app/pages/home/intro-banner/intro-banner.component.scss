@@ -88,3 +88,13 @@
     }
   }
 }
+
+@include media(920px) {
+  .banner-wrapper {
+    display: block;
+    aspect-ratio: 953/481;
+  }
+  .banner-right {
+    display: none;
+  }
+}

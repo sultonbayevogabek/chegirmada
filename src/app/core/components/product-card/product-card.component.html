@@ -79,11 +79,11 @@
       <div class="product-card-location-date-item">
         <mat-icon [svgIcon]="'icon:location'"></mat-icon>
 
-        <span>{{ product.store.full_address.district.label }}</span>
+        <span>{{ product?.store?.full_address?.region?.label?.split(' ')[0] }}</span>
       </div>
 
       <div class="product-card-location-date-item">
-        {{ product.start_date| date: 'dd.MM.YYYY' }} -  {{ product.end_date| date: 'dd.MM.YYYY' }}
+        {{ product?.start_date| datePipe| async }} -  {{ product?.end_date| datePipe| async }}
       </div>
     </div>
   </div>

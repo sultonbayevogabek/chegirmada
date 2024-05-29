@@ -40,8 +40,8 @@
 
 .create-announcement-features-price-difference-toggle {
   position: absolute;
-  right: 3px;
-  bottom: 3px;
+  right: 0.375rem;
+  bottom: 0.375rem;
   @include flex-center;
   height: calc(2.75rem - 6px);
   padding: 0.25rem;

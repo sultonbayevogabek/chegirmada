@@ -32,7 +32,7 @@ export class ProductsSectionComponent implements OnInit {
   ngOnInit(): void {
     this._announcementsService.getAnnouncementsList({
       page: this.page,
-      page_size: 8,
+      page_size: 12,
     })
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(res => {

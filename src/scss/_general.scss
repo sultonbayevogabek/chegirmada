@@ -364,6 +364,10 @@ div.mat-mdc-select-panel {
 }
 
 @include media(1280px) {
+  html {
+    font-size: 15px;
+  }
+
   .container {
     max-width: 70rem;
   }
@@ -380,5 +384,11 @@ div.mat-mdc-select-panel {
     max-width: 60rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+}
+
+@include media(920px) {
+  .container {
+    width: 100%;
   }
 }

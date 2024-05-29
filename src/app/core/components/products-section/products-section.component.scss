@@ -7,9 +7,11 @@
 @include media(1280px) {
   .products-grid {
     @include grid(repeat(3, 1fr), 1rem);
+  }
+}
 
-    & > *:nth-child(n+4) {
-      display: none;
-    }
+@include media(780px) {
+  .products-grid {
+    @include grid(repeat(2, 1fr), 1rem);
   }
 }

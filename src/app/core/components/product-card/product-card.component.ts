@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
-import { DatePipe, DecimalPipe, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { ProductCard } from '../../models/wishlist.model';
@@ -10,6 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthService } from '../../services/auth.service';
 import { UserModel } from '../../models/user.model';
 import { LoginProfileComponent } from '../header/header-middle/login-button/login-profile.component';
+import { DatePipe } from '../../pipes/date.pipe';
 
 @Component({
   selector: 'product-card',
@@ -22,7 +23,10 @@ import { LoginProfileComponent } from '../header/header-middle/login-button/logi
     DecimalPipe,
     TranslateModule,
     DatePipe,
-    MatIconButton
+    MatIconButton,
+    DatePipe,
+    DatePipe,
+    AsyncPipe
   ],
   standalone: true,
   providers: [
