@@ -1,24 +1,20 @@
 @import "mixins";
 @import "variables";
 
-.partners-inner {
-  @include grid(1fr 1.7fr);
+.partners-info {
+  padding: 2rem;
   border-radius: 1rem;
   background-color: $background-grey-color;
   overflow: hidden;
 }
 
-.partners-info {
-  padding: 3.5rem 3rem 3.5rem 4rem;
-}
-
 .partners-info-header {
-  @include flex-center-between;
+  @include flex-start-between;
 }
 
 .partners-info-heading {
   h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 600;
     line-height: 2.5rem;
   }
@@ -31,16 +27,25 @@
 }
 
 .partners-info-button {
-  @include blue-button;;
+  @include blue-button;
   @include flex-center-center(0.5rem);
+
+  span {
+    white-space: nowrap;
+  }
 
   .mat-icon {
     width: 0.5rem;
   }
+
+  &.mobile {
+    display: none;
+    margin-top: 1rem;
+  }
 }
 
 .partners-info-list {
-  @include grid(repeat(6, 1fr), 1rem);
+  @include grid(repeat(8, 1fr), 1rem);
   padding-top: 2.5rem;
 }
 
@@ -50,4 +55,44 @@
   aspect-ratio: 1;
   border-radius: 50%;
   background-color: $white-color;
+}
+
+@include media(1280px) {
+  .partners-info {
+    padding: 1.5rem;
+  }
+
+  .partners-info-list {
+    @include grid(repeat(6, 1fr), 1rem);
+    padding-top: 1.5rem;
+  }
+}
+
+@include media(920px) {
+  .partners-info-list {
+    @include grid(repeat(5, 1fr), 1rem);
+  }
+}
+
+@include media(780px) {
+  .partners-info-list {
+    @include grid(repeat(4, 1fr), 1rem);
+  }
+
+  .partners-info-button {
+    &.desktop {
+      display: none;
+    }
+
+    &.mobile {
+      display: flex;
+      width: 100%;
+    }
+  }
+}
+
+@include media(580px) {
+  .partners-info-list {
+    @include grid(repeat(3, 1fr), 1rem);
+  }
 }

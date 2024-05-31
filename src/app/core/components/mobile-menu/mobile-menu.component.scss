@@ -1,0 +1,21 @@
+@import "mixins";
+@import "variables";
+
+.mobile-menu-ul {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: $white-color;
+  border-radius: 0.5rem 0.5rem 0 0;
+  border-top: 1px solid #DBDBDB;
+}
+
+.mobile-menu-li {
+  padding: 1rem;
+  border-radius: 0.25rem;
+  color: $primary-blue-color;
+}

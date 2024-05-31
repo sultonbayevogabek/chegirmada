@@ -1,4 +1,8 @@
 <site-header />
-<scroll-to-top />
 
+@if (screenWidth <= 1080) {
+  <mobile-menu/>
+}
+
+<scroll-to-top />
 <router-outlet/>

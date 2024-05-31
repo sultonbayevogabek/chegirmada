@@ -3,6 +3,7 @@ import { NavigationEnd, Router, RouterOutlet, Event } from '@angular/router';
 import { HeaderComponent } from '../core/components/header/header.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ScrollToTopComponent } from '../core/components/scroll-to-top/scroll-to-top.component';
+import { MobileMenuComponent } from '../core/components/mobile-menu/mobile-menu.component';
 
 @Component({
   selector: 'pages',
@@ -11,12 +12,14 @@ import { ScrollToTopComponent } from '../core/components/scroll-to-top/scroll-to
   imports: [
     RouterOutlet,
     HeaderComponent,
-    ScrollToTopComponent
+    ScrollToTopComponent,
+    MobileMenuComponent
   ],
   standalone: true
 })
 
 export class PagesComponent implements OnInit {
+  screenWidth = document.documentElement.clientWidth;
   private _router = inject(Router);
   private _destroyRef = inject(DestroyRef);
 
