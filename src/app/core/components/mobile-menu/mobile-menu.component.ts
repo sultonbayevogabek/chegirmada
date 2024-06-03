@@ -5,6 +5,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UserModel } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { LoginProfileComponent } from '../header/header-middle/login-button/login-profile.component';
 
 @Component({
   selector: 'mobile-menu',
@@ -16,7 +17,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     RouterLink,
     RouterLinkActive
   ],
-  standalone: true
+  standalone: true,
+  providers: [LoginProfileComponent],
 })
 
 export class MobileMenuComponent implements OnInit {
@@ -24,6 +26,7 @@ export class MobileMenuComponent implements OnInit {
 
   private _authService = inject(AuthService);
   private _destroyRef = inject(DestroyRef);
+  private _loginProfileComponent = inject(LoginProfileComponent);
 
   ngOnInit(): void {
     this._authService.currentUser$
@@ -31,5 +34,9 @@ export class MobileMenuComponent implements OnInit {
       .subscribe(user => {
         this.currentUser = user;
       })
+  }
+
+  openLoginProfileModal() {
+    this._loginProfileComponent.openLoginDialog();
   }
 }

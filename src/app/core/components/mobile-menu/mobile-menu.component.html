@@ -34,17 +34,25 @@
     </li>
 
     @if (currentUser) {
-
+      <li
+        class="mobile-menu-li"
+        mat-ripple
+        [routerLink]="['/', 'profile', 'my-information']"
+        [routerLinkActive]="'active'"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <mat-icon class="mobile-menu-icon active-icon" [svgIcon]="'icon:avatar-active'"/>
+        <mat-icon class="mobile-menu-icon inactive-icon" [svgIcon]="'icon:avatar-inactive'"/>
+      </li>
+    } @else {
+      <li
+        class="mobile-menu-li"
+        mat-ripple
+        (click)="openLoginProfileModal()"
+      >
+        <mat-icon class="mobile-menu-icon inactive-icon" [svgIcon]="'icon:avatar-inactive'"/>
+      </li>
     }
-    <li
-      class="mobile-menu-li"
-      mat-ripple
-      [routerLink]="['/']"
-      [routerLinkActive]="'active'"
-      [routerLinkActiveOptions]="{ exact: true }"
-    >
-      <mat-icon class="mobile-menu-icon active-icon" [svgIcon]="'icon:avatar-active'"/>
-      <mat-icon class="mobile-menu-icon inactive-icon" [svgIcon]="'icon:avatar-inactive'"/>
-    </li>
+
   </ul>
 </nav>
