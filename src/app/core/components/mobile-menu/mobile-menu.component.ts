@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { UserModel } from '../../models/user.model';
+import { AuthService } from '../../services/auth.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'mobile-menu',
@@ -8,11 +12,24 @@ import { MatRipple } from '@angular/material/core';
   styleUrl: 'mobile-menu.component.scss',
   imports: [
     MatIcon,
-    MatRipple
+    MatRipple,
+    RouterLink,
+    RouterLinkActive
   ],
   standalone: true
 })
 
-export class MobileMenuComponent {
+export class MobileMenuComponent implements OnInit {
+  currentUser: UserModel;
 
+  private _authService = inject(AuthService);
+  private _destroyRef = inject(DestroyRef);
+
+  ngOnInit(): void {
+    this._authService.currentUser$
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(user => {
+        this.currentUser = user;
+      })
+  }
 }

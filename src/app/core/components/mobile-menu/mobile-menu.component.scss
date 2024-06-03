@@ -12,10 +12,23 @@
   background-color: $white-color;
   border-radius: 0.5rem 0.5rem 0 0;
   border-top: 1px solid #DBDBDB;
+  z-index: 3;
+}
+
+.active-icon {
+  display: none;
 }
 
 .mobile-menu-li {
   padding: 1rem;
   border-radius: 0.25rem;
   color: $primary-blue-color;
+
+  &.active .active-icon {
+    display: block;
+  }
+
+  &.active .inactive-icon {
+    display: none;
+  }
 }
