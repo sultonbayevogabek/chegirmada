@@ -17,3 +17,13 @@
     cursor: pointer;
   }
 }
+
+@include media(1080px) {
+  .section-header {
+    margin-bottom: 0.5rem;
+
+    h2 {
+      font-size: 1.125rem;
+    }
+  }
+}

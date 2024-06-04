@@ -10,8 +10,14 @@
   }
 }
 
+@include media(1080px) {
+  .products-grid {
+    grid-gap: 0.5rem;
+  }
+}
+
 @include media(780px) {
   .products-grid {
-    @include grid(repeat(2, 1fr), 1rem);
+    @include grid(repeat(2, 1fr), 0.5rem);
   }
 }

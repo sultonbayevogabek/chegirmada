@@ -89,6 +89,12 @@
   }
 }
 
+@include media(1280px) {
+  .banner-wrapper {
+    padding-top: 0;
+  }
+}
+
 @include media(920px) {
   .banner-wrapper {
     display: block;

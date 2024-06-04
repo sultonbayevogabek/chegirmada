@@ -21,3 +21,9 @@
     color: $primary-blue-color;
   }
 }
+
+@include media(1080px) {
+  :host {
+    display: none;
+  }
+}

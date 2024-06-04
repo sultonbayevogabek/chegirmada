@@ -187,3 +187,9 @@ div.global-search-result.mat-mdc-autocomplete-panel {
     cursor: pointer;
   }
 }
+
+@include media(1080px) {
+  .global-search-location {
+    display: none;
+  }
+}
