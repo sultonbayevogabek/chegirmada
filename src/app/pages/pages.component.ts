@@ -19,7 +19,6 @@ import { MobileMenuComponent } from '../core/components/mobile-menu/mobile-menu.
 })
 
 export class PagesComponent implements OnInit {
-  screenWidth = document.documentElement.clientWidth;
   private _router = inject(Router);
   private _destroyRef = inject(DestroyRef);
 

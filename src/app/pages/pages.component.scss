@@ -4,3 +4,9 @@
   @include flex-column;
   flex-grow: 1;
 }
+
+@include media(1080px) {
+  .pages {
+    padding-bottom: 4rem;
+  }
+}

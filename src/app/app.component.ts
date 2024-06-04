@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
+import { MobileMenuComponent } from './core/components/mobile-menu/mobile-menu.component';
 
 export interface ILanguageOption {
   value: string;
@@ -12,9 +13,10 @@ export interface ILanguageOption {
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrl: 'app.component.scss',
-  imports: [
-    RouterOutlet
-  ],
+   imports: [
+      RouterOutlet,
+      MobileMenuComponent
+   ],
   standalone: true
 })
 
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit {
   private _availableLanguages = [ 'uz', 'ru' ];
   private _translateService = inject(TranslateService);
   languageOptions: ILanguageOption[] = [];
+  screenWidth = document.documentElement.clientWidth;
 
   ngOnInit(): void {
     this._translateService.addLangs(this._availableLanguages);

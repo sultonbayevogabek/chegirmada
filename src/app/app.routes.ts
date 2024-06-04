@@ -10,6 +10,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/webview-player/webview-player.component').then(c => c.WebviewPlayerComponent)
   },
   {
+    path: 'categories-mobile',
+    loadComponent: () => import('./core/components/categories-mobile/categories-mobile.component').then(c => c.CategoriesMobileComponent)
+  },
+  {
     path: '',
     loadComponent: () => import('./pages/pages.component').then(c => c.PagesComponent),
     resolve: { initialData: initialDataResolver },

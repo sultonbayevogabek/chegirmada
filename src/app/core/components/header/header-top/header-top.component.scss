@@ -15,3 +15,9 @@
 .header-top-right {
   @include flex-center(1.5rem);
 }
+
+@include media(1080px) {
+  .header-top-links {
+    display: none;
+  }
+}

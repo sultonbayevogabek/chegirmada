@@ -1,0 +1,91 @@
+<div class="categories-mobile">
+  @if (categoriesTab === 1) {
+    <div class="categories-mobile-header">
+      <h2 class="categories-mobile-heading">{{ 'categories'| translate }}</h2>
+    </div>
+    <ul class="categories-mobile-ul">
+      @for (category of categories; track category) {
+        <li class="categories-mobile-li" mat-ripple (click)="selectMainCategory(category.id)">
+          <mat-icon class="categories-mobile-icon" [svgIcon]="'icon:' + category.name"/>
+          <span class="categories-mobile-text">{{ category.name| translate }}</span>
+          <mat-icon class="categories-mobile-arrow" [svgIcon]="'icon:arrow-right'"/>
+        </li>
+      }
+    </ul>
+  }
+
+  @if (categoriesTab === 2) {
+    <div class="categories-mobile-header">
+      <icon-button
+        [icon]="'icon:arrow-back'"
+        (click)="back(1)"
+      />
+      <h2 class="categories-mobile-heading">{{ categories[selectedCategoriesIndex?.main].name| translate }}</h2>
+    </div>
+    <ul class="categories-mobile-ul">
+      <li
+        class="categories-mobile-li"
+        mat-ripple
+        [routerLink]="['/category', 'list-view']"
+        [queryParams]="{
+          main_category: selectedCategoriesIndex?.main,
+          page: 1,
+          page_size: 12
+        }"
+      >
+        <span class="categories-mobile-text">{{ 'all.announcements.category'| translate }}</span>
+        <mat-icon class="categories-mobile-arrow" [svgIcon]="'icon:arrow-right'"/>
+      </li>
+      @for (secondLevelCategory of categories[selectedCategoriesIndex?.main]?.subcategories; track secondLevelCategory; let i = $index) {
+        <li
+          (click)="selectSecondaryCategory(i)"
+          class="categories-mobile-li" mat-ripple>
+          <span class="categories-mobile-text">{{ secondLevelCategory?.name }}</span>
+          <mat-icon class="categories-mobile-arrow" [svgIcon]="'icon:arrow-right'"/>
+        </li>
+      }
+    </ul>
+  }
+
+  @if (categoriesTab === 3) {
+    <div class="categories-mobile-header">
+      <icon-button
+        [icon]="'icon:arrow-back'"
+        (click)="back(2)"
+      />
+      <h2
+        class="categories-mobile-heading">{{ categories[selectedCategoriesIndex?.main]?.subcategories[selectedCategoriesIndex?.secondary]?.name }}</h2>
+    </div>
+    <ul class="categories-mobile-ul">
+      <li
+        class="categories-mobile-li"
+        mat-ripple
+        [routerLink]="['/category', 'list-view']"
+        [queryParams]="{
+          main_category: selectedCategoriesIndex?.main,
+          second_category: categories[selectedCategoriesIndex?.main]?.subcategories[selectedCategoriesIndex?.secondary]?.pk,
+          page: 1,
+          page_size: 12
+        }"
+      >
+        <span class="categories-mobile-text">{{ 'all.announcements.category'| translate }}</span>
+        <mat-icon class="categories-mobile-arrow" [svgIcon]="'icon:arrow-right'"/>
+      </li>
+      @for (thirdLevelCategory of categories[selectedCategoriesIndex?.main]?.subcategories[selectedCategoriesIndex?.secondary]?.children; track thirdLevelCategory) {
+        <li
+          [routerLink]="['/category', 'list-view']"
+          [queryParams]="{
+            main_category: selectedCategoriesIndex?.main,
+            second_category: categories[selectedCategoriesIndex?.main]?.subcategories[selectedCategoriesIndex?.secondary]?.pk,
+            category: thirdLevelCategory.pk,
+            page: 1,
+            page_size: 12
+          }"
+          class="categories-mobile-li" mat-ripple>
+          <span class="categories-mobile-text">{{ thirdLevelCategory?.name }}</span>
+          <mat-icon class="categories-mobile-arrow" [svgIcon]="'icon:arrow-right'"/>
+        </li>
+      }
+    </ul>
+  }
+</div>

@@ -9,7 +9,8 @@ export interface MainCategory {
     1: SecondLevelCategory[],
     2: SecondLevelCategory[],
     3: SecondLevelCategory[]
-  }
+  },
+  subcategories?: SecondLevelCategory[]
 }
 
 export interface SecondLevelCategory {

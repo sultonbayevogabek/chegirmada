@@ -85,7 +85,7 @@
   top: 0;
 }
 
-.header-middle-catalog-hamburger div:nth-child(2),.header-middle-catalog-hamburger div:nth-child(3) {
+.header-middle-catalog-hamburger div:nth-child(2), .header-middle-catalog-hamburger div:nth-child(3) {
   top: 1.125rem;
 }
 
@@ -146,6 +146,12 @@
   }
 }
 
-@include media(1060px) {
-
+@include media(1080px) {
+  .header-middle-catalog-button,
+  .header-middle-wish-list,
+  .header-middle-login-profile,
+  .header-middle-logo,
+  .header-middle-notifications {
+    display: none !important;
+  }
 }

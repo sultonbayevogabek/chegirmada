@@ -1,0 +1,36 @@
+@import "variables";
+@import "mixins";
+
+.categories-mobile {
+  padding: 1rem 0 4rem;
+}
+
+.categories-mobile-li {
+  @include flex-center(0.5rem);
+  flex-wrap: nowrap;
+  padding: 0.75rem 1.5rem;
+}
+
+.categories-mobile-text {
+  flex-grow: 1;
+  font-size: 1rem;
+  color: $secondary-black-color;
+  @include line-clamp(1);
+}
+
+.categories-mobile-arrow {
+  flex-shrink: 0;
+  width: 0.6rem;
+  color: $secondary-black-color;
+}
+
+.categories-mobile-header {
+  @include flex-center(1rem);
+  margin-bottom: 0.75rem;
+  padding: 0 1rem;
+}
+
+.categories-mobile-heading {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
