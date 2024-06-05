@@ -12,7 +12,7 @@
         }
       </div>
 
-      <div class="product-card-hover-blocks">
+      <div class="product-card-hover-blocks" (touchstart)="swipeStart($event)" (touchend)="swipeEnd($event)">
         @for (item of product.images; track item; let i = $index) {
           <div
             class="product-card-hover-block"

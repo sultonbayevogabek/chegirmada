@@ -42,3 +42,25 @@
   font-size: 0.875rem;
   color: $secondary-black-color;
 }
+
+@include media(1280px) {
+  .wish-list-grid {
+    @include grid(repeat(3, 1fr), 1rem);
+  }
+}
+
+@include media(1080px) {
+  .wish-list {
+    padding-top: 0.5rem;
+  }
+
+  .wish-list-grid {
+    grid-gap: 0.5rem;
+  }
+}
+
+@include media(780px) {
+  .wish-list-grid {
+    @include grid(repeat(2, 1fr), 0.5rem);
+  }
+}

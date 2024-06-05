@@ -2,6 +2,8 @@
 @import "mixins";
 
 .product-card {
+  @include flex-column;
+  height: 100%;
   cursor: pointer;
 }
 
@@ -101,6 +103,8 @@
 }
 
 .product-card-bottom {
+  flex-grow: 1;
+  @include flex-column;
   padding-top: 1rem;
 }
 
@@ -173,7 +177,8 @@
 }
 
 .product-card-location-date {
-  @include flex-center-between;
+  flex-grow: 1;
+  @include flex-end-between;
   padding-top: 0.5rem;
 }
 
@@ -188,5 +193,43 @@
 
   .mat-icon {
     width: 0.75rem;
+  }
+}
+
+@include media(1080px) {
+  .product-card-brand-logo {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .product-card-bottom {
+    padding-top: 0.5rem;
+  }
+
+  .product-card-title {
+    font-size: 0.875rem;
+    line-height: 1rem;
+  }
+
+  .product-card-brand-name {
+    font-size: 0.75rem;
+  }
+
+  .product-card-view {
+    span {
+      font-size: 0.75rem;
+    }
+
+    .mat-icon {
+      width: 1rem;
+    }
+  }
+
+  .product-card-price-old, .product-card-location-date-item {
+    font-size: 0.75rem;
+  }
+
+  .product-card-price-new {
+    font-size: 1.125rem;
   }
 }

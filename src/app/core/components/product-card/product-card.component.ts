@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
+import { Component, DestroyRef, ElementRef, inject, Input, OnInit } from '@angular/core';
 import { AsyncPipe, DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
@@ -41,10 +41,13 @@ export class ProductCardComponent implements OnInit {
   activeIndex = 0;
   currentUser: UserModel;
 
+  private _startX: number = 0;
+  private _startY: number = 0;
   private _productDetailsService = inject(ProductDetailsService);
   private _authService = inject(AuthService);
   private _destroyRef = inject(DestroyRef);
   private _loginProfileComponent = inject(LoginProfileComponent);
+  private _el = inject(ElementRef);
 
   ngOnInit(): void {
     this._authService.currentUser$
@@ -69,5 +72,37 @@ export class ProductCardComponent implements OnInit {
           this.product.user_wishlist = !this.product.user_wishlist;
         }
       });
+  }
+
+  swipeStart(event: TouchEvent) {
+    this._startX = event.changedTouches[0].clientX;
+    this._startY = event.changedTouches[0].clientY;
+  }
+
+  swipeEnd(event: TouchEvent) {
+    const deltaX = event.changedTouches[0].clientX - this._startX;
+    const deltaY = event.changedTouches[0].clientY - this._startY;
+
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      if (deltaX > 0) {
+        if (this.activeIndex > 0) {
+          this.activeIndex--;
+          return;
+        }
+
+        this.activeIndex = this.product.images?.length - 1;
+        return;
+      }
+
+      if (this.activeIndex < this.product.images?.length - 1) {
+        this.activeIndex++;
+        return;
+      }
+
+      this.activeIndex = 0;
+    }
+
+    this._startX = 0;
+    this._startY = 0;
   }
 }

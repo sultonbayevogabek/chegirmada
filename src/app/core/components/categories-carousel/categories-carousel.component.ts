@@ -51,15 +51,15 @@ export class CategoriesCarouselComponent {
       },
       992: {
         items: 4,
-        margin: 14
+        margin: 15
       },
       576: {
         items: 3,
-        margin: 8
+        margin: 7.5
       },
       0: {
         items: 2,
-        margin: 8
+        margin: 7.5
       }
     }
   };
