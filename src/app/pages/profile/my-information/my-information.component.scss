@@ -1,7 +1,6 @@
 @import "variables";
 @import "mixins";
 
-
 .my-information {
   padding: 1.25rem;
   border-radius: 0.5rem;
@@ -45,4 +44,14 @@
 
 .my-information-submit {
   margin-left: auto;
+}
+
+@include media(1080px) {
+  .my-information {
+    padding: 0.75rem;
+  }
+
+  .my-information-fields {
+    @include grid(repeat(2, 1fr), 0.75rem);
+  }
 }

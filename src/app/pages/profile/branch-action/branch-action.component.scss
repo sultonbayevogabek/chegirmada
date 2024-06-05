@@ -45,3 +45,47 @@
   @include flex-center-end;
   padding: 1.5rem 2rem;
 }
+
+@include media(1080px) {
+  .branch-action-header {
+    @include flex-center-between;
+    padding: 1.5rem;
+  }
+
+  .branch-action-heading {
+    font-size: 1.25rem;
+  }
+
+  .working-time {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  .branch-action-form {
+    padding: 0 1.5rem;
+  }
+
+  .branch-action-fields {
+    grid-gap: 0.5rem;
+  }
+
+  .branch-action-submit {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .branch-action-delivery, .branch-action-times {
+    grid-gap: 0.5rem;
+  }
+}
+
+@include media(720px) {
+  .branch-action-fields {
+    @include grid(1fr, 0.5rem);
+  }
+
+  .working-time {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+}
+

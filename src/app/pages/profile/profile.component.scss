@@ -1,6 +1,10 @@
 @import "mixins";
 @import "variables";
 
+.profile {
+  padding-top: 1.5rem;
+}
+
 .profile-inner {
   @include grid(1fr 3.5fr, 1.25rem);
   align-items: start;
@@ -43,5 +47,20 @@
 
   .mat-icon {
     width: 1.25rem;
+  }
+}
+
+@include media(1080px) {
+  .profile {
+    padding-top: 0.25rem;
+  }
+
+  .profile-inner {
+    @include grid(1fr 2fr, 0.75rem);
+    align-items: start;
+  }
+
+  .profile-menu-item {
+    padding: 0 0.75rem;
   }
 }

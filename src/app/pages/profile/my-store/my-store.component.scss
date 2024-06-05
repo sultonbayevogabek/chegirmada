@@ -240,3 +240,26 @@
   height: 100%;
   object-fit: cover;
 }
+
+@include media(1080px) {
+  .my-store {
+    padding: 0.75rem;
+  }
+
+  .register-main-fields, .register-company-info-fields {
+    @include grid(repeat(2, 1fr), 0.75rem);
+  }
+
+  .register-company-info-top {
+    @include grid(1fr, 0.75rem);
+  }
+
+  .register-company-upload-logo {
+    order: -1;
+  }
+
+  .working-time {
+    grid-column-start: 1;  /* Starts from the second column */
+    grid-column-end: 3;
+  }
+}

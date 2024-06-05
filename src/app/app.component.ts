@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { forkJoin } from 'rxjs';
 import { MobileMenuComponent } from './core/components/mobile-menu/mobile-menu.component';
+import { ScrollToTopComponent } from './core/components/scroll-to-top/scroll-to-top.component';
 
 export interface ILanguageOption {
   value: string;
@@ -15,7 +16,8 @@ export interface ILanguageOption {
   styleUrl: 'app.component.scss',
    imports: [
       RouterOutlet,
-      MobileMenuComponent
+      MobileMenuComponent,
+      ScrollToTopComponent
    ],
   standalone: true
 })

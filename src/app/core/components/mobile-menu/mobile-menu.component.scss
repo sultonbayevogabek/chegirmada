@@ -1,32 +1,36 @@
 @import "mixins";
 @import "variables";
 
-.mobile-menu-ul {
+.mobile-menu {
   position: fixed;
   bottom: 0;
   left: 0;
+  right: 0;
+  z-index: 3;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   background-color: $white-color;
   border-radius: 0.5rem 0.5rem 0 0;
   border-top: 1px solid #DBDBDB;
-  z-index: 3;
+}
+
+.mobile-menu-ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .mobile-menu-icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.4rem;
+  height: 1.4rem;
 
   &.heart {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 1.65rem;
+    height: 1.65rem;
   }
 
   &.bell {
-    width: 1.7rem;
-    height: 1.7rem;
+    width: 1.6rem;
+    height: 1.6rem;
   }
 }
 
@@ -37,7 +41,7 @@
 .mobile-menu-li {
   padding: 1rem;
   border-radius: 0.25rem;
-  color: $primary-blue-color;
+  color: $dialog-title-black;
 
   &.active .active-icon {
     display: block;
