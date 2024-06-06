@@ -22,23 +22,23 @@
 
             <div class="branch-details">
               <div class="branch-details-item">
-                <div class="branch-details-label">{{ 'working.time'| translate }}:</div>
-                <div class="branch-details-value">
+                <span class="branch-details-label">{{ 'working.time'| translate }}: </span>
+                <span class="branch-details-value">
                   {{ weekdays[+branch.working_day_start].name| translate }} - {{ weekdays[+branch.working_day_end].name| translate }},
                   {{ branch.working_time_start }} - {{ branch.working_time_end }}
-                </div>
+                </span>
               </div>
               <div class="branch-details-item">
-                <div class="branch-details-label">{{ 'delivery'| translate }}:</div>
-                <div class="branch-details-value">{{ (branch.delivery ? 'available' : 'no')| translate| lowercase }}</div>
+                <span class="branch-details-label">{{ 'delivery'| translate }}: </span>
+                <span class="branch-details-value">{{ (branch.delivery ? 'available' : 'no')| translate| lowercase }}</span>
               </div>
               <div class="branch-details-item">
-                <div class="branch-details-label">{{ 'phone.number'| translate }}:</div>
-                <div class="branch-details-value">{{ branch.main_phone_number| phoneNumber }}</div>
+                <span class="branch-details-label">{{ 'phone.number'| translate }}: </span>
+                <span class="branch-details-value">{{ branch.main_phone_number| phoneNumber }}</span>
               </div>
               <div class="branch-details-item">
-                <div class="branch-details-label">{{ 'address'| translate }}:</div>
-                <div class="branch-details-value">{{ branch.address }}</div>
+                <span class="branch-details-label">{{ 'address'| translate }}: </span>
+                <span class="branch-details-value">{{ branch.address }}</span>
               </div>
             </div>
           </div>

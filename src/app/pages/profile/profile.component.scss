@@ -50,6 +50,14 @@
   }
 }
 
+.profile-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  background: rgba(178, 183, 208, 0.30);
+  backdrop-filter: blur(3px);
+}
+
 @include media(1080px) {
   .profile {
     padding-top: 0.25rem;
@@ -62,5 +70,21 @@
 
   .profile-menu-item {
     padding: 0 0.75rem;
+  }
+}
+
+@include media(780px) {
+  .profile-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 16rem;
+    background-color: $white-color;
+    z-index: 5;
+  }
+
+  .profile-menu {
+    border-radius: 0 0.5rem 0.5rem 0;
   }
 }

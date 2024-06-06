@@ -8,6 +8,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { UserModel } from '../../core/models/user.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SectionHeaderComponent } from '../../core/components/section-header/section-header.component';
+import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'profile',
@@ -21,7 +22,9 @@ import { SectionHeaderComponent } from '../../core/components/section-header/sec
     RouterOutlet,
     RouterLinkActive,
     NgTemplateOutlet,
-    TranslateModule
+    TranslateModule,
+    MatDrawerContainer,
+    MatDrawer
   ],
   standalone: true,
   providers: []

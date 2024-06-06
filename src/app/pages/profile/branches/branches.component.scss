@@ -18,13 +18,13 @@
 }
 
 .branches-item {
-  @include flex-start-between;
+  @include flex-start(1rem);
   padding-bottom: 0.75rem;
   border-bottom: 1px solid $border-grey-color;
 }
 
 .branch-info {
-  width: 70%;
+  flex-grow: 1;
 }
 
 .branch-name {
@@ -35,11 +35,11 @@
 
 .branch-details {
   @include grid(1fr 1fr, 0.75rem 1.5rem);
+  align-items: start;
   padding-top: 0.75rem;
 }
 
 .branch-details-item {
-  @include flex-center(0.25rem);
   font-size: 0.875rem;
 }
 
@@ -53,10 +53,26 @@
 }
 
 .branch-actions {
-  @include flex-column(0.25rem)
+  @include flex-column(0.25rem);
+  flex-shrink: 0;
 }
 
 .branch-new {
   @include flex-center-end;
   padding-top: 1.25rem;
+}
+
+@include media(1080px) {
+  .branches {
+    padding: 0.75rem;
+  }
+
+  .branches-heading {
+    margin-bottom: 1rem;
+  }
+
+  .branch-details {
+    @include grid(1fr, 0.5rem);
+    padding-top: 0;
+  }
 }
