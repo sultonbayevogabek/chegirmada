@@ -1,16 +1,32 @@
 <section class="profile">
   <div class="container">
-    <section-header
-      class="profile-header"
-      [heading]="'my.profile'"/>
+    <div class="profile-header">
+      <section-header
+        [heading]="'my.profile'"
+        (click)="isProfileMenuOpened = true"
+      />
+
+      <ui-button
+        class="profile-menu-toggle"
+        (click)="isProfileMenuOpened = true"
+        [text]="'menu'"
+        [icon]="'icon:hamburger'"
+        [type]="'gray-outline'"
+      />
+    </div>
 
     <div class="profile-inner">
-      <aside class="profile-menu">
+      <aside
+        class="profile-menu"
+        [ngClass]="{
+          'opened': isProfileMenuOpened,
+          'closed': !isProfileMenuOpened,
+        }"
+      >
         <ng-container
           *ngTemplateOutlet="profileMenu"
         />
       </aside>
-
       <main class="profile-main">
         <router-outlet />
       </main>
@@ -56,6 +72,9 @@
   </li>
 </ng-template>
 
-<div class="profile-menu-backdrop">
+@if (isProfileMenuOpened) {
+  <div
+    (click)="isProfileMenuOpened = false"
+    class="profile-menu-backdrop"></div>
+}
 
-</div>

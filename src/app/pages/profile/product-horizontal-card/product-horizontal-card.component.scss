@@ -263,3 +263,17 @@
   font-weight: 500;
   color: $dialog-title-black;
 }
+
+@include media(1080px) {
+  .product-horizontal-card-footer {
+    @include flex-center(1rem);
+    padding-top: 1rem;
+  }
+}
+
+@include media(620px) {
+  .product-horizontal-card-body {
+    @include flex-center(1rem);
+    padding-top: 1rem;
+  }
+}

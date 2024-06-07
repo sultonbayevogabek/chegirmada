@@ -1,14 +1,15 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
-import { NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../core/services/auth.service';
 import { UserModel } from '../../core/models/user.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SectionHeaderComponent } from '../../core/components/section-header/section-header.component';
 import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
+import { UiButtonComponent } from '../../core/components/ui-button/ui-button.component';
 
 @Component({
   selector: 'profile',
@@ -24,7 +25,9 @@ import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
     NgTemplateOutlet,
     TranslateModule,
     MatDrawerContainer,
-    MatDrawer
+    MatDrawer,
+    NgClass,
+    UiButtonComponent
   ],
   standalone: true,
   providers: []
@@ -32,8 +35,11 @@ import { MatDrawer, MatDrawerContainer } from '@angular/material/sidenav';
 
 export class ProfileComponent implements OnInit {
   currentUser: UserModel;
+  isProfileMenuOpened = false;
+
   private _authService = inject(AuthService);
   private _destroyRef = inject(DestroyRef);
+  private _router = inject(Router);
 
   constructor() {
   }
@@ -95,6 +101,14 @@ export class ProfileComponent implements OnInit {
       .subscribe(user => {
         this.currentUser = user;
       })
+
+    this._router.events
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe({
+        next: event => {
+          this.isProfileMenuOpened = false;
+        }
+      });
   }
 
   signOut(): void {

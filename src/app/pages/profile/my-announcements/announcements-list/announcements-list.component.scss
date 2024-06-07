@@ -17,3 +17,14 @@
     border-color: $border-grey-color
   }
 }
+
+@include media(1080px) {
+  .my-announcements-filter {
+    display: block !important;
+    padding-top: 0.5rem;
+  }
+
+  .my-announcements-search {
+    padding-top: 0.5rem;
+  }
+}

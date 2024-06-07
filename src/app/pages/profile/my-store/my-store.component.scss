@@ -258,8 +258,36 @@
     order: -1;
   }
 
-  .working-time {
+  .working-time, .register-work-times {
     grid-column-start: 1;  /* Starts from the second column */
     grid-column-end: 3;
+    grid-gap: 0.75rem;
+  }
+
+  .register-heading {
+    font-size: 1rem;
+  }
+
+  .register-company-address {
+    display: block;
+  }
+
+  .register-delivery-type, .register-company-descriptions {
+    grid-gap: 0.75rem;
+  }
+}
+
+@include media(620px) {
+  .register-main-fields {
+    @include grid(1fr, 0.75rem);
+  }
+
+  .register-company-info-fields, .register-company-descriptions {
+    @include grid(1fr, 0.75rem);
+  }
+
+  .working-time {
+    grid-column-start: 1;  /* Starts from the second column */
+    grid-column-end: 2;
   }
 }
