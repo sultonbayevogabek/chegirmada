@@ -78,3 +78,13 @@
 .payment-form-submit {
   margin-left: auto;
 }
+
+@include media(1080px) {
+  .packages {
+    padding: 0.75rem;
+  }
+
+  .packages-heading, .packages-balance {
+    font-size: 1rem;
+  }
+}

@@ -12,6 +12,7 @@
 
 .product-horizontal-card-images {
   position: relative;
+  aspect-ratio: 1;
   border-radius: 0.5rem;
   overflow: hidden;
 }
@@ -273,7 +274,12 @@
 
 @include media(620px) {
   .product-horizontal-card-body {
-    @include flex-center(1rem);
-    padding-top: 1rem;
+    @include grid(1fr, 0.75rem)
+  }
+
+  .product-horizontal-card-images {
+    width: 300px;
+    aspect-ratio: 1;
+    margin: 0 auto;
   }
 }
