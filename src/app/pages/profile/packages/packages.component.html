@@ -22,43 +22,45 @@
   }
 
   @if (!loading && packages.length) {
-    <table class="packages-table">
-      <thead>
-      <tr>
-        <th class="packages-th">{{ 'category'| translate }}</th>
-        <th class="packages-th">{{ 'number'| translate }}</th>
-        <th class="packages-th">{{ 'price'| translate }}</th>
-        <th class="packages-th">{{ 'term'| translate }}</th>
-      </tr>
-      </thead>
+    <div class="packages-table-wrapper">
+      <table class="packages-table">
+        <thead>
+        <tr>
+          <th class="packages-th">{{ 'category'| translate }}</th>
+          <th class="packages-th">{{ 'number'| translate }}</th>
+          <th class="packages-th">{{ 'price'| translate }}</th>
+          <th class="packages-th">{{ 'term'| translate }}</th>
+        </tr>
+        </thead>
 
-      <tbody>
-        @for (pack of packages; track pack) {
-          <tr class="packages-tr">
-            <td class="packages-td">
-              <div class="packages-data">
-                {{ CATEGORIES_OBJECT[pack.category.pk]| translate }}
-              </div>
-            </td>
-            <td class="packages-td">
-              <div class="packages-data">
-                {{ pack.remainder || 0 }} / {{ pack.quantity || 0 }}
-              </div>
-            </td>
-            <td class="packages-td">
-              <div class="packages-data">
-                {{ (+(pack.quantity || 0) * pack.tariff_price)| number }} {{ 'sum'| translate }}
-              </div>
-            </td>
-            <td class="packages-td">
-              <div class="packages-data">
-                {{ pack.created_at| date: 'dd.MM.YYYY' }}
-              </div>
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
+        <tbody>
+          @for (pack of packages; track pack) {
+            <tr class="packages-tr">
+              <td class="packages-td">
+                <div class="packages-data">
+                  {{ CATEGORIES_OBJECT[pack.category.pk]| translate }}
+                </div>
+              </td>
+              <td class="packages-td">
+                <div class="packages-data">
+                  {{ pack.remainder || 0 }} / {{ pack.quantity || 0 }}
+                </div>
+              </td>
+              <td class="packages-td">
+                <div class="packages-data">
+                  {{ (+(pack.quantity || 0) * pack.tariff_price)| number }} {{ 'sum'| translate }}
+                </div>
+              </td>
+              <td class="packages-td">
+                <div class="packages-data">
+                  {{ pack.created_at| date: 'dd.MM.YYYY' }}
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
 
     <mat-paginator
       [hidePageSize]="true"

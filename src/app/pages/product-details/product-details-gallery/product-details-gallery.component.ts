@@ -41,7 +41,7 @@ export class ProductDetailsGalleryComponent implements OnChanges {
     dots: false,
     navSpeed: 700,
     items: 4,
-    margin: 16,
+    margin: 8,
     nav: false,
     navText: [ '', '' ],
     autoWidth: false

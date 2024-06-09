@@ -115,3 +115,15 @@
   font-weight: 500;
   color: $logo-black-color;
 }
+
+@include media(1280px) {
+  .product-details-side-info {
+    @include grid(1fr 1fr, 1rem)
+  }
+}
+
+@include media(620px) {
+  .product-details-side-info {
+    @include grid(1fr, 0.5rem)
+  }
+}

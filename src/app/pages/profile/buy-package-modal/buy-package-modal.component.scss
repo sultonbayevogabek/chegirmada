@@ -33,3 +33,21 @@
   @include flex-center-end;
   padding-top: 0.5rem;
 }
+
+@include media(1080px) {
+  .buy-package-modal-header {
+    padding: 1.5rem 1.5rem 1rem;
+  }
+
+  .buy-package-modal-heading {
+    font-size: 1.25rem;
+  }
+
+  .buy-package-modal-hint {
+    padding: 0 1.5rem 1rem;
+  }
+
+  .buy-package-modal-form {
+    padding: 0 1.5rem 1.75rem;
+  }
+}

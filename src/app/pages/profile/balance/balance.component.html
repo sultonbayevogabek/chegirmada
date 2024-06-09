@@ -18,55 +18,58 @@
   }
 
   @if (!loading && paymentHistory.length) {
-    <table class="balance-table">
-      <thead>
-      <tr>
-        <th class="balance-th">{{ 'type'| translate }}</th>
-        <th class="balance-th">{{ 'amount'| translate }}</th>
-        <th class="balance-th">{{ 'date'| translate }}</th>
-      </tr>
-      </thead>
+    <div class="balance-table-wrapper">
+      <table class="balance-table">
+        <thead>
+        <tr>
+          <th class="balance-th">{{ 'type'| translate }}</th>
+          <th class="balance-th">{{ 'amount'| translate }}</th>
+          <th class="balance-th">{{ 'date'| translate }}</th>
+        </tr>
+        </thead>
 
-      <tbody>
-        @for (history of paymentHistory; track history) {
-          <tr class="balance-tr">
-            <td class="balance-td">
-              <div class="balance-data">
-                @if (history.payment_type === 0) {
-                  {{ 'account.has.been.filled'| translate }}
-                }
-                @if (history.payment_type === 1) {
-                  {{ 'advertising'| translate }}
-                }
-                @if (history.payment_type === 2) {
-                  {{ 'package'| translate }}
-                }
-              </div>
-            </td>
-            <td class="balance-td">
-              <div
-                class="balance-data"
-                [ngClass]="{
+        <tbody>
+          @for (history of paymentHistory; track history) {
+            <tr class="balance-tr">
+              <td class="balance-td">
+                <div class="balance-data">
+                  @if (history.payment_type === 0) {
+                    {{ 'account.has.been.filled'| translate }}
+                  }
+                  @if (history.payment_type === 1) {
+                    {{ 'advertising'| translate }}
+                  }
+                  @if (history.payment_type === 2) {
+                    {{ 'package'| translate }}
+                  }
+                </div>
+              </td>
+              <td class="balance-td">
+                <div
+                  class="balance-data"
+                  [ngClass]="{
                 'input': history.payment_type === 0,
                 'output': [1, 2].includes(history.payment_type)
               }"
-              >
-                {{ [ 1, 2 ].includes(history.payment_type) ? '-' : '+' }} {{ history.amount| number }} {{ 'sum'| translate }}
-              </div>
-            </td>
-            <td class="balance-td">
-              <div class="balance-data">{{ history.created_at| date: 'dd.MM.YYYY' }}</div>
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
+                >
+                  {{ [ 1, 2 ].includes(history.payment_type) ? '-' : '+' }} {{ history.amount| number }} {{ 'sum'| translate }}
+                </div>
+              </td>
+              <td class="balance-td">
+                <div class="balance-data">{{ history.created_at| date: 'dd.MM.YYYY' }}</div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
 
     <mat-paginator
       [pageIndex]="params.page"
       [pageSize]="params.page_size"
       [length]="params.total"
       [showFirstLastButtons]="true"
+      [hidePageSize]="true"
       (page)="changePage($event)"
     />
   }

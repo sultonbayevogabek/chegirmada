@@ -81,12 +81,12 @@ export class ProfileComponent implements OnInit {
       name: 'packages',
       isStoreRequired: true
     },
-    {
+    /*{
       icon: 'icon:like-outline',
       link: 'favourite-products',
       name: 'liked.announcements',
       isStoreRequired: false
-    },
+    },*/
     // {
     //   icon: 'icon:settings',
     //   link: 'settings',

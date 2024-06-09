@@ -215,3 +215,9 @@
   color: $primary-blue-color;
 }
 
+@include media(900px) {
+  .product-details-tabs-body {
+    height: auto;
+  }
+}
+

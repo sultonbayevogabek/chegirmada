@@ -57,7 +57,7 @@
 }
 
 .product-details-photo-thumbs {
-  padding-top: 1rem;
+  padding-top: 0.5rem;
 }
 
 .product-details-photo-thumb {
@@ -95,4 +95,7 @@
   .owl-item {
     max-width: 25% !important;
   }
+}
+
+@include media(780px) {
 }

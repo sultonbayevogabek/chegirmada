@@ -18,8 +18,13 @@
   font-weight: 500;
 }
 
+.balance-table-wrapper {
+  overflow: auto;
+}
+
 .balance-table {
   width: 100%;
+  min-width: 560px;
   border: none;
   border-collapse: collapse;
 }
@@ -74,4 +79,14 @@
 
 .payment-form-submit {
   margin-left: auto;
+}
+
+@include media(1080px) {
+  .balance {
+    padding: 0.75rem;
+  }
+
+  .balance-heading {
+    font-size: 1rem;
+  }
 }

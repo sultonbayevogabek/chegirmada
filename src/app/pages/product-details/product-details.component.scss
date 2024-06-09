@@ -14,3 +14,38 @@
   @include grid(repeat(2, 1fr), 1.5rem);
   padding-top: 2rem;
 }
+
+@include media(1280px) {
+  .product-details-main {
+    @include grid(1fr, 1rem);
+    align-items: flex-start;
+    padding-top: 1rem;
+  }
+}
+
+@include media(1080px) {
+  .product-details {
+    padding-top: 0;
+  }
+
+  .product-details-additional-info {
+    grid-gap: 1rem;
+  }
+
+  .product-details-main-info {
+    grid-gap: 1rem;
+  }
+}
+
+@include media(900px) {
+  .product-details-additional-info {
+    @include grid(1fr, 1rem);
+    padding-top: 1rem;
+  }
+}
+
+@include media(780px) {
+  .product-details-main-info {
+    @include grid(1fr, 0);
+  }
+}

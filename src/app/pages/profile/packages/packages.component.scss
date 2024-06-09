@@ -21,8 +21,13 @@
   font-weight: 500;
 }
 
+.packages-table-wrapper {
+  overflow: auto;
+}
+
 .packages-table {
   width: 100%;
+  min-width: 600px;
   border: none;
   border-collapse: collapse;
 }
@@ -86,5 +91,11 @@
 
   .packages-heading, .packages-balance {
     font-size: 1rem;
+  }
+}
+
+@include media(520px) {
+  .packages-balance .packages-heading {
+    display: none;
   }
 }

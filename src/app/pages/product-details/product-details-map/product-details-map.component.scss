@@ -19,6 +19,18 @@
   overflow: hidden;
 }
 
+@include media(1080px) {
+  .product-details-map-heading {
+    font-size: 1rem;
+  }
+}
+
+@include media(900px) {
+  .product-details-map-heading {
+    height: auto;
+    line-height: 1;
+  }
+}
 
 
 
