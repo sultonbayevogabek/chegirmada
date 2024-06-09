@@ -114,6 +114,11 @@ export class LoginDialogComponent implements OnInit, AfterViewInit {
             return;
           }
 
+          this._toaster.open({
+            message: '' + res.code,
+            type: 'info',
+            duration: 10000
+          })
           this.resetCodeForm();
           this.countDown();
           this.step = 'code';
