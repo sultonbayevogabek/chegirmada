@@ -62,3 +62,20 @@
   @include grid(repeat(3, 1fr), 1.5rem);
   padding-top: 1.5rem;
 }
+
+@include media(1280px) {
+  .category-products-list-date-sort {
+    @include flex-start(0.5rem);
+  }
+
+  .category-products-list-grid {
+    @include grid(repeat(3, 1fr), 1rem);
+    padding-top: 1rem;
+  }
+}
+
+@include media(1080px) {
+  .category-products-list-grid {
+    @include grid(repeat(2, 1fr), 1rem);
+  }
+}

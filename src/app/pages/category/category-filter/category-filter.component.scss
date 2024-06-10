@@ -175,3 +175,23 @@
     height: 1.25rem;
   }
 }
+
+@include media(780px) {
+  .category-filter {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 18rem;
+    background-color: $white-color;
+    z-index: 5;
+    transition: all 325ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.opened {
+      left: 0;
+    }
+
+    &.closed {
+      left: -100%;
+    }
+  }
+}

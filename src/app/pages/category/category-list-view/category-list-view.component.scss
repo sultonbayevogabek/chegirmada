@@ -33,3 +33,46 @@
   @include grid(1fr 3fr, 1.5rem);
   padding-top: 1.5rem;
 }
+
+.filter-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  background: rgba(178, 183, 208, 0.30);
+  backdrop-filter: blur(3px);
+}
+
+.filter-toggle {
+  display: none;
+}
+
+@include media(1280px) {
+  .category-content {
+    grid-gap: 1rem;
+  }
+}
+
+@include media(1080px) {
+  .category {
+    padding-top: 0;
+  }
+
+  .category-header {
+    padding-top: 0.75rem;
+  }
+
+  .category-heading {
+    font-size: 1.125rem;
+  }
+
+  .category-content {
+    @include grid(1fr 2fr, 1rem);
+    padding-top: 1.25rem;
+  }
+}
+
+@include media(780px) {
+  .filter-toggle {
+    display: block;
+  }
+}

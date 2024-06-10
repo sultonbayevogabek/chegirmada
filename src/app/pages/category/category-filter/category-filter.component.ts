@@ -11,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DiscountParamsModel } from '../../../core/models/discount-params.model';
 import { FormsModule } from '@angular/forms';
+import { MatDateRangeInput, MatDateRangePicker, MatEndDate, MatStartDate } from '@angular/material/datepicker';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'category-filter',
@@ -25,7 +27,11 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     UiButtonComponent,
     TranslateModule,
-    FormsModule
+    FormsModule,
+    MatDateRangeInput,
+    MatDateRangePicker,
+    MatEndDate,
+    MatStartDate
   ],
   providers: [
     provideNgxMask()
@@ -35,48 +41,6 @@ import { FormsModule } from '@angular/forms';
 
 export class CategoryFilterComponent implements OnInit {
   @Input() withBorder = true;
-  brands = [
-    {
-      name: 'Samsung',
-      count: 13,
-      selected: false
-    },
-    {
-      name: 'Philips',
-      count: 31,
-      selected: true
-    },
-    {
-      name: 'ZTE',
-      count: 23,
-      selected: false
-    },
-    {
-      name: 'Nokia',
-      count: 30,
-      selected: true
-    },
-    {
-      name: 'Fly',
-      count: 35,
-      selected: false
-    },
-    {
-      name: 'Apple',
-      count: 3,
-      selected: false
-    },
-    {
-      name: 'BQ',
-      count: 333,
-      selected: false
-    },
-    {
-      name: 'Huawei',
-      count: 37,
-      selected: false
-    }
-  ];
 
   params = {
     from: 0,
@@ -88,30 +52,6 @@ export class CategoryFilterComponent implements OnInit {
   private _router = inject(Router);
   private _destroyRef = inject(DestroyRef);
 
-  screenResolutions = [
-    {
-      name: '96x68',
-      count: 23,
-      selected: false
-    },
-    {
-      name: '160x128',
-      count: 1,
-      selected: true
-    },
-    {
-      name: '220x175',
-      count: 18,
-      selected: false
-    },
-    { name: '320x240', count: 18, selected: false },
-    { name: '480x320', count: 18, selected: false },
-    { name: '800x480', count: 18, selected: true },
-    { name: '854x480', count: 18, selected: false },
-    { name: '960x480', count: 18, selected: true },
-    { name: '1280x720 (HD)', count: 18, selected: false },
-    { name: '1440x720', count: 18, selected: false }
-  ];
 
   ngOnInit() {
     this.getParamsFromUrl();

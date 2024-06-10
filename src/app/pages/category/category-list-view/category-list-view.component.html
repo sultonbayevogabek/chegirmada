@@ -6,6 +6,14 @@
 
     <div class="category-header">
       <h1 class="category-heading">Мобильные телефоны</h1>
+
+      <ui-button
+        class="filter-toggle"
+        (click)="isFilterOpened = true"
+        [text]="'filter'"
+        [icon]="'icon:hamburger'"
+        [type]="'gray-outline'"
+      />
     </div>
 
     <!--<div class="category-brands">
@@ -30,3 +38,9 @@
     </div>
   </div>
 </section>
+
+@if (isFilterOpened) {
+  <div
+    (click)="isFilterOpened = false"
+    class="filter-backdrop"></div>
+}
