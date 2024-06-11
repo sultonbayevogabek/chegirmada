@@ -237,3 +237,22 @@
   background-color: $background-grey-color;
   border-radius: 0.5rem;
 }
+
+@include media(1080px) {
+  .company-profile {
+    padding-top: 0;
+  }
+
+  .company-profile-top {
+    @include grid(1fr, 1rem);
+    padding-top: 0.5rem;
+  }
+
+  .company-profile-main-left {
+    @include grid(1fr 4fr, 0.75rem);
+  }
+
+  .company-profile-brand-stats {
+
+  }
+}
