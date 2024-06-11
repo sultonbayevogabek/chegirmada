@@ -11,7 +11,7 @@
         class="filter-toggle"
         (click)="isFilterOpened = true"
         [text]="'filter'"
-        [icon]="'icon:hamburger'"
+        [icon]="'icon:filter'"
         [type]="'gray-outline'"
       />
     </div>
@@ -33,7 +33,9 @@
     </div>-->
 
     <div class="category-content">
-      <category-filter />
+      <category-filter
+        [isFilterOpened]="isFilterOpened"
+      />
       <category-products-list />
     </div>
   </div>

@@ -62,7 +62,7 @@
   }
 
   .category-heading {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
 
   .category-content {
@@ -74,5 +74,10 @@
 @include media(780px) {
   .filter-toggle {
     display: block;
+  }
+
+  .category-content {
+    @include grid(1fr, 0);
+    padding-top: 1rem;
   }
 }

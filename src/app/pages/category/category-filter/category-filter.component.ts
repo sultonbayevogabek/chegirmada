@@ -12,7 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DiscountParamsModel } from '../../../core/models/discount-params.model';
 import { FormsModule } from '@angular/forms';
 import { MatDateRangeInput, MatDateRangePicker, MatEndDate, MatStartDate } from '@angular/material/datepicker';
-import { formatDate } from '@angular/common';
+import { formatDate, NgClass } from '@angular/common';
 
 @Component({
   selector: 'category-filter',
@@ -31,7 +31,8 @@ import { formatDate } from '@angular/common';
     MatDateRangeInput,
     MatDateRangePicker,
     MatEndDate,
-    MatStartDate
+    MatStartDate,
+    NgClass
   ],
   providers: [
     provideNgxMask()
@@ -41,6 +42,7 @@ import { formatDate } from '@angular/common';
 
 export class CategoryFilterComponent implements OnInit {
   @Input() withBorder = true;
+  @Input() isFilterOpened = false;
 
   params = {
     from: 0,

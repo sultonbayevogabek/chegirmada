@@ -1,4 +1,11 @@
-<aside class="category-filter" [class.border]="withBorder">
+<aside
+  class="category-filter"
+  [ngClass]="{
+    'border': withBorder,
+    'opened': isFilterOpened,
+    'closed': !isFilterOpened
+  }"
+>
   <ui-button
     class="category-filter-reset"
     [text]="'reset.filter'| translate"

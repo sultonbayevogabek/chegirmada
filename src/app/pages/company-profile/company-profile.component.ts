@@ -52,7 +52,7 @@ import { SpinnerLoaderComponent } from '../../core/components/spinner-loader/spi
 export class CompanyProfileComponent implements OnInit {
   tabs = [
     {
-      routerLink: [ 'products' ],
+      routerLink: [ 'discounts' ],
       text: 'announcements'
     },
     {

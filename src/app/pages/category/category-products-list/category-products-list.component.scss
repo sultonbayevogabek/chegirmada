@@ -16,6 +16,8 @@
 
 .category-products-list-date {
   @include flex-center;
+  flex-wrap: nowrap;
+  flex-grow: 1;
   height: 2.75rem;
   padding: 0 0.75rem;
   border-radius: 0.5rem;
@@ -77,5 +79,24 @@
 @include media(1080px) {
   .category-products-list-grid {
     @include grid(repeat(2, 1fr), 1rem);
+  }
+}
+
+@include media(620px) {
+  .category-products-list-date-sort {
+    width: 100%;
+    @include grid(3fr 2fr, 0.5rem);
+  }
+
+  mat-date-range-input {
+    flex-grow: 1;
+  }
+
+  .category-products-list-count {
+    display: none;
+  }
+
+  .category-products-list-common-sort {
+    width: auto;
   }
 }

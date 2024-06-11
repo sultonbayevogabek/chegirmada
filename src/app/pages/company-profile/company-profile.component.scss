@@ -61,7 +61,7 @@
 }
 
 .company-profile-username-views {
-  @include flex-center(4rem);
+  @include flex-center-between;
   gap: 2rem;
 }
 
