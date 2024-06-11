@@ -12,39 +12,41 @@
           </div>
 
           <div class="company-profile-brand-stats">
-            <div class="company-profile-brand-details">
-              <h2 class="company-profile-brand-name">{{ store?.name }}</h2>
+            <div>
+              <div class="company-profile-brand-details">
+                <h2 class="company-profile-brand-name">{{ store?.name }}</h2>
 
-              <div class="company-profile-username-views">
-                <div class="company-profile-username-views-item">
-                  {{ '@' + store?.shortname }}
-                </div>
+                <div class="company-profile-username-views">
+                  <div class="company-profile-username-views-item">
+                    {{ '@' + store?.shortname }}
+                  </div>
 
-                <div class="company-profile-username-views-item">
-                  <mat-icon [svgIcon]="'icon:eye'"/>
-                  <span>11</span>
-                </div>
+                  <div class="company-profile-username-views-item">
+                    <mat-icon [svgIcon]="'icon:eye'"/>
+                    <span>11</span>
+                  </div>
 
-                <div class="company-profile-username-views-item">
-                  {{ 'since.registered.date'| translate: { registeredDate: store?.created_at| date: 'dd.MM.YYYY' } }}
+                  <div class="company-profile-username-views-item">
+                    {{ 'since.registered.date'| translate: { registeredDate: store?.created_at| date: 'dd.MM.YYYY' } }}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="company-profile-stats">
-              <div class="company-profile-stats-item">
-                <div class="company-profile-stats-value">{{ store?.followers| number}}</div>
-                <div class="company-profile-stats-label">{{ 'subscribers'| translate }}</div>
-              </div>
+              <div class="company-profile-stats">
+                <div class="company-profile-stats-item">
+                  <div class="company-profile-stats-value">{{ store?.followers| number}}</div>
+                  <div class="company-profile-stats-label">{{ 'subscribers'| translate }}</div>
+                </div>
 
-              <div class="company-profile-stats-item">
-                <div class="company-profile-stats-value">{{ store?.likes| number }}</div>
-                <div class="company-profile-stats-label">{{ 'likes'| translate }}</div>
-              </div>
+                <div class="company-profile-stats-item">
+                  <div class="company-profile-stats-value">{{ store?.likes| number }}</div>
+                  <div class="company-profile-stats-label">{{ 'likes'| translate }}</div>
+                </div>
 
-              <div class="company-profile-stats-item">
-                <div class="company-profile-stats-value">{{ store?.comments| translate }}</div>
-                <div class="company-profile-stats-label">{{ 'comments'| translate }}</div>
+                <div class="company-profile-stats-item">
+                  <div class="company-profile-stats-value">{{ store?.comments| translate }}</div>
+                  <div class="company-profile-stats-label">{{ 'comments'| translate }}</div>
+                </div>
               </div>
             </div>
 

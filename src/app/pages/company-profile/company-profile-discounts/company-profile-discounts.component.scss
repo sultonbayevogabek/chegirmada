@@ -16,6 +16,7 @@
 
 .company-profile-discounts-filter {
   @include flex-center(0.5rem);
+  flex-wrap: nowrap;
 }
 
 .company-profile-discount-search {
@@ -41,4 +42,41 @@
 .company-profile-discounts-cards {
   @include grid(repeat(4, 1fr), 1.5rem);
   padding-top: 1.5rem;
+}
+
+@include media(1280px) {
+  .company-profile-discounts-cards {
+    @include grid(repeat(3, 1fr), 1rem);
+    padding-top: 1rem;
+  }
+}
+
+@include media(1080px) {
+  .company-profile-discounts {
+    padding-top: 0.75rem;
+  }
+
+  .company-profile-discounts-cards {
+    grid-gap: 0.5rem;
+  }
+}
+
+@include media(780px) {
+  .company-profile-discounts-cards {
+    @include grid(repeat(2, 1fr), 0.5rem);
+  }
+}
+
+@include media(680px) {
+  .company-profile-discounts-total {
+    display: none !important;
+  }
+
+  .company-profile-discounts-filter {
+    width: 100%;
+  }
+
+  .company-profile-discount-search {
+    flex-grow: 1;
+  }
 }

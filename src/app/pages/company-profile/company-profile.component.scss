@@ -245,14 +245,98 @@
 
   .company-profile-top {
     @include grid(1fr, 1rem);
-    padding-top: 0.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 
   .company-profile-main-left {
-    @include grid(1fr 4fr, 0.75rem);
+    @include flex-start(0.75rem);
+  }
+
+  .company-profile-logo {
+    width: 8rem;
+    border-radius: 50%;
   }
 
   .company-profile-brand-stats {
+    @include flex-start(1.5rem);
+    flex-grow: 1;
 
+    ui-button {
+      flex-grow: 1;
+    }
+  }
+
+  .company-profile-contact {
+    @include grid(repeat(3, 1fr), 0.5rem);
+    padding: 0.75rem;
+  }
+
+  .company-profile-stats {
+    padding: 0.5rem 0;
+  }
+
+  .company-profile-stats-item {
+    padding: 0.5rem 1rem 0.5rem 0;
+  }
+
+  .company-profile-middle {
+    grid-gap: 1rem;
+    padding-top: 0.75rem;
+  }
+
+  .company-profile-middle-heading {
+    font-size: 1rem;
+  }
+
+  .company-profile-tabs {
+    padding-top: 0.75rem;
+  }
+
+  .company-profile-rate-description, .company-profile-about-text {
+    padding-top: 0.5rem;
+  }
+}
+
+@include media(780px) {
+  .company-profile-brand-stats {
+    display: block;
+  }
+
+  .company-profile-username-views {
+    justify-content: flex-start;
+  }
+
+  .company-profile-contact {
+    @include grid(repeat(2, 1fr), 0.5rem);
+  }
+
+  .company-profile-middle {
+    @include grid(1fr, 0.5rem);
+  }
+}
+
+@include media(620px) {
+  .company-profile-main-left {
+    @include grid(1fr, 0.5rem);
+  }
+
+  .company-profile-logo {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .company-profile-brand-name, .company-profile-stats-value {
+    text-align: center;
+  }
+
+  .company-profile-username-views, .company-profile-stats {
+    justify-content: center;
+  }
+}
+
+@include media(450px) {
+  .company-profile-contact {
+    @include grid(1fr, 0.5rem);
   }
 }

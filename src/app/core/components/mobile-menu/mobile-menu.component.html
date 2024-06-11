@@ -26,23 +26,23 @@
       <li
         class="mobile-menu-li"
         mat-ripple
+        [routerLink]="['/', 'stores']"
+        [routerLinkActive]="'active'"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <mat-icon class="mobile-menu-icon store active-icon" [svgIcon]="'icon:store-active'"/>
+        <mat-icon class="mobile-menu-icon store inactive-icon" [svgIcon]="'icon:store-inactive'"/>
+      </li>
+
+      <li
+        class="mobile-menu-li"
+        mat-ripple
         [routerLink]="['/', 'wish-list']"
         [routerLinkActive]="'active'"
         [routerLinkActiveOptions]="{ exact: true }"
       >
         <mat-icon class="mobile-menu-icon heart active-icon" [svgIcon]="'icon:solid-heart'"/>
         <mat-icon class="mobile-menu-icon heart inactive-icon" [svgIcon]="'icon:outlined-heart'"/>
-      </li>
-
-      <li
-        class="mobile-menu-li"
-        mat-ripple
-        [routerLink]="['/', 'notifications']"
-        [routerLinkActive]="'active'"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <mat-icon class="mobile-menu-icon bell active-icon" [svgIcon]="'icon:bell-active'"/>
-        <mat-icon class="mobile-menu-icon bell inactive-icon" [svgIcon]="'icon:bell'"/>
       </li>
 
       @if (currentUser) {

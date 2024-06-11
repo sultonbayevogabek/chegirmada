@@ -30,6 +30,7 @@
 }
 
 .company-branch-details-label {
+  white-space: nowrap;
   color: $secondary-text-color;
 }
 
@@ -37,4 +38,27 @@
   font-weight: 500;
   color: $dialog-title-black;
   @include line-clamp(1)
+}
+
+@include media(1080px) {
+  .company-profile-branches-list {
+    padding-top: 0.75rem;
+    grid-gap: 0.75rem;
+  }
+
+  .company-profile-branches-item {
+    padding: 0.75rem;
+  }
+}
+
+@include media(780px) {
+  .company-profile-branches-list {
+    @include grid(1fr, 0.5rem);
+  }
+}
+
+@include media(620px) {
+  .company-branch-details {
+    @include grid(1fr, 0.5rem);
+  }
 }
