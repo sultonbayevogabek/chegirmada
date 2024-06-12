@@ -49,4 +49,13 @@ export class MyStoreService {
   deleteBranch(branchId: number): Observable<BranchModel> {
     return this._httpClient.delete<BranchModel>(this._host + `stores/branches/${branchId}/`);
   }
+
+  getStoreList(params: { page: number; page_size: number; search: string }): Observable<{ count: number; results: StoreModel[] }> {
+    return this._httpClient.get<{ count: number; results: StoreModel[] }>(this._host + 'stores/', {
+      params: {
+        ...params,
+        page: params.page + 1,
+      }
+    })
+  }
 }

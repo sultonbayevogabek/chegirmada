@@ -58,9 +58,13 @@ export const routes: Routes = [
         loadChildren: () => import('./pages/company-profile/company-profile.routes').then(r => r.companyProfileRoutes)
       },
       {
+        path: 'stores',
+        loadComponent: () => import('./pages/stores/stores.component').then(c => c.StoresComponent)
+      },
+      {
         path: '**',
         redirectTo: 'not-found-404'
       }
     ]
-  },
+  }
 ];

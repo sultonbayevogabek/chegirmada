@@ -1,0 +1,72 @@
+<div class="stores">
+  <div class="container">
+    <div class="stores-header">
+      <section-header
+        [heading]="'stores'"
+      />
+
+      <input
+        [(ngModel)]="params.search"
+        (keydown.enter)="search()"
+        class="stores-search form-input"
+        type="search"
+        [placeholder]="'search'| translate"
+      >
+    </div>
+
+    @if (loading) {
+      <spinner-loader/>
+    }
+
+    @if (!loading && stores?.length) {
+      <div class="stores-grid">
+        @for (store of stores; track store) {
+          <div class="stores-item">
+            <div class="stores-logo">
+              @if (store.logo) {
+                <img [ngSrc]="store.logo" [fill]="true" alt="">
+              } @else {
+                <mat-icon [svgIcon]="'icon:store'"/>
+              }
+            </div>
+
+            <div class="stores-info">
+              <h3 class="stores-name">{{ store.name }}</h3>
+              <div class="stores-statistics">
+                <div class="stores-statistics-item">
+                  <mat-icon class="icon-star" [svgIcon]="'icon:gradient-star'"/>
+                  <span>{{ store?.avg_rating }}</span>
+                </div>
+
+                <div class="stores-statistics-item">
+                  <mat-icon class="icon-avatar" [svgIcon]="'icon:gradient-man'"/>
+                  <span>{{ store?.followers }}</span>
+                </div>
+              </div>
+            </div>
+
+            <ui-button
+              [type]="store?.user_follow ? 'gray-outline' : 'blue'"
+              [text]="store?.user_follow ? 'unsubscribe': 'subscribe'"
+              [full]="true"
+              (click)="subscribeToStore(store)"
+            />
+          </div>
+        }
+      </div>
+
+      <mat-paginator
+        [pageSize]="params.page_size"
+        [pageIndex]="params.page"
+        [length]="params.total"
+        (page)="onPageChange($event)"
+        [hidePageSize]="true"
+      />
+    }
+
+    @if (!loading && !stores?.length) {
+      <profile-empty-list/>
+    }
+
+  </div>
+</div>
