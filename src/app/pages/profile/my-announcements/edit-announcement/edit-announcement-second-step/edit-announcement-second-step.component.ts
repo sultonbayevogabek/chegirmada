@@ -1,4 +1,4 @@
-import { Component, DestroyRef, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import {
   MatAutocomplete,
   MatAutocompleteOrigin, MatAutocompleteSelectedEvent,
@@ -27,6 +27,7 @@ import { AuthService } from '../../../../../core/services/auth.service';
 import { BranchModel } from '../../../../../core/models/branch.model';
 import { ToasterService } from '../../../../../core/services/toaster.service';
 import { newPrice } from '../../../../../core/validators/new-price.validator';
+import { ProductDetails } from '../../../../../core/models/product-details.model';
 
 @Component({
   selector: 'edit-announcement-second-step',
@@ -78,6 +79,7 @@ export class EditAnnouncementSecondStepComponent implements OnInit {
   }>();
 
   @Output() onStepChanged: EventEmitter<number> = new EventEmitter<number>();
+  @Input() productDetails: ProductDetails;
 
   tags: {
     searchedTags: TagModel[];

@@ -71,7 +71,7 @@ export class BranchActionComponent implements OnInit {
   regions = REGIONS;
   districts: DistrictModel[];
   manageBranchForm = new FormGroup({
-    name_uz: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
+    name: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
     working_day_start: new FormControl(0),
     working_day_end: new FormControl(4),
     working_time_start: new FormControl('09:00', [ Validators.required, Validators.minLength(4) ]),
@@ -159,7 +159,7 @@ export class BranchActionComponent implements OnInit {
           this._yandexMapsService
             .setSingleLocationPoint('map', [ branch.latitude, branch.longitude ]);
           this.manageBranchForm.patchValue(branch);
-          this.manageBranchForm.get('name_uz').setValue(branch.name);
+          this.manageBranchForm.get('name').setValue(branch.name);
           this.getDistrictsList();
         }
       });

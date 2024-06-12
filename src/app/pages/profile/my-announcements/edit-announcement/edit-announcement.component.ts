@@ -10,12 +10,14 @@ import {
 } from './edit-announcement-third-step/edit-announcement-third-step.component';
 import { IconButtonComponent } from '../../../../core/components/icon-button/icon-button.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   EditAnnouncementSecondStepComponent
 } from './edit-announcement-second-step/edit-announcement-second-step.component';
 import { MyAnnouncementsService } from '../../../../core/services/my-announcements.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ProductDetailsService } from '../../../../core/services/product-details.service';
+import { ProductDetails } from '../../../../core/models/product-details.model';
 
 @Component({
   selector: 'edit-announcement',
@@ -37,7 +39,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     EditAnnouncementSecondStepComponent
   ],
   providers: [
-    MyAnnouncementsService
+    MyAnnouncementsService,
+    ProductDetailsService
   ]
 })
 
@@ -55,13 +58,31 @@ export class EditAnnouncementComponent implements OnInit {
     '2': null,
     '3': null
   };
+  details: ProductDetails;
+
   private _toaster = inject(ToasterService);
   private _myAnnouncementService = inject(MyAnnouncementsService);
+  private _productDetailsService = inject(ProductDetailsService);
+  private _activatedRoute = inject(ActivatedRoute);
   private _destroyRef = inject(DestroyRef);
   private _location = inject(Location);
 
-
   ngOnInit(): void {
+    this._activatedRoute.params
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe((res: { id: string }) => {
+        if (!res?.id) return;
+
+        this.getProductDetails(+res?.id);
+      });
+  }
+
+  getProductDetails(id: number): void {
+    this._productDetailsService.getProductDetails(id)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(data => {
+        this.details = data;
+      });
   }
 
   changeTab(tab: number): void {
@@ -106,27 +127,23 @@ export class EditAnnouncementComponent implements OnInit {
 
       if ([ 'start_date', 'end_date' ].includes(key)) {
         formData.append(key, formatDate(value, 'yyyy-MM-dd', 'ru'));
-      }
-      else if ([ 'images', 'store_branches', 'tags', 'new_tags' ].includes(key)) {
+      } else if ([ 'images', 'store_branches', 'tags', 'new_tags' ].includes(key)) {
         value.forEach((item: any) => {
           formData.append(key, item);
         });
-      }
-      else if (key === 'custom_features') {
+      } else if (key === 'custom_features') {
         value.forEach((item: { value: string; price: string; feature: number; name: string }, index: number) => {
-          formData.append(`custom_features[${index}]value`, item.value);
-          formData.append(`custom_features[${index}]name`, item.name ? item.name : '');
-          formData.append(`custom_features[${index}]feature`, item.feature ? item.feature.toString() : '');
-          formData.append(`custom_features[${index}]price`, item.price);
-        })
-      }
-      else if (key === 'features') {
+          formData.append(`custom_features[${ index }]value`, item.value);
+          formData.append(`custom_features[${ index }]name`, item.name ? item.name : '');
+          formData.append(`custom_features[${ index }]feature`, item.feature ? item.feature.toString() : '');
+          formData.append(`custom_features[${ index }]price`, item.price);
+        });
+      } else if (key === 'features') {
         value.forEach((item: { feature_value: string; price: string }, index: number) => {
-          formData.append(`features[${index}]feature_value`, item.feature_value);
-          formData.append(`features[${index}]price`, item.price);
-        })
-      }
-      else {
+          formData.append(`features[${ index }]feature_value`, item.feature_value);
+          formData.append(`features[${ index }]price`, item.price);
+        });
+      } else {
         formData.append(key, value);
       }
     }
