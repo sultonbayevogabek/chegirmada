@@ -25,7 +25,7 @@ export class MyAnnouncementsService {
   }
 
   getDiscountDataForEditing(id: number): Observable<any> {
-    return this._httpClient.post<Observable<any>>(this._host + 'discounts/create/standard/', { id });
+    return this._httpClient.post<Observable<any>>(this._host + `/discounts/${id}/update/`, { id });
   }
 
   getMyAnnouncements(params: {
