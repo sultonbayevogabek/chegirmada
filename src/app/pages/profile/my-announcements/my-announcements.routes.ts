@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { MyAnnouncementsService } from '../../../core/services/my-announcements.service';
+import { discountUpdateDataResolver } from '../../../core/resolvers/discount-update-data.resolver';
 
 export const myAnnouncementsRoutes: Routes = [
   {
@@ -20,7 +22,13 @@ export const myAnnouncementsRoutes: Routes = [
       },
       {
         path: 'edit/:id',
-        loadComponent: () => import('./edit-announcement/edit-announcement.component').then(c => c.EditAnnouncementComponent)
+        loadComponent: () => import('./edit-announcement/edit-announcement.component').then(c => c.EditAnnouncementComponent),
+        providers: [
+          MyAnnouncementsService
+        ],
+        resolve: {
+          discountUpdateDataResolver
+        }
       }
     ]
   }

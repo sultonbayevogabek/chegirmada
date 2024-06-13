@@ -1,18 +1,20 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
 import { TagModel } from '../models/tag.model';
 import { PaymentHistoryResponse } from '../models/payment-history.model';
 import { AnnouncementResponse } from '../models/announcement.model';
 import { AdvertisingTypeModel } from '../models/advertising-type.model';
 import { DiscountUpdateData } from '../models/discount-update-data.model';
+import { ProductDetails } from '../models/product-details.model';
 
 @Injectable()
 
 export class MyAnnouncementsService {
   private _host = environment.host;
   private _httpClient = inject(HttpClient);
+  discountDataForEditing$: BehaviorSubject<DiscountUpdateData> = new BehaviorSubject<DiscountUpdateData>(null);
 
   getTags(search: string): Observable<{ search: string; tags: TagModel[] }> {
     return this._httpClient.post<{
@@ -26,7 +28,13 @@ export class MyAnnouncementsService {
   }
 
   getDiscountDataForEditing(id: number): Observable<DiscountUpdateData> {
-    return this._httpClient.get<DiscountUpdateData>(this._host + `discounts/${id}/update/`);
+    return this._httpClient.get<DiscountUpdateData>(this._host + `discounts/${id}/update/`)
+      .pipe(
+        tap(productDetails => {
+          this.discountDataForEditing$.next(productDetails);
+        }),
+        switchMap(productDetails => of(productDetails))
+      );
   }
 
   getMyAnnouncements(params: {

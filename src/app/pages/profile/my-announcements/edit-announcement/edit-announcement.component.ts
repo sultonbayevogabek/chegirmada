@@ -37,9 +37,6 @@ import { DiscountUpdateData } from '../../../../core/models/discount-update-data
     RouterLink,
     NgClass,
     EditAnnouncementSecondStepComponent
-  ],
-  providers: [
-    MyAnnouncementsService
   ]
 })
 
@@ -66,17 +63,11 @@ export class EditAnnouncementComponent implements OnInit {
   private _location = inject(Location);
 
   ngOnInit(): void {
-    this._activatedRoute.params
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((res: { id: string }) => {
-        if (!res?.id) return;
-
-        this.getProductDetails(+res?.id);
-      });
+    this.getProductDetails();
   }
 
-  getProductDetails(id: number): void {
-    this._myAnnouncementService.getDiscountDataForEditing(id)
+  getProductDetails(): void {
+    this._myAnnouncementService.discountDataForEditing$
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(data => {
         this.details = data;

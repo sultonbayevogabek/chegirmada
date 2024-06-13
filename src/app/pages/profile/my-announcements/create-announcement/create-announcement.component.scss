@@ -80,3 +80,13 @@
 .create-announcement-tabs-item.disabled {
   cursor: not-allowed;
 }
+
+@include media(1080px) {
+  .create-announcement-heading {
+    font-size: 1rem;
+  }
+
+  .create-announcement-tabs {
+    padding: 0;
+  }
+}

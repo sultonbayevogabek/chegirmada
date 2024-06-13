@@ -130,3 +130,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+@include media(1080px) {
+  .create-announcement-information-inner {
+    padding: 0.75rem;
+  }
+
+  .create-announcement-information-fields {
+    grid-gap: 0.75rem;
+  }
+
+  .grid-2 {
+    grid-gap: 0.75rem;
+  }
+}
