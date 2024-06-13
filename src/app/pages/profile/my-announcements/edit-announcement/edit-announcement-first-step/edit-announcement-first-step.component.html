@@ -1,13 +1,12 @@
 <div class="create-announcement-information">
   <form class="create-announcement-information-inner" [formGroup]="firstStepForm">
     <div class="create-announcement-information-fields">
-      <label class="create-announcement-information-field form-label">
+      <label class="create-announcement-information-field form-label" [matTooltip]="'category.cannot.be.changed'| translate">
         <span class="create-announcement-information-field-title form-label-text">{{ 'main.category'| translate }} ( 1 ) *</span>
 
         <mat-select
           class="solid-select"
           [placeholder]="'select.main.category'| translate"
-          (selectionChange)="onMainCategoryChanged()"
           [formControlName]="'main_category'"
           [class.invalid]="firstStepForm.get('main_category').invalid && firstStepForm.get('main_category').touched"
         >
@@ -22,13 +21,12 @@
       </label>
 
       @if (firstStepForm.get('main_category').value != null && secondLevelCategories.length) {
-        <label class="create-announcement-information-field form-label">
+        <label class="create-announcement-information-field form-label" [matTooltip]="'category.cannot.be.changed'| translate">
           <span class="create-announcement-information-field-title form-label-text">{{ 'subcategory'| translate }} ( 2 ) *</span>
 
           <mat-select
             class="solid-select"
             [placeholder]="'select.subcategory'| translate"
-            (selectionChange)="onSubcategoryChanged()"
             [formControlName]="'subcategory'"
             [class.invalid]="firstStepForm.get('subcategory').invalid && firstStepForm.get('subcategory').touched"
           >
@@ -44,7 +42,7 @@
       }
 
       @if (firstStepForm.get('subcategory').value != null && thirdLevelCategories.length) {
-        <label class="create-announcement-information-field form-label">
+        <label class="create-announcement-information-field form-label" [matTooltip]="'category.cannot.be.changed'| translate">
           <span class="create-announcement-information-field-title form-label-text">{{ 'subcategory'| translate }} ( 3 ) *</span>
 
           <mat-select
@@ -210,18 +208,18 @@
       </div>
     </div>
 
-    @if (imagesBuffers.length) {
+    @if (firstStepForm.get('images')?.value?.length) {
       <div
         cdkDropList
         cdkDropListOrientation="horizontal"
         class="create-announcement-images"
         (cdkDropListDropped)="drop($event)"
       >
-        @for (buffer of imagesBuffers; track buffer; let i = $index) {
+        @for (image of firstStepForm.get('images')?.value; track image; let i = $index) {
           <div class="create-announcement-image" cdkDrag>
             <div class="create-announcement-image-placeholder" *cdkDragPlaceholder></div>
 
-            <img class="create-announcement-image-original" [src]="buffer" [alt]="">
+            <img class="create-announcement-image-original" [src]="image?.buffer ? image?.buffer : image" [alt]="">
 
 
             <icon-button

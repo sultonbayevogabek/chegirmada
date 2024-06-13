@@ -6,6 +6,7 @@ import { TagModel } from '../models/tag.model';
 import { PaymentHistoryResponse } from '../models/payment-history.model';
 import { AnnouncementResponse } from '../models/announcement.model';
 import { AdvertisingTypeModel } from '../models/advertising-type.model';
+import { DiscountUpdateData } from '../models/discount-update-data.model';
 
 @Injectable()
 
@@ -20,12 +21,12 @@ export class MyAnnouncementsService {
     }>(this._host + 'tags/search/', { search });
   }
 
-  createStandardDiscount(payload: any): Observable<any> {
+  createStandardDiscount(payload: FormData): Observable<any> {
     return this._httpClient.post<Observable<any>>(this._host + 'discounts/create/standard/', payload);
   }
 
-  getDiscountDataForEditing(id: number): Observable<any> {
-    return this._httpClient.post<Observable<any>>(this._host + `/discounts/${id}/update/`, { id });
+  getDiscountDataForEditing(id: number): Observable<DiscountUpdateData> {
+    return this._httpClient.get<DiscountUpdateData>(this._host + `discounts/${id}/update/`);
   }
 
   getMyAnnouncements(params: {
@@ -66,5 +67,9 @@ export class MyAnnouncementsService {
 
   buyAdvertising(params: { discount: number; advertisement: number }): Observable<{ discount: number; advertisement: number }> {
     return this._httpClient.post<{ discount: number; advertisement: number }>(this._host + 'discounts/advertising/buy/', params)
+  }
+
+  updateStandardDiscount(id: number, payload: FormData): Observable<any> {
+    return this._httpClient.put<Observable<any>>(this._host + `discounts/${id}/update/`, payload);
   }
 }

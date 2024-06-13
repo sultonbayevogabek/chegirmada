@@ -16,8 +16,8 @@ import {
 } from './edit-announcement-second-step/edit-announcement-second-step.component';
 import { MyAnnouncementsService } from '../../../../core/services/my-announcements.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ProductDetailsService } from '../../../../core/services/product-details.service';
 import { ProductDetails } from '../../../../core/models/product-details.model';
+import { DiscountUpdateData } from '../../../../core/models/discount-update-data.model';
 
 @Component({
   selector: 'edit-announcement',
@@ -39,8 +39,7 @@ import { ProductDetails } from '../../../../core/models/product-details.model';
     EditAnnouncementSecondStepComponent
   ],
   providers: [
-    MyAnnouncementsService,
-    ProductDetailsService
+    MyAnnouncementsService
   ]
 })
 
@@ -58,11 +57,10 @@ export class EditAnnouncementComponent implements OnInit {
     '2': null,
     '3': null
   };
-  details: ProductDetails;
+  details: DiscountUpdateData;
 
   private _toaster = inject(ToasterService);
   private _myAnnouncementService = inject(MyAnnouncementsService);
-  private _productDetailsService = inject(ProductDetailsService);
   private _activatedRoute = inject(ActivatedRoute);
   private _destroyRef = inject(DestroyRef);
   private _location = inject(Location);
@@ -78,7 +76,7 @@ export class EditAnnouncementComponent implements OnInit {
   }
 
   getProductDetails(id: number): void {
-    this._productDetailsService.getProductDetails(id)
+    this._myAnnouncementService.getDiscountDataForEditing(id)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(data => {
         this.details = data;
@@ -118,7 +116,8 @@ export class EditAnnouncementComponent implements OnInit {
       ...this.data['1'].getRawValue(),
       ...this.data['2'].getRawValue(),
       ...this.data['3'],
-      is_active: true
+      is_active: true,
+      is_modified: true
     };
     const formData = new FormData();
 
@@ -127,11 +126,22 @@ export class EditAnnouncementComponent implements OnInit {
 
       if ([ 'start_date', 'end_date' ].includes(key)) {
         formData.append(key, formatDate(value, 'yyyy-MM-dd', 'ru'));
-      } else if ([ 'images', 'store_branches', 'tags', 'new_tags' ].includes(key)) {
+      }
+      else if ([ 'store_branches', 'tags', 'new_tags' ].includes(key)) {
         value.forEach((item: any) => {
           formData.append(key, item);
         });
-      } else if (key === 'custom_features') {
+      }
+      else if ('images' === key) {
+        value.forEach((item: any) => {
+          if (typeof item === 'object') {
+            formData.append('modified_images', item?.file);
+          } else {
+            formData.append('modified_images', item);
+          }
+        });
+      }
+      else if (key === 'custom_features') {
         value.forEach((item: { value: string; price: string; feature: number; name: string }, index: number) => {
           formData.append(`custom_features[${ index }]value`, item.value);
           formData.append(`custom_features[${ index }]name`, item.name ? item.name : '');
@@ -148,9 +158,15 @@ export class EditAnnouncementComponent implements OnInit {
       }
     }
 
-    this._myAnnouncementService.createStandardDiscount(formData)
+    this._myAnnouncementService.updateStandardDiscount(this.details.pk, formData)
       .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe();
+      .subscribe(res => {
+        this._toaster.open({
+          title: 'attention',
+          message: 'changes.successfully.changed',
+        })
+        this._location.back();
+      });
   }
 
   back(): void {

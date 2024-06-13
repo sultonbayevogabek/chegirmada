@@ -42,6 +42,7 @@
   "catalog": "Katalog",
   "categories": "Kategoriyalar",
   "category": "Kategoriya",
+  "category.cannot.be.changed": "Kategoriyani o'zgartirish mumkin emas",
   "change": "O'zgartirish",
   "change.branch.information": "Filial ma'lumotlarini o'zgartirish",
   "changes.successfully.changed": "O'zgarishlar muvaffaqiyatli saqlandi",

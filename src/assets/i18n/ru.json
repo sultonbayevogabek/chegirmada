@@ -42,6 +42,7 @@
   "catalog": "Каталог",
   "categories": "Категории",
   "category": "Категория",
+  "category.cannot.be.changed": "Категорию нельзя изменить",
   "change": "Изменить",
   "change.branch.information": "Изменить информацию о филиале",
   "changes.successfully.changed": "Изменения успешно сохранены",

@@ -16,7 +16,7 @@ export interface MainCategory {
 export interface SecondLevelCategory {
   pk: number;
   name: string;
-  children: ThirdLevelCategory[];
+  children?: ThirdLevelCategory[];
 }
 
 export interface ThirdLevelCategory {

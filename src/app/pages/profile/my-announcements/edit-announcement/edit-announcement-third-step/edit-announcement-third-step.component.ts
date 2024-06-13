@@ -29,6 +29,7 @@ import { MatRipple } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFeatureModalComponent } from '../../new-feature-modal/new-feature-modal.component';
 import { ProductDetails } from '../../../../../core/models/product-details.model';
+import { DiscountUpdateData } from '../../../../../core/models/discount-update-data.model';
 
 @Component({
   selector: 'edit-announcement-third-step',
@@ -62,7 +63,7 @@ export class EditAnnouncementThirdStepComponent implements OnInit, OnChanges {
     step: number
   }>();
   @Output() onStepChanged: EventEmitter<number> = new EventEmitter<number>();
-  @Input() productDetails: ProductDetails;
+  @Input() productDetails: DiscountUpdateData;
 
   featureTemplates: FeatureTemplate[] = [];
   customTemplates: CustomTemplate[] = [];
@@ -79,7 +80,7 @@ export class EditAnnouncementThirdStepComponent implements OnInit, OnChanges {
   private _dialog = inject(MatDialog);
 
   ngOnInit(): void {
-    this._generalService.getCategoryFeatures(1)
+    this._generalService.getCategoryFeatures(this.productDetails.categories[2].pk)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(res => {
         this.featureTemplates = res.map(item => {
@@ -88,6 +89,35 @@ export class EditAnnouncementThirdStepComponent implements OnInit, OnChanges {
             selected: [ { feature_value: null, price: '', sign: '-' } ]
           };
         });
+        this.featureTemplates.map(featureTemplate => {
+          const exist = this.productDetails.features_read_only.find(i => i.name === featureTemplate.name && !i.is_custom);
+
+          if (exist) {
+            featureTemplate.selected = [];
+            exist.values.forEach(i => {
+              featureTemplate.selected.push({
+                feature_value: i.pk,
+                price: '0',
+                sign: '-'
+              })
+            })
+          }
+        })
+
+        this.productDetails.features_read_only.forEach(feature => {
+          if (!feature.is_custom) return;
+
+          this.customTemplates.push({
+            name: feature.name,
+            items: feature.values.map(i => {
+              return {
+                value: i.value,
+                price: '0',
+                sign: '-'
+              }
+            })
+          })
+        })
       });
   }
 

@@ -73,24 +73,26 @@
   </button>
 </div>
 
-<edit-announcement-first-step
-  [hidden]="currentTab !== 1"
-  (onFormStateChanged)="onFormStateChanged($event)"
-  (onStepChanged)="changeTab($event)"
-  [productDetails]="details"
-/>
-<edit-announcement-second-step
-  [hidden]="currentTab !== 2"
-  (onFormStateChanged)="onFormStateChanged($event)"
-  (onStepChanged)="changeTab($event)"
-  [productDetails]="details"
-/>
-<edit-announcement-third-step
-  [hidden]="currentTab !== 3"
-  (onFormStateChanged)="onFormStateChanged($event)"
-  (onStepChanged)="changeTab($event)"
-  [productDetails]="details"
-/>
+@if (details) {
+  <edit-announcement-first-step
+    [hidden]="currentTab !== 1"
+    (onFormStateChanged)="onFormStateChanged($event)"
+    (onStepChanged)="changeTab($event)"
+    [productDetails]="details"
+  />
+  <edit-announcement-second-step
+    [hidden]="currentTab !== 2"
+    (onFormStateChanged)="onFormStateChanged($event)"
+    (onStepChanged)="changeTab($event)"
+    [productDetails]="details"
+  />
+  <edit-announcement-third-step
+    [hidden]="currentTab !== 3"
+    (onFormStateChanged)="onFormStateChanged($event)"
+    (onStepChanged)="changeTab($event)"
+    [productDetails]="details"
+  />
+}
 
 <ng-template #decorationItems>
   @for (i of Array(20).fill(1); track i) {

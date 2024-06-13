@@ -1,4 +1,14 @@
-import { Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import {
   MatAutocomplete,
   MatAutocompleteOrigin, MatAutocompleteSelectedEvent,
@@ -28,6 +38,7 @@ import { BranchModel } from '../../../../../core/models/branch.model';
 import { ToasterService } from '../../../../../core/services/toaster.service';
 import { newPrice } from '../../../../../core/validators/new-price.validator';
 import { ProductDetails } from '../../../../../core/models/product-details.model';
+import { DiscountUpdateData } from '../../../../../core/models/discount-update-data.model';
 
 @Component({
   selector: 'edit-announcement-second-step',
@@ -72,14 +83,14 @@ import { ProductDetails } from '../../../../../core/models/product-details.model
   ]
 })
 
-export class EditAnnouncementSecondStepComponent implements OnInit {
+export class EditAnnouncementSecondStepComponent implements OnInit, OnChanges {
   @Output() onFormStateChanged: EventEmitter<{ form: FormGroup<any>, step: number }> = new EventEmitter<{
     form: FormGroup<any>,
     step: number
   }>();
 
   @Output() onStepChanged: EventEmitter<number> = new EventEmitter<number>();
-  @Input() productDetails: ProductDetails;
+  @Input() productDetails: DiscountUpdateData;
 
   tags: {
     searchedTags: TagModel[];
@@ -102,16 +113,16 @@ export class EditAnnouncementSecondStepComponent implements OnInit {
   secondStepForm = new FormGroup({
     price: new FormControl<number>(null, [ Validators.required ]),
     currency: new FormControl<1 | 2>(1),
-    product_counts: new FormControl<number>(100, [ Validators.max(2147483647) ]),
-    remainder: new FormControl<number>(76, [ Validators.max(2147483647) ]),
-    start_date: new FormControl<Date>(new Date(), [ Validators.required ]),
-    end_date: new FormControl<Date>(new Date(), [ Validators.required ]),
+    product_counts: new FormControl<number>(null, [ Validators.max(2147483647) ]),
+    remainder: new FormControl<number>(null, [ Validators.max(2147483647) ]),
+    start_date: new FormControl<Date>(null, [ Validators.required ]),
+    end_date: new FormControl<Date>(null, [ Validators.required ]),
     tags: new FormControl<number[]>([]),
     new_tags: new FormControl<string[]>([]),
     store_branches: new FormControl<number[]>([]),
 
     // regular
-    discount_amount: new FormControl(45, [
+    discount_amount: new FormControl(null, [
       Validators.required,
       Validators.min(1), Validators.max(100)
     ]),
@@ -157,12 +168,32 @@ export class EditAnnouncementSecondStepComponent implements OnInit {
     this.secondStepForm.valueChanges
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(_ => {
-        console.log('FormGroup', this.secondStepForm);
         if (this.secondStepForm.invalid) {
           return;
         }
         this.onFormStateChanged.emit({ form: this.secondStepForm, step: 2 });
       });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.secondStepForm.get('price').setValue(+this.productDetails.price);
+    this.secondStepForm.get('currency').setValue(this.productDetails.currency);
+    this.secondStepForm.get('product_counts').setValue(+this.productDetails?.product_counts);
+    this.secondStepForm.get('remainder').setValue(+this.productDetails?.remainder);
+    this.secondStepForm.get('start_date').setValue(new Date(this.productDetails?.start_date));
+    this.secondStepForm.get('end_date').setValue(new Date(this.productDetails?.end_date));
+    this.secondStepForm.get('tags').setValue(this.productDetails?.tags?.map(t => t.pk));
+    this.tags.selectedTags = this.productDetails?.tags;
+    this.secondStepForm.get('store_branches').setValue(this.productDetails?.store_branches.map(branch => branch.pk));
+    this.secondStepForm.get('discount_amount').setValue(+this.productDetails?.discount_amount);
+    this.secondStepForm.get('discount_amount_is_percent').setValue(this.productDetails?.discount_amount_is_percent);
+
+    if (this.productDetails?.discount_amount_is_percent) {
+      this.secondStepForm.get('regular_discount_type').setValue('percent');
+    } else {
+      this.secondStepForm.get('regular_discount_type').setValue(this.productDetails.currency === 1 ? 'uzs' : 'usd');
+    }
+    this.onFormStateChanged.emit({ form: this.secondStepForm, step: 2 });
   }
 
   changeCurrency(currency: 1 | 2): void {

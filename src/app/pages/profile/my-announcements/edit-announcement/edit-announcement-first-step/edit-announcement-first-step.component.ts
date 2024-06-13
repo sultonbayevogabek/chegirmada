@@ -5,8 +5,10 @@ import {
   EventEmitter,
   inject,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -14,7 +16,7 @@ import { DragAndDropDirective } from '../../../../../core/directives/drag-and-dr
 import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
 import { MatIcon } from '@angular/material/icon';
 import { MatNativeDateModule, MatOption, MatRipple } from '@angular/material/core';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IconButtonComponent } from '../../../../../core/components/icon-button/icon-button.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatSelect } from '@angular/material/select';
@@ -31,10 +33,11 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { youtubeVideoURL } from '../../../../../core/validators/youtube-video.validator';
 import { arrayMinLength } from '../../../../../core/validators/array-min-length.validator';
 import { ToasterService } from '../../../../../core/services/toaster.service';
-import { ProductDetails } from '../../../../../core/models/product-details.model';
+import { DiscountUpdateData } from '../../../../../core/models/discount-update-data.model';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-  selector: 'wedit-announcement-first-step',
+  selector: 'edit-announcement-first-step',
   standalone: true,
   imports: [
     CdkDrag,
@@ -57,7 +60,8 @@ import { ProductDetails } from '../../../../../core/models/product-details.model
     CdkDragPlaceholder,
     OverlayComponent,
     YoutubePlayer,
-    MatProgressSpinner
+    MatProgressSpinner,
+    MatTooltip
   ],
   providers: [
     GeneralService,
@@ -69,7 +73,8 @@ import { ProductDetails } from '../../../../../core/models/product-details.model
     '../../create-announcement/create-announcement-first-step/create-announcement-first-step.component.scss'
   ]
 })
-export class EditAnnouncementFirstStepComponent implements OnInit {
+
+export class EditAnnouncementFirstStepComponent implements OnInit, OnChanges {
   @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
   @ViewChild('videoPreviewPanel') videoPreviewPanel: OverlayComponent;
 
@@ -78,40 +83,22 @@ export class EditAnnouncementFirstStepComponent implements OnInit {
     step: number
   }>();
   @Output() onStepChanged: EventEmitter<number> = new EventEmitter<number>();
-  @Input() productDetails: ProductDetails;
+  @Input() productDetails: DiscountUpdateData;
 
   date: Date = new Date();
-  imagesBuffers: (string | ArrayBuffer)[] = [];
 
   categories = CATEGORIES;
   secondLevelCategories: SecondLevelCategory[] = [];
   thirdLevelCategories: ThirdLevelCategory[] = [];
   firstStepForm = new FormGroup({
-    main_category: new FormControl(null, [ Validators.required ]),
-    subcategory: new FormControl(null, [ Validators.required ]),
-    category: new FormControl(null, [ Validators.required ]),
-    desc_uz: new FormControl(`iPhone 15 Pro Max - bu Apple kompaniyasining yangi smartfonlar qatorining eng yaxshi modeli bo'lib, u me'yordan ham oshib ketadi. U eng yangi 3nm A17 Bionic protsessoriga ega boʻlib, 8K video tahrirlashdan tortib eng ilgʻor grafik oʻyinlargacha boʻlgan barcha narsalar uchun yashin tezligida ishlash imkonini beradi.
-
-Ajoyib displey
-
-2796x1290 pikselli 6,7 dyuymli katta Super Retina XDR displey sizga filmlar, o‘yinlar va veb-sahifalarni ajoyib tomosha qilish tajribasini taqdim etadi. OLED texnologiyasi yuqori kontrast, boy ranglar va ajoyib qora chuqurlikni kafolatlaydi.
-
-Professional kamera
-
-iPhone 15 Pro Max kamera tizimi mobil suratga olishni keyingi bosqichga olib chiqadi. Asosiy kamera endi 48 megapikselli ruxsatga ega bo'lib, ajoyib darajada batafsil suratga olish imkonini beradi. Kengaytirilgan kam yorug'likdagi tortishish rejimi tunda ham aniq va yorqin suratlarni ta'minlaydi.`, [ Validators.required, Validators.maxLength(1500) ]),
-    desc_ru: new FormControl(`iPhone 15 Pro Max — это топовая модель новой линейки смартфонов Apple, которая выходит за рамки привычного. Он оснащен новейшим процессором A17 Bionic, изготовленным по 3-х нанометровому техпроцессу, что обеспечивает молниеносную производительность для любых задач, от редактирования видео 8K до игр с самой продвинутой графикой.
-
-Шикарный дисплей
-
-Большой 6.7-дюймовый Super Retina XDR дисплей с разрешением 2796x1290 пикселей подарит вам невероятные впечатления от просмотра фильмов, игр и веб-страниц. Технология OLED гарантирует высокую контрастность, сочные цвета и потрясающую глубину черного.
-
-Профессиональная камера
-
-Система камер iPhone 15 Pro Max выводит мобильную фотографию на новый уровень. Основная камера теперь имеет разрешение 48 мегапикселей, позволяя делать невероятно детализированные снимки. Усовершенствованный режим съемки при слабом освещении обеспечит четкие и яркие фотографии даже ночью.
-`, [ Validators.required, Validators.maxLength(1500) ]),
-    title_uz: new FormControl('iPhone 15 Pro Max (Dubay versiya)', [ Validators.required, Validators.maxLength(255) ]),
-    title_ru: new FormControl('iPhone 15 Pro Max (Дубай версия)', [ Validators.required, Validators.maxLength(255) ]),
-    video_link: new FormControl('https://youtube.com/shorts/EI1KHTgbwSk?si=7ipiTajPVQJEb97B', [ Validators.maxLength(200), youtubeVideoURL ]),
+    main_category: new FormControl({ value: null, disabled: true }, [ Validators.required ]),
+    subcategory: new FormControl({ value: null, disabled: true }, [ Validators.required ]),
+    category: new FormControl({ value: null, disabled: true }, [ Validators.required ]),
+    desc_uz: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
+    desc_ru: new FormControl('', [ Validators.required, Validators.maxLength(1500) ]),
+    title_uz: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
+    title_ru: new FormControl('', [ Validators.required, Validators.maxLength(255) ]),
+    video_link: new FormControl('', [ Validators.maxLength(200), youtubeVideoURL ]),
     images: new FormControl([], [ arrayMinLength(1) ])
   });
 
@@ -130,8 +117,25 @@ iPhone 15 Pro Max kamera tizimi mobil suratga olishni keyingi bosqichga olib chi
       });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.secondLevelCategories = [this.productDetails.categories[1]];
+    this.thirdLevelCategories = [this.productDetails.categories[2]];
+
+    this.firstStepForm.get('main_category').setValue(this.productDetails?.categories[0]?.pk);
+    this.firstStepForm.get('subcategory').setValue(this.productDetails?.categories[1]?.pk);
+    this.firstStepForm.get('category').setValue(this.productDetails?.categories[2]?.pk);
+    this.firstStepForm.get('title_uz').setValue(this.productDetails?.title_uz);
+    this.firstStepForm.get('title_ru').setValue(this.productDetails?.title_ru);
+    this.firstStepForm.get('desc_uz').setValue(this.productDetails?.desc_uz);
+    this.firstStepForm.get('desc_ru').setValue(this.productDetails?.desc_ru);
+    this.firstStepForm.get('video_link').setValue(this.productDetails?.video_link);
+    this.firstStepForm.get('images').setValue(this.productDetails?.images);
+
+    this.onFormStateChanged.emit({ form: this.firstStepForm, step: 1 });
+  }
+
   onImagesDropped($event: FileList): void {
-    if (this.imagesBuffers.length === 8) {
+    if (this.firstStepForm.get('images').value.length === 8) {
       this._toasterService.open({
         title: 'dear.user',
         message: 'you.can.upload.up.to.8.images',
@@ -152,21 +156,22 @@ iPhone 15 Pro Max kamera tizimi mobil suratga olishni keyingi bosqichga olib chi
   transformImageFile(file: File): void {
     const reader = new FileReader();
     reader.onload = event => {
-      const buffer = event.target.result;
-      if (this.imagesBuffers.find(item => item === buffer) || this.imagesBuffers.length === 8) {
+      const buffer = event.target.result as ArrayBuffer;
+      const images: (string | { file: File; buffer: ArrayBuffer})[] = this.firstStepForm.get('images').value;
+      if (images.find(item => (typeof item === 'object' && item?.buffer === buffer)) || images.length === 8) {
         return;
       }
-      this.imagesBuffers.push(buffer);
-      const images: File[] = this.firstStepForm.get('images').value;
-      images.push(file);
+      images.push({
+        file,
+        buffer
+      })
       this.firstStepForm.get('images').setValue(images);
     };
     reader.readAsDataURL(file);
   }
 
   removeImage(i: number): void {
-    this.imagesBuffers.splice(i, 1);
-    const images: File[] = this.firstStepForm.get('images').value;
+    const images: (string | { file: File; buffer: ArrayBuffer})[] = this.firstStepForm.get('images').value;
     images.splice(i, 1);
     this.firstStepForm.get('images').setValue(images);
   }
@@ -177,38 +182,9 @@ iPhone 15 Pro Max kamera tizimi mobil suratga olishni keyingi bosqichga olib chi
   }
 
   drop($event: CdkDragDrop<any, any>): void {
-    const images: File[] = this.firstStepForm.get('images').value;
-    moveItemInArray(this.imagesBuffers, $event.previousIndex, $event.currentIndex);
+    const images: (string | { file: File; buffer: ArrayBuffer})[] = this.firstStepForm.get('images').value;
     moveItemInArray(images, $event.previousIndex, $event.currentIndex);
     this.firstStepForm.get('images').setValue(images);
-  }
-
-  onMainCategoryChanged(): void {
-    this.secondLevelCategories = [];
-    this.thirdLevelCategories = [];
-    this.firstStepForm.get('subcategory').setValue(null);
-    this.firstStepForm.get('category').setValue(null);
-    this.firstStepForm.get('subcategory').markAsUntouched();
-    this.firstStepForm.get('category').markAsUntouched();
-    this._generalService.getSubcategories(this.firstStepForm.get('main_category').value)
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe({
-        next: res => {
-          this.secondLevelCategories = res;
-        },
-        error: () => {
-          this.secondLevelCategories = [];
-        }
-      });
-  }
-
-  onSubcategoryChanged(): void {
-    this.thirdLevelCategories = [];
-    this.firstStepForm.get('category').setValue(null);
-    this.firstStepForm.get('category').markAsUntouched();
-    this.thirdLevelCategories = (this.secondLevelCategories.find(category => {
-      return category.pk === this.firstStepForm.get('subcategory').value;
-    })).children;
   }
 
   openVideoPreview($event: MouseEvent): void {
