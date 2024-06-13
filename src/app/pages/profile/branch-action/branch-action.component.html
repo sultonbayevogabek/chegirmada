@@ -21,12 +21,12 @@
             type="text"
             trim
             [placeholder]="'enter.branch.name'| translate"
-            [class.invalid]="manageBranchForm.get('name_uz').invalid && manageBranchForm.get('name_uz').touched"
+            [class.invalid]="manageBranchForm.get('name').invalid && manageBranchForm.get('name').touched"
             [maxlength]="255"
-            [formControlName]="'name_uz'"
+            [formControlName]="'name'"
           >
           <ng-container
-            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'name_uz' }"
+            *ngTemplateOutlet="requiredErrors; context: { $implicit: 'name' }"
           />
         </label>
 

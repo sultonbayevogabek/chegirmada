@@ -1,4 +1,14 @@
-import { Component, DestroyRef, EventEmitter, inject, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { GeneralService } from '../../../../../core/services/general.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -18,6 +28,7 @@ import {
 import { MatRipple } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFeatureModalComponent } from '../../new-feature-modal/new-feature-modal.component';
+import { ProductDetails } from '../../../../../core/models/product-details.model';
 
 @Component({
   selector: 'edit-announcement-third-step',
@@ -51,6 +62,7 @@ export class EditAnnouncementThirdStepComponent implements OnInit, OnChanges {
     step: number
   }>();
   @Output() onStepChanged: EventEmitter<number> = new EventEmitter<number>();
+  @Input() productDetails: ProductDetails;
 
   featureTemplates: FeatureTemplate[] = [];
   customTemplates: CustomTemplate[] = [];

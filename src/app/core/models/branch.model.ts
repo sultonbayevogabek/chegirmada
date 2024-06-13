@@ -1,6 +1,5 @@
 export interface BranchModel {
   pk?: number;
-  name_uz: string;
   name_ru?: string;
   name?: string;
   main_phone_number: string;

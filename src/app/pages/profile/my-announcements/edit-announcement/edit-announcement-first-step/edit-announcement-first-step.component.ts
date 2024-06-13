@@ -1,4 +1,14 @@
-import { Component, DestroyRef, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DragAndDropDirective } from '../../../../../core/directives/drag-and-drop.directive';
 import { MatDatepicker, MatDatepickerInput } from '@angular/material/datepicker';
@@ -21,9 +31,10 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { youtubeVideoURL } from '../../../../../core/validators/youtube-video.validator';
 import { arrayMinLength } from '../../../../../core/validators/array-min-length.validator';
 import { ToasterService } from '../../../../../core/services/toaster.service';
+import { ProductDetails } from '../../../../../core/models/product-details.model';
 
 @Component({
-  selector: 'edit-announcement-first-step',
+  selector: 'wedit-announcement-first-step',
   standalone: true,
   imports: [
     CdkDrag,
@@ -67,6 +78,7 @@ export class EditAnnouncementFirstStepComponent implements OnInit {
     step: number
   }>();
   @Output() onStepChanged: EventEmitter<number> = new EventEmitter<number>();
+  @Input() productDetails: ProductDetails;
 
   date: Date = new Date();
   imagesBuffers: (string | ArrayBuffer)[] = [];

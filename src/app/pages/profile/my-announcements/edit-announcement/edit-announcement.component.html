@@ -77,16 +77,19 @@
   [hidden]="currentTab !== 1"
   (onFormStateChanged)="onFormStateChanged($event)"
   (onStepChanged)="changeTab($event)"
+  [productDetails]="details"
 />
 <edit-announcement-second-step
   [hidden]="currentTab !== 2"
   (onFormStateChanged)="onFormStateChanged($event)"
   (onStepChanged)="changeTab($event)"
+  [productDetails]="details"
 />
 <edit-announcement-third-step
   [hidden]="currentTab !== 3"
   (onFormStateChanged)="onFormStateChanged($event)"
   (onStepChanged)="changeTab($event)"
+  [productDetails]="details"
 />
 
 <ng-template #decorationItems>
