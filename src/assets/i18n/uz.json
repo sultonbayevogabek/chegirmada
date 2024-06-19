@@ -233,6 +233,7 @@
   "settings": "Sozlamalar",
   "short.name.of.store": "Do'konning qisqacha nomi",
   "shortname.requirements": "Qisqa nom lotin harfi bilan boshlanishi kerak. Nomda 0 dan 9 gacha bo'lgan raqamlar va tag chiziq (_) qatnashishi mumkin. Nom uzunligi eng kamida 3 ta va ko'pi bilan 20 ta belgidan iborat bo'lishi mumkin. Ikkita ketma-ket tagchiziqlar kelishi mumkin emas",
+  "similar.announcements": "O'xshash e'lonlar",
   "since.registered.date": "Tizimda {{ registeredDate }} dan beri",
   "sirdarya": "Sirdaryo",
   "spam": "Spam",

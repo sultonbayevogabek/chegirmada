@@ -34,13 +34,13 @@
       <spinner-loader/>
     }
 
-
-
-    <!--<div class="product-details-other-products">
-      <product-details-other-shops />
-
-      <product-details-similar-products />
-    </div>-->
+    @defer (on viewport) {
+      <product-details-similar-products
+        [discountId]="details?.pk"
+      />
+    } @placeholder {
+      <spinner-loader/>
+    }
   </div>
 </section>
 

@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
 import { ProductDetails } from '../models/product-details.model';
 import { CommentModel } from '../models/comment.model';
-import { WishlistResponse } from '../models/wishlist.model';
+import { ProductCard, WishlistResponse } from '../models/wishlist.model';
 import { PaymentHistoryResponse } from '../models/payment-history.model';
 
 @Injectable()
@@ -79,5 +79,10 @@ export class ProductDetailsService {
   getWishlist(params: { page: number; page_size: number }): Observable<WishlistResponse> {
     const options = new HttpParams().set('page', params.page + 1).set('page_size', params.page_size);
     return this._httpClient.get<WishlistResponse>(this._host + 'wishlists/', { params: options });
+  }
+
+  getSimilarDiscountsList(params: { page: number; page_size: number; id: number }): Observable<{ count: number; results: ProductCard[] }> {
+    const options = new HttpParams().set('page', params.page + 1).set('page_size', params.page_size);
+    return this._httpClient.get<{ count: number; results: ProductCard[] }>(this._host + `discounts/${params?.id}/similar/`, { params: options });
   }
 }

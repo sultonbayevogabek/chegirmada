@@ -1,18 +1,28 @@
 @import 'variables';
 @import 'mixins';
 
-.product-details-similar-carousel-wrapper {
-  position: relative;
-  margin-bottom: 1.5rem;
+.similar-products {
+  padding-top: 1rem;
 }
 
-.product-details-similar-carousel-navs {
-  position: absolute;
-  top: 30%;
-  left: 0;
-  transform: translateY(-50%);
-  z-index: 1;
-  @include flex-center-between;
-  width: calc(100% + 2.5rem);
-  margin: 0 -1.25rem;
+.similar-products-grid {
+  @include grid(repeat(4, 1fr), 1.25rem);
+}
+
+@include media(1280px) {
+  .similar-products-grid {
+    @include grid(repeat(3, 1fr), 1rem);
+  }
+}
+
+@include media(1080px) {
+  .similar-products-grid {
+    grid-gap: 0.5rem;
+  }
+}
+
+@include media(780px) {
+  .similar-products-grid {
+    @include grid(repeat(2, 1fr), 0.5rem);
+  }
 }

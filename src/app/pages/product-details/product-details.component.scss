@@ -10,7 +10,7 @@
   @include grid(1fr 1.32fr, 1.25rem);
 }
 
-.product-details-additional-info, .product-details-other-products {
+.product-details-additional-info {
   @include grid(repeat(2, 1fr), 1.5rem);
   padding-top: 2rem;
 }
