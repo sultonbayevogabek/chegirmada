@@ -18,7 +18,7 @@ import { LoginProfileComponent } from '../header/header-middle/login-button/logi
     RouterLinkActive
   ],
   standalone: true,
-  providers: [LoginProfileComponent],
+  providers: [ LoginProfileComponent ]
 })
 
 export class MobileMenuComponent implements OnInit {
@@ -33,10 +33,10 @@ export class MobileMenuComponent implements OnInit {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(user => {
         this.currentUser = user;
-      })
+      });
   }
 
-  openLoginProfileModal() {
+  openLoginProfileModal(): void {
     this._loginProfileComponent.openLoginDialog();
   }
 }

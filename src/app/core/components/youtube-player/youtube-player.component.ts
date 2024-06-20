@@ -35,6 +35,7 @@ export class YoutubePlayer implements OnInit, AfterViewInit {
     }
   }) videoID: string;
   @Input() aspectRatio?: number = 9 / 16;
+  @Input() rounded = true;
 
   videoHeight: number | undefined;
   videoWidth: number | undefined;
