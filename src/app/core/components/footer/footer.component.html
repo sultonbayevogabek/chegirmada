@@ -1,3 +1,66 @@
 <div class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a class="footer-logo" [routerLink]="['/']">
+          <img [ngSrc]="'assets/logos/aksiyamix-logo.svg'" [width]="178" [height]="40" alt="">
+        </a>
 
+        <p class="footer-desc">
+          {{ 'footer.description'| translate }}
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-heading">{{ 'contact'| translate }}</div>
+
+        <div class="footer-info">
+          <div class="footer-info-label">{{ 'call.us'| translate }}:</div>
+          <a class="footer-info-value" href="tel: +998999639773">+998 (99) 963-97-73</a>
+        </div>
+
+        <div class="footer-info">
+          <div class="footer-info-label">{{ 'telegram'| translate }}:</div>
+          <a class="footer-info-value" href="https://t.me/aksiyamix">{{ '@aksiyamix' }}</a>
+        </div>
+
+        <div class="footer-info">
+          <div class="footer-info-label">{{ 'write.to.us'| translate }}:</div>
+          <a class="footer-info-value" href="mailto:aksiyamix@gmail.com">{{ 'aksiyamix@gmail.com' }}</a>
+        </div>
+
+        <div class="footer-socials">
+          <div class="footer-col-heading">{{ 'social.networks'| translate }}:</div>
+
+          <div class="footer-socials-list">
+            <a href="" class="footer-socials-item">
+              <mat-icon [svgIcon]="'icon:telegram'"/>
+            </a>
+            <a href="" class="footer-socials-item">
+              <mat-icon [svgIcon]="'icon:instagram'"/>
+            </a>
+            <a href="" class="footer-socials-item facebook">
+              <mat-icon [svgIcon]="'icon:facebook'"/>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-heading">{{ 'download.the.app'| translate }}</div>
+
+        <div class="footer-app-links">
+          <a href="" class="footer-app-link">
+            <img-wrapper [src]="'assets/logos/play-market.svg'"/>
+          </a>
+          <a href="" class="footer-app-link app-store">
+            <img-wrapper [src]="'assets/logos/app-store.svg'"/>
+          </a>
+          <a href="" class="footer-app-link">
+            <img-wrapper [src]="'assets/logos/app-gallery.svg'"/>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

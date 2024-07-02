@@ -1,4 +1,84 @@
+@import "variables";
+@import "mixins";
+
 .footer {
-  height: 12.5rem;
-  background: lightgrey;
+  margin-top: 1.5rem;
+  padding: 1.5rem 0;
+  background-color: $background-grey-color;
+  color: $secondary-black-color;
+  font-size: 0.875rem;
+}
+
+.footer-grid {
+  @include grid(repeat(3, 1fr), 2rem)
+}
+
+.footer-desc {
+  padding-top: 1.5rem;
+}
+
+.footer-col-heading {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $dialog-title-black;
+}
+
+.footer-info {
+  @include flex-center(0.5rem);
+  margin-bottom: 0.75rem;
+}
+
+.footer-info-value {
+  color: $green-color;
+  font-weight: 500;
+}
+
+.footer-socials {
+  padding-top: 1rem;
+
+  .footer-col-heading {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.footer-socials-list {
+
+}
+
+.footer-socials-item {
+  width: 2rem;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  @include flex-center-center;
+  border: 1px solid $border-grey-color;
+  border-radius: 50%;
+
+  .mat-icon {
+    width: 1rem;
+  }
+
+  &.facebook .mat-icon {
+    height: 1rem;
+  }
+}
+
+.footer-socials-list {
+  @include flex-center(0.5rem)
+}
+
+.footer-app-links {
+  @include grid(repeat(3, 1fr), 0.5rem)
+}
+
+.footer-app-link {
+  @include flex-center-center;
+  height: 2.5rem;
+  padding: 0 1.5rem;
+  border-radius: 0.5rem;
+  background-color: $dialog-title-black;
+
+  &.app-store {
+    padding: 0 2rem;
+  }
 }

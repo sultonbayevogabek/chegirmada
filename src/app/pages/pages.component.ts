@@ -4,6 +4,7 @@ import { HeaderComponent } from '../core/components/header/header.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ScrollToTopComponent } from '../core/components/scroll-to-top/scroll-to-top.component';
 import { MobileMenuComponent } from '../core/components/mobile-menu/mobile-menu.component';
+import { FooterComponent } from '../core/components/footer/footer.component';
 
 @Component({
   selector: 'pages',
@@ -13,7 +14,8 @@ import { MobileMenuComponent } from '../core/components/mobile-menu/mobile-menu.
     RouterOutlet,
     HeaderComponent,
     ScrollToTopComponent,
-    MobileMenuComponent
+    MobileMenuComponent,
+    FooterComponent
   ],
   standalone: true
 })
