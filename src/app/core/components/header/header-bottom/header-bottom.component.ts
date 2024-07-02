@@ -18,12 +18,10 @@ import { MatTabLink, MatTabNav } from '@angular/material/tabs';
 
 export class HeaderBottomComponent {
   navs = [
-    'categories',
     'the.best.announcements',
-    'announcements.about.coming.discounts',
-    'for.you',
-    'announcements.near.you',
-    'recently.viewed.announcements',
+    'the.cheapest',
+    'the.most.expensive',
+    'coming.soon',
     'expired.announcements'
   ]
 }
