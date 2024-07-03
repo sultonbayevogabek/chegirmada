@@ -74,11 +74,62 @@
 .footer-app-link {
   @include flex-center-center;
   height: 2.5rem;
-  padding: 0 1.5rem;
   border-radius: 0.5rem;
   background-color: $dialog-title-black;
 
-  &.app-store {
-    padding: 0 2rem;
+  img-wrapper {
+    width: 50%;
+  }
+
+  &.app-store img-wrapper {
+    width: 45%;
+  }
+}
+
+@include media(1080px) {
+  .footer {
+    margin-top: 1rem;
+    padding: 1rem 0;
+  }
+
+  .footer-grid {
+    @include grid(repeat(2, 1fr), 2rem);
+  }
+
+  .footer-col.contact {
+    order: 1
+  }
+
+  .footer-col-heading {
+    margin-bottom: 1rem;
+  }
+
+  .footer-app-links {
+    @include grid(repeat(2, 1fr), 0.5rem);
+  }
+}
+
+@include media(780px) {
+  .footer-grid {
+    @include grid(repeat(1, 1fr), 2rem);
+  }
+
+  .footer-app-links {
+    @include grid(repeat(3, 1fr), 0.5rem);
+  }
+
+  .footer-logo {
+    display: block;
+    text-align: center;
+  }
+
+  .footer-desc {
+    text-align: center;
+  }
+}
+
+@include media(480px) {
+  .footer-app-links {
+    @include grid(repeat(2, 1fr), 0.5rem);
   }
 }
