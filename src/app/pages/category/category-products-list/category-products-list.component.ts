@@ -40,25 +40,25 @@ export class CategoryProductsListComponent implements OnInit {
   filter = {
     startDate: new Date(),
     endDate: null,
-    ordering: 'likes'
+    ordering: 3
   };
 
   ordering = [
     {
-      value: '-likes',
+      value: 3,
       label: 'popular'
     },
     {
-      value: 'price',
+      value: 1,
       label: 'cheaper'
     },
     {
-      value: '-price',
+      value: 2,
       label: 'more.expensive'
     },
     {
-      value: '-created_at',
-      label: 'new.ones'
+      value: 0,
+      label: 'coming.soon'
     }
   ];
 
@@ -89,7 +89,8 @@ export class CategoryProductsListComponent implements OnInit {
         this.params = {
           ...params,
           page: +params.page || 1,
-          page_size: +params.page_size || 12
+          page_size: +params.page_size || 12,
+          ordering: +params.ordering
         };
 
         if (params?.start_date__lte) {
@@ -104,10 +105,10 @@ export class CategoryProductsListComponent implements OnInit {
           this.filter.endDate = null;
         }
 
-        if (['-likes', 'price', '-price', 'created_at'].includes(params?.ordering)) {
-          this.filter.ordering = params?.ordering;
+        if ([0, 1, 2, 3].includes(+params?.ordering)) {
+          this.filter.ordering = +params?.ordering;
         } else {
-          this.filter.ordering = '-likes';
+          this.filter.ordering = 3;
         }
 
         this.getAnnouncements();

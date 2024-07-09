@@ -7,21 +7,60 @@ import { MatTabLink, MatTabNav } from '@angular/material/tabs';
   selector: 'header-bottom',
   templateUrl: 'header-bottom.component.html',
   styleUrl: 'header-bottom.component.scss',
-   imports: [
-      RouterLink,
-      TranslateModule,
-      MatTabLink,
-      MatTabNav
-   ],
+  imports: [
+    RouterLink,
+    TranslateModule,
+    MatTabLink,
+    MatTabNav
+  ],
   standalone: true
 })
 
 export class HeaderBottomComponent {
   navs = [
-    'the.best.announcements',
-    'the.cheapest',
-    'the.most.expensive',
-    'coming.soon',
-    'expired.announcements'
-  ]
+    {
+      text: 'the.best.announcements',
+      query: {
+        ordering: 3,
+        page: 1,
+        page_size: 12,
+        expire: false
+      }
+    },
+    {
+      text: 'the.cheapest',
+      query: {
+        ordering: 1,
+        page: 1,
+        page_size: 12,
+        expire: false
+      }
+    },
+    {
+      text: 'the.most.expensive',
+      query: {
+        ordering: 2,
+        page: 1,
+        page_size: 12,
+        expire: false
+      }
+    },
+    {
+      text: 'coming.soon',
+      query: {
+        ordering: 0,
+        page: 1,
+        page_size: 12,
+        expire: false
+      }
+    },
+    {
+      text: 'expired.announcements',
+      query: {
+        page: 1,
+        page_size: 12,
+        expire: true
+      }
+    }
+  ];
 }

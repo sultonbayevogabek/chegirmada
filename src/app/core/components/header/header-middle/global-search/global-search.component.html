@@ -8,9 +8,18 @@
     [matAutocompleteConnectedTo]="globalSearchWrapper"
     type="text"
     [placeholder]="'search'| translate"
+    trim
+    [(ngModel)]="params.search"
+    (keydown.enter)="search()"
   >
   <button class="global-search-location" #locationButton (click)="overlayPanel.openPanel()">
-    <span>{{ regions[selectedRegionIndex].name | translate }}</span>
+    <span>
+    @if (params.region !== null) {
+      {{ regions[params.region].name| translate }}{{ params.district !== null ? ', ' +  regions[params.region].districts[params.district].name : ''}}
+    } @else {
+      {{ 'whole.country' | translate }}
+    }
+      </span>
     <mat-icon [svgIcon]="'icon:arrow-down'"></mat-icon>
   </button>
   <button class="global-search-submit">
@@ -55,6 +64,13 @@
   >
     @if (tab === 'regions') {
       <ul class="global-search-location-list" scrollbar>
+        <li class="global-search-location-item" mat-ripple (click)="selectWholeCountry()">
+          <div>
+            <span>{{ 'whole.country'| translate }}</span>
+
+            <mat-icon [svgIcon]="'icon:arrow-right'"></mat-icon>
+          </div>
+        </li>
         @for (region of regions; track region; let i = $index) {
           <li class="global-search-location-item" mat-ripple (click)="selectRegion(i)">
             <div>
@@ -74,12 +90,19 @@
         />
 
         <h2 class="global-search-location-region-name">
-          {{ regions[selectedRegionIndex].name | translate }}
+          {{ regions[params.region].name | translate }}
         </h2>
       </div>
       <ul class="global-search-location-list districts" scrollbar>
-        @for (district of regions[selectedRegionIndex].districts; track district) {
-          <li class="global-search-location-item" mat-ripple>
+        <li
+          (click)="selectWholeRegion()"
+          class="global-search-location-item" mat-ripple>
+          <div>{{ 'whole.region'| translate }}</div>
+        </li>
+        @for (district of regions[params.region].districts; track district; let i = $index) {
+          <li
+            (click)="selectDistrict(i)"
+            class="global-search-location-item" mat-ripple>
             <div>{{ district.name }}</div>
           </li>
         }

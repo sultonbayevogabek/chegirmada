@@ -10,7 +10,7 @@ export interface DiscountParamsModel {
   end_date__gte?: string;
   price__range?: string;
   search?: string;
-  ordering?: string;
+  ordering?: number;
   page?: number;
   page_size?: number;
   total?: number;
