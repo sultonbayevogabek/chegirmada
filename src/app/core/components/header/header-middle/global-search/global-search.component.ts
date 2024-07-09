@@ -14,6 +14,9 @@ import { TrimDirective } from '../../../../directives/trim.directive';
 import { FormsModule } from '@angular/forms';
 import { AnnouncementsService } from '../../../../services/announcements.service';
 import { take } from 'rxjs';
+import { ProductCard } from '../../../../models/wishlist.model';
+import { ImgWrapperComponent } from '../../../img-wrapper/img-wrapper.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'global-search',
@@ -30,7 +33,9 @@ import { take } from 'rxjs';
     TranslateModule,
     IconButtonComponent,
     TrimDirective,
-    FormsModule
+    FormsModule,
+    ImgWrapperComponent,
+    RouterLink
   ],
   standalone: true,
   providers: [
@@ -46,6 +51,8 @@ export class GlobalSearchComponent {
   streets: string[] = [ 'Champs-Élysées', 'Lombard Street', 'Abbey Road',
     'Fifth Avenue', 'Champs-Élysées', 'Lombard Street', 'Abbey Road',
     'Fifth Avenue' ];
+
+  searchResults: ProductCard[] = [];
 
   tab: 'regions' | 'districts' = 'regions';
   regions = REGIONS;
@@ -142,7 +149,7 @@ export class GlobalSearchComponent {
     this._announcementsService.getAnnouncementsList(params)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(res => {
-
+        this.searchResults = res?.results || [];
       })
   }
 }

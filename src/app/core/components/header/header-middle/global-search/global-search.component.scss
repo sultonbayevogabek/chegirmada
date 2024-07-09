@@ -86,11 +86,7 @@ div.global-search-result.mat-mdc-autocomplete-panel {
   height: 3rem;
   border-radius: 50%;
   background-color: $background-grey-color;
-  object-fit: cover;
-
-  img {
-    max-width: 1.25rem;
-  }
+  overflow: hidden;
 }
 
 .global-search-title {
@@ -99,6 +95,7 @@ div.global-search-result.mat-mdc-autocomplete-panel {
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1;
+  @include line-clamp(1)
 }
 
 .global-search-text {

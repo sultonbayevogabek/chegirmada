@@ -22,7 +22,7 @@
       </span>
     <mat-icon [svgIcon]="'icon:arrow-down'"></mat-icon>
   </button>
-  <button class="global-search-submit">
+  <button class="global-search-submit" (click)="search()">
     <mat-icon [svgIcon]="'icon:search'"></mat-icon>
   </button>
 </div>
@@ -34,22 +34,27 @@
   #globalSearchInput="matAutocomplete"
 >
 
-  @for (option of streets; track option) {
-    <mat-option class="global-search-option" [value]="option">
+  @for (result of searchResults; track result) {
+    <mat-option
+      [routerLink]="['/product-details', result?.pk]"
+      class="global-search-option" [value]="result?.title">
       <div class="global-search-item">
         <div class="global-search-img">
-          <img
-            src="https://www.edigitalagency.com.au/wp-content/uploads/apple-logo-png-black.png"
-            alt="logo name"
-          >
+          @if (result?.store?.logo) {
+            <img-wrapper
+              [src]="result?.store?.logo"
+            />
+          } @else {
+            <mat-icon [svgIcon]="'icon:store-active'"/>
+          }
         </div>
 
         <div class="global-search-info">
           <div class="global-search-title">
-            Помидор соланум рома
+            {{ result?.title }}
           </div>
           <div class="global-search-text">
-            Корзинка
+            {{ result?.store?.name }}
           </div>
         </div>
       </div>
