@@ -380,6 +380,10 @@ div.mat-mdc-select-panel {
 }
 
 @include media(1080px) {
+  body {
+    padding-bottom: 4rem;
+  }
+
   .container {
     max-width: 60rem;
     padding-left: .5rem;

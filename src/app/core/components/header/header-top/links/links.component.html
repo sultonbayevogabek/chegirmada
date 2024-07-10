@@ -1,4 +1,9 @@
 <div class="links">
-  <a class="links-item" href="#">{{ 'request.response'| translate }}</a>
+  <a
+    class="links-item"
+    [href]="translateService.defaultLang === 'uz' ? 'https://chegirmada-terms.netlify.app/uz.html' : 'https://chegirmada-terms.netlify.app/ru.html'"
+  >
+    {{ 'privacy.policy'| translate }}
+  </a>
   <a class="links-item" href="#">{{ 'my.orders'| translate }}</a>
 </div>

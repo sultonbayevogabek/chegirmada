@@ -11,6 +11,7 @@
     trim
     [(ngModel)]="params.search"
     (keydown.enter)="search()"
+    #searchInput
   >
   <button class="global-search-location" #locationButton (click)="overlayPanel.openPanel()">
     <span>

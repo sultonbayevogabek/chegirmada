@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { Component, inject } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'links',
@@ -12,4 +12,5 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 
 export class LinksComponent {
+  translateService = inject(TranslateService)
 }

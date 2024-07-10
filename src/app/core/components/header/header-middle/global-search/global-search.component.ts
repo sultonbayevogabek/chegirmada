@@ -1,9 +1,9 @@
-import { Component, DestroyRef, inject, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, DestroyRef, ElementRef, inject, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import { MatRippleModule } from '@angular/material/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { OverlayComponent } from '../../../overlay-panel/overlay-panel.component';
 import { ScrollbarDirective } from '../../../../directives/scrollbar.directive';
 import { REGIONS } from '../../../../constants/regions';
@@ -13,7 +13,6 @@ import { IconButtonComponent } from '../../../icon-button/icon-button.component'
 import { TrimDirective } from '../../../../directives/trim.directive';
 import { FormsModule } from '@angular/forms';
 import { AnnouncementsService } from '../../../../services/announcements.service';
-import { take } from 'rxjs';
 import { ProductCard } from '../../../../models/wishlist.model';
 import { ImgWrapperComponent } from '../../../img-wrapper/img-wrapper.component';
 import { RouterLink } from '@angular/router';
@@ -47,10 +46,7 @@ import { RouterLink } from '@angular/router';
 
 export class GlobalSearchComponent {
   @ViewChild('overlayPanel') overlayPanel: OverlayComponent;
-
-  streets: string[] = [ 'Champs-Élysées', 'Lombard Street', 'Abbey Road',
-    'Fifth Avenue', 'Champs-Élysées', 'Lombard Street', 'Abbey Road',
-    'Fifth Avenue' ];
+  @ViewChild('searchInput', { static: true }) searchInput: ElementRef;
 
   searchResults: ProductCard[] = [];
 
@@ -69,6 +65,7 @@ export class GlobalSearchComponent {
 
   private _generalService = inject(GeneralService);
   private _announcementsService = inject(AnnouncementsService);
+  private _translateService = inject(TranslateService);
   private _destroyRef = inject(DestroyRef);
 
   selectRegion(index: number): void {
@@ -150,6 +147,7 @@ export class GlobalSearchComponent {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(res => {
         this.searchResults = res?.results || [];
+        this.searchInput.nativeElement.focus();
       })
   }
 }

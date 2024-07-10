@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { MatIcon } from '@angular/material/icon';
 import { ImgWrapperComponent } from '../img-wrapper/img-wrapper.component';
 
@@ -20,5 +20,5 @@ import { ImgWrapperComponent } from '../img-wrapper/img-wrapper.component';
 })
 
 export class FooterComponent {
-  translateService = inject(TranslateService);
+
 }
