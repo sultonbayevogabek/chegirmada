@@ -14,4 +14,6 @@ export interface DiscountParamsModel {
   page?: number;
   page_size?: number;
   total?: number;
+  region?: number;
+  district?: number;
 }

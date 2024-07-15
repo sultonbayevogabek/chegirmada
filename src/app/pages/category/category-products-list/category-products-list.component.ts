@@ -90,7 +90,7 @@ export class CategoryProductsListComponent implements OnInit {
           ...params,
           page: +params.page || 1,
           page_size: +params.page_size || 12,
-          ordering: +params.ordering
+          ordering: +params.ordering || 3
         };
 
         if (params?.start_date__lte) {

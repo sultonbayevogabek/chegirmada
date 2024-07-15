@@ -44,6 +44,7 @@ export class AuthService {
           return of(user);
         }),
         catchError(() => {
+          console.log();
           this.currentUser$.next(null);
           return of(null);
         })
@@ -66,6 +67,6 @@ export class AuthService {
     this.currentUser = null;
     this.currentUser$.next(null);
     localStorage.removeItem('token');
-    this._router.navigate(['/']);
+    this._router.navigate(['/']).then();
   }
 }
