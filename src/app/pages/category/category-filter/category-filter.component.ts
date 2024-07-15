@@ -81,7 +81,7 @@ export class CategoryFilterComponent implements OnInit {
     this._activatedRoute.queryParams
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((params: DiscountParamsModel) => {
-        this.urlParams = params;
+        this.urlParams = { ...params };
 
         if (this.urlParams?.price__range) {
           const [ from, to ] = this.urlParams?.price__range?.split(',');
@@ -91,6 +91,12 @@ export class CategoryFilterComponent implements OnInit {
 
         if (this.urlParams?.region) {
           this.params.region = +this.urlParams?.region;
+
+          this._generalService.getDistrictsByRegionId(this.params.region)
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe(res => {
+              this.regions[this.params.region].districts = res;
+            })
         }
 
         if (this.urlParams?.district) {
@@ -106,8 +112,8 @@ export class CategoryFilterComponent implements OnInit {
       delete this.urlParams?.price__range;
     }
 
-    if (this.params.region > 0) {
-      this.urlParams.region = +this.params.region;
+    if (+this.params.region > 0) {
+      this.urlParams.region = +this.params?.region;
     } else {
       delete this.urlParams?.region;
       delete this.urlParams?.district;
@@ -120,12 +126,13 @@ export class CategoryFilterComponent implements OnInit {
     }
 
     this.urlParams.page = 1;
+    this.urlParams.page_size = 12;
 
     this._router.navigate(
       [],
       {
         relativeTo: this._activatedRoute,
-        queryParamsHandling: 'merge'
+        queryParams: this.urlParams
       }
     )
   }

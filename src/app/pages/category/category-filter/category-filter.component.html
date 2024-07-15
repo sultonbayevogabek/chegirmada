@@ -111,6 +111,7 @@
               [placeholder]="'district'| translate"
               (selectionChange)="setParamsToUrl()"
             >
+              <mat-option [value]="''">{{ 'whole.region'| translate }}</mat-option>
               @for (district of regions[this.params.region]?.districts; track district) {
                 <mat-option [value]="district.pk">{{ district?.name }}</mat-option>
               }

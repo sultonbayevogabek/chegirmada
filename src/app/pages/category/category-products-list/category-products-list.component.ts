@@ -16,6 +16,9 @@ import { AnnouncementsService } from '../../../core/services/announcements.servi
 import { ProductCard } from '../../../core/models/wishlist.model';
 import { TranslateModule } from '@ngx-translate/core';
 import { formatDate } from '@angular/common';
+import { load } from '@angular-devkit/build-angular/src/utils/server-rendering/esm-in-memory-loader/loader-hooks';
+import { SpinnerLoaderComponent } from '../../../core/components/spinner-loader/spinner-loader.component';
+import { ProfileEmptyListComponent } from '../../profile/profile-empty-list/profile-empty-list.component';
 
 @Component({
   selector: 'category-products-list',
@@ -28,7 +31,7 @@ import { formatDate } from '@angular/common';
     MatButtonModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatNativeDateModule, FormsModule, ProductCardComponent, MatSelect, MatOption, RouterLink, MatPaginator, TranslateModule
+    MatNativeDateModule, FormsModule, ProductCardComponent, MatSelect, MatOption, RouterLink, MatPaginator, TranslateModule, SpinnerLoaderComponent, ProfileEmptyListComponent
   ],
   standalone: true,
   providers: [
@@ -37,6 +40,8 @@ import { formatDate } from '@angular/common';
 })
 
 export class CategoryProductsListComponent implements OnInit {
+  loading = true;
+
   filter = {
     startDate: new Date(),
     endDate: null,
@@ -77,6 +82,7 @@ export class CategoryProductsListComponent implements OnInit {
   getAnnouncements(): void {
     this._announcementsService.getAnnouncementsList(this.params)
       .subscribe(res => {
+        this.loading = false;
         this.products = res.results;
         this.params.total = +res?.count;
       });

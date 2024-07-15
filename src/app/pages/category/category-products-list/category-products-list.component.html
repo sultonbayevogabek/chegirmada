@@ -60,20 +60,30 @@
 <!--      </button>-->
     </div>
 
-    <div class="category-products-list-grid">
-      @for (product of products; track product) {
-        <product-card [product]="product"/>
-      }
-    </div>
+    @if (loading) {
+      <spinner-loader/>
+    }
 
-    <mat-paginator
-      [pageIndex]="params.page - 1"
-      [pageSize]="params.page_size"
-      [length]="params.total"
-      [showFirstLastButtons]="true"
-      (page)="changePage($event)"
-      [hidePageSize]="true"
-    />
+    @if (!loading && products?.length) {
+      <div class="category-products-list-grid">
+        @for (product of products; track product) {
+          <product-card [product]="product"/>
+        }
+      </div>
+
+      <mat-paginator
+        [pageIndex]="params.page - 1"
+        [pageSize]="params.page_size"
+        [length]="params.total"
+        [showFirstLastButtons]="true"
+        (page)="changePage($event)"
+        [hidePageSize]="true"
+      />
+    }
+
+    @if (!loading && !products?.length) {
+      <profile-empty-list/>
+    }
   </div>
 </main>
 
