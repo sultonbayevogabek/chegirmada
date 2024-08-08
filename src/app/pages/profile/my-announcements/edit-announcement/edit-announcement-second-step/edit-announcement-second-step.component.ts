@@ -160,7 +160,7 @@ export class EditAnnouncementSecondStepComponent implements OnInit, OnChanges {
         } else {
           discountAmountControl.clearValidators();
           discountAmountControl.setValidators([ Validators.required ]);
-          this.secondStepForm.addValidators([ newPrice ]);
+          this.secondStepForm.addValidators([newPrice]);
         }
         discountAmountControl.updateValueAndValidity();
       });

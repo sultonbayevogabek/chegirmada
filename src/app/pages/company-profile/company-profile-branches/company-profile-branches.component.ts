@@ -4,7 +4,7 @@ import { IconButtonComponent } from '../../../core/components/icon-button/icon-b
 import { BranchModel } from '../../../core/models/branch.model';
 import { MyStoreService } from '../../../core/services/my-store.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { SpinnerLoaderComponent } from '../../../core/components/spinner-loader/spinner-loader.component';
 import { ProfileEmptyListComponent } from '../../profile/profile-empty-list/profile-empty-list.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -40,10 +40,10 @@ export class CompanyProfileBranchesComponent implements OnInit {
   private _activatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    this._activatedRoute.parent.params.subscribe((params: { storeId: string }) => {
-      if (!params?.storeId) return;
+    this._activatedRoute.parent.params.subscribe((params: Params) => {
+      if (!params['storeId']) return;
 
-      this.getStoreBranches(+params.storeId);
+      this.getStoreBranches(+params['storeId']);
     });
   }
 

@@ -3,7 +3,7 @@ import { DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { UiButtonComponent } from '../../../core/components/ui-button/ui-button.component';
 import { ProductCardComponent } from '../../../core/components/product-card/product-card.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { CompanyProfileService } from '../../../core/services/company-profile.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -53,10 +53,10 @@ export class CompanyProfileDiscountsComponent implements OnInit {
   private _announcementsService = inject(AnnouncementsService);
 
   ngOnInit(): void {
-    this._activatedRoute.parent.params.subscribe((params: { storeId: string }) => {
-      if (!params?.storeId) return;
+    this._activatedRoute.parent.params.subscribe((params: Params) => {
+      if (!params['storeId']) return;
 
-      this.params.store__in = params.storeId;
+      this.params.store__in = params['storeId'];
       this.getAnnouncements();
     });
   }

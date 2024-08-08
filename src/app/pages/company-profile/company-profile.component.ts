@@ -76,10 +76,10 @@ export class CompanyProfileComponent implements OnInit {
   ngOnInit(): void {
     this._activatedRoute.params
       .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((params: { storeId: string }) => {
-        if (!params?.storeId) return;
+      .subscribe((params: Params) => {
+        if (!params['storeId']) return;
 
-        this.getStoreInfo(params?.storeId)
+        this.getStoreInfo(params['storeId'])
       })
 
     this._authService.currentUser$

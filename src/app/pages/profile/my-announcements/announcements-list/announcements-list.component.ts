@@ -5,7 +5,7 @@ import { MatIcon } from '@angular/material/icon';
 import { ProductHorizontalCardComponent } from '../../product-horizontal-card/product-horizontal-card.component';
 import { UiButtonComponent } from '../../../../core/components/ui-button/ui-button.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Params, RouterLink } from '@angular/router';
 import { PRODUCTS } from '../../../../core/constants/products';
 import { MyAnnouncementsService } from '../../../../core/services/my-announcements.service';
 import { ToasterService } from '../../../../core/services/toaster.service';
@@ -77,8 +77,8 @@ export class AnnouncementsListComponent implements OnInit {
   ngOnInit(): void {
     this._activatedRoute.params
       .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((params: { status: string }) => {
-        this.changeParamsByRoute(params?.status);
+      .subscribe((params: Params) => {
+        this.changeParamsByRoute(params['status']);
       });
   }
 
