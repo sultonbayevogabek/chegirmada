@@ -109,16 +109,6 @@ export class LoginDialogComponent implements OnInit, AfterViewInit {
       .subscribe({
         next: res => {
           this.phoneForm.enable();
-
-          if (!res.code) {
-            return;
-          }
-
-          this._toaster.open({
-            message: '' + res.code,
-            type: 'info',
-            duration: 10000
-          })
           this.resetCodeForm();
           this.countDown();
           this.step = 'code';

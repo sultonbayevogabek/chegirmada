@@ -16,11 +16,15 @@
       </div>
 
       <a [href]="banners?.large_banners[0]?.url" class="banner-right banner-right-top">
-        <img [ngSrc]="banners?.large_banners[0]?.image" [fill]="true" alt="">
+        @if (banners?.large_banners[0]?.image) {
+          <img [ngSrc]="banners.large_banners[0].image" [fill]="true" alt="">
+        }
       </a>
 
       <a [href]="banners?.large_banners[0]?.url" class="banner-right banner-right-bottom">
-        <img [ngSrc]="banners?.large_banners[1]?.image" [fill]="true" alt="">
+        @if (banners?.large_banners[1]?.image) {
+          <img [ngSrc]="banners.large_banners[1].image" [fill]="true" alt="">
+        }
       </a>
     </div>
   </div>
@@ -31,7 +35,9 @@
     @for (banner of banners?.banners; track banner) {
       <ng-template carouselSlide>
         <a class="banner-slide" [href]="banner.url">
-          <img [ngSrc]="banner?.image" [fill]="true" [alt]="banner.desc">
+          @if (banner?.image) {
+            <img [ngSrc]="banner.image" [fill]="true" [alt]="banner.desc">
+          }
         </a>
       </ng-template>
     }
