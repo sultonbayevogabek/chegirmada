@@ -12,14 +12,10 @@
 }
 
 .header-middle-logo {
-  @include flex-center(0.5rem);
+  display: block;
+  width: 180px;
+  aspect-ratio: 606/140;
   margin-right: 0.5rem;
-
-  &-text {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: $logo-black-color;
-  }
 }
 
 .header-middle-search {

@@ -9,6 +9,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { CategoriesPanelComponent } from './catalog-panel/categories-panel.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ImgWrapperComponent } from '../../img-wrapper/img-wrapper.component';
 
 @Component({
   selector: 'header-middle',
@@ -23,7 +24,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     LoginProfileComponent,
     NgOptimizedImage,
     CategoriesPanelComponent,
-    TranslateModule
+    TranslateModule,
+    ImgWrapperComponent
   ],
   standalone: true
 })

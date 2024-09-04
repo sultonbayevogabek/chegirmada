@@ -17,6 +17,13 @@
   padding-top: 1.5rem;
 }
 
+.footer-logo {
+  display: block;
+  text-align: center;
+  width: 200px;
+  aspect-ratio: 606/140;
+}
+
 .footer-col-heading {
   margin-bottom: 1.5rem;
   font-size: 1rem;
@@ -39,10 +46,6 @@
   .footer-col-heading {
     margin-bottom: 0.5rem;
   }
-}
-
-.footer-socials-list {
-
 }
 
 .footer-socials-item {
@@ -115,11 +118,6 @@
 
   .footer-app-links {
     @include grid(repeat(3, 1fr), 0.5rem);
-  }
-
-  .footer-logo {
-    display: block;
-    text-align: center;
   }
 
   .footer-desc {

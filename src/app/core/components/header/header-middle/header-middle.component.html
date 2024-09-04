@@ -3,14 +3,7 @@
     <div class="header-middle-inner">
       <a class="header-middle-logo"
          routerLink="/">
-        <img
-          class="header-middle-logo-img"
-          [ngSrc]="'assets/logos/logo.svg'"
-          [width]="30"
-          [height]="30"
-          [alt]="'Aksiya Mix logo'"
-        >
-        <span class="header-middle-logo-text">aksiyamix</span>
+        <img-wrapper [src]="'assets/logos/logo.svg'"/>
       </a>
 
       <button class="header-middle-catalog-button" (click)="toggleCatalogPanel()">
