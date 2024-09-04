@@ -1,30 +1,20 @@
-import {
-  Component,
-  DestroyRef,
-  EventEmitter,
-  inject,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges
-} from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, Input, OnChanges, OnInit, Output } from '@angular/core';
 import {
   MatAutocomplete,
-  MatAutocompleteOrigin, MatAutocompleteSelectedEvent,
+  MatAutocompleteOrigin,
+  MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
   MatOption
 } from '@angular/material/autocomplete';
 import { MatRadioButton } from '@angular/material/radio';
 import { MatSelect } from '@angular/material/select';
 import { JsonPipe, LowerCasePipe, NgClass, NgTemplateOutlet } from '@angular/common';
-import { Form, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatNativeDateModule, MatRipple } from '@angular/material/core';
 import { MatDatepicker, MatDatepickerInput, MatDatepickerModule } from '@angular/material/datepicker';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatInput } from '@angular/material/input';
-import { arrayMinLength } from '../../../../../core/validators/array-min-length.validator';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MyAnnouncementsService } from '../../../../../core/services/my-announcements.service';
 import { UiButtonComponent } from '../../../../../core/components/ui-button/ui-button.component';
@@ -37,7 +27,6 @@ import { AuthService } from '../../../../../core/services/auth.service';
 import { BranchModel } from '../../../../../core/models/branch.model';
 import { ToasterService } from '../../../../../core/services/toaster.service';
 import { newPrice } from '../../../../../core/validators/new-price.validator';
-import { ProductDetails } from '../../../../../core/models/product-details.model';
 import { DiscountUpdateData } from '../../../../../core/models/discount-update-data.model';
 
 @Component({
@@ -136,33 +125,15 @@ export class EditAnnouncementSecondStepComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this._authService.currentUser$
       .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe({
-        next: user => {
-          this.getBranches(user.store_id);
-        }
+      .subscribe(user => {
+        this.getBranches(user?.store_id);
       });
 
     // watch regular_discount_type change
     this.secondStepForm.get('regular_discount_type').valueChanges
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe(value => {
-        const discountAmountControl = this.secondStepForm.get('discount_amount');
-        discountAmountControl.markAsTouched();
-        this.secondStepForm.get('discount_amount_is_percent')
-          .setValue(value === 'percent');
-
-        if (value === 'percent') {
-          discountAmountControl.setValidators([
-            Validators.min(1),
-            Validators.max(100)
-          ]);
-          this.secondStepForm.removeValidators([ newPrice ]);
-        } else {
-          discountAmountControl.clearValidators();
-          discountAmountControl.setValidators([ Validators.required ]);
-          this.secondStepForm.addValidators([newPrice]);
-        }
-        discountAmountControl.updateValueAndValidity();
+        this.discountAmountValidator(value);
       });
 
     this.secondStepForm.valueChanges
@@ -175,7 +146,7 @@ export class EditAnnouncementSecondStepComponent implements OnInit, OnChanges {
       });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.secondStepForm.get('price').setValue(+this.productDetails.price);
     this.secondStepForm.get('currency').setValue(this.productDetails.currency);
     this.secondStepForm.get('product_counts').setValue(+this.productDetails?.product_counts);
@@ -187,12 +158,12 @@ export class EditAnnouncementSecondStepComponent implements OnInit, OnChanges {
     this.secondStepForm.get('store_branches').setValue(this.productDetails?.store_branches.map(branch => branch.pk));
     this.secondStepForm.get('discount_amount').setValue(+this.productDetails?.discount_amount);
     this.secondStepForm.get('discount_amount_is_percent').setValue(this.productDetails?.discount_amount_is_percent);
-
     if (this.productDetails?.discount_amount_is_percent) {
       this.secondStepForm.get('regular_discount_type').setValue('percent');
     } else {
       this.secondStepForm.get('regular_discount_type').setValue(this.productDetails.currency === 1 ? 'uzs' : 'usd');
     }
+    this.discountAmountValidator(this.secondStepForm.get('regular_discount_type').value);
     this.onFormStateChanged.emit({ form: this.secondStepForm, step: 2 });
   }
 
@@ -279,6 +250,26 @@ export class EditAnnouncementSecondStepComponent implements OnInit, OnChanges {
     }
 
     this.onStepChanged.emit(3);
+  }
+
+  discountAmountValidator(value: string): void {
+    const discountAmountControl = this.secondStepForm.get('discount_amount');
+    discountAmountControl.markAsTouched();
+    this.secondStepForm.get('discount_amount_is_percent')
+      .setValue(value === 'percent');
+
+    if (value === 'percent') {
+      discountAmountControl.setValidators([
+        Validators.min(1),
+        Validators.max(100)
+      ]);
+      this.secondStepForm.removeValidators([ newPrice ]);
+    } else {
+      discountAmountControl.clearValidators();
+      discountAmountControl.setValidators([ Validators.required ]);
+      this.secondStepForm.addValidators([ newPrice ]);
+    }
+    discountAmountControl.updateValueAndValidity();
   }
 
   back(): void {

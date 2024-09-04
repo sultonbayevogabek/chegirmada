@@ -48,9 +48,9 @@
     <div
       class="create-announcement-discount-combinations"
       [ngClass]="{
-          'grid-2': ['regular', 'for-free'].includes(secondStepForm.get('discount_type').value),
-          'grid-4': ['quantity', 'service'].includes(secondStepForm.get('discount_type').value),
-        }"
+        'grid-2': ['regular', 'for-free'].includes(secondStepForm.get('discount_type').value),
+        'grid-4': ['quantity', 'service'].includes(secondStepForm.get('discount_type').value),
+      }"
     >
       <label class="form-label">
         <span class="form-label-text">{{ 'discount.type'| translate }}</span>
@@ -120,7 +120,8 @@
           }
 
           @if (secondStepForm.hasError('invalidNewPrice')) {
-            <span class="form-error">{{ 'the.amount.of.the.discount.cannot.be.greater.than.the.current.price.of.the.goods'| translate }}</span>
+            <span
+              class="form-error">{{ 'the.amount.of.the.discount.cannot.be.greater.than.the.current.price.of.the.goods'| translate }}</span>
           }
         }
       </div>
@@ -257,7 +258,7 @@
     <div class="create-announcement-information-tags">
       <div class="create-announcement-information-tags-search">
         <label class="form-label" matAutocompleteOrigin #globalSearchWrapper="matAutocompleteOrigin">
-          <span class="form-label-text">{{ 'tags'| translate }} *</span>
+          <span class="form-label-text">{{ 'tags'| translate }}</span>
           <input
             class="form-input"
             [class.invalid]="secondStepForm.get('tags').invalid && secondStepForm.get('tags').touched"

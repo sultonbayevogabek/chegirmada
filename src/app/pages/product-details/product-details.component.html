@@ -26,9 +26,11 @@
           [currentUser]="currentUser"
         />
 
-        <product-details-map
-          [branches]="details.store_branches"
-        />
+        @if (details?.store_branches?.length) {
+          <product-details-map
+            [branches]="details.store_branches"
+          />
+        }
       </div>
     } @placeholder {
       <spinner-loader/>

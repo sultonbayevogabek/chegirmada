@@ -95,7 +95,9 @@ export class EditAnnouncementComponent implements OnInit {
   }
 
   onFormStateChanged({ form, step }: { form: Partial<any>; step: number }): void {
+    console.log(form);
     this.data[step] = form;
+    console.log(this.data);
 
     if (step === 3) {
       this.createAnnouncement();

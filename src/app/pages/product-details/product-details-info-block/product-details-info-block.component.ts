@@ -1,10 +1,9 @@
-import { Component, DestroyRef, inject, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnChanges, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { ProductDetails } from '../../../core/models/product-details.model';
 import { TranslateModule } from '@ngx-translate/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
-import { AuthService } from '../../../core/services/auth.service';
 import {
   LoginProfileComponent
 } from '../../../core/components/header/header-middle/login-button/login-profile.component';
@@ -38,17 +37,14 @@ export class ProductDetailsInfoBlockComponent implements OnInit, OnChanges {
   }) currentUser: UserModel;
   loading = false;
 
-  private _authService = inject(AuthService);
   private _loginProfileComponent = inject(LoginProfileComponent);
   private _productDetailsService = inject(ProductDetailsService);
   private _destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-
   }
 
   ngOnChanges(): void {
-    console.log('Changes', this.details);
   }
 
   like(): void {

@@ -1,6 +1,6 @@
 <div class="product-details-photo-gallery">
   <div class="product-details-photo-display">
-    @if (selectedItemUrl.startsWith('https://api.chegirmada.uz')) {
+    @if (selectedItemUrl.startsWith('https://api.aksiyamix.uz')) {
       <img
         [ngSrc]="selectedItemUrl"
         [fill]="true"
@@ -37,7 +37,7 @@
             [id]="i"
             (click)="selectThumb(i)"
           >
-            @if (imgUrl.startsWith('https://api.chegirmada.uz')) {
+            @if (imgUrl.startsWith('https://api.aksiyamix.uz')) {
               <img [ngSrc]="imgUrl" [fill]="true" [alt]="imgUrl">
             } @else {
               <div class="product-details-video-thumb">

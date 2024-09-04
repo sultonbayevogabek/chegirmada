@@ -24,11 +24,10 @@ export class YandexMapsService {
       workingTimeEnd: string;
     }[]
   ): void {
-    console.log(points);
     this._yandexApiLoaderService.load()
       .subscribe(_ => {
         this._map = new ymaps.Map(mapContainerId, {
-          center: points[0].coordinates,
+          center: points[0]?.coordinates,
           zoom: 10,
           controls: [ 'geolocationControl' ]
         });
