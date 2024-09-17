@@ -4,6 +4,7 @@ import { SectionHeaderComponent } from '../section-header/section-header.compone
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
+import { ImgWrapperComponent } from '../img-wrapper/img-wrapper.component';
 
 @Component({
   selector: 'categories-carousel',
@@ -14,7 +15,8 @@ import { RouterLink } from '@angular/router';
     SectionHeaderComponent,
     MatIconModule,
     TranslateModule,
-    RouterLink
+    RouterLink,
+    ImgWrapperComponent
   ],
   standalone: true,
   encapsulation: ViewEncapsulation.None

@@ -13,6 +13,7 @@
   z-index: 1;
   @include flex-center-between;
   width: calc(100% + 2.5rem);
+  height: 0;
   margin: 0 -1.25rem;
 }
 
