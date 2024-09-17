@@ -10,13 +10,12 @@ import {
 } from './edit-announcement-third-step/edit-announcement-third-step.component';
 import { IconButtonComponent } from '../../../../core/components/icon-button/icon-button.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import {
   EditAnnouncementSecondStepComponent
 } from './edit-announcement-second-step/edit-announcement-second-step.component';
 import { MyAnnouncementsService } from '../../../../core/services/my-announcements.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ProductDetails } from '../../../../core/models/product-details.model';
 import { DiscountUpdateData } from '../../../../core/models/discount-update-data.model';
 
 @Component({
@@ -46,7 +45,7 @@ export class EditAnnouncementComponent implements OnInit {
     $event.returnValue = false;
   }*/
 
-  loading = true;
+  loading = false;
   currentTab = 1;
   readonly Array = Array;
   data = {
@@ -58,7 +57,6 @@ export class EditAnnouncementComponent implements OnInit {
 
   private _toaster = inject(ToasterService);
   private _myAnnouncementService = inject(MyAnnouncementsService);
-  private _activatedRoute = inject(ActivatedRoute);
   private _destroyRef = inject(DestroyRef);
   private _location = inject(Location);
 
@@ -95,16 +93,14 @@ export class EditAnnouncementComponent implements OnInit {
   }
 
   onFormStateChanged({ form, step }: { form: Partial<any>; step: number }): void {
-    console.log(form);
     this.data[step] = form;
-    console.log(this.data);
 
     if (step === 3) {
-      this.createAnnouncement();
+      this.editAnnouncement();
     }
   }
 
-  createAnnouncement(): void {
+  editAnnouncement(): void {
     const data = {
       ...this.data['1'].getRawValue(),
       ...this.data['2'].getRawValue(),
@@ -112,6 +108,7 @@ export class EditAnnouncementComponent implements OnInit {
       is_active: true,
       is_modified: true
     };
+
     const formData = new FormData();
 
     for (const key in data) {
@@ -151,14 +148,21 @@ export class EditAnnouncementComponent implements OnInit {
       }
     }
 
+    this.loading = true;
     this._myAnnouncementService.updateStandardDiscount(this.details.pk, formData)
       .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe(res => {
+      .subscribe(() => {
         this._toaster.open({
           title: 'attention',
           message: 'changes.successfully.changed',
         })
         this._location.back();
+      }, () => {
+        this._toaster.open({
+          message: 'error.occurred',
+          type: 'error'
+        })
+        this.loading = false;
       });
   }
 

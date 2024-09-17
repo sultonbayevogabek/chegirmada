@@ -9,7 +9,7 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GeneralService } from '../../../../../core/services/general.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ToasterService } from '../../../../../core/services/toaster.service';
@@ -20,7 +20,8 @@ import { UiButtonComponent } from '../../../../../core/components/ui-button/ui-b
 import { MatOption, MatSelect } from '@angular/material/select';
 import { IconButtonComponent } from '../../../../../core/components/icon-button/icon-button.component';
 import {
-  CustomTemplate, CustomTemplateItem,
+  CustomTemplate,
+  CustomTemplateItem,
   FeatureTemplate,
   SelectedValue,
   Value
@@ -28,7 +29,6 @@ import {
 import { MatRipple } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFeatureModalComponent } from '../../new-feature-modal/new-feature-modal.component';
-import { ProductDetails } from '../../../../../core/models/product-details.model';
 import { DiscountUpdateData } from '../../../../../core/models/discount-update-data.model';
 
 @Component({
@@ -64,6 +64,7 @@ export class EditAnnouncementThirdStepComponent implements OnInit, OnChanges {
   }>();
   @Output() onStepChanged: EventEmitter<number> = new EventEmitter<number>();
   @Input() productDetails: DiscountUpdateData;
+  @Input() loading = false;
 
   featureTemplates: FeatureTemplate[] = [];
   customTemplates: CustomTemplate[] = [];
@@ -217,7 +218,6 @@ export class EditAnnouncementThirdStepComponent implements OnInit, OnChanges {
         dialogType: 'value'
       }
     });
-
 
     newValueDialog.afterClosed()
       .pipe(takeUntilDestroyed(this._destroyRef))
